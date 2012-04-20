@@ -1,0 +1,12 @@
+{application, nosh,
+ [
+  {description, ""},
+  {vsn, "1"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {mod, { nosh_app, []}},
+  {env, []}
+ ]}.

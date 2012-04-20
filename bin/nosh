@@ -1,0 +1,12 @@
+#!/bin/sh
+
+VERSION=0.0.5
+
+tabs -1				# requires ncurses (noterm doesn't yet know how to process tabs)
+cd /cygdrive/d/workspace/nosh
+
+echo sh-nosh $VERSION wrapper script for Nosh
+
+rebar compile
+
+erl -pa "d:/workspace/nosh/ebin" -noshell -s noterm start
