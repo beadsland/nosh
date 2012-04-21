@@ -51,14 +51,13 @@ version() -> Version = "0.1.1", Version.
 %%
 eval(Subject, _Stdin, _Stdout, Stderr) -> parse(Subject, Stderr).
 
-
+-define(QUOTE_CHARS, "\\\\\"\'\`\n").
+-define(GROUP_CHARS, "\;\(\)\{\}\&\|").
 
 %% Parse command line string and return a list of nested quoting and grouping contexts.
 %$ Handle thrown errors for unmatched quoting and grouping characters.
 parse(Subject, Stderr) ->
-	Quote_Chars = "\\\\\"\'\`\n",
-	Group_Chars = "\;\(\)\{\}\&\|",
-	Pattern = io_lib:format("([~s~s])", [Quote_Chars, Group_Chars]),
+	Pattern = io_lib:format("([~s~s])", [?QUOTE_CHARS, ?GROUP_CHARS]),
 	{ok, MP} = re:compile(Pattern), 
 	
 	Split = re:split(Subject, MP, [{return, list}]),
@@ -84,7 +83,7 @@ parse(Subject, Stderr) ->
 parse(eval, [], []) -> {[close_eval], []};
 parse(Type, _Context, []) -> throw(Type);
 parse(Type, Context, [[] | Tail]) -> parse(Type, Context, Tail);
-parse(Type, Context, [Head | Tail]) when is_number(Head) ->
+parse(Type, Context, [Head | Tail]) when is_integer(Head) ->
 	HeadStr = io_lib:format([Head], []),  
 	parse(Type, Context, HeadStr ++ Tail);
 parse({quote, QType}, Context, List) -> 
@@ -102,7 +101,7 @@ parse({quote, QType}, Context, List) ->
 
 %% Wind up quote block.
 close_quote(QType, Context, List) ->
-	{Tail, _TailContext} = parse({quote, QType}, Context, List), 
+	{Tail, Context} = parse({quote, QType}, Context, List), 
 	Close = {close_quote, QType},
 	Pred = fun(T) -> T /= Close end,
 	{L1, L2} = lists:splitwith(Pred, Tail),
@@ -114,8 +113,6 @@ close_quote(QType, Context, List) ->
 
 %% @doc Unwind quote and group stream.
 parse_quote(line, Context, ["\n" | Tail]) -> {close_quote, Context, Tail};
-
-%parse_quote(line, Context, ["\;" | Tail]) -> close_group(semi, [{group, line}] ++ Context, Tail);
 
 parse_quote(QT, Context, ["\`" | Tail]) when QT == line -> close_quote(back, [{quote, QT}] ++ Context, Tail);
 parse_quote(QT, Context, ["\`" | Tail]) when QT == doub -> close_quote(back, [{quote, QT}] ++ Context, Tail);
@@ -138,7 +135,7 @@ parse_quote(escp, Context, [[] | Tail]) -> parse_quote(escp, Context, Tail);
 parse_quote(escp, [Type | Context], [Head | Tail]) -> 
 	[First | Rest] = Head,
 	Escape = [First, {close_quote, escp}],
-	{NewTail, _TailContext} = parse(Type, Context, [Rest] ++ Tail), 
+	{NewTail, Context} = parse(Type, Context, [Rest] ++ Tail), 
 	{Escape ++ NewTail, [Type] ++ Context};
 
 parse_quote(dbcp, _Context, ["\n"]) -> throw({quote, escp});
@@ -153,12 +150,12 @@ parse_quote(dbcp, [Type | Context], [Head | Tail]) ->
 		"\\"	-> Escape = [[First], {close_quote, dbcp}], Left = [Rest]; 
 		_Other	-> Escape = [{close_quote, dbcp}], Left = [[First] ++ Rest]
 	end,  
-	{NewTail, _TailContext} = parse(Type, Context, Left ++ Tail), 
+	{NewTail, Context} = parse(Type, Context, Left ++ Tail), 
 	{Escape ++ NewTail, [Type] ++ Context};
 
 parse_quote(QType, Context, [Head | Tail]) -> 
 	io:format("+parse_quote(~p, ~p, ~p)~n", [QType, Context, [Head] ++ Tail]),  
-	{NewTail, TailContext} = parse({quote, QType}, Context, Tail), 
-	io:format("+parse_quote(~p, ~p, ~p) ->~n     ~p~n", [QType, Context, [Head] ++ Tail, {NewTail, TailContext}]), 
+	{NewTail, ReturnContext} = parse({quote, QType}, Context, Tail), 
+	io:format("+parse_quote(~p, ~p, ~p) ->~n     ~p~n", [QType, Context, [Head] ++ Tail, {NewTail, ReturnContext}]), 
 	{[Head] ++ NewTail, Context}.
 	
