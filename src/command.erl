@@ -1,48 +1,71 @@
-% REF: http://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html#tag_02_06_05
+%% @author Beads D. Land-Trujillo <beads.d.land@gmail.com>
+%% @copyright 2012 Beads D. Land-Trujillo
+%% @doc This is a preliminary draft of the command line parser for <code>nosh</code>.
+%% @end
+%% @reference See <a href="http://sayle.net/book/basics.htm">Shell Basics</a> for overview of functionality.
+%% (to be implemented)
+%% @end
+%% @reference See <a href="http://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html">Shell Command Language</a> 
+%% for detailed specification. (to be implemented)
+%% @end
 
-% TODO: Eclipse permission denied errors
-% TODO: payments
+% TODO: follow up bug report on Erlide permission denied errors
+% payments
 
+% TODO: document
 
-% TODO: git
-% TODO: version macros from git
-
-% grouping reference for offline development...
-
-
-% brooklyn
-% lunch meat
+% feeding
 % walk
 % email
 
-
 % TODO: Grouping - http://sayle.net/book/basics.htm#grouping_commands
 % TODO: Tokenizing
-% TODO: conservative module loader
-% TODO: Executing
 % TODO: $ - Parameter expansion
 % TODO: ${} - Parameter expansion
 % TODO: $() - Command substitution
 % TODO: $(()) - Arithmetic Expansion
 % TODO: Field splitting
 % TODO: Reserved words
+% TODO: conservative module loader
+% TODO: Executing
 % TODO: Alias substitution
+% TODO: Line continuation
 % TODO: Here document
 % TODO: Etc., etc. 
 
+%% @version 0.1.1
 -module(command).
 
--export([version/0]).
 -export([eval/4]).
 
-version() -> Version = "0.0.16", Version. 
+-define(STDERR(Stderr, Format, List), Stderr ! {self(), stderr, io_lib:format(Format, List)}).
 
+
+%% @doc Return author's revision number of this module.  Used for debugging purposes.
+-export([version/0]).
+-spec version()-> nonempty_string().
+%%
+version() -> Version = "0.1.1", Version. 
+
+
+
+%% @doc Parse command line string and return a list of nested quoting and grouping context blocks, 
+%% or else <code>failed</code> on a caught syntax exception.
+%%
+%% This is a temporary function name, pending refactoring to reflect full execution of parsed command lines.
+%% @end
+-type io_proc() :: pid().
+-type quote_type() :: line | back | doub | sing | escp | dbcp.
+-type context_type() :: {eval, eval} | {quote, quote_type()}.
+-type block() :: nonempty_string() | {context_type(), list(block())}.
+-spec eval(Subject :: nonempty_string(), Stdin :: io_proc(), Stdout :: io_proc(), Stderr :: io_proc()) -> failed | list(block()).
+%%
 eval(Subject, _Stdin, _Stdout, Stderr) -> parse(Subject, Stderr).
 
-stderr(Stderr, Format, List) -> Stderr ! {self(), stderr, io_lib:format(Format, List)}.
 
 
-% Parser only tokenizes on matching quotes thus far.
+% Parse command line string and return a list of nested quoting and grouping contexts.
+% Handle thrown errors for unmatched quoting and grouping characters.
 parse(Subject, Stderr) ->
 	{ok, MP} = re:compile("([\\\\\"\'\`\n])"), 
 	
@@ -51,23 +74,22 @@ parse(Subject, Stderr) ->
 	CleanSplit = lists:filter(Pred, Split), 
 	
 	QuoteErr = "Quote error: Closing ~s missing~n", 
-	try parse(eval, [], CleanSplit) of
-		Result -> Result
+	try close_quote(line, [eval], CleanSplit) of
+		{Parse, [eval]} -> [{{quote, line}, ContextList}, close_eval] = Parse, ContextList	
 	catch
-		{eval, eval}  	-> stderr(Stderr, "Eval error: shouldn't happen~n", []), {failed};
-		{quote, line} 	-> stderr(Stderr, QuoteErr, ["EOL"]), {failed};
-		{quote, back} 	-> stderr(Stderr, QuoteErr, ["\`"]), {failed};
-		{quote, doub} 	-> stderr(Stderr, QuoteErr, ["\""]), {failed};
-		{quote, sing} 	-> stderr(Stderr, QuoteErr, ["\'"]), {failed};
-		{quote, escp} 	-> stderr(Stderr, "Quote error: Line continuation not supported~n", []), {failed}
+		{eval, eval}  	-> ?STDERR(Stderr, "Eval error: shouldn't happen~n", []), failed;
+		{quote, line} 	-> ?STDERR(Stderr, QuoteErr, ["EOL"]), failed;
+		{quote, back} 	-> ?STDERR(Stderr, QuoteErr, ["\`"]), failed;
+		{quote, doub} 	-> ?STDERR(Stderr, QuoteErr, ["\""]), failed;
+		{quote, sing} 	-> ?STDERR(Stderr, QuoteErr, ["\'"]), failed;
+		{quote, escp} 	-> ?STDERR(Stderr, "Quote error: Line continuation not supported~n", []), failed
 	end. 
 
-% Unwind parse stream.
+% Parse list of strings split on quoting and grouping characters.
+% Return tuple of context tree and context stack  OR
+%        tuple of 'close_quote', context stack, and trailing context tree.
+% Throw exception for unmatched quoting or grouping character.
 parse(eval, [], []) -> {[close_eval], []};
-parse(eval, [], Split) -> 
-	{Parse, [eval]} = close_quote(line, [eval], Split),
-	[{{quote, line}, Tokens}, close_eval] = Parse, 
-	Tokens;
 parse(Type, _Context, []) -> throw(Type);
 parse(Type, Context, [[] | Tail]) -> parse(Type, Context, Tail);
 parse(Type, Context, [Head | Tail]) when is_number(Head) ->
@@ -83,12 +105,10 @@ parse({quote, QType}, Context, List) ->
 										   [SuperType | SuperContext] = Context,
 										   {Post, _PCon} = parse(SuperType, SuperContext, Tail),
 										   {[Close] ++ Post, SuperContext};
-
-% 	if this never errors out, then we don't need to pass Context in tuple/2
-%		{Head, Context, {_Type, Tail}}	-> {Head ++ Tail, Context}; 
-
-		{Head, ReturnContext}			-> {Head, ReturnContext}
+		{Tail, ReturnContext}			-> {Tail, ReturnContext}
 	end.  
+
+
 
 % Wind up quote block.
 close_quote(QType, Context, List) ->

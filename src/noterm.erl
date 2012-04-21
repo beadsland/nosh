@@ -1,5 +1,5 @@
 % TODO: io:get_char (see code in jungerl)
-% TODO: escript & parameters (make it run like any other shell command)
+% TODO: escript and parameters (make it run like any other shell command)
 % TODO: make fully redistributable (Win/cygwin/*NIX)
 % TODO: incorporate full terminfo/ncurses support
 % TODO: notermd - telent/ssh access 
@@ -7,7 +7,6 @@
 -module(noterm).
 
 -export([start/0]).
-
 -export([key_start/1]).
 
 version() -> Version = "0.0.13", Version. 

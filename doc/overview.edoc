@@ -1,0 +1,10 @@
+@author Beads D. Land-Trujillo <beads.d.land@gmail.com>
+@copyright 2012 Beads D. Land-Trujillo
+@version 0.1.0
+@title Welcome to nosh
+@doc <code>nosh</code> (nosql shell) is a Bourne shell emulator implemented in Erlang.
+
+When finished, the <code>nosh</code> application will augment Bourne shell functionality
+with a UNIX-style Erlang command set and the ability to mount CouchDB databases to the
+file system.
+@end
