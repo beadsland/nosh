@@ -1,16 +1,23 @@
-% TODO: io:get_char (see code in jungerl)
-% TODO: escript and parameters (make it run like any other shell command)
-% TODO: make fully redistributable (Win/cygwin/*NIX)
-% TODO: incorporate full terminfo/ncurses support
-% TODO: notermd - telent/ssh access 
+%% @doc Terminal emulator for <code>nosh</code>.
+%% Translating standard I/O to Erlang messaging.
+%% @end
+%% @author Beads D. Land-Trujillo <beads.d.land@gmail.com>
+%% @copyright 2012 Beads D. Land-Trujillo
 
+%% TODO: io:get_char (see code in jungerl)
+%% TODO: escript and parameters (make it run like any other shell command)
+%% TODO: make fully redistributable (Win/cygwin/*NIX)
+%% TODO: incorporate full terminfo/ncurses support
+%% TODO: notermd - telent/ssh access
+
+%% @version 0.1.0
 -module(noterm).
-
 -export([start/0]).
 -export([key_start/1]).
+version() -> Version = "0.1.0", Version. 
 
-version() -> Version = "0.0.13", Version. 
 
+%% @doc Start terminal, launching message loop and keyboard listening process. 
 start() ->
 	process_flag(trap_exit, true),
 	io:format("Starting Noterm ~s terminal emulator on ~p ~p~n", [version(), node(), self()]),
@@ -54,7 +61,11 @@ strip_escapes(Subject) ->
 	{ok, MP} = re:compile("\e\[[\d,\s]+[A-Z]"),
 	re:replace(Subject, MP, "", [global, {return, list}]).
 
+%%========================================
+%% Functions for keyboard process.
+%%========================================
 
+%%@private Export to allow for spawn.
 key_start(Pid) -> 
 	Pid ! {self(), stderr, io_lib:format("Listening to keyboard ~p~n", [self()])},
 	key_loop(Pid, Pid, Pid). 

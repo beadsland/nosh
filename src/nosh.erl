@@ -1,19 +1,27 @@
-% TODO: Buffered I/O (pending get_char working in noterm)
-% TODO: File System:  pwd / cd
-% TODO: File System:  *NIX / cygwin / Win32
-% TODO: File System:  NoSQL
-% TODO: Env
-% TODO: Sh commands
-% TODO: Erl commands
-% TODO: Couch commands
-% TODO: Add support for line continuation (currently throws error)
+%% @doc Nosh (nosql shell) Bourne shell emulator and alternative Erlang shell.
+%% @author Beads D. Land-Trujillo <beads.d.land@gmail.com>
+%% @copyright 2012 Beads D. Land-Trujillo
 
+%% TODO: nosh as application
+%% TODO: nosh_command behaviour
+%% TODO: nosh as nosh_command
+%% TODO: Buffered I/O (pending get_char working in noterm)
+%% TODO: File System:  pwd / cd
+%% TODO: File System:  *NIX / cygwin / Win32
+%% TODO: File System:  NoSQL
+%% TODO: Env
+%% TODO: Sh commands
+%% TODO: Erl commands
+%% TODO: Couch commands
+%% TODO: Add support for line continuation (currently throws error)
+
+%% @version 0.1.0
 -module(nosh).
-
 -export([start/1]).
+version() -> Version = "0.1.0", Version.
 
-version() -> Version = "0.0.6", Version.
 
+%% @doc Start nosh, passing Pid of process providing standard i/o messaging.
 start(Pid) ->
 	start(Pid, Pid, Pid).
 	

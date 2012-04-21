@@ -1,52 +1,38 @@
+%% @doc This is a preliminary draft of the command line parser for <code>nosh</code>.
 %% @author Beads D. Land-Trujillo <beads.d.land@gmail.com>
 %% @copyright 2012 Beads D. Land-Trujillo
-%% @doc This is a preliminary draft of the command line parser for <code>nosh</code>.
-%% @end
-%% @reference See <a href="http://sayle.net/book/basics.htm">Shell Basics</a> for overview of functionality.
-%% (to be implemented)
-%% @end
+%% @reference See <a href="http://sayle.net/book/basics.htm">Shell Basics</a> for overview of functionality.  (to be implemented)
 %% @reference See <a href="http://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html">Shell Command Language</a> 
 %% for detailed specification. (to be implemented)
 %% @end
 
-% TODO: follow up bug report on Erlide permission denied errors
-% payments
-
-% TODO: document
-
-% feeding
-% walk
-% email
-
-% TODO: Grouping - http://sayle.net/book/basics.htm#grouping_commands
-% TODO: Tokenizing
-% TODO: $ - Parameter expansion
-% TODO: ${} - Parameter expansion
-% TODO: $() - Command substitution
-% TODO: $(()) - Arithmetic Expansion
-% TODO: Field splitting
-% TODO: Reserved words
-% TODO: conservative module loader
-% TODO: Executing
-% TODO: Alias substitution
-% TODO: Line continuation
-% TODO: Here document
-% TODO: Etc., etc. 
+%$ TODO: follow up bug report on Erlide permission denied errors
+%% TODO: edocs all modules
+%% TODO: Grouping - http://sayle.net/book/basics.htm#grouping_commands
+%% TODO: Tokenizing
+%% TODO: $ - Parameter expansion
+%% TODO: ${} - Parameter expansion
+%% TODO: $() - Command substitution
+%% TODO: $(()) - Arithmetic Expansion
+%% TODO: Field splitting
+%% TODO: Reserved words
+%% TODO: conservative module loader
+%% TODO: Executing
+%% TODO: Alias substitution
+%% TODO: Line continuation
+%% TODO: Here document
+%% TODO: Etc., etc. 
 
 %% @version 0.1.1
 -module(command).
-
 -export([eval/4]).
-
 -define(STDERR(Stderr, Format, List), Stderr ! {self(), stderr, io_lib:format(Format, List)}).
-
 
 %% @doc Return author's revision number of this module.  Used for debugging purposes.
 -export([version/0]).
 -spec version()-> nonempty_string().
 %%
 version() -> Version = "0.1.1", Version. 
-
 
 
 %% @doc Parse command line string and return a list of nested quoting and grouping context blocks, 
@@ -64,8 +50,8 @@ eval(Subject, _Stdin, _Stdout, Stderr) -> parse(Subject, Stderr).
 
 
 
-% Parse command line string and return a list of nested quoting and grouping contexts.
-% Handle thrown errors for unmatched quoting and grouping characters.
+%% Parse command line string and return a list of nested quoting and grouping contexts.
+%$ Handle thrown errors for unmatched quoting and grouping characters.
 parse(Subject, Stderr) ->
 	{ok, MP} = re:compile("([\\\\\"\'\`\n])"), 
 	
@@ -85,10 +71,10 @@ parse(Subject, Stderr) ->
 		{quote, escp} 	-> ?STDERR(Stderr, "Quote error: Line continuation not supported~n", []), failed
 	end. 
 
-% Parse list of strings split on quoting and grouping characters.
-% Return tuple of context tree and context stack  OR
-%        tuple of 'close_quote', context stack, and trailing context tree.
-% Throw exception for unmatched quoting or grouping character.
+
+%% Parse list of strings split on quoting and grouping characters, according to current context type.
+%% Return tuple of block list and context stack OR tuple of 'close_quote', context stack, and trailing context tree.
+%% Throw exception for unmatched quoting or grouping character.
 parse(eval, [], []) -> {[close_eval], []};
 parse(Type, _Context, []) -> throw(Type);
 parse(Type, Context, [[] | Tail]) -> parse(Type, Context, Tail);
@@ -108,21 +94,19 @@ parse({quote, QType}, Context, List) ->
 		{Tail, ReturnContext}			-> {Tail, ReturnContext}
 	end.  
 
-
-
-% Wind up quote block.
+%% Wind up quote block.
 close_quote(QType, Context, List) ->
 	{Tail, _TailContext} = parse({quote, QType}, Context, List), 
 	Close = {close_quote, QType},
 	Pred = fun(T) -> T /= Close end,
 	{L1, L2} = lists:splitwith(Pred, Tail),
 	Quote = if
-		QType == dbcp, L1 == []	-> "\\";
+		QType == dbcp, L1 == []	-> "\\";      % Didn't escape anything, so restore backslash as regular character.
 		true					-> {{quote, QType}, L1}
 	end,
 	{[Quote] ++ lists:delete(Close, L2), Context}.
 
-% Unwind quote stream. 
+%% Unwind quote stream. 
 parse_quote(line, Context, ["\n" | Tail]) -> {close_quote, Context, Tail};
 
 parse_quote(line, Context, ["\`" | Tail]) -> close_quote(back, [{quote, line}] ++ Context, Tail);
@@ -140,7 +124,6 @@ parse_quote(sing, Context, ["\'" | Tail]) -> {close_quote, Context, Tail};
 parse_quote(line, Context, ["\\" | Tail]) -> close_quote(escp, [{quote, line}] ++ Context, Tail);
 parse_quote(doub, Context, ["\\" | Tail]) -> close_quote(dbcp, [{quote, doub}] ++ Context, Tail);
 parse_quote(back, Context, ["\\" | Tail]) -> close_quote(escp, [{quote, back}] ++ Context, Tail);
-
 
 parse_quote(escp, _Context, ["\n"]) -> throw({quote, escp}); 
 parse_quote(escp, Context, [[] | Tail]) -> parse_quote(escp, Context, Tail);
