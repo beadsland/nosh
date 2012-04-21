@@ -1,4 +1,8 @@
 %% @doc This is a preliminary draft of the command line parser for <code>nosh</code>.
+%%
+%% Note:  Grouping is parsed for entire line prior to execution, unlike Bourne standard.  
+%% This enforces transactional integrity--command execution is deferred until entire line parses correctly.
+%% @end
 %% @author Beads D. Land-Trujillo <beads.d.land@gmail.com>
 %% @copyright 2012 Beads D. Land-Trujillo
 %% @reference See <a href="http://sayle.net/book/basics.htm">Shell Basics</a> for overview of functionality.  (to be implemented)
@@ -7,7 +11,6 @@
 %% @end
 
 %$ TODO: follow up bug report on Erlide permission denied errors
-%% TODO: edocs all modules
 %% TODO: Grouping - http://sayle.net/book/basics.htm#grouping_commands
 %% TODO: Tokenizing
 %% TODO: $ - Parameter expansion
@@ -53,7 +56,10 @@ eval(Subject, _Stdin, _Stdout, Stderr) -> parse(Subject, Stderr).
 %% Parse command line string and return a list of nested quoting and grouping contexts.
 %$ Handle thrown errors for unmatched quoting and grouping characters.
 parse(Subject, Stderr) ->
-	{ok, MP} = re:compile("([\\\\\"\'\`\n])"), 
+	Quote_Chars = "\\\\\"\'\`\n",
+	Group_Chars = "\;\(\)\{\}\&\|",
+	Pattern = io_lib:format("([~s~s])", [Quote_Chars, Group_Chars]),
+	{ok, MP} = re:compile(Pattern), 
 	
 	Split = re:split(Subject, MP, [{return, list}]),
 	Pred = fun(T) -> case T of [] -> false; _Else -> true end end,
@@ -106,24 +112,26 @@ close_quote(QType, Context, List) ->
 	end,
 	{[Quote] ++ lists:delete(Close, L2), Context}.
 
-%% Unwind quote stream. 
+%% @doc Unwind quote and group stream.
 parse_quote(line, Context, ["\n" | Tail]) -> {close_quote, Context, Tail};
 
-parse_quote(line, Context, ["\`" | Tail]) -> close_quote(back, [{quote, line}] ++ Context, Tail);
-parse_quote(doub, Context, ["\`" | Tail]) -> close_quote(back, [{quote, doub}] ++ Context, Tail);
-parse_quote(back, Context, ["\`" | Tail]) -> {close_quote, Context, Tail};
+%parse_quote(line, Context, ["\;" | Tail]) -> close_group(semi, [{group, line}] ++ Context, Tail);
 
-parse_quote(line, Context, ["\"" | Tail]) -> close_quote(doub, [{quote, line}] ++ Context, Tail);
-parse_quote(back, Context, ["\"" | Tail]) -> close_quote(doub, [{quote, back}] ++ Context, Tail);
-parse_quote(doub, Context, ["\"" | Tail]) -> {close_quote, Context, Tail};
+parse_quote(QT, Context, ["\`" | Tail]) when QT == line -> close_quote(back, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, ["\`" | Tail]) when QT == doub -> close_quote(back, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, ["\`" | Tail]) when QT == back -> {close_quote, Context, Tail};
 
-parse_quote(line, Context, ["\'" | Tail]) -> close_quote(sing, [{quote, line}] ++ Context, Tail);
-parse_quote(back, Context, ["\'" | Tail]) -> close_quote(sing, [{quote, back}] ++ Context, Tail);
-parse_quote(sing, Context, ["\'" | Tail]) -> {close_quote, Context, Tail};
+parse_quote(QT, Context, ["\"" | Tail]) when QT == line -> close_quote(doub, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, ["\"" | Tail]) when QT == back -> close_quote(doub, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, ["\"" | Tail]) when QT == doub -> {close_quote, Context, Tail};
 
-parse_quote(line, Context, ["\\" | Tail]) -> close_quote(escp, [{quote, line}] ++ Context, Tail);
-parse_quote(doub, Context, ["\\" | Tail]) -> close_quote(dbcp, [{quote, doub}] ++ Context, Tail);
-parse_quote(back, Context, ["\\" | Tail]) -> close_quote(escp, [{quote, back}] ++ Context, Tail);
+parse_quote(QT, Context, ["\'" | Tail]) when QT == line -> close_quote(sing, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, ["\'" | Tail]) when QT == back -> close_quote(sing, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, ["\'" | Tail]) when QT == sing -> {close_quote, Context, Tail};
+
+parse_quote(QT, Context, ["\\" | Tail]) when QT == line -> close_quote(escp, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, ["\\" | Tail]) when QT == doub -> close_quote(dbcp, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, ["\\" | Tail]) when QT == back -> close_quote(escp, [{quote, QT}] ++ Context, Tail);
 
 parse_quote(escp, _Context, ["\n"]) -> throw({quote, escp}); 
 parse_quote(escp, Context, [[] | Tail]) -> parse_quote(escp, Context, Tail);
