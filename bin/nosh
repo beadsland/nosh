@@ -2,12 +2,13 @@
 
 VERSION=0.1.1
 
-tabs -1				# requires ncurses (noterm doesn't yet know how to process tabs)
+tabs -1	>/dev/nul		# requires ncurses (noterm doesn't yet know how to process tabs)
 cd /cygdrive/d/workspace/nosh
 
 echo sh-nosh $VERSION wrapper script for Nosh
 
 rm doc/edoc-info    # edoc warns it can't read this on Windows path
+
 rebar compile doc
 
 erl -pa "d:/workspace/nosh/ebin" -noshell -s noterm start

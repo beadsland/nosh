@@ -10,11 +10,11 @@
 %% TODO: incorporate full terminfo/ncurses support
 %% TODO: notermd - telent/ssh access
 
-%% @version 0.1.0
+%% @version 0.1.1
 -module(noterm).
 -export([start/0]).
 -export([key_start/1]).
-version() -> Version = "0.1.0", Version. 
+version() -> Version = "0.1.1", Version. 
 
 
 %% @doc Start terminal, launching message loop and keyboard listening process. 
@@ -48,9 +48,9 @@ msg_loop(Stdin, Stdout, Stderr) ->
 
 grace(Message, Reason) -> 
 	case Reason of
-		{{Exception, Context}, Trace} 	-> 
+		{{Exception, ExcReason}, Trace} 	-> 
 			Format = "~s: ~p ~p~nContext: ~p~nTrace: ~p~n",
-			io:format(standard_error, Format, [Message, Exception, self(), Context, Trace]),
+			io:format(standard_error, Format, [Message, Exception, self(), ExcReason, Trace]),
 			init:stop(); 
 		Else						->
 			io:format(standard_error, "~s: ~p ~p~n", [Message, Else, self()])

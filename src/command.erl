@@ -11,6 +11,7 @@
 %% @end
 
 %$ TODO: follow up bug report on Erlide permission denied errors
+
 %% TODO: Grouping - http://sayle.net/book/basics.htm#grouping_commands
 %% TODO: Tokenizing
 %% TODO: $ - Parameter expansion
@@ -29,7 +30,6 @@
 %% @version 0.1.1
 -module(command).
 -export([eval/4]).
--define(STDERR(Stderr, Format, List), Stderr ! {self(), stderr, io_lib:format(Format, List)}).
 
 %% @doc Return author's revision number of this module.  Used for debugging purposes.
 -export([version/0]).
@@ -52,12 +52,14 @@ version() -> Version = "0.1.1", Version.
 eval(Subject, _Stdin, _Stdout, Stderr) -> parse(Subject, Stderr).
 
 -define(QUOTE_CHARS, "\\\\\"\'\`\n").
--define(GROUP_CHARS, "\;\(\)\{\}\&\|").
+-define(GROUP_CHARS, "\;\(\)\&\|").     % curly braces are reserved words, not grouping characters
+-define(SPACE_CHARS, "\ \t\n").
+-define(STDERR(Format, List), Stderr ! {self(), stderr, io_lib:format(Format, List)}).
 
 %% Parse command line string and return a list of nested quoting and grouping contexts.
 %$ Handle thrown errors for unmatched quoting and grouping characters.
 parse(Subject, Stderr) ->
-	Pattern = io_lib:format("([~s~s])", [?QUOTE_CHARS, ?GROUP_CHARS]),
+	Pattern = io_lib:format("([~s~s~s])", [?QUOTE_CHARS, ?GROUP_CHARS, ?SPACE_CHARS]),
 	{ok, MP} = re:compile(Pattern), 
 	
 	Split = re:split(Subject, MP, [{return, list}]),
@@ -68,12 +70,14 @@ parse(Subject, Stderr) ->
 	try close_quote(line, [eval], CleanSplit) of
 		{Parse, [eval]} -> [{{quote, line}, ContextList}, close_eval] = Parse, ContextList	
 	catch
-		{eval, eval}  	-> ?STDERR(Stderr, "Eval error: shouldn't happen~n", []), failed;
-		{quote, line} 	-> ?STDERR(Stderr, QuoteErr, ["EOL"]), failed;
-		{quote, back} 	-> ?STDERR(Stderr, QuoteErr, ["\`"]), failed;
-		{quote, doub} 	-> ?STDERR(Stderr, QuoteErr, ["\""]), failed;
-		{quote, sing} 	-> ?STDERR(Stderr, QuoteErr, ["\'"]), failed;
-		{quote, escp} 	-> ?STDERR(Stderr, "Quote error: Line continuation not supported~n", []), failed
+		{eval, eval}  	-> ?STDERR("Eval error: shouldn't happen~n", []), failed;
+		{quote, line} 	-> ?STDERR(QuoteErr, ["EOL"]), failed;
+		{quote, semi}	-> ?STDERR(QuoteErr, ["EOL"]), failed;
+		{quote, pren}	-> ?STDERR(QuoteErr, ["\)"]), failed;
+		{quote, back} 	-> ?STDERR(QuoteErr, ["\`"]), failed;
+		{quote, doub} 	-> ?STDERR(QuoteErr, ["\""]), failed;
+		{quote, sing} 	-> ?STDERR(QuoteErr, ["\'"]), failed;
+		{quote, escp} 	-> ?STDERR("Quote error: Line continuation not supported~n", []), failed
 	end. 
 
 
@@ -86,7 +90,7 @@ parse(Type, Context, [[] | Tail]) -> parse(Type, Context, Tail);
 parse(Type, Context, [Head | Tail]) when is_integer(Head) ->
 	HeadStr = io_lib:format([Head], []),  
 	parse(Type, Context, HeadStr ++ Tail);
-parse({quote, QType}, Context, List) -> 
+parse({quote, QType}, Context, List) -> 	
 	io:format("parse_quote(~p, ~p, ~p)~n", [QType, Context, List]), 	
 	Parse = parse_quote(QType, Context, List), 
 	io:format("~nparse_quote(~p, ~p, ~p) ->~n     ~p~n", [QType, Context, List, Parse]), 
@@ -94,41 +98,74 @@ parse({quote, QType}, Context, List) ->
 	case Parse of 							
 		{close_quote, Context, Tail}	-> Close = {close_quote, QType},
 										   [SuperType | SuperContext] = Context,
-										   {Post, _PCon} = parse(SuperType, SuperContext, Tail),
+										   {Post, _ReturnContext} = parse(SuperType, SuperContext, Tail),
 										   {[Close] ++ Post, SuperContext};
 		{Tail, ReturnContext}			-> {Tail, ReturnContext}
 	end.  
 
 %% Wind up quote block.
 close_quote(QType, Context, List) ->
-	{Tail, Context} = parse({quote, QType}, Context, List), 
+	io:format("Xparse_quote(~p, ~p, ~p)~n", [QType, Context, List]), 	
+	{Tail, _ReturnContext} = parse({quote, QType}, Context, List), 
 	Close = {close_quote, QType},
 	Pred = fun(T) -> T /= Close end,
 	{L1, L2} = lists:splitwith(Pred, Tail),
-	Quote = if
-		QType == dbcp, L1 == []	-> "\\";      % Didn't escape anything, so restore backslash as regular character.
-		true					-> {{quote, QType}, L1}
+	if
+		QType == dbcp, L1 == []	-> Quote = "\\";      % Didn't escape anything, so restore backslash as regular character.
+		true					-> Quote = {{quote, QType}, L1}
 	end,
 	{[Quote] ++ lists:delete(Close, L2), Context}.
 
+
+%parse_quote(QT, Context, ["\`" | Tail]) ->
+%	case lists:member(QT, [line, semi] ++ [doub]) of
+%		true	-> close_quote(back, [{quote, QT}] ++ Context, Tail);
+%		false	-> {NewTail, _ReturnContext} = parse({quote, QT}, Context, Tail), {["\`"] ++ NewTail, Context} 
+%	end;
+
+
 %% @doc Unwind quote and group stream.
-parse_quote(line, Context, ["\n" | Tail]) -> {close_quote, Context, Tail};
+parse_quote(QT, Context, [Char | Tail]) when QT == line, Char == "\n" -> {close_quote, Context, Tail};
+parse_quote(QT, Context, [Char | Tail]) when QT == semi, Char == "\n" -> {close_quote, Context, [Char] ++ Tail};
 
-parse_quote(QT, Context, ["\`" | Tail]) when QT == line -> close_quote(back, [{quote, QT}] ++ Context, Tail);
-parse_quote(QT, Context, ["\`" | Tail]) when QT == doub -> close_quote(back, [{quote, QT}] ++ Context, Tail);
-parse_quote(QT, Context, ["\`" | Tail]) when QT == back -> {close_quote, Context, Tail};
+parse_quote(QT, Context, [Char | Tail]) when QT == line, Char == "\;" -> close_quote(semi, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char | Tail]) when QT == semi, Char == "\;" -> close_quote(semi, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char | Tail]) when QT == back, Char == "\;" -> close_quote(semi, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char | Tail]) when QT == pren, Char == "\;" -> close_quote(semi, [{quote, QT}] ++ Context, Tail);
 
-parse_quote(QT, Context, ["\"" | Tail]) when QT == line -> close_quote(doub, [{quote, QT}] ++ Context, Tail);
-parse_quote(QT, Context, ["\"" | Tail]) when QT == back -> close_quote(doub, [{quote, QT}] ++ Context, Tail);
-parse_quote(QT, Context, ["\"" | Tail]) when QT == doub -> {close_quote, Context, Tail};
+parse_quote(QT, Context, [Char | Tail]) when QT == line, Char == "\"" -> close_quote(doub, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char | Tail]) when QT == semi, Char == "\"" -> close_quote(doub, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char | Tail]) when QT == back, Char == "\"" -> close_quote(doub, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char | Tail]) when QT == pren, Char == "\"" -> close_quote(doub, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char | Tail]) when QT == doub, Char == "\"" -> {close_quote, Context, Tail};
 
-parse_quote(QT, Context, ["\'" | Tail]) when QT == line -> close_quote(sing, [{quote, QT}] ++ Context, Tail);
-parse_quote(QT, Context, ["\'" | Tail]) when QT == back -> close_quote(sing, [{quote, QT}] ++ Context, Tail);
-parse_quote(QT, Context, ["\'" | Tail]) when QT == sing -> {close_quote, Context, Tail};
+parse_quote(QT, Context, [Char | Tail]) when QT == line, Char == "\\" -> close_quote(escp, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char | Tail]) when QT == semi, Char == "\\" -> close_quote(escp, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char | Tail]) when QT == back, Char == "\\" -> close_quote(escp, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char | Tail]) when QT == pren, Char == "\\" -> close_quote(escp, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char | Tail]) when QT == doub, Char == "\\" -> close_quote(dbcp, [{quote, QT}] ++ Context, Tail);
 
-parse_quote(QT, Context, ["\\" | Tail]) when QT == line -> close_quote(escp, [{quote, QT}] ++ Context, Tail);
-parse_quote(QT, Context, ["\\" | Tail]) when QT == doub -> close_quote(dbcp, [{quote, QT}] ++ Context, Tail);
-parse_quote(QT, Context, ["\\" | Tail]) when QT == back -> close_quote(escp, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char | Tail]) when QT == line, Char == "\'" -> close_quote(sing, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char | Tail]) when QT == semi, Char == "\'" -> close_quote(sing, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char | Tail]) when QT == back, Char == "\'" -> close_quote(sing, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char | Tail]) when QT == pren, Char == "\'" -> close_quote(sing, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char | Tail]) when QT == sing, Char == "\'" -> {close_quote, Context, Tail};
+
+parse_quote(QT, Context, [Char | Tail]) when QT == line, Char == "\`" -> close_quote(back, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char | Tail]) when QT == semi, Char == "\`" -> close_quote(back, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char | Tail]) when QT == pren, Char == "\`" -> close_quote(back, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char | Tail]) when QT == doub, Char == "\`" -> close_quote(back, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char | Tail]) when QT == back, Char == "\`" -> {close_quote, Context, Tail};
+  
+parse_quote(QT, Context, [Char | Tail]) when QT == line, Char == "\(" -> close_quote(pren, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char | Tail]) when QT == semi, Char == "\(" -> close_quote(pren, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char | Tail]) when QT == back, Char == "\(" -> close_quote(pren, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char | Tail]) when QT == pren, Char == "\(" -> close_quote(pren, [{quote, QT}] ++ Context, Tail);
+
+parse_quote(QT, Context, [Char | Tail]) when QT == pren, Char == "\)" -> {close_quote, Context, Tail};
+parse_quote(QT, Context, [Char | Tail]) when QT == semi, Char == "\)" -> {close_quote, Context, [Char] ++ Tail};
+
+
 
 parse_quote(escp, _Context, ["\n"]) -> throw({quote, escp}); 
 parse_quote(escp, Context, [[] | Tail]) -> parse_quote(escp, Context, Tail);
@@ -143,19 +180,18 @@ parse_quote(dbcp, Context, [[] | Tail]) -> parse_quote(dbcp, Context, Tail);
 parse_quote(dbcp, [Type | Context], [Head | Tail]) -> 
 	[First | Rest] = Head,
 
-	case [First] of
+	case [First] of 
 		"\$"	-> Escape = [[First], {close_quote, dbcp}], Left = [Rest];
-		"\'"	-> Escape = [[First], {close_quote, dbcp}], Left = [Rest];
+		"\`"	-> Escape = [[First], {close_quote, dbcp}], Left = [Rest];
 		"\""	-> Escape = [[First], {close_quote, dbcp}], Left = [Rest];
 		"\\"	-> Escape = [[First], {close_quote, dbcp}], Left = [Rest]; 
+		"\n"	-> Escape = throw({quote, escp}), Left = [Rest]; 
 		_Other	-> Escape = [{close_quote, dbcp}], Left = [[First] ++ Rest]
 	end,  
 	{NewTail, Context} = parse(Type, Context, Left ++ Tail), 
 	{Escape ++ NewTail, [Type] ++ Context};
 
 parse_quote(QType, Context, [Head | Tail]) -> 
-	io:format("+parse_quote(~p, ~p, ~p)~n", [QType, Context, [Head] ++ Tail]),  
-	{NewTail, ReturnContext} = parse({quote, QType}, Context, Tail), 
-	io:format("+parse_quote(~p, ~p, ~p) ->~n     ~p~n", [QType, Context, [Head] ++ Tail, {NewTail, ReturnContext}]), 
+	{NewTail, _ReturnContext} = parse({quote, QType}, Context, Tail), 
 	{[Head] ++ NewTail, Context}.
 	
