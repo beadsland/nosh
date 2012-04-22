@@ -53,6 +53,3 @@ loop(Stdin, Stdout, Stderr) ->
 
 prompt() ->
 	"> ".
-
-%trim(S) ->
-%	re:replace(S,"\n$","",[{return,list}]).
