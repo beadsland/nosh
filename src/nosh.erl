@@ -1,5 +1,5 @@
-%% @doc Nosh (nosql shell) Bourne shell emulator and alternative Erlang shell.
-%% @author Beads D. Land-Trujillo <beads.d.land@gmail.com>
+%% @doc The `nosh' process module, which handles messaging with a paired `noterm' process.
+%% @author Beads D. Land-Trujillo [http://www.twitter.com/beadsland]
 %% @copyright 2012 Beads D. Land-Trujillo
 
 %% TODO: nosh as application

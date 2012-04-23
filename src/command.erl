@@ -1,11 +1,7 @@
-%% @doc This is a preliminary draft of the command line parser for <code>nosh</code>.
+%% @doc This is a preliminary draft of the command line parser for `nosh'.
 %%
-%% Notes:  Grouping is parsed for entire line prior to execution, unlike Bourne standard.  
-%% This enforces transactional integrity--command execution is deferred until entire line parses correctly.
-%%
-%% Reserved words { and } not supported.  Curly brackets to be implemented for Erlang tuples.
 %% @end
-%% @author Beads D. Land-Trujillo <beads.d.land@gmail.com>
+%% @author Beads D. Land-Trujillo [http://www.twitter.com/beadsland]
 %% @copyright 2012 Beads D. Land-Trujillo
 %% @reference See <a href="http://sayle.net/book/basics.htm">Shell Basics</a> for overview of functionality.  (to be implemented)
 %% @reference See <a href="http://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html">Shell Command Language</a> 
@@ -14,14 +10,20 @@
 
 %$ TODO: follow up bug report on Erlide permission denied errors
 
-%% TODO: Man page
+%% TODO: overview.edoc
+%% TODO: Redirection
 %% TODO: Tokenizing
 %% TODO: $ - Parameter expansion
-%% TODO: ${} - Parameter expansion
-%% TODO: $() - Command substitution
-%% TODO: $(()) - Arithmetic Expansion
+%% TODO: ${...} - Parameter expansion
+%% TODO: $(...) - Command substitution
+%% TODO: $((...)) - Arithmetic Expansion
 %% TODO: Field splitting
 %% TODO: Reserved words
+%% TODO: [...] Lists
+%% TODO: [`'...`'] Lists command substituion
+%% TODO: (...) second position parameter Lists
+%% TODO: {...} nth position tuples
+%% TODO: {...;}; faux-command groups
 %% TODO: conservative module loader
 %% TODO: Executing
 %% TODO: Alias substitution
