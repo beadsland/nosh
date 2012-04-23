@@ -1,7 +1,7 @@
 %% @doc This is a preliminary draft of the command line parser for `nosh'.
 %%
 %% @end
-%% @author Beads D. Land-Trujillo [http://www.twitter.com/beadsland]
+%% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
 %% @copyright 2012 Beads D. Land-Trujillo
 %% @reference See <a href="http://sayle.net/book/basics.htm">Shell Basics</a> for overview of functionality.  (to be implemented)
 %% @reference See <a href="http://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html">Shell Command Language</a> 

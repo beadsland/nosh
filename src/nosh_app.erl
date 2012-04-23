@@ -1,7 +1,7 @@
 %% @hidden
 
 %% @doc Not used.
-%% @author Beads D. Land-Trujillo [http://www.twitter.com/beadsland]
+%% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
 %% @copyright 2012 Beads D. Land-Trujillo
 
 -module(nosh_app).

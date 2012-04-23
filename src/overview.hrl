@@ -1,5 +1,19 @@
-% @doc `nosh' is a {@section Bourne Shell Emulator}, {@section Erl Shell Alternative} 
-% and {@section NoSQL File System} implemented in Erlang.
+% @doc == Introduction ==
+% 
+% `nosh' is a {@section Bourne Shell Emulator}, {@section Erl Shell Alternative} 
+% and {@section NoSQL File System} implemented in Erlang.  Providing an intuitive
+% commandline interface for compiling and loading Erlang modules, and for executing
+% Erlang module functions, `nosh' affords both the ease of a UNIX shell and the power
+% of an Erlang interpreter.
+%
+% == Contents ==
+%
+% <ul>
+% <li> {@section Noterm} </li>
+% <li> {@section Bourne Shell Emulator} </li>
+% <li> {@section Erl Shell Alternative} </li>
+% <li> {@section NoSQL File System} </li>
+% </ul>
 %
 % == Noterm ==
 %
@@ -9,7 +23,7 @@
 %
 % <i>Full terminal emulation has yet to be implemented.</i>  The `nosh' process continues to 
 % run until it receives an end-of-file message from `noterm'.  This is currently produced by
-% typing a period (`.') by itself on a line, followed by a `<newline>'.  (This EOL period should
+% typing a period (`.') by itself on a line, followed by a `<newline>'.  (This EOF period should
 % not be confused with the {@section Erlang Context} left-wise conjunction; or with the period
 % command, one of the built-in {@section Bourne Commands}.)
 % 
@@ -31,20 +45,20 @@
 % 
 % === Quoting ===
 % 
-% Single quoted (``'...'''), double quoted (`"..."'), and back quoted (<code>`'...`'</code>) character
-% sequences are supported, as per the Bourne shell, as use of the backslash (`\') to escape the
-% character that follows.  Additionally, single and double quoted sequences have special meaning
-% within {@section Erlang Context}.
+% Single quoted (`` '...' ''), double quoted (`"..."'), and back quoted (<code>`'...`'</code>) character
+% sequences are supported, as per the Bourne shell, as is use of the backslash (`\') to escape special
+% characters.  Additionally, single and double quoted sequences have special meaning
+% when passed to Erlang functions.
 % 
 % Single quotes remove the special meaning of all characters they enclose.  In addition, single quotes
-% indicate the `atom()' type in Erlang Context.
+% indicate the `atom()' type when passed to Erlang functions.
 % 
 % Double quotes remove the special meaning of all characters other than the dollar sign (`$'), the
 % backquote (<code>`'</code>), the backslash (`\'), and the newline (per {@section Multiline Parsing}).  
-% In Erlang Context, double quotes indicate the `string()' type, <i>i.e.</i> a `list()' of characters.  
+% Additionally, double quotes indicate the `string()' type, <i>i.e.</i> a `list()' of characters.  
 % Strings are passed to Erlang functions only after all embedded {@section Parameter Expansion}, 
 % {@section Command Substition} and {@section Arithmetic Expansion} has been performed.
-% 
+%
 % Back quotes signal {@section Command Substitution}, the back quoted character sequence being replaced
 % by the results of the substituted command(s) execution.  A {@section Lists} back quote (<code>[`'...`']</code>)
 % results in an Erlang `list()' of tokens.  Otherwise, the results of a back quoted sequence are inserted
@@ -55,7 +69,7 @@
 % ==== Multiline Parsing ====
 % 
 % Presently, multi-line parsing is not supported.  Any line ending in a backslash (an escaped carriage return)
-% will throw an exception.
+% will result in an error.
 %  
 % === Grouping ===
 % 
@@ -68,7 +82,7 @@
 % after second position are invalid, throwing a parsing error.  (<i>Second and third position
 % processing not yet implemented.</i>)
 % 
-% The faux within-shell execution syntax of Bourne shell (`{ ...; };`)--implemented 
+% The faux within-shell execution syntax of Bourne shell (`{ ...; };')--implemented 
 % with the open curly bracket (`{') and closed curly bracker (`}') as reserved words--is not
 % supported by `nosh', curly brackets instead marking {@section Tuples}.
 % 
@@ -81,7 +95,8 @@
 % 
 % These {@section Bourne Context} conjunctions are parsed right-wise.  That is, everything that follows the conjunction
 % is returned as a nested group in the last element of the enclosing group context.  There are two left-wise conjunctions,
-% the period, indicating an {@section Erlang Context} group, and the `<newline>', indicating the enclosing command line group.
+% the period (`.'), indicating an {@section Erlang Context} group, and the `<newline>', 
+% indicating the enclosing command line group.
 % 
 % ==== Pipes ====
 % 
@@ -114,7 +129,7 @@
 % 
 % <i>Bourne built-in commands have not yet been implemented.</i>
 % 
-% == Erl Shell Alterantive ==
+% == Erl Shell Alternative ==
 % 
 % `nosh' will provide a UNIX-style command line for Erlang, as a human-thinkable alternative to
 % the Erl shell ([http://www.erlang.org/doc/man/erl.html]).  
@@ -126,7 +141,7 @@
 % For these reasons, `nosh' operates in {@section Bourne Context} by default, while still supporting
 % Erlang {@section Lists} and {@section Tuples}.  Within Bourne Context, {@section Modules} compile
 % and load on-the-fly, {@section Parameters} may be passed (and functions called) with minimal typing,
-% and {@section Exceptions} thrown by processes are gracefully caught.
+% and {@section Exceptions} thrown by processes are gracefully caught and displayed.
 % 
 % === Modules ===
 % 
@@ -144,7 +159,7 @@
 % Otherwise, the compiler error is written to `stdout' and a non-zero status is returned.  
 % 
 % If no associated `.erl' file is found, the `.beam' file on the $PATH is loaded and {@section Execution}
-% goes forward.  If no `.beam' file is found, the search continues to the next directory on `$PATH`,
+% goes forward.  If no `.beam' file is found, the search continues to the next directory on `$PATH',
 % returning an error if no `.beam' file can be found or compiled from source before the `$PATH' is
 % exhausted.
 % 
@@ -163,9 +178,9 @@
 % module's {@section Nosh_exec Behaviour} `start/6' function, reporting an error on failure.  Otherwise,
 % `nosh' will attempt to spawn on `start/5', reporting an error on failure.
 % 
-% In <i>explicit function</i> mode, the command appears in Erlang syntax as `<i>Module</i>:<i>Function</i>'.
+% In <i>explicit function</i> mode, the command appears in Erlang syntax as <i>`Module'</i>`:'<i>`Function'</i>.
 % This can stand on it's own, or else be followed either by {@section Parameters} or a {@section Parameter List}.  
-% The appropriate arity function is called by `nosh', reporting an error on failure.  In {@section Erlang Context},
+% The resulting arity function is called by `nosh', reporting an error on failure.  In {@section Erlang Context},
 % all function invocations are in explicit function mode, always with a Parameter List.
 % 
 % In <i>getoptions functions</i> mode, the module name appears in first position, followed by
@@ -203,7 +218,7 @@
 % ==== Lists ====
 % 
 % Zero or more Words, Lists and/or Tuples are treated as a single List parameter 
-% (not to be confused with a {@section Parameter List} when enclosed by an open square bracket (`[')
+% (not to be confused with a {@section Parameter List}) when enclosed by an open square bracket (`[')
 % and close square bracket (`]').  Per Erlang syntax, elements of a List are delimited by commas (`,'),
 % whitespace is ignored, and `$IFS' specified delimiters have no special meaning.
 % 
@@ -215,7 +230,7 @@
 % A Parameter List follows Erlang syntax for specifying the parameters (and indirectly, the arity) of a
 % function, and consists of zero or more comma-delimited Words, Lists, and Tuples enclosed by an 
 % open parentheses (`(') and close parentheses (`)') rather than square brackets.  A Parameter List
-% may only appear in second position after a command in explicit function mode (see {@section Execution}).
+% may only appear in second position after a command, and only in explicit function mode (see {@section Execution}).
 % 
 % In first position, parentheses denote command {@section Grouping}.
 % 

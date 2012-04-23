@@ -1,5 +1,5 @@
 %% @doc The `nosh' process module, which handles messaging with a paired `noterm' process.
-%% @author Beads D. Land-Trujillo [http://www.twitter.com/beadsland]
+%% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
 %% @copyright 2012 Beads D. Land-Trujillo
 
 %% TODO: nosh as application

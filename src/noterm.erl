@@ -1,7 +1,7 @@
 %% @doc Terminal emulator for <code>nosh</code>.
 %% Translating standard I/O to Erlang messaging.
 %% @end
-%% @author Beads D. Land-Trujillo [http://www.twitter.com/beadsland]
+%% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
 %% @copyright 2012 Beads D. Land-Trujillo
 
 %% TODO: io:get_char (see code in jungerl)
