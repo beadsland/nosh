@@ -39,10 +39,13 @@
 %% TODO: Couch commands
 %% TODO: Add support for line continuation (currently throws error)
 
-%% @version 0.1.0
+%% @version 0.1.1
 -module(nosh).
+-version("0.1.1").
+
+-include("macro.hrl").
+
 -export([start/1]).
-version() -> Version = "0.1.0", Version.
 
 
 %% @doc Start nosh, passing Pid of process providing standard i/o messaging.
@@ -51,13 +54,13 @@ start(Pid) ->
 	
 start(Stdin, Stdout, Stderr) ->
 	process_flag(trap_exit, true),
-	Stdout ! {self(), stdout, io_lib:format("Starting Nosh ~s nosql shell ~p~n", [version(), self()])},
+	Stdout ! {self(), stdout, io_lib:format("Starting Nosh ~s nosql shell ~p~n", [?VERSION(?MODULE), self()])},
 
-	Dependency = command,
+	Dependency = nosh.parse,
 	case code:load_file(Dependency) of 
 		{error, Reason} 	-> io:format(standard_error, "~s: ~p~n", [Dependency, Reason]), 
 							   init:stop(); 
-		{module, _Module} 	-> CmdVersion = Dependency:version(),
+		{module, _Module} 	-> CmdVersion = ?VERSION(Dependency),
 							   Stdout ! {self(), stdout, io_lib:format("Using rev. ~s command line parser~n", [CmdVersion])},
 							   loop(Stdin, Stdout, Stderr)
 	end.	
@@ -65,8 +68,11 @@ start(Stdin, Stdout, Stderr) ->
 loop(Stdin, Stdout, Stderr) ->
 	Stdout ! {self(), stdout, prompt()},
 	receive
-		{Stdin, stdout, Line}		-> 	Eval = command:eval(Line, Stdin, Stdout, Stderr),
-									 	Stdout ! {self(), stdout, io_lib:format("parse: ~p~n", [Eval])};
+		{Stdin, stdout, Line}		-> 	try nosh.parse:parse(Line, Stderr) of
+											Eval 	-> Stdout ! {self(), stdout, io_lib:format("parse: ~p~n", [Eval])}
+										catch
+											Error 	-> exit(Error) 
+										end;
 		{'EXIT', Stdin, Reason}		-> 	io:format("Stopping on terminal exit: ~p ~p~n", [Reason, self()]), 
 										init:stop();
 		{'EXIT', ExitPid, Reason}	-> 	io:format(standard_error, "** Exit ~p: ~p ~p~n", [ExitPid, Reason, self()]), 

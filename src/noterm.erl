@@ -36,17 +36,18 @@
 
 %% @version 0.1.1
 -module(noterm).
+-version("0.1.1").
+
+-include("macro.hrl").
 
 -export([start/0]).
 -export([key_start/1]).
-
-version() -> Version = "0.1.1", Version. 
 
 
 %% @doc Start terminal, launching message loop and keyboard listening process. 
 start() ->
 	process_flag(trap_exit, true),
-	io:format("Starting Noterm ~s terminal emulator on ~p ~p~n", [version(), node(), self()]),
+	io:format("Starting Noterm ~s terminal emulator on ~p ~p~n", [?VERSION(?MODULE), node(), self()]),
 	
 	Dependency = nosh,
 	case code:load_file(Dependency) of 

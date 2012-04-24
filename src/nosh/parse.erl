@@ -30,7 +30,21 @@
 %% for detailed specification. (to be implemented)
 %% @end
 
-%% TODO: figure out module name clash strategy
+%% TODO: standardize dependency checker
+%%
+%% logic for this: during development, we want to gracefully exit if we run after a compiler error
+%%
+%% TODO: clean up debug code
+%% TODO: refactor these to-do tasks
+%% TODO: command load module
+%% 
+%% Pack:  if module actually called as package, look it up on path that way
+%%        check if is_loaded path clashes, per flat
+%% Deep:  confirm package path is nosh.<i>project</i>.<i>module</i>
+%%        reset package path according to shell path
+%% Flat:  check if is_loaded path is different from to_be_loaded path
+%%        throw error if it is
+%%
 %% TODO: revise loops to use fully-qualified function calls
 %% TODO: doc update:  "procedural" should read "imperative"
 %% TODO: doc update:  first character, lower case:  atom; upper case:  variable
@@ -61,39 +75,35 @@
 %% TODO: Line continuation
 %% TODO: Etc., etc. 
 
+%% @version 0.1.3
+-module(nosh.parse).
+-version("0.1.3").
 
-%% @version 0.1.2
--module(command).
--export([eval/4]).
+-export([parse/2]).
 
-%% @doc Return author's revision number of this module.  Used for debugging purposes.
--export([version/0]).
--spec version()-> nonempty_string().
-%%
-version() -> Version = "0.1.2", Version. 
+-include("../macro.hrl").
+-import(lists).
+-import(io).
+-import(io_lib).
+-import(re).
+
+-define(QUOTE_CHARS, "\\\\\"\'\`\n").
+-define(GROUP_CHARS, "\;\(\)\&\|").     % curly braces are reserved words, not grouping characters
+-define(SPACE_CHARS, "\ \t\n").
 
 
 %% @doc Parse command line string and return a list of nested quoting and grouping context blocks, 
-%% or else <code>failed</code> on a caught syntax exception.
+%% or else `failed' on a caught syntax exception.
 %%
-%% This is a temporary function name, pending refactoring to reflect full execution of parsed command lines.
+%% Handle thrown errors for unmatched quoting and grouping characters.
 %% @end
 -type io_proc() :: pid().
 -type quote_type() :: back | doub | sing | escp | dbcp.
 -type group_type() :: line | pren | ifok | ambi | ifnz | pipe.
 -type context_type() :: {eval, eval} | {quote, group_type()} | {quote, quote_type()}.
 -type block() :: nonempty_string() | {context_type(), list(block())}.
--spec eval(Subject :: nonempty_string(), Stdin :: io_proc(), Stdout :: io_proc(), Stderr :: io_proc()) -> failed | list(block()).
+-spec parse(Subject :: nonempty_string(), Stderr :: io_proc()) -> failed | list(block()).
 %%
-eval(Subject, _Stdin, _Stdout, Stderr) -> parse(Subject, Stderr).
-
--define(QUOTE_CHARS, "\\\\\"\'\`\n").
--define(GROUP_CHARS, "\;\(\)\&\|").     % curly braces are reserved words, not grouping characters
--define(SPACE_CHARS, "\ \t\n").
--define(STDERR(Format, List), Stderr ! {self(), stderr, io_lib:format(Format, List)}).
-
-%% Parse command line string and return a list of nested quoting and grouping contexts.
-%$ Handle thrown errors for unmatched quoting and grouping characters.
 parse(Subject, Stderr) ->
 	Pattern = io_lib:format("([~s~s~s])", [?QUOTE_CHARS, ?GROUP_CHARS, ?SPACE_CHARS]),
 	{ok, MP} = re:compile(Pattern), 
@@ -117,7 +127,6 @@ parse(Subject, Stderr) ->
 		{quote, sing} 	-> ?STDERR(QuoteErr, ["\'"]), failed;
 		{quote, escp} 	-> ?STDERR("Quote error: Line continuation not supported~n", []), failed
 	end. 
-
 
 %% Parse list of strings split on quoting and grouping characters, according to current context type.
 %% Return tuple of block list and context stack OR tuple of 'close_quote', context stack, and trailing context tree.
