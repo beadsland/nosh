@@ -63,8 +63,11 @@ start(Stdin, Stdout, Stderr) ->
 	process_flag(trap_exit, true),
 	?INIT_DEBUG(Stderr), 
 	Stdout ! {self(), stdout, io_lib:format("Starting Nosh ~s nosql shell ~p~n", [?VERSION(?MODULE), self()])},
-	CmdVersion = ?VERSION(nosh_parse),
-	Stdout ! {self(), stdout, io_lib:format("Using rev. ~s command line parser~n", [CmdVersion])},
+	?DEBUG("Using rev. ~s command line parser~n", [?VERSION(nosh_parse)]),
+	?DEBUG("Using rev. ~s module loader~n", [?VERSION(nosh_load)]),
+	
+	nosh_load:test(Stderr),
+
 	loop(Stdin, Stdout, Stderr).
 		
 loop(Stdin, Stdout, Stderr) ->
@@ -72,9 +75,10 @@ loop(Stdin, Stdout, Stderr) ->
 	receive
 		{Stdin, stdout, Line}		-> 	Eval = nosh_parse:parse(Line, Stderr),
 										Stdout ! {self(), stdout, io_lib:format("parse: ~p~n", [Eval])};
-		{'EXIT', Stdin, Reason}		-> 	io:format("Stopping on terminal exit: ~p ~p~n", [Reason, self()]), 
+		{'EXIT', Stdin, Reason}		-> 	?DEBUG("Stopping on terminal exit: ~p ~p~n", [Reason, self()]), 
 										init:stop();
-		{'EXIT', ExitPid, Reason}	-> 	io:format(standard_error, "** Exit ~p: ~p ~p~n", [ExitPid, Reason, self()]), 
+		{'EXIT', ExitPid, normal}	-> 	?DEBUG("Saw process exit: ~p~n", [ExitPid]);
+		{'EXIT', ExitPid, Reason}	-> 	?STDERR("Exit ~p: ~p ~p~n", [ExitPid, Reason, self()]), 
 										init:stop()
 	end,
 	loop(Stdin, Stdout, Stderr).

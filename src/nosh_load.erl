@@ -40,11 +40,28 @@
 %% TODO: $PATH search
 %% TODO: conservative module loader
 
-%% @version 0.0.0
+%% @version 0.0.1
 -module(nosh_load).
--version("0.0.0").
+-version("0.0.1").
 
--export([test/0]).
+-include("macro.hrl").
 
-test() -> ok.
+-export([test/1]).
+
+test(Stderr) ->
+	?INIT_DEBUG(Stderr),
+	?DEBUG("Running ver. ~s nosh_load test.~n", [?VERSION(?MODULE)]),
+
+	FlatCompile = compile:file("d:/workspace/nosh/src/test",
+				 			[verbose, report, {outdir, "d:/workspace/nosh/ebin"}, {i, "d:/workspace/nosh/src"}]),
+	?DEBUG("Compile result: ~p~n", [FlatCompile]),
+	test:test(),
+	
+	file:make_dir("d:/workspace/nosh/ebin/nosh"),
+	PackCompile = compile:file("d:/workspace/nosh/src/test",
+				 			[{d, nosh, nosh},
+							 verbose, report, {outdir, "d:/workspace/nosh/ebin/nosh"}, {i, "d:/workspace/nosh/src"}]),
+	?DEBUG("Compile result: ~p~n", [PackCompile]),
+	nosh.test:test().
+	
 	

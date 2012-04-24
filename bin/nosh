@@ -7,7 +7,7 @@ cd /cygdrive/d/workspace/nosh
 
 echo sh-nosh $VERSION wrapper script for Nosh
 
-rm doc/edoc-info    # edoc warns it can't read this on Windows path
+rm doc/edoc-info 2&>1   # edoc warns it can't read this on Windows path
 
 rebar compile doc
 
