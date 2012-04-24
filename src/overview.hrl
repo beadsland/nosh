@@ -48,13 +48,13 @@
 % Single quoted (`` '...' ''), double quoted (`"..."'), and back quoted (<code>`'...`'</code>) character
 % sequences are supported, as per the Bourne shell, as is use of the backslash (`\') to escape special
 % characters.  Additionally, single and double quoted sequences have special meaning
-% when passed to Erlang functions.
+% when passed to Erlang functions.  (Unlike in Bourne shell, quote removal does not occur in `nosh'.)
 % 
 % Single quotes remove the special meaning of all characters they enclose.  In addition, single quotes
 % indicate the `atom()' type when passed to Erlang functions.
 % 
 % Double quotes remove the special meaning of all characters other than the dollar sign (`$'), the
-% backquote (<code>`'</code>), the backslash (`\'), and the newline (per {@section Multiline Parsing}).  
+% back quote (<code>`'</code>), the backslash (`\'), and the newline (per {@section Multiline Parsing}).  
 % Additionally, double quotes indicate the `string()' type, <i>i.e.</i> a `list()' of characters.  
 % Strings are passed to Erlang functions only after all embedded {@section Parameter Expansion}, 
 % {@section Command Substition} and {@section Arithmetic Expansion} has been performed.

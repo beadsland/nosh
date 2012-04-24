@@ -8,27 +8,38 @@
 %% for detailed specification. (to be implemented)
 %% @end
 
-%$ TODO: follow up bug report on Erlide permission denied errors
-
-%% TODO: overview.edoc
-%% TODO: Redirection
-%% TODO: Tokenizing
+%% TODO: open source license
+%% TODO: github
+%% TODO: review conditional compiler directives
+%% TODO: figure out module name clash strategy
+%% TODO: revise loops to use fully-qualified function calls
+%% TODO: doc update:  "procedural" should read "imperative"
+%% TODO: doc update:  first character, lower case:  atom; upper case:  variable
+%% TODO: Field splitting/Tokenizing
+%% TODO: rebar dependency directory structure
+%% TODO: built-in functions dependency
+%% TODO: $PATH search
+%% TODO: Executing - implicit start
+%% TODO: Executing - explicit function
+%% TODO: Executing - getoptions functions
+%% TODO: Tilde expansion
+%% TODO: Reserved words
 %% TODO: $ - Parameter expansion
 %% TODO: ${...} - Parameter expansion
 %% TODO: $(...) - Command substitution
 %% TODO: $((...)) - Arithmetic Expansion
-%% TODO: Field splitting
-%% TODO: Reserved words
 %% TODO: [...] Lists
 %% TODO: [`'...`'] Lists command substituion
 %% TODO: (...) second position parameter Lists
-%% TODO: {...} nth position tuples
-%% TODO: {...;}; faux-command groups
+%% TODO: {...} Tuples
+%% TODO: <...> Pids
+%% TODO: <<...>> Bitstrings
+%% TODO: Fileglobs
+%% TODO: Redirection
+%% TODO: Here document
 %% TODO: conservative module loader
-%% TODO: Executing
 %% TODO: Alias substitution
 %% TODO: Line continuation
-%% TODO: Here document
 %% TODO: Etc., etc. 
 
 %% @version 0.1.2
