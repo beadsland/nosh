@@ -30,8 +30,6 @@
 %% for detailed specification. (to be implemented)
 %% @end
 
-%% TODO: github
-%% TODO: review conditional compiler directives
 %% TODO: figure out module name clash strategy
 %% TODO: revise loops to use fully-qualified function calls
 %% TODO: doc update:  "procedural" should read "imperative"
@@ -53,8 +51,8 @@
 %% TODO: [`'...`'] Lists command substituion
 %% TODO: (...) second position parameter Lists
 %% TODO: {...} Tuples
-%% TODO: <...> Pids
-%% TODO: <<...>> Bitstrings
+%% TODO: `<...>' Pids
+%% TODO: `<<...>>' Bitstrings
 %% TODO: Fileglobs
 %% TODO: Redirection
 %% TODO: Here document
@@ -62,6 +60,7 @@
 %% TODO: Alias substitution
 %% TODO: Line continuation
 %% TODO: Etc., etc. 
+
 
 %% @version 0.1.2
 -module(command).

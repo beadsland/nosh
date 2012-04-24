@@ -22,7 +22,7 @@
 %% -----------------------------------------------------------------------
 %% CDDL HEADER END
 
-%% @doc Terminal emulator for <code>nosh</code>.
+%% @doc Terminal emulator for `nosh'.
 %% Translating standard I/O to Erlang messaging.
 %% @end
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
@@ -36,8 +36,10 @@
 
 %% @version 0.1.1
 -module(noterm).
+
 -export([start/0]).
 -export([key_start/1]).
+
 version() -> Version = "0.1.1", Version. 
 
 
