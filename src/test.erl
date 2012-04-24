@@ -1,7 +1,7 @@
--ifndef(nosh).
+-ifndef(package).
 -module(test).
 -else.
--module(?nosh.test).
+-module(?package.test).
 -endif.
 
 -include("macro.hrl").

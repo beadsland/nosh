@@ -42,7 +42,7 @@
 
 %% @version 0.0.1
 -module(nosh_load).
--version("0.0.1").
+-version("0.0.2").
 
 -include("macro.hrl").
 
@@ -59,7 +59,7 @@ test(Stderr) ->
 	
 	file:make_dir("d:/workspace/nosh/ebin/nosh"),
 	PackCompile = compile:file("d:/workspace/nosh/src/test",
-				 			[{d, nosh, nosh},
+				 			[{d, package, nosh},
 							 verbose, report, {outdir, "d:/workspace/nosh/ebin/nosh"}, {i, "d:/workspace/nosh/src"}]),
 	?DEBUG("Compile result: ~p~n", [PackCompile]),
 	nosh.test:test().

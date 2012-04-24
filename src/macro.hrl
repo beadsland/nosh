@@ -9,4 +9,4 @@
 
 -define(INIT_DEBUG(Pid), put(debug, Pid)).
 -define(DEBUG(Format, List), get(debug) ! {self(), debug, lists:flatten(io_lib:format(Format, List))}).
--define(DEBUG(String), ?DEBUG(String, [])). 
+-define(DEBUG(String), ?DEBUG(String, [])).  
