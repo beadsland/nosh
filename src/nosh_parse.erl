@@ -30,46 +30,14 @@
 %% for detailed specification. (to be implemented)
 %% @end
 
-%% TODO: clean up debug code
-%% TODO: refactor these to-do tasks
-%% TODO: command load module
-%% 
-%% Pack:  if module actually called as package, look it up on path that way
-%%        check if is_loaded path clashes, per flat
-%% Deep:  confirm package path is nosh.<i>project</i>.<i>module</i>
-%%        reset package path according to shell path
-%% Flat:  check if is_loaded path is different from to_be_loaded path
-%%        throw error if it is
-%%
-%% TODO: revise loops to use fully-qualified function calls
-%% TODO: doc update:  "procedural" should read "imperative"
-%% TODO: doc update:  first character, lower case:  atom; upper case:  variable
-%% TODO: Field splitting/Tokenizing
-%% TODO: rebar dependency directory structure
-%% TODO: built-in functions dependency
-%% TODO: $PATH search
-%% TODO: Executing - implicit start
-%% TODO: Executing - explicit function
-%% TODO: Executing - getoptions functions
-%% TODO: Tilde expansion
-%% TODO: Reserved words
-%% TODO: $ - Parameter expansion
-%% TODO: ${...} - Parameter expansion
-%% TODO: $(...) - Command substitution
-%% TODO: $((...)) - Arithmetic Expansion
 %% TODO: [...] Lists
 %% TODO: [`'...`'] Lists command substituion
 %% TODO: (...) second position parameter Lists
 %% TODO: {...} Tuples
 %% TODO: `<...>' Pids
 %% TODO: `<<...>>' Bitstrings
-%% TODO: Fileglobs
-%% TODO: Redirection
-%% TODO: Here document
-%% TODO: conservative module loader
-%% TODO: Alias substitution
+%% TODO: Erlang Context
 %% TODO: Line continuation
-%% TODO: Etc., etc. 
 
 %% @version 0.1.3
 -module(nosh_parse).

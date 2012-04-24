@@ -26,6 +26,14 @@
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
 %% @copyright 2012 Beads D. Land-Trujillo
 
+%% TODO: implement nosh_load
+%% TODO: revise loops to use fully-qualified function calls
+%% TODO: doc update:  "procedural" should read "imperative"
+%% TODO: doc update:  first character, lower case:  atom; upper case:  variable
+%% TODO: nosh_parse: tokenizing
+%% TODO: implement nosh_exec
+%% TODO: implement nosh_eval to convert nosh_parse output to nosh_exec input
+
 %% TODO: nosh as application
 %% TODO: nosh_command behaviour
 %% TODO: nosh as nosh_command
