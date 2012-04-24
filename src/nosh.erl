@@ -49,11 +49,11 @@
 
 
 %% @doc Start nosh, passing Pid of process providing standard i/o messaging.
-start(Pid) ->
-	start(Pid, Pid, Pid).
+start(Pid) -> start(Pid, Pid, Pid).
 	
 start(Stdin, Stdout, Stderr) ->
 	process_flag(trap_exit, true),
+	?INIT_DEBUG(Stderr), 
 	Stdout ! {self(), stdout, io_lib:format("Starting Nosh ~s nosql shell ~p~n", [?VERSION(?MODULE), self()])},
 	CmdVersion = ?VERSION(nosh_parse),
 	Stdout ! {self(), stdout, io_lib:format("Using rev. ~s command line parser~n", [CmdVersion])},
@@ -71,6 +71,4 @@ loop(Stdin, Stdout, Stderr) ->
 	end,
 	loop(Stdin, Stdout, Stderr).
 
-
-prompt() ->
-	"> ".
+prompt() ->	"nosh> ".

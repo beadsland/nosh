@@ -130,9 +130,9 @@ parse(Type, Context, [Head | Tail]) when is_integer(Head) ->
 	HeadStr = io_lib:format([Head], []),  
 	parse(Type, Context, HeadStr ++ Tail);
 parse({quote, QType}, Context, List) -> 	
-	io:format("parse_quote(~p, ~p, ~p)~n", [QType, Context, List]), 	
+	?DEBUG("parse_quote(~p, ~p, ~p)~n", [QType, Context, List]), 	
 	Parse = parse_quote(QType, Context, List), 
-	io:format("~nparse_quote(~p, ~p, ~p) ->~n     ~p~n", [QType, Context, List, Parse]), 
+	?DEBUG("~nparse_quote(~p, ~p, ~p) ->~n     ~p~n", [QType, Context, List, Parse]), 
 										 
 	case Parse of 							
 		{close_quote, Context, Tail}	-> Close = {close_quote, QType},
@@ -144,7 +144,7 @@ parse({quote, QType}, Context, List) ->
 
 %% Wind up quote block.
 close_quote(QType, Context, List) ->
-	io:format("Xparse_quote(~p, ~p, ~p)~n", [QType, Context, List]), 	
+	?DEBUG("# parse_quote(~p, ~p, ~p)~n", [QType, Context, List]), 	
 	{Tail, _ReturnContext} = parse({quote, QType}, Context, List), 
 	Close = {close_quote, QType},
 	Pred = fun(T) -> T /= Close end,

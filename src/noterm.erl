@@ -62,6 +62,7 @@ msg_loop(Stdin, Stdout, Stderr) ->
 		{Stdin, stderr, Line}		-> io:format(standard_error, "** ~s", [Line]); % key err doesn't go to shell
 		{Stdout, stdout, Line} 		-> io:format(Line, []);
 		{Stderr, stderr, Line} 		-> io:format(standard_error, "** ~s", [Line]);
+		{Stderr, debug, Line}		-> io:format(standard_error, Line, []);
 		{'EXIT', Stdin, Reason}  	-> grace("Stopping on keyboard exit", Reason), exit(normal);
 		{'EXIT', Stdout, Reason}	-> grace("Stopping on shell exit", Reason), init:stop();
 		{'EXIT', ExitPid, Reason}	-> grace(io_lib:format("Stopping on ~p exit", [ExitPid]), Reason), exit(normal)
