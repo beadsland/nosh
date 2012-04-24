@@ -78,15 +78,15 @@ parse(Subject, Stderr) ->
 	try close_quote(line, [eval], CleanSplit) of
 		{Parse, [eval]} -> [{{quote, line}, ContextList}, close_eval] = Parse, ContextList	
 	catch
-		{eval, eval}  	-> ?STDERR("Eval error: shouldn't happen~n", []), failed;
+		{eval, eval}  	-> ?STDERR("Eval error: shouldn't happen~n"), failed;
 		{quote, line} 	-> ?STDERR(GroupErr, ["EOL"]), failed;
 		{quote, semi}	-> ?STDERR(GroupErr, ["EOL"]), failed;
 		{quote, pren}	-> ?STDERR(GroupErr, ["\)"]), failed;
-		{close, pren}	-> ?STDERR("Group error: Unmatched closing parentheses~n", []), failed;
+		{close, pren}	-> ?STDERR("Group error: Unmatched closing parentheses~n"), failed;
 		{quote, back} 	-> ?STDERR(QuoteErr, ["\`"]), failed;
 		{quote, doub} 	-> ?STDERR(QuoteErr, ["\""]), failed;
 		{quote, sing} 	-> ?STDERR(QuoteErr, ["\'"]), failed;
-		{quote, escp} 	-> ?STDERR("Quote error: Line continuation not supported~n", []), failed
+		{quote, escp} 	-> ?STDERR("Quote error: Line continuation not supported~n"), failed
 	end. 
 
 %% Parse list of strings split on quoting and grouping characters, according to current context type.

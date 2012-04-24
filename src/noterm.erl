@@ -62,12 +62,13 @@ msg_loop(Stdin, Stdout, Stderr) ->
 		{Stdin, stderr, Line}		-> io:format(standard_error, "** ~s", [Line]); % key err doesn't go to shell
 		{Stdout, stdout, Line} 		-> io:format(Line, []);
 		{Stderr, stderr, Line} 		-> io:format(standard_error, "** ~s", [Line]);
-		{Stderr, debug, Line}		-> io:format(standard_error, Line, []);
+		{_Pid, debug, Line}			-> io:format(standard_error, Line, []);
 		{'EXIT', Stdin, Reason}  	-> grace("Stopping on keyboard exit", Reason), exit(normal);
 		{'EXIT', Stdout, Reason}	-> grace("Stopping on shell exit", Reason), init:stop();
-		{'EXIT', ExitPid, Reason}	-> grace(io_lib:format("Stopping on ~p exit", [ExitPid]), Reason), exit(normal)
+		{'EXIT', ExitPid, Reason}	-> grace(io_lib:format("Stopping on ~p exit", [ExitPid]), Reason), exit(normal);
+		{Pid, Message, Payload}		-> io:format(standard_error, "unknown message: {~p, ~p, ~p}~n", [Pid, Message, Payload])
     end,
-	msg_loop(Stdin, Stdout, Stderr). 
+	msg_loop(Stdin, Stdout, Stderr).  
 
 grace(Message, Reason) -> 
 	case Reason of
@@ -88,8 +89,9 @@ strip_escapes(Subject) ->
 %%========================================
 
 %%@private Export to allow for spawn.
-key_start(Pid) -> 
-	Pid ! {self(), stderr, io_lib:format("Listening to keyboard ~p~n", [self()])},
+key_start(Pid) ->
+	?INIT_DEBUG(Pid),
+	?DEBUG("Listening to keyboard ~p~n", [self()]),
 	key_loop(Pid, Pid, Pid). 
 
 key_loop(Stdin, Stdout, Stderr) ->
@@ -103,9 +105,9 @@ key_loop(Stdin, Stdout, Stderr) ->
 		".\n"			->  key_stop(eof);
 		{error, Reason} ->  Stderr ! {self(), stderr, io_lib:format("error: ~p~n", [Reason])};
 		Line			->  Stdout ! {self(), stdout, Line}
-	end,
+	end, 
 	key_loop(Stdin, Stdout, Stderr).
 
 key_stop(Reason) ->
-    io:format("Stopping: ~p ~p~n", [Reason, self()]),
+	?DEBUG("Stopping: ~p ~p~n", [Reason, self()]),
     exit(Reason).
