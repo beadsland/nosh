@@ -30,7 +30,7 @@
 %% for detailed specification. (to be implemented)
 %% @end
 
-%% TODO: standardize dependency checker
+%% TODO: will Erlide check package syntax???
 %%
 %% logic for this: during development, we want to gracefully exit if we run after a compiler error
 %%
@@ -107,7 +107,7 @@
 parse(Subject, Stderr) ->
 	Pattern = io_lib:format("([~s~s~s])", [?QUOTE_CHARS, ?GROUP_CHARS, ?SPACE_CHARS]),
 	{ok, MP} = re:compile(Pattern), 
-	
+
 	Split = re:split(Subject, MP, [{return, list}]),
 	Pred = fun(T) -> case T of [] -> false; _Else -> true end end,
 	CleanSplit = lists:filter(Pred, Split), 

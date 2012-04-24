@@ -34,9 +34,9 @@
 %% TODO: incorporate full terminfo/ncurses support
 %% TODO: notermd - telent/ssh access
 
-%% @version 0.1.1
+%% @version 0.1.2
 -module(noterm).
--version("0.1.1").
+-version("0.1.2").
 
 -include("macro.hrl").
 
@@ -44,32 +44,27 @@
 -export([key_start/1]).
 
 
-%% @doc Start terminal, launching message loop and keyboard listening process. 
+%% @doc Start terminal, launching message loop and keyboard listening process.
 start() ->
 	process_flag(trap_exit, true),
+	error_logger:tty(false),
 	io:format("Starting Noterm ~s terminal emulator on ~p ~p~n", [?VERSION(?MODULE), node(), self()]),
-	
-	Dependency = nosh,
-	case code:load_file(Dependency) of 
-		{error, Reason} 	-> io:format(standard_error, "~s: ~p~n", [Dependency, Reason]), init:stop(); 
-		{module, _Module} 	-> loop_start(Dependency)
-	end,
-	{ok, self()}.
-
-loop_start(Shell) ->
-	NoshPid = spawn_link(Shell, start, [self()]), 
 	KeyPid = spawn_link(?MODULE, key_start, [self()]),
-	msg_loop(KeyPid, NoshPid, NoshPid).	
-							   
+	try spawn_link(nosh, start, [self()]) of
+		NoshPid 			-> msg_loop(KeyPid, NoshPid, NoshPid)
+	catch
+		{Message, Reason}	-> grace(Message, Reason), init:stop()
+	end.
+					   
 msg_loop(Stdin, Stdout, Stderr) ->
 	receive
 		{Stdin, stdout, Line}		-> Stdout ! {self(), stdout, strip_escapes(Line)};
 		{Stdin, stderr, Line}		-> io:format(standard_error, "** ~s", [Line]); % key err doesn't go to shell
 		{Stdout, stdout, Line} 		-> io:format(Line, []);
 		{Stderr, stderr, Line} 		-> io:format(standard_error, "** ~s", [Line]);
-		{'EXIT', Stdin, Reason}  	-> grace("Stopping on keyboard exit", Reason);
+		{'EXIT', Stdin, Reason}  	-> grace("Stopping on keyboard exit", Reason), exit(normal);
 		{'EXIT', Stdout, Reason}	-> grace("Stopping on shell exit", Reason), init:stop();
-		{'EXIT', ExitPid, Reason}	-> grace(io_lib:format("Stopping on ~p exit", [ExitPid]), Reason)
+		{'EXIT', ExitPid, Reason}	-> grace(io_lib:format("Stopping on ~p exit", [ExitPid]), Reason), exit(normal)
     end,
 	msg_loop(Stdin, Stdout, Stderr). 
 
@@ -81,8 +76,7 @@ grace(Message, Reason) ->
 			init:stop(); 
 		Else						->
 			io:format(standard_error, "~s: ~p ~p~n", [Message, Else, self()])
-	end,
-	exit(normal).
+	end.
 
 strip_escapes(Subject) ->
 	{ok, MP} = re:compile("\e\[[\d,\s]+[A-Z]"),
