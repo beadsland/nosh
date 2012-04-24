@@ -30,10 +30,6 @@
 %% for detailed specification. (to be implemented)
 %% @end
 
-%% TODO: will Erlide check package syntax???
-%%
-%% logic for this: during development, we want to gracefully exit if we run after a compiler error
-%%
 %% TODO: clean up debug code
 %% TODO: refactor these to-do tasks
 %% TODO: command load module
@@ -76,16 +72,12 @@
 %% TODO: Etc., etc. 
 
 %% @version 0.1.3
--module(nosh.parse).
+-module(nosh_parse).
 -version("0.1.3").
 
 -export([parse/2]).
 
--include("../macro.hrl").
--import(lists).
--import(io).
--import(io_lib).
--import(re).
+-include("macro.hrl").
 
 -define(QUOTE_CHARS, "\\\\\"\'\`\n").
 -define(GROUP_CHARS, "\;\(\)\&\|").     % curly braces are reserved words, not grouping characters

@@ -55,14 +55,14 @@ start(Pid) ->
 start(Stdin, Stdout, Stderr) ->
 	process_flag(trap_exit, true),
 	Stdout ! {self(), stdout, io_lib:format("Starting Nosh ~s nosql shell ~p~n", [?VERSION(?MODULE), self()])},
-	CmdVersion = ?VERSION(nosh.parse),
+	CmdVersion = ?VERSION(nosh_parse),
 	Stdout ! {self(), stdout, io_lib:format("Using rev. ~s command line parser~n", [CmdVersion])},
 	loop(Stdin, Stdout, Stderr).
 		
 loop(Stdin, Stdout, Stderr) ->
 	Stdout ! {self(), stdout, prompt()},
 	receive
-		{Stdin, stdout, Line}		-> 	Eval = nosh.parse:parse(Line, Stderr),
+		{Stdin, stdout, Line}		-> 	Eval = nosh_parse:parse(Line, Stderr),
 										Stdout ! {self(), stdout, io_lib:format("parse: ~p~n", [Eval])};
 		{'EXIT', Stdin, Reason}		-> 	io:format("Stopping on terminal exit: ~p ~p~n", [Reason, self()]), 
 										init:stop();
