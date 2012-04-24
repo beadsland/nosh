@@ -6,6 +6,6 @@
 
 -include("macro.hrl").
 
--export([test/0]). 
+-export([start/0]). 
 
-test() -> ?DEBUG("Hello, world!  My name is ~p.~n", [?MODULE]). 
+start() -> ?DEBUG("Hello, world!  My name is ~p.~n", [?MODULE]). 

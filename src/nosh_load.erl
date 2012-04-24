@@ -40,9 +40,9 @@
 %% TODO: $PATH search
 %% TODO: conservative module loader
 
-%% @version 0.0.1
+%% @version 0.0.3
 -module(nosh_load).
--version("0.0.2").
+-version("0.0.3").
 
 -include("macro.hrl").
 
@@ -52,16 +52,32 @@ test(Stderr) ->
 	?INIT_DEBUG(Stderr),
 	?DEBUG("Running ver. ~s nosh_load test.~n", [?VERSION(?MODULE)]),
 
+	% AltCompile
+	file:make_dir("d:/workspace/nosh/ebin/alt"),
+	AltCompile = compile:file("d:/workspace/nosh/src/test",
+				 			[verbose, report, {outdir, "d:/workspace/nosh/ebin/alt"}, {i, "d:/workspace/nosh/src"}]),
+	?DEBUG("Compile result: ~p~n", [AltCompile]),
+	?DEBUG("Was loaded as: ~p~n", [code:is_loaded(test)]),
+	AltLoad = code:load_abs("d:/workspace/nosh/ebin/alt/test"),
+	?DEBUG("Alt load result: ~p~n", [AltLoad]),
+	?DEBUG("Now loaded as: ~p~n", [code:is_loaded(test)]),	
+	test:start(),
+
+	% FlatCompile
 	FlatCompile = compile:file("d:/workspace/nosh/src/test",
 				 			[verbose, report, {outdir, "d:/workspace/nosh/ebin"}, {i, "d:/workspace/nosh/src"}]),
 	?DEBUG("Compile result: ~p~n", [FlatCompile]),
-	test:test(),
-	
+	?DEBUG("Was loaded as: ~p~n", [code:is_loaded(test)]),
+	code:load_abs("d:/workspace/nosh/ebin/test"),
+	?DEBUG("Now loaded as: ~p~n", [code:is_loaded(test)]),	
+	test:start(),
+
+	% PackCompile
 	file:make_dir("d:/workspace/nosh/ebin/nosh"),
 	PackCompile = compile:file("d:/workspace/nosh/src/test",
 				 			[{d, package, nosh},
 							 verbose, report, {outdir, "d:/workspace/nosh/ebin/nosh"}, {i, "d:/workspace/nosh/src"}]),
 	?DEBUG("Compile result: ~p~n", [PackCompile]),
-	nosh.test:test().
+	nosh.test:start().
 	
 	
