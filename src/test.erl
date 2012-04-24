@@ -1,0 +1,5 @@
+-ifndef(nosh).
+-module(test).
+-else.
+-module(nosh.test).
+-endif.

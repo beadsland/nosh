@@ -43,3 +43,8 @@
 %% @version 0.0.0
 -module(nosh_load).
 -version("0.0.0").
+
+-export([test/0]).
+
+test() -> ok.
+	

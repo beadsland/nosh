@@ -33,7 +33,7 @@
 %% TODO: nosh_parse: tokenizing
 %% TODO: implement nosh_exec
 %% TODO: implement nosh_eval to convert nosh_parse output to nosh_exec input
-
+%% TODO: finish up nosh_parse
 %% TODO: nosh as application
 %% TODO: nosh_command behaviour
 %% TODO: nosh as nosh_command

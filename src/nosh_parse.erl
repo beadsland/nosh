@@ -30,6 +30,7 @@
 %% for detailed specification. (to be implemented)
 %% @end
 
+%% TODO: Tokenizing
 %% TODO: [...] Lists
 %% TODO: [`'...`'] Lists command substituion
 %% TODO: (...) second position parameter Lists
