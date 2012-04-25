@@ -47,13 +47,10 @@
 -include("macro.hrl").
 
 -export([test/1]).
--export([load/2]).
+-export([load/3]).
 
 % Logic:
-% check if writeable ebin
-% Y: check if parallel src
-% YY: check if src newer than ebin
-% YYY: compile src to ebin
+
 % check if ebin module on this path
 % Y: check if module by file module name loaded
 % YY: check if loaded version diff file version
@@ -65,9 +62,35 @@
 -define(FILENAME(Path, Command), ?FILENAME(Path, Command, "")).
 -define(MODIFIED(Path, Command, Extn), last_modified(?FILENAME(Path, Command, Extn))).
 
-load(Command, Path) ->
-    ensure_compiled(Command, Path).
- 
+load(Command, Path, Stderr) ->
+    ensure_compiled(Command, Path),
+	NewFile = ?FILENAME(Command, Path, ".beam"),
+	{ok, Binary, NewModule, NewVsn} = load_binary(NewFile),
+	case confirm_loaded(NewModule) of
+		{ok, OldFile, OldVsn} 	-> 
+			if OldFile /= NewFile 	-> ?STDERR("~s: hotswap namespace collision", [NewModule]);
+			   true					-> false
+			end,
+			if OldVsn /= NewVsn 	-> code:load_binary(NewModule, NewFile, Binary); 
+			   true 				-> false 
+			end;
+		false					->
+			code:load_binary(NewModule, NewFile, Binary)
+	end.
+
+confirm_loaded(NewModule) ->
+	case code:is_loaded(NewModule) of
+		{file, Loaded} 	-> {ok, Loaded, ?ATTRIB(NewModule, vsn)};
+		false			-> false
+	end.
+
+load_binary(NewFile) ->
+	{ok, Binary} = file:read_file(NewFile),
+    Info = beam_lib:info(Binary),
+	{module, Module} = lists:keyfind(module, 1, Info),
+	{ok, {Module, Version}} = beam_lib:version(Binary),
+	{ok, Binary, Module, Version}.			
+
 ensure_compiled(Command, Path) ->
 	Writeable = can_write(Path) andalso can_write(?FILENAME(Path, Command, ".beam")),
 	if Writeable 	->
