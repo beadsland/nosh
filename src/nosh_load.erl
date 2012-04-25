@@ -27,68 +27,78 @@
 %% @copyright 2012 Beads D. Land-Trujillo
 
 %% TODO: command load module
-%% 
-%% Pack:  if module actually called as package, look it up on path that way
-%%        check if is_loaded path clashes, per flat
-%% Deep:  confirm package path is nosh.<i>project</i>.<i>module</i>
-%%        reset package path according to shell path
-%% Flat:  check if is_loaded path is different from to_be_loaded path
-%%        throw error if it is
-%%
 %% TODO: rebar dependency directory structure
 %% TODO: built-in functions project
 %% TODO: $PATH search
+%% TODO: module binary service (to avoid repetitive slurps)
 %% TODO: conservative module loader
 
-%% @version 0.0.3
+%% @version 0.0.4
 -module(nosh_load).
--version("0.0.3").
+-version("0.0.4").
 
 -include("macro.hrl").
 
 -export([test/1]).
 -export([load/3]).
 
-% Logic:
-
-% check if ebin module on this path
-% Y: check if module by file module name loaded
-% YY: check if loaded version diff file version
-% YYY: load file version by package module name
-% YYYY: check if old file name diff new file name
-% YYYYY: report error if hotswap namespace collision
-
 -define(FILENAME(Path, Command, Extn), Path ++ "/" ++ Command ++ Extn).
 -define(FILENAME(Path, Command), ?FILENAME(Path, Command, "")).
 -define(MODIFIED(Path, Command, Extn), last_modified(?FILENAME(Path, Command, Extn))).
 
-load(Command, Path, Stderr) ->
-    ensure_compiled(Command, Path),
+test(Stderr) ->
+	?INIT_DEBUG(Stderr),
+	?DEBUG("Running ver. ~s nosh_load test.~n", [?VERSION(?MODULE)]),
+
+	AltPath = "d:/workspace/nosh/ebin/alt",
+	file:make_dir(AltPath),
+	load(test, AltPath, Stderr),
+	test:start(),
+
+	Alt2Path = "d:/workspace/nosh/ebin/alt2",
+	file:make_dir(AltPath),
+	load(test, Alt2Path, Stderr),
+	test:start(),
+	
+	FlatPath = "d:/workspace/nosh/ebin",
+	load(test, FlatPath, Stderr),
+	test:start(),
+	nosh.test:start(),
+	?DEBUG("test: done~n").
+	
+load(Command, Path, Stderr) when is_atom(Command) -> load(atom_to_list(Command), Path, Stderr);
+load(Command, Path, Stderr) -> 
+	ensure_compiled(Command, Path),
 	NewFile = ?FILENAME(Command, Path, ".beam"),
-	{ok, Binary, NewModule, NewVsn} = load_binary(NewFile),
+	{ok, Binary, NewModule, NewVsn} = slurp_binary(NewFile),
 	case confirm_loaded(NewModule) of
 		{ok, OldFile, OldVsn} 	-> 
-			if OldFile /= NewFile 	-> ?STDERR("~s: hotswap namespace collision", [NewModule]);
+			if OldFile /= NewFile 	-> ?STDERR("~s: hotswap namespace collision~n", [NewModule]);
 			   true					-> false
 			end,
-			if OldVsn /= NewVsn 	-> code:load_binary(NewModule, NewFile, Binary); 
+			if OldVsn /= NewVsn 	-> Load = code:load_binary(NewModule, NewFile, Binary),
+									   ?DEBUG("l: ~p~n", [Load]);
 			   true 				-> false 
 			end;
 		false					->
-			code:load_binary(NewModule, NewFile, Binary)
-	end.
+		Load = code:load_binary(NewModule, NewFile, Binary),
+			?DEBUG("l: ~p~n", [Load])
+	end,
+	?DEBUG("load: finished~n").
 
 confirm_loaded(NewModule) ->
 	case code:is_loaded(NewModule) of
-		{file, Loaded} 	-> {ok, Loaded, ?ATTRIB(NewModule, vsn)};
+		{file, Loaded} 	-> ?DEBUG("old: ~p~n", [{NewModule, Loaded, ?ATTRIB(NewModule, vsn)}]),
+						   {ok, Loaded, ?ATTRIB(NewModule, vsn)};
 		false			-> false
 	end.
 
-load_binary(NewFile) ->
+slurp_binary(NewFile) ->
 	{ok, Binary} = file:read_file(NewFile),
     Info = beam_lib:info(Binary),
 	{module, Module} = lists:keyfind(module, 1, Info),
 	{ok, {Module, Version}} = beam_lib:version(Binary),
+	?DEBUG("new: ~p~n", [{Module, NewFile, Version}]),
 	{ok, Binary, Module, Version}.			
 
 ensure_compiled(Command, Path) ->
@@ -98,7 +108,8 @@ ensure_compiled(Command, Path) ->
 			   {ok, SrcPath, Project}	-> 
 				   SrcMod = ?MODIFIED(SrcPath, Command, ".erl"),
 				   BinMod = ?MODIFIED(Path, Command, ".beam"),
-				   if SrcMod > BinMod 		-> do_compile(SrcPath, Command, Project, Path); 
+				   if SrcMod > BinMod 		-> Compile = do_compile(SrcPath, Command, Project, Path),
+											   ?DEBUG("c: ~p~n", [Compile]); 
 					  true 					-> false 
 				   end;
 			   no_src 					-> false
@@ -151,51 +162,5 @@ ebin_to_src([Head | Tail]) ->
 	
 			
 
-test(Stderr) ->
-	?INIT_DEBUG(Stderr),
-	?DEBUG("Running ver. ~s nosh_load test.~n", [?VERSION(?MODULE)]),
-
-	% AltCompile
-	file:make_dir("d:/workspace/nosh/ebin/alt"),
-	AltCompile = compile:file("d:/workspace/nosh/src/test",
-				 			[verbose, report, {outdir, "d:/workspace/nosh/ebin/alt"}, {i, "d:/workspace/nosh/src"}]),
-	?DEBUG("Compile result: ~p~n", [AltCompile]),
-	?DEBUG("Was loaded as: ~p~n", [code:is_loaded(test)]),
-	AltLoad = code:load_abs("d:/workspace/nosh/ebin/alt/test"),
-	?DEBUG("Alt load result: ~p~n", [AltLoad]),
-	?DEBUG("Now loaded as: ~p~n", [code:is_loaded(test)]),	
-	test:start(),
-
-	% FlatCompile
-	FlatCompile = compile:file("d:/workspace/nosh/src/test",
-				 			[verbose, report, {outdir, "d:/workspace/nosh/ebin"}, {i, "d:/workspace/nosh/src"}]),
-	?DEBUG("Compile result: ~p~n", [FlatCompile]),
-	?DEBUG("Was loaded as: ~p~n", [code:is_loaded(test)]),
-	code:load_abs("d:/workspace/nosh/ebin/test"),
-	?DEBUG("Now loaded as: ~p~n", [code:is_loaded(test)]),	
-	test:start(),
-
-	% PackCompile
-    {ok, {_, _, _, _, SrcTime, _, _}} = file:file_info("d:/workspace/nosh/src/test.erl"),
-	{ok, {_, _, _, _, BinTime, _, _}} = file:file_info("d:/workspace/nosh/src/test.beam"),
 	
-	?DEBUG("Source time: ~p~n", [SrcTime]),
-	?DEBUG("Beam time: ~p~n", [BinTime]),
-	
-	file:make_dir("d:/workspace/nosh/ebin"),
-	PackCompile = compile:file("d:/workspace/nosh/src/test",
-				 			[{d, package, nosh},
-							 verbose, report, {outdir, "d:/workspace/nosh/ebin"}, {i, "d:/workspace/nosh/src"}]),
-	?DEBUG("Compile result: ~p~n", [PackCompile]),
-	?DEBUG("Was loaded as: ~p~n", [code:is_loaded(nosh.test)]),
-	{ok, Binary} = file:read_file("d:/workspace/nosh/ebin/test.beam"),
-	Info = beam_lib:info(Binary),
-	{module, Module} = lists:keyfind(module, 1, Info),
-	{ok, {Module, Version}} = beam_lib:version(Binary), 
-	?DEBUG("binary version: ~p~n", [Version]),
-	code:load_binary(Module, "d:/workspace/nosh/ebin/test.beam", Binary),
-	?DEBUG("Now loaded as: ~p~n", [code:is_loaded(nosh.test)]),	
-	?DEBUG("loaded version: ~p~n", [?ATTRIB(Module, vsn)]),
-	nosh.test:start().
-		
 	
