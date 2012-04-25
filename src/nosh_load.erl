@@ -73,11 +73,17 @@ test(Stderr) ->
 	test:start(),
 
 	% PackCompile
-	file:make_dir("d:/workspace/nosh/ebin/nosh"),
+	file:make_dir("d:/workspace/nosh/ebin"),
 	PackCompile = compile:file("d:/workspace/nosh/src/test",
 				 			[{d, package, nosh},
-							 verbose, report, {outdir, "d:/workspace/nosh/ebin/nosh"}, {i, "d:/workspace/nosh/src"}]),
+							 verbose, report, {outdir, "d:/workspace/nosh/ebin"}, {i, "d:/workspace/nosh/src"}]),
 	?DEBUG("Compile result: ~p~n", [PackCompile]),
+	?DEBUG("Was loaded as: ~p~n", [code:is_loaded(nosh.test)]),
+	{ok, Binary} = file:read_file("d:/workspace/nosh/ebin/test.beam"),
+	Info = beam_lib:info(Binary),
+	{module, Module} = lists:keyfind(module, 1, Info),
+	code:load_binary(Module, "d:/workspace/nosh/ebin/test.beam", Binary),
+	?DEBUG("Now loaded as: ~p~n", [code:is_loaded(nosh.test)]),	
 	nosh.test:start().
 	
 	
