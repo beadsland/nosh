@@ -47,6 +47,86 @@
 -include("macro.hrl").
 
 -export([test/1]).
+-export([load/2]).
+
+% Logic:
+% check if writeable ebin
+% Y: check if parallel src
+% YY: check if src newer than ebin
+% YYY: compile src to ebin
+% check if ebin module on this path
+% Y: check if module by file module name loaded
+% YY: check if loaded version diff file version
+% YYY: load file version by package module name
+% YYYY: check if old file name diff new file name
+% YYYYY: report error if hotswap namespace collision
+
+-define(FILENAME(Path, Command, Extn), Path ++ "/" ++ Command ++ Extn).
+-define(FILENAME(Path, Command), ?FILENAME(Path, Command, "")).
+-define(MODIFIED(Path, Command, Extn), last_modified(?FILENAME(Path, Command, Extn))).
+
+load(Command, Path) ->
+    ensure_compiled(Command, Path).
+ 
+ensure_compiled(Command, Path) ->
+	Writeable = can_write(Path) andalso can_write(?FILENAME(Path, Command, ".beam")),
+	if Writeable 	->
+		   case parallel_src(Path, Command) of
+			   {ok, SrcPath, Project}	-> 
+				   SrcMod = ?MODIFIED(SrcPath, Command, ".erl"),
+				   BinMod = ?MODIFIED(Path, Command, ".beam"),
+				   if SrcMod > BinMod 		-> do_compile(SrcPath, Command, Project, Path); 
+					  true 					-> false 
+				   end;
+			   no_src 					-> false
+		   end;
+	   true			-> false
+	end.												 
+
+do_compile(SrcPath, Command, Project, Path) ->
+	Options = [verbose, report, {d, package, Project}, {outdir, Path}, {i, SrcPath}],
+	compile:file(?FILENAME(SrcPath, Command), Options).
+
+last_modified(Filename) ->
+	case file:file_info(Filename) of
+    	{ok, {_, _, _, _, SrcTime, _, _}}	-> {ok, SrcTime};
+		_Else								-> _Else
+	end.
+
+can_write(Filename) ->
+	case file:read_file_info(Filename) of 
+		{ok, {_, _, Access, _, _, _, _}}	-> case Access of write -> true; read_write -> true; _Else2 -> false end;
+		{error, enoent}						-> true;  % file does not exist, so is writeable if directory is
+		Else								-> Else
+	end.
+
+can_read(Filename) ->
+	case file:read_file_info(Filename) of 
+		{ok, {_, _, Access, _, _, _, _}}	-> case Access of read -> true; read_write -> true; _Else2 -> false end;
+		Else								-> Else
+	end.
+	
+parallel_src(Path, Command) ->
+	Split = re:split(Path, "/", [{return, list}]),	
+	case ebin_to_src(Split) of 
+		{true, SrcPath, Project} 	-> case can_read(?FILENAME(Path, Command, ".erl")) of
+										   true 	-> {ok, SrcPath, Project}; 
+										   false 	-> no_src 
+									   end;
+		_Else						-> no_src
+	end.
+
+ebin_to_src([Head | []]) -> if Head == "ebin" -> {true, "src"}; true -> {false, Head} end;
+ebin_to_src([Head | Tail]) ->
+	case ebin_to_src(Tail) of
+		{true, SrcPath, Project}	-> {true, Head ++ "/" ++ SrcPath, Project};
+		{true, SrcPath}				-> {true, Head ++ "/" ++ SrcPath, Head};
+		{false, BinPath}			-> if Head == "ebin" 	-> {true, "src/" ++ BinPath}; 
+										  true 				-> {false, Head ++ "/" ++ BinPath} end
+	end.
+	
+	
+			
 
 test(Stderr) ->
 	?INIT_DEBUG(Stderr),
@@ -73,6 +153,12 @@ test(Stderr) ->
 	test:start(),
 
 	% PackCompile
+    {ok, {_, _, _, _, SrcTime, _, _}} = file:file_info("d:/workspace/nosh/src/test.erl"),
+	{ok, {_, _, _, _, BinTime, _, _}} = file:file_info("d:/workspace/nosh/src/test.beam"),
+	
+	?DEBUG("Source time: ~p~n", [SrcTime]),
+	?DEBUG("Beam time: ~p~n", [BinTime]),
+	
 	file:make_dir("d:/workspace/nosh/ebin"),
 	PackCompile = compile:file("d:/workspace/nosh/src/test",
 				 			[{d, package, nosh},
@@ -82,8 +168,11 @@ test(Stderr) ->
 	{ok, Binary} = file:read_file("d:/workspace/nosh/ebin/test.beam"),
 	Info = beam_lib:info(Binary),
 	{module, Module} = lists:keyfind(module, 1, Info),
+	{ok, {Module, Version}} = beam_lib:version(Binary), 
+	?DEBUG("binary version: ~p~n", [Version]),
 	code:load_binary(Module, "d:/workspace/nosh/ebin/test.beam", Binary),
 	?DEBUG("Now loaded as: ~p~n", [code:is_loaded(nosh.test)]),	
+	?DEBUG("loaded version: ~p~n", [?ATTRIB(Module, vsn)]),
 	nosh.test:start().
-	
+		
 	
