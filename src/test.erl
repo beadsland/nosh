@@ -1,3 +1,5 @@
+% @TODO figure out if we can pass in package name by some method
+
 -ifndef(package).
 -module(test).
 -else.
@@ -7,7 +9,7 @@
 -ifndef(package).
 -package(default).
 -else.
--package(?package).
+-package(nosh).
 -endif.
 
 -hello(world).

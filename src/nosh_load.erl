@@ -73,7 +73,7 @@ load(Command, Path, Stderr) when is_atom(Command) -> load(atom_to_list(Command),
 load(Command, Path, Stderr) -> 
 	case ensure_compiled(Command, Path, Stderr) of
 		error						-> throw({load_failed, unspecified_compiler_error});
-		{error, Errors, Warnings}	-> throw({load_failed, {Errors, Warnings}}); 
+		{error, Errors, Warnings}	-> throw({load_failed, {compiler, {Errors, Warnings}}}); 
 		{info, no_src}				-> ?DEBUG("l: no source file~n");
 		{info, readonly}			-> ?DEBUG("l: readonly binary~n");
 		{ok, _Module, _Binary}		-> ?DEBUG("l: compiled~n");
@@ -85,9 +85,8 @@ load(Command, Path, Stderr) ->
 		{info, no_src}				-> throw({recompile_failed, src_file_missing});
 		{info, readonly}			-> throw({recompile_failed, beam_file_readonly});
 		{ok, Module, Binary, Vsn} 	-> NewFile = ?FILENAME(Path, Command, ".beam"),
-										   ensure_loaded(NewFile, Module, Binary, Vsn, Stderr)
-	end,
-	?DEBUG("load: finished~n").
+									   ensure_loaded(NewFile, Module, Binary, Vsn, Stderr)
+	end.
 
 ensure_loaded(NewFile, NewModule, Binary, NewVsn, Stderr) ->
 	case confirm_loaded(NewModule) of
@@ -95,13 +94,17 @@ ensure_loaded(NewFile, NewModule, Binary, NewVsn, Stderr) ->
 			if OldFile /= NewFile 	-> ?STDERR("~s: hotswap namespace collision~n", [NewModule]);
 			   true					-> false
 			end,
-			if OldVsn /= NewVsn		-> Load = code:load_binary(NewModule, NewFile, Binary),
-									   ?DEBUG("l: ~p~n", [Load]);
+			if OldVsn /= NewVsn		-> case code:load_binary(NewModule, NewFile, Binary) of
+										   {module, NewModule}	-> {module, NewModule};
+										   {error, What}		-> throw({load_failed, What})
+									   end;
 			   true 				-> false 
 			end;
 		false					->
-			Load = code:load_binary(NewModule, NewFile, Binary),
-			?DEBUG("l: ~p~n", [Load])
+			case code:load_binary(NewModule, NewFile, Binary) of
+				{module, NewModule}	-> {module, NewModule};
+				{error, What}		-> throw({load_failed, What})
+			end
 	end.
 
 ensure_packaged(Command, Path, Stderr) ->
@@ -110,8 +113,8 @@ ensure_packaged(Command, Path, Stderr) ->
 	case Package of
 		default		-> ?DEBUG("l: default package detected~n"),
 					   case ensure_compiled(Command, Path, Stderr, true) of
-						   ok		-> {ok, Module, Binary, Vsn};
-						   Other	-> Other
+						   {ok, NewModule, NewBinary} 	-> {ok, NewModule, NewBinary, Vsn};
+						   Other						-> Other
 					   end;
 		_Else		-> {ok, Module, Binary, Vsn}
 	end.
@@ -161,7 +164,7 @@ ensure_compiled(Command, Path, Stderr, Force) ->
 				   ?DEBUG("compare: ~p > ~p~n", [SrcMod, BinMod]),
 				   if SrcMod > BinMod 		-> do_compile(SrcPath, Command, Project, Path);
 					  Force 				-> do_compile(SrcPath, Command, Project, Path);
-					  true					-> ok
+					  true					-> ok   
 				   end;
 			   no_src 					-> {info, no_src} 
 		   end;
@@ -170,16 +173,19 @@ ensure_compiled(Command, Path, Stderr, Force) ->
 
 do_compile(SrcPath, Command, Project, Path) ->
 	file:make_dir(Path),
-	Options = [verbose, return_warnings, return_errors,
+	Options = [verbose, warnings_as_errors, return_errors, binary,
 			   {d, package, Project}, {outdir, Path}, {i, SrcPath}],
 	Filename = ?FILENAME(SrcPath, Command, ".erl"),
 	?DEBUG("c: ~p~n", [{Filename, Options}]),
 	Compile = compile:file(Filename, Options),
-	?DEBUG("c: ~p~n", [Compile]),
 	case Compile of
-		{ok, ModuleName, Binary, Warnings} 	-> ?DEBUG("c warnings: ~p~n", [Warnings]), 
-											   {ok, ModuleName, Binary}; 
-		Other								-> Other
+		error								-> error;
+		{error, Errors, Warnings}			-> {error, Errors, Warnings};
+		{ok, ModuleName, Binary} 			-> Outfile = ?FILENAME(Path, Command, ".beam"),
+											   case file:write_file(Outfile, Binary) of
+											   		{error, Reason}	-> {error, [{binary_write, Reason}], []};
+													ok				-> {ok, ModuleName, Binary}
+											   end
 	end.
 
 last_modified(Filename) ->
