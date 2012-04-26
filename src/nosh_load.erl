@@ -26,10 +26,6 @@
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
 %% @copyright 2012 Beads D. Land-Trujillo
 
-%% TODO: command load module
-%% TODO: rebar dependency directory structure
-%% TODO: built-in functions project
-%% TODO: $PATH search
 %% TODO: module binary service (to avoid repetitive slurps)
 %% TODO: conservative module loader
 

@@ -26,7 +26,9 @@
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
 %% @copyright 2012 Beads D. Land-Trujillo
 
-%% TODO: implement nosh_load
+%% TODO: rebar dependency directory structure
+%% TODO: built-in functions project
+%% TODO: $PATH search
 %% TODO: revise loops to use fully-qualified function calls
 %% TODO: doc update:  "procedural" should read "imperative"
 %% TODO: doc update:  first character, lower case:  atom; upper case:  variable
