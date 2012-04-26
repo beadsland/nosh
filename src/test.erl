@@ -6,6 +6,8 @@
 -package(?package).
 -endif.
 
+-hello(world).
+
 -include("macro.hrl").
 
 -export([start/0]). 

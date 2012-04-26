@@ -76,19 +76,20 @@ load(Command, Path, Stderr) ->
 		{error, Errors, Warnings}	-> throw({load_failed, {Errors, Warnings}}); 
 		{info, no_src}				-> ?DEBUG("l: no source file~n");
 		{info, readonly}			-> ?DEBUG("l: readonly binary~n");
-		ok							-> ?DEBUG("l: file current~n")
+		{ok, _Module, _Binary}		-> ?DEBUG("l: compiled~n");
+		ok							-> ?DEBUG("l: file current~n") 
     end,
 	case ensure_packaged(Command, Path, Stderr) of
 		error						-> throw({recompile_failed, unspecified_compiler_error});
 		{error, Errors2, Warnings2}	-> throw({recompile_failed, {Errors2, Warnings2}});
 		{info, no_src}				-> throw({recompile_failed, src_file_missing});
 		{info, readonly}			-> throw({recompile_failed, beam_file_readonly});
-		{ok, Binary, NewModule, NewVsn} -> NewFile = ?FILENAME(Path, Command, ".beam"),
-										   ensure_loaded(NewFile, Binary, NewModule, NewVsn, Stderr)
+		{ok, Module, Binary, Vsn} 	-> NewFile = ?FILENAME(Path, Command, ".beam"),
+										   ensure_loaded(NewFile, Module, Binary, Vsn, Stderr)
 	end,
 	?DEBUG("load: finished~n").
 
-ensure_loaded(NewFile, Binary, NewModule, NewVsn, Stderr) ->
+ensure_loaded(NewFile, NewModule, Binary, NewVsn, Stderr) ->
 	case confirm_loaded(NewModule) of
 		{ok, OldFile, OldVsn} 	-> 
 			if OldFile /= NewFile 	-> ?STDERR("~s: hotswap namespace collision~n", [NewModule]);
@@ -105,14 +106,14 @@ ensure_loaded(NewFile, Binary, NewModule, NewVsn, Stderr) ->
 
 ensure_packaged(Command, Path, Stderr) ->
 	Filename = ?FILENAME(Path, Command, ".beam"),
-	{ok, Binary, NewPackage, NewModule, NewVsn} = slurp_binary(Filename),
-	case NewPackage of
+	{ok, Module, Binary, Vsn, Package} = slurp_binary(Filename),
+	case Package of
 		default		-> ?DEBUG("l: default package detected~n"),
 					   case ensure_compiled(Command, Path, Stderr, true) of
-						   ok		-> {ok, Binary, NewPackage, NewModule, NewVsn};
+						   ok		-> {ok, Module, Binary, Vsn};
 						   Other	-> Other
 					   end;
-		_Else		-> {ok, Binary, NewModule, NewVsn}
+		_Else		-> {ok, Module, Binary, Vsn}
 	end.
 
 confirm_loaded(NewModule) ->
@@ -129,7 +130,8 @@ slurp_binary(NewFile) ->
 						   Info = beam_lib:info(Binary),
 						   {module, Module} = lists:keyfind(module, 1, Info),
 						   case beam_lib:chunks(Binary, [attributes]) of
-							   {ok, {Module, [{attributes, Attr}]}} -> 
+							   {ok, {Module, [{attributes, Attr}]}} ->
+								   ?DEBUG("attributes: ~p~n", [Attr]),
 								   case lists:keyfind(package, 1, Attr) of 
 									   {package, [Package]}	-> Package;
 									   false				-> ModStr = atom_to_list(Module),
@@ -143,7 +145,7 @@ slurp_binary(NewFile) ->
 						   ?DEBUG("package: ~p~n", [Package]),
 						   {ok, {Module, Version}} = beam_lib:version(Binary),
 						   ?DEBUG("new: ~p~n", [{Module, NewFile, Version}]),
-						   {ok, Binary, Package, Module, Version};
+						   {ok, Module, Binary, Version, Package};
 		{error, Reason} -> throw({file, {NewFile, Reason}})
 	end.
 
@@ -157,12 +159,8 @@ ensure_compiled(Command, Path, Stderr, Force) ->
 				   SrcMod = ?MODIFIED(SrcPath, Command, ".erl"),
 				   BinMod = ?MODIFIED(Path, Command, ".beam"),
 				   ?DEBUG("compare: ~p > ~p~n", [SrcMod, BinMod]),
-				   if SrcMod > BinMod 		-> Compile = do_compile(SrcPath, Command, Project, Path),
-											   ?DEBUG("c: ~p~n", [Compile]),
-											   Compile;
-					  Force 				-> Compile = do_compile(SrcPath, Command, Project, Path),
-											   ?DEBUG("c: ~p~n", [Compile]),
-											   Compile;
+				   if SrcMod > BinMod 		-> do_compile(SrcPath, Command, Project, Path);
+					  Force 				-> do_compile(SrcPath, Command, Project, Path);
 					  true					-> ok
 				   end;
 			   no_src 					-> {info, no_src} 
@@ -173,7 +171,14 @@ ensure_compiled(Command, Path, Stderr, Force) ->
 do_compile(SrcPath, Command, Project, Path) ->
 	file:make_dir(Path),
 	Options = [verbose, report, {d, package, Project}, {outdir, Path}, {i, SrcPath}],
-	compile:file(?FILENAME(SrcPath, Command), Options).
+	Filename = ?FILENAME(SrcPath, Command, ".erl"),
+	?DEBUG("c: ~p~n", [{Filename, Options}]),
+	Compile = compile:file(Filename, Options),
+	?DEBUG("c: ~p~n", [Compile]),
+	case Compile of
+		{ok, ModuleName, Binary, _Warnings} 	-> {ok, ModuleName, Binary}; 
+		Other									-> Other
+	end.
 
 last_modified(Filename) ->
 	case file:read_file_info(Filename) of
