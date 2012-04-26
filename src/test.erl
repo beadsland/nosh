@@ -2,14 +2,14 @@
 
 -ifndef(package).
 -module(test).
--else.
--module(nosh.test).
--endif.
-
--ifndef(package).
 -package(default).
 -else.
+-module(nosh.test).
 -package(nosh).
+-endif.
+
+-ifdef(test).
+-test(?test).
 -endif.
 
 -hello(world).

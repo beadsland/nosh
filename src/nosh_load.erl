@@ -85,6 +85,7 @@ load(Command, Path, Stderr) ->
 		{info, no_src}				-> throw({recompile_failed, src_file_missing});
 		{info, readonly}			-> throw({recompile_failed, beam_file_readonly});
 		{ok, Module, Binary, Vsn} 	-> NewFile = ?FILENAME(Path, Command, ".beam"),
+									   ?DEBUG("attribute: -test(~p)~n", [read_beam_attribute(Binary, test)]),
 									   ensure_loaded(NewFile, Module, Binary, Vsn, Stderr)
 	end.
 
@@ -126,24 +127,31 @@ confirm_loaded(NewModule) ->
 		false			-> false
 	end.
 
+read_beam_attribute(Binary, Attribute) ->
+	case beam_lib:chunks(Binary, [attributes], [allow_missing_chunks]) of
+		{ok, {_Module, [{attributes, AttrList}]}} ->
+			case lists:keyfind(Attribute, 1, AttrList) of
+				{Attribute, missing_chunk}	-> {error, missing_chunk};
+				{Attribute, [Value]} 		-> Value;
+				{Attribute, Value}			-> ?DEBUG("misformed attribute: ~p~n", [Value]), Value;
+				false						-> false
+			end
+	end.
+
 slurp_binary(NewFile) ->
 	?DEBUG("slurping ~s~n", [NewFile]),
 	case file:read_file(NewFile) of
 		{ok, Binary} 	-> ?DEBUG("got binary~n"),
 						   Info = beam_lib:info(Binary),
 						   {module, Module} = lists:keyfind(module, 1, Info),
-						   case beam_lib:chunks(Binary, [attributes]) of
-							   {ok, {Module, [{attributes, Attr}]}} ->
-								   ?DEBUG("attributes: ~p~n", [Attr]),
-								   case lists:keyfind(package, 1, Attr) of 
-									   {package, [Package]}	-> Package;
-									   false				-> ModStr = atom_to_list(Module),
-															   case string:rstr(ModStr, ".") of
-																   0	-> Package = '';
-																   Last	-> PackStr = string:substr(ModStr, 0, Last-1),
-																		   Package = list_to_atom(PackStr)
-															   end
-								   end
+						   case read_beam_attribute(Binary, package) of
+							   false	-> ModStr = atom_to_list(Module),
+										   case string:rstr(ModStr, ".") of
+											   0	-> Package = '';
+											   Last	-> PackStr = string:substr(ModStr, 0, Last-1),
+													   Package = list_to_atom(PackStr)
+										   end;
+							   Package 	-> Package
 						   end,
 						   ?DEBUG("package: ~p~n", [Package]),
 						   {ok, {Module, Version}} = beam_lib:version(Binary),
@@ -174,6 +182,7 @@ ensure_compiled(Command, Path, Stderr, Force) ->
 do_compile(SrcPath, Command, Project, Path) ->
 	file:make_dir(Path),
 	Options = [verbose, warnings_as_errors, return_errors, binary,
+			   {d, test, test},
 			   {d, package, Project}, {outdir, Path}, {i, SrcPath}],
 	Filename = ?FILENAME(SrcPath, Command, ".erl"),
 	?DEBUG("c: ~p~n", [{Filename, Options}]),
