@@ -85,7 +85,7 @@ load(Command, Path, Stderr) ->
 		{info, no_src}				-> throw({recompile_failed, src_file_missing});
 		{info, readonly}			-> throw({recompile_failed, beam_file_readonly});
 		{ok, Module, Binary, Vsn} 	-> NewFile = ?FILENAME(Path, Command, ".beam"),
-									   ?DEBUG("attribute: -test(~p)~n", [read_beam_attribute(Binary, test)]),
+									   ?DEBUG("attribute: -package(~p)~n", [read_beam_attribute(Binary, package)]),
 									   ensure_loaded(NewFile, Module, Binary, Vsn, Stderr)
 	end.
 
@@ -133,7 +133,7 @@ read_beam_attribute(Binary, Attribute) ->
 			case lists:keyfind(Attribute, 1, AttrList) of
 				{Attribute, missing_chunk}	-> {error, missing_chunk};
 				{Attribute, [Value]} 		-> Value;
-				{Attribute, Value}			-> ?DEBUG("misformed attribute: ~p~n", [Value]), Value;
+				{Attribute, Value}			-> ?DEBUG("misformed attribute: ~p~n", [{Attribute, Value}]), Value;
 				false						-> false
 			end
 	end.
@@ -179,10 +179,9 @@ ensure_compiled(Command, Path, Stderr, Force) ->
 	   true			-> {info, readonly}
 	end.												 
 
-do_compile(SrcPath, Command, Project, Path) ->
+do_compile(SrcPath, Command, Project, Path) when is_atom(Project) ->
 	file:make_dir(Path),
 	Options = [verbose, warnings_as_errors, return_errors, binary,
-			   {d, test, test},
 			   {d, package, Project}, {outdir, Path}, {i, SrcPath}],
 	Filename = ?FILENAME(SrcPath, Command, ".erl"),
 	?DEBUG("c: ~p~n", [{Filename, Options}]),
@@ -231,7 +230,7 @@ ebin_to_src([Head | []]) -> if Head == "ebin" -> {true, "src"}; true -> {false, 
 ebin_to_src([Head | Tail]) ->
 	case ebin_to_src(Tail) of
 		{true, SrcPath, Project}	-> {true, Head ++ "/" ++ SrcPath, Project};
-		{true, SrcPath}				-> {true, Head ++ "/" ++ SrcPath, Head};
+		{true, SrcPath}				-> {true, Head ++ "/" ++ SrcPath, list_to_atom(Head)};
 		{false, BinPath}			-> if Head == "ebin" 	-> {true, "src/" ++ BinPath}; 
 										  true 				-> {false, Head ++ "/" ++ BinPath} end
 	end.

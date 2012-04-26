@@ -4,12 +4,8 @@
 -module(test).
 -package(default).
 -else.
--module(nosh.test).
--package(nosh).
--endif.
-
--ifdef(test).
--test(?test).
+-module(?package.test).
+-package(?package).
 -endif.
 
 -hello(world).
