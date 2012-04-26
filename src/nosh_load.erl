@@ -33,9 +33,9 @@
 %% TODO: module binary service (to avoid repetitive slurps)
 %% TODO: conservative module loader
 
-%% @version 0.0.6
+%% @version 0.1.0
 -module(nosh_load).
--version("0.0.6").
+-version("0.1.0").
 
 -include_lib("kernel/include/file.hrl").
 %-define(debug, true). 
