@@ -10,6 +10,7 @@
 
 -hello(world).
 
+-define(debug, true).
 -include("macro.hrl").
 
 -export([start/0]). 

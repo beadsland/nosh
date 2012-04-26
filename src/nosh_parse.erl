@@ -67,7 +67,7 @@
 %%
 parse(Subject, Stderr) ->
 	Pattern = io_lib:format("([~s~s~s])", [?QUOTE_CHARS, ?GROUP_CHARS, ?SPACE_CHARS]),
-	{ok, MP} = re:compile(Pattern), 
+	{ok, MP} = re:compile(Pattern),
 
 	Split = re:split(Subject, MP, [{return, list}]),
 	Pred = fun(T) -> case T of [] -> false; _Else -> true end end,
@@ -113,7 +113,7 @@ parse({quote, QType}, Context, List) ->
 
 %% Wind up quote block.
 close_quote(QType, Context, List) ->
-	?DEBUG("# parse_quote(~p, ~p, ~p)~n", [QType, Context, List]), 	
+	?DEBUG("# parse_quote(~p, ~p, ~p)~n", [QType, Context, List]),
 	{Tail, _ReturnContext} = parse({quote, QType}, Context, List), 
 	Close = {close_quote, QType},
 	Pred = fun(T) -> T /= Close end,

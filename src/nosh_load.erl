@@ -38,6 +38,7 @@
 -version("0.0.6").
 
 -include_lib("kernel/include/file.hrl").
+%-define(debug, true). 
 -include("macro.hrl").
 
 -export([test/1]).
@@ -49,7 +50,7 @@
 
 test(Stderr) ->
 	?INIT_DEBUG(Stderr),
-	?DEBUG("Running ver. ~s nosh_load test.~n", [?VERSION(?MODULE)]),
+	?DEBUG("Running ver. ~s nosh_load test.~n", [?VERSION(?MODULE)]), 
 
 	?DEBUG("~n"),
 	AltPath = "d:/workspace/nosh/ebin/alt",
