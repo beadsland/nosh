@@ -1,5 +1,4 @@
-% @TODO figure out if we can pass in package name by some method
-
+% BEGIN NOSH PACKAGE PATTERN
 -ifndef(package).
 -module(test).
 -package(default).
@@ -7,8 +6,7 @@
 -module(?package.test).
 -package(?package).
 -endif.
-
--hello(world).
+% END NOSH PACKAGE PATTERN
 
 -define(debug, true).
 -include("macro.hrl").
