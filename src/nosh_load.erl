@@ -33,10 +33,11 @@
 %% TODO: module binary service (to avoid repetitive slurps)
 %% TODO: conservative module loader
 
-%% @version 0.0.4
+%% @version 0.0.6
 -module(nosh_load).
--version("0.0.4").
+-version("0.0.6").
 
+-include_lib("kernel/include/file.hrl").
 -include("macro.hrl").
 
 -export([test/1]).
@@ -50,41 +51,69 @@ test(Stderr) ->
 	?INIT_DEBUG(Stderr),
 	?DEBUG("Running ver. ~s nosh_load test.~n", [?VERSION(?MODULE)]),
 
+	?DEBUG("~n"),
 	AltPath = "d:/workspace/nosh/ebin/alt",
-	file:make_dir(AltPath),
 	load(test, AltPath, Stderr),
 	test:start(),
 
+	?DEBUG("~n"),
 	Alt2Path = "d:/workspace/nosh/ebin/alt2",
-	file:make_dir(AltPath),
 	load(test, Alt2Path, Stderr),
 	test:start(),
-	
+
+	?DEBUG("~n"),	
 	FlatPath = "d:/workspace/nosh/ebin",
 	load(test, FlatPath, Stderr),
-	test:start(),
 	nosh.test:start(),
-	?DEBUG("test: done~n").
+	test:start(),
+
+	?DEBUG("~ntest: done~n").
 	
 load(Command, Path, Stderr) when is_atom(Command) -> load(atom_to_list(Command), Path, Stderr);
 load(Command, Path, Stderr) -> 
-	ensure_compiled(Command, Path),
-	NewFile = ?FILENAME(Command, Path, ".beam"),
-	{ok, Binary, NewModule, NewVsn} = slurp_binary(NewFile),
+	case ensure_compiled(Command, Path, Stderr) of
+		error						-> throw({load_failed, unspecified_compiler_error});
+		{error, Errors, Warnings}	-> throw({load_failed, {Errors, Warnings}}); 
+		{info, no_src}				-> ?DEBUG("l: no source file~n");
+		{info, readonly}			-> ?DEBUG("l: readonly binary~n");
+		ok							-> ?DEBUG("l: file current~n")
+    end,
+	case ensure_packaged(Command, Path, Stderr) of
+		error						-> throw({recompile_failed, unspecified_compiler_error});
+		{error, Errors2, Warnings2}	-> throw({recompile_failed, {Errors2, Warnings2}});
+		{info, no_src}				-> throw({recompile_failed, src_file_missing});
+		{info, readonly}			-> throw({recompile_failed, beam_file_readonly});
+		{ok, Binary, NewModule, NewVsn} -> NewFile = ?FILENAME(Path, Command, ".beam"),
+										   ensure_loaded(NewFile, Binary, NewModule, NewVsn, Stderr)
+	end,
+	?DEBUG("load: finished~n").
+
+ensure_loaded(NewFile, Binary, NewModule, NewVsn, Stderr) ->
 	case confirm_loaded(NewModule) of
 		{ok, OldFile, OldVsn} 	-> 
 			if OldFile /= NewFile 	-> ?STDERR("~s: hotswap namespace collision~n", [NewModule]);
 			   true					-> false
 			end,
-			if OldVsn /= NewVsn 	-> Load = code:load_binary(NewModule, NewFile, Binary),
+			if OldVsn /= NewVsn		-> Load = code:load_binary(NewModule, NewFile, Binary),
 									   ?DEBUG("l: ~p~n", [Load]);
 			   true 				-> false 
 			end;
 		false					->
-		Load = code:load_binary(NewModule, NewFile, Binary),
+			Load = code:load_binary(NewModule, NewFile, Binary),
 			?DEBUG("l: ~p~n", [Load])
-	end,
-	?DEBUG("load: finished~n").
+	end.
+
+ensure_packaged(Command, Path, Stderr) ->
+	Filename = ?FILENAME(Path, Command, ".beam"),
+	{ok, Binary, NewPackage, NewModule, NewVsn} = slurp_binary(Filename),
+	case NewPackage of
+		default		-> ?DEBUG("l: default package detected~n"),
+					   case ensure_compiled(Command, Path, Stderr, true) of
+						   ok		-> {ok, Binary, NewPackage, NewModule, NewVsn};
+						   Other	-> Other
+					   end;
+		_Else		-> {ok, Binary, NewModule, NewVsn}
+	end.
 
 confirm_loaded(NewModule) ->
 	case code:is_loaded(NewModule) of
@@ -94,57 +123,83 @@ confirm_loaded(NewModule) ->
 	end.
 
 slurp_binary(NewFile) ->
-	{ok, Binary} = file:read_file(NewFile),
-    Info = beam_lib:info(Binary),
-	{module, Module} = lists:keyfind(module, 1, Info),
-	{ok, {Module, Version}} = beam_lib:version(Binary),
-	?DEBUG("new: ~p~n", [{Module, NewFile, Version}]),
-	{ok, Binary, Module, Version}.			
+	?DEBUG("slurping ~s~n", [NewFile]),
+	case file:read_file(NewFile) of
+		{ok, Binary} 	-> ?DEBUG("got binary~n"),
+						   Info = beam_lib:info(Binary),
+						   {module, Module} = lists:keyfind(module, 1, Info),
+						   case beam_lib:chunks(Binary, [attributes]) of
+							   {ok, {Module, [{attributes, Attr}]}} -> 
+								   case lists:keyfind(package, 1, Attr) of 
+									   {package, [Package]}	-> Package;
+									   false				-> ModStr = atom_to_list(Module),
+															   case string:rstr(ModStr, ".") of
+																   0	-> Package = '';
+																   Last	-> PackStr = string:substr(ModStr, 0, Last-1),
+																		   Package = list_to_atom(PackStr)
+															   end
+								   end
+						   end,
+						   ?DEBUG("package: ~p~n", [Package]),
+						   {ok, {Module, Version}} = beam_lib:version(Binary),
+						   ?DEBUG("new: ~p~n", [{Module, NewFile, Version}]),
+						   {ok, Binary, Package, Module, Version};
+		{error, Reason} -> throw({file, {NewFile, Reason}})
+	end.
 
-ensure_compiled(Command, Path) ->
-	Writeable = can_write(Path) andalso can_write(?FILENAME(Path, Command, ".beam")),
+ensure_compiled(Command, Path, Stderr) -> ensure_compiled(Command, Path, Stderr, false).
+ensure_compiled(Command, Path, Stderr, Force) ->
+	Writeable = can_write(Path, Stderr) andalso can_write(?FILENAME(Path, Command, ".beam"), Stderr),
 	if Writeable 	->
+		   ?DEBUG("writeable: ~s~n", [?FILENAME(Path, Command, ".beam")]),
 		   case parallel_src(Path, Command) of
 			   {ok, SrcPath, Project}	-> 
 				   SrcMod = ?MODIFIED(SrcPath, Command, ".erl"),
 				   BinMod = ?MODIFIED(Path, Command, ".beam"),
+				   ?DEBUG("compare: ~p > ~p~n", [SrcMod, BinMod]),
 				   if SrcMod > BinMod 		-> Compile = do_compile(SrcPath, Command, Project, Path),
-											   ?DEBUG("c: ~p~n", [Compile]); 
-					  true 					-> false 
+											   ?DEBUG("c: ~p~n", [Compile]),
+											   Compile;
+					  Force 				-> Compile = do_compile(SrcPath, Command, Project, Path),
+											   ?DEBUG("c: ~p~n", [Compile]),
+											   Compile;
+					  true					-> ok
 				   end;
-			   no_src 					-> false
+			   no_src 					-> {info, no_src} 
 		   end;
-	   true			-> false
+	   true			-> {info, readonly}
 	end.												 
 
 do_compile(SrcPath, Command, Project, Path) ->
+	file:make_dir(Path),
 	Options = [verbose, report, {d, package, Project}, {outdir, Path}, {i, SrcPath}],
 	compile:file(?FILENAME(SrcPath, Command), Options).
 
 last_modified(Filename) ->
-	case file:file_info(Filename) of
-    	{ok, {_, _, _, _, SrcTime, _, _}}	-> {ok, SrcTime};
-		_Else								-> _Else
+	case file:read_file_info(Filename) of
+    	{ok, FileInfo}	-> {ok, FileInfo#file_info.mtime};
+		_Else			-> _Else
 	end.
 
-can_write(Filename) ->
+can_write(Filename, Stderr) ->
 	case file:read_file_info(Filename) of 
-		{ok, {_, _, Access, _, _, _, _}}	-> case Access of write -> true; read_write -> true; _Else2 -> false end;
-		{error, enoent}						-> true;  % file does not exist, so is writeable if directory is
-		Else								-> Else
+		{ok, FileInfo}	-> case FileInfo#file_info.access of write -> true; read_write -> true; _Else2 -> false end;
+		{error, enoent}	-> true;  				% file does not exist, so is writeable if directory is
+		{error, Reason}	-> ?STDERR("file error: ~p~n", [{Filename, Reason}]), false
 	end.
 
 can_read(Filename) ->
 	case file:read_file_info(Filename) of 
-		{ok, {_, _, Access, _, _, _, _}}	-> case Access of read -> true; read_write -> true; _Else2 -> false end;
-		Else								-> Else
+		{ok, FileInfo}		-> case FileInfo#file_info.access of read -> true; read_write -> true; _Else2 -> false end;
+		{error, Reason}		-> ?DEBUG("read error: ~p~n", [{Filename, Reason}]), false
 	end.
 	
 parallel_src(Path, Command) ->
 	Split = re:split(Path, "/", [{return, list}]),	
 	case ebin_to_src(Split) of 
-		{true, SrcPath, Project} 	-> case can_read(?FILENAME(Path, Command, ".erl")) of
-										   true 	-> {ok, SrcPath, Project}; 
+		{true, SrcPath, Project} 	-> case can_read(?FILENAME(SrcPath, Command, ".erl")) of
+										   true 	-> ?DEBUG("readable: ~s~n", [?FILENAME(SrcPath, Command, ".erl")]),
+													   {ok, SrcPath, Project}; 
 										   false 	-> no_src 
 									   end;
 		_Else						-> no_src
@@ -158,9 +213,4 @@ ebin_to_src([Head | Tail]) ->
 		{false, BinPath}			-> if Head == "ebin" 	-> {true, "src/" ++ BinPath}; 
 										  true 				-> {false, Head ++ "/" ++ BinPath} end
 	end.
-	
-	
-			
-
-	
-	
+		
