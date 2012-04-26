@@ -60,6 +60,7 @@
 start(Pid) -> start(Pid, Pid, Pid).
 	
 start(Stdin, Stdout, Stderr) ->
+	error_logger:tty(false),
 	process_flag(trap_exit, true),
 	?INIT_DEBUG(Stderr), 
 	Stdout ! {self(), stdout, io_lib:format("Starting Nosh ~s nosql shell ~p~n", [?VERSION(?MODULE), self()])},

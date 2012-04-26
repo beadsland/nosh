@@ -170,14 +170,16 @@ ensure_compiled(Command, Path, Stderr, Force) ->
 
 do_compile(SrcPath, Command, Project, Path) ->
 	file:make_dir(Path),
-	Options = [verbose, report, {d, package, Project}, {outdir, Path}, {i, SrcPath}],
+	Options = [verbose, return_warnings, return_errors,
+			   {d, package, Project}, {outdir, Path}, {i, SrcPath}],
 	Filename = ?FILENAME(SrcPath, Command, ".erl"),
 	?DEBUG("c: ~p~n", [{Filename, Options}]),
 	Compile = compile:file(Filename, Options),
 	?DEBUG("c: ~p~n", [Compile]),
 	case Compile of
-		{ok, ModuleName, Binary, _Warnings} 	-> {ok, ModuleName, Binary}; 
-		Other									-> Other
+		{ok, ModuleName, Binary, Warnings} 	-> ?DEBUG("c warnings: ~p~n", [Warnings]), 
+											   {ok, ModuleName, Binary}; 
+		Other								-> Other
 	end.
 
 last_modified(Filename) ->

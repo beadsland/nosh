@@ -47,7 +47,6 @@
 %% @doc Start terminal, launching message loop and keyboard listening process.
 start() ->
 	process_flag(trap_exit, true),
-	error_logger:tty(false),
 	io:format("Starting Noterm ~s terminal emulator on ~p ~p~n", [?VERSION(?MODULE), node(), self()]),
 	KeyPid = spawn_link(?MODULE, key_start, [self()]),
 	try spawn_link(nosh, start, [self()]) of

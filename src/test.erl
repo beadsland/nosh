@@ -1,8 +1,12 @@
 -ifndef(package).
 -module(test).
+-else.
+-module(nosh.test).
+-endif.
+
+-ifndef(package).
 -package(default).
 -else.
--module(?package.test).
 -package(?package).
 -endif.
 
