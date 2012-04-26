@@ -36,3 +36,19 @@
 %% @version 0.0.0
 -module(nosh_exec).
 -version("0.0.0").
+
+%%
+%% Include files
+%%
+
+%%
+%% Exported functions
+%%
+
+%%
+%% API functions
+%%
+
+%%
+%% Local functions
+%%

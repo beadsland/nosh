@@ -53,14 +53,29 @@
 -module(nosh).
 -version("0.1.2").
 
+%%
+%% Include files
+%%
+
 -include("macro.hrl").
+
+%%
+%% Exported functions
+%%
 
 -export([start/1]).
 
+%%
+%% API functions
+%%
 
 %% @doc Start nosh, passing Pid of process providing standard i/o messaging.
 start(Pid) -> start(Pid, Pid, Pid).
-	
+
+%%
+%% Local functions
+%%
+
 start(Stdin, Stdout, Stderr) ->
 	error_logger:tty(false),
 	process_flag(trap_exit, true),

@@ -26,6 +26,7 @@
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
 %% @copyright 2012 Beads D. Land-Trujillo
 
+%% TODO: document this module
 %% TODO: module binary service (to avoid repetitive slurps)
 %% TODO: conservative module loader
 
@@ -33,16 +34,27 @@
 -module(nosh_load).
 -version("0.1.0").
 
+%%
+%% Include files
+%%
+
 -include_lib("kernel/include/file.hrl").
 %-define(debug, true). 
 -include("macro.hrl").
 
+%%
+%% Exported functions
+%%
 -export([test/1]).
 -export([load/3]).
 
 -define(FILENAME(Path, Command, Extn), Path ++ "/" ++ Command ++ Extn).
 -define(FILENAME(Path, Command), ?FILENAME(Path, Command, "")).
 -define(MODIFIED(Path, Command, Extn), last_modified(?FILENAME(Path, Command, Extn))).
+
+%%
+%% API functions
+%%
 
 test(Stderr) ->
 	?INIT_DEBUG(Stderr),
@@ -85,6 +97,10 @@ load(Command, Path, Stderr) ->
 									   ?DEBUG("attribute: -package(~p)~n", [read_beam_attribute(Binary, package)]),
 									   ensure_loaded(NewFile, Module, Binary, Vsn, Stderr)
 	end.
+
+%%
+%% Local functions
+%%
 
 ensure_loaded(NewFile, NewModule, Binary, NewVsn, Stderr) ->
 	case confirm_loaded(NewModule) of

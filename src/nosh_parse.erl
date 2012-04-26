@@ -44,7 +44,9 @@
 -module(nosh_parse).
 -version("0.1.3").
 
--export([parse/2]).
+%%
+%% Include files
+%%
 
 -include("macro.hrl").
 
@@ -52,6 +54,15 @@
 -define(GROUP_CHARS, "\;\(\)\&\|").     % curly braces are reserved words, not grouping characters
 -define(SPACE_CHARS, "\ \t\n").
 
+%%
+%% Exported functions
+%%
+
+-export([parse/2]).
+
+%%
+%% API functions
+%%
 
 %% @doc Parse command line string and return a list of nested quoting and grouping context blocks, 
 %% or else `failed' on a caught syntax exception.
@@ -88,6 +99,10 @@ parse(Subject, Stderr) ->
 		{quote, sing} 	-> ?STDERR(QuoteErr, ["\'"]), failed;
 		{quote, escp} 	-> ?STDERR("Quote error: Line continuation not supported~n"), failed
 	end. 
+
+%%
+%% Local functions
+%%
 
 %% Parse list of strings split on quoting and grouping characters, according to current context type.
 %% Return tuple of block list and context stack OR tuple of 'close_quote', context stack, and trailing context tree.

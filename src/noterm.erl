@@ -38,11 +38,22 @@
 -module(noterm).
 -version("0.1.2").
 
+%%
+%% Include files
+%%
+
 -include("macro.hrl").
+
+%%
+%% Exported functions
+%%
 
 -export([start/0]).
 -export([key_start/1]).
 
+%%
+%% API functions
+%%
 
 %% @doc Start terminal, launching message loop and keyboard listening process.
 start() ->
@@ -54,7 +65,11 @@ start() ->
 	catch
 		{Message, Reason}	-> grace(Message, Reason), init:stop()
 	end.
-					   
+
+%%
+%% Local functions
+%%
+
 msg_loop(Stdin, Stdout, Stderr) ->
 	receive
 		{Stdin, stdout, Line}		-> Stdout ! {self(), stdout, strip_escapes(Line)};
