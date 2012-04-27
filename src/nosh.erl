@@ -26,11 +26,16 @@
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
 %% @copyright 2012 Beads D. Land-Trujillo
 
-%% TODO: README for bin
-%% TODO: README for nosh
+%% TODO: refactor todo
+%% TODO: sh-nosh offline
+%% TODO: sh-nosh dev
+%% TODO: edoc to markdown
+%% TODO: edoc transclude
+%% TODO: quote/context semantics
 %% TODO: rebar.config to auto refresh deps and compile
 %% TODO: echo - stand-alone
 %% TODO: echo - under nosh
+%% TODO: nosh_bin README.md
 %% TODO: $PATH search
 %% TODO: revise loops to use fully-qualified function calls
 %% TODO: doc update:  "procedural" should read "imperative"
