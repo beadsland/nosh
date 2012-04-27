@@ -26,37 +26,6 @@
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
 %% @copyright 2012 Beads D. Land-Trujillo
 
-%% TODO: refactor todo
-%% TODO: sh-nosh offline
-%% TODO: sh-nosh dev
-%% TODO: edoc to markdown
-%% TODO: edoc transclude
-%% TODO: quote/context semantics
-%% TODO: rebar.config to auto refresh deps and compile
-%% TODO: echo - stand-alone
-%% TODO: echo - under nosh
-%% TODO: nosh_bin README.md
-%% TODO: $PATH search
-%% TODO: revise loops to use fully-qualified function calls
-%% TODO: doc update:  "procedural" should read "imperative"
-%% TODO: doc update:  first character, lower case:  atom; upper case:  variable
-%% TODO: nosh_parse: tokenizing
-%% TODO: implement nosh_exec
-%% TODO: implement nosh_eval to convert nosh_parse output to nosh_exec input
-%% TODO: finish up nosh_parse
-%% TODO: nosh as application
-%% TODO: standardize nosh_exec behaviour
-%% TODO: nosh as nosh_command
-%% TODO: Buffered I/O (pending get_char working in noterm)
-%% TODO: File System:  pwd / cd
-%% TODO: File System:  *NIX / cygwin / Win32
-%% TODO: File System:  NoSQL
-%% TODO: Env
-%% TODO: Sh commands
-%% TODO: Erl commands
-%% TODO: Couch commands
-%% TODO: Add support for line continuation (currently throws error)
-
 %% @version 0.1.2
 -module(nosh).
 -version("0.1.2").
