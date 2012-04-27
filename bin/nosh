@@ -13,4 +13,6 @@ cd /cygdrive/d/workspace/nosh
 git push origin master
 rebar update-deps compile doc | grep -v "cannot handle URI.*edoc-info"
 
+html2text.py doc/overview-summary.html iso-8859-1 > README.md
+
 erl -pa "d:/workspace/nosh/ebin" -noshell -s noterm start
