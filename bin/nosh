@@ -1,17 +1,37 @@
 #!/bin/sh
 
-VERSION=0.1.3
+VERSION=0.1.4
+
 
 tabs -1	>/dev/null		# requires ncurses (noterm doesn't yet know how to process tabs)
 
+echo Checking if online
+ONLINE=no; ping www.google.com > /dev/null && ONLINE=yes
+
+alias crowbar='rebar $REBAR_COMMANDS | grep -v "cannot handle URI.*edoc-info"'
+
+
+
 echo sh-nosh $VERSION wrapper script for Nosh
 
-cd /cygdrive/d/workspace/nosh_bin
-git push origin master
+if [ $ONLINE = yes ]; then
+	echo Making nosh built-ins
+	cd /cygdrive/d/workspace/nosh_bin
+	git push origin master
 
-cd /cygdrive/d/workspace/nosh
-git push origin master
-rebar update-deps compile doc | grep -v "cannot handle URI.*edoc-info"
+	echo Making nosh
+	cd /cygdrive/d/workspace/nosh
+	git push origin master
+
+	REBAR_COMMANDS='update-deps compile doc'
+	crowbar
+else
+	echo "Working offline"
+	cd /cygdrive/d/workspace/nosh
+	REBAR_COMMANDS='compile doc'
+	crowbar
+fi
+
 
 html2text.py doc/overview-summary.html iso-8859-1 > README.md   # https://github.com/aaronsw/html2text
 

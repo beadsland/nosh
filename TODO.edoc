@@ -3,6 +3,7 @@
 @todo edoc to markdown
 @todo edoc transclude
 @todo quote/context semantics
+@todo warn flat package module unsafe
 @todo rebar.config to auto refresh deps and compile
 @todo echo - stand-alone
 @todo echo - under nosh
