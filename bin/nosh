@@ -3,12 +3,15 @@
 VERSION=0.1.1
 
 tabs -1	>/dev/null		# requires ncurses (noterm doesn't yet know how to process tabs)
+
+cd /cygdrive/d/workspace/nosh_bin
+git push origin master
+
 cd /cygdrive/d/workspace/nosh
+git push origin master
 
 echo sh-nosh $VERSION wrapper script for Nosh
 
-rm doc/edoc-info >/dev/null 2>&1   # edoc warns it can't read this on Windows path
-
-rebar compile doc
+rebar update-deps compile doc | grep -v "cannot handle URI.*edoc-info"
 
 erl -pa "d:/workspace/nosh/ebin" -noshell -s noterm start

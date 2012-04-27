@@ -28,6 +28,11 @@
 
 %% TODO: rebar dependency directory structure
 %% TODO: built-in functions project
+%% TODO: README for bin
+%% TODO: README for nosh
+%% TODO: rebar.config to auto refresh deps and compile
+%% TODO: echo - stand-alone
+%% TODO: echo - under nosh
 %% TODO: $PATH search
 %% TODO: revise loops to use fully-qualified function calls
 %% TODO: doc update:  "procedural" should read "imperative"
@@ -37,7 +42,7 @@
 %% TODO: implement nosh_eval to convert nosh_parse output to nosh_exec input
 %% TODO: finish up nosh_parse
 %% TODO: nosh as application
-%% TODO: nosh_command behaviour
+%% TODO: standardize nosh_exec behaviour
 %% TODO: nosh as nosh_command
 %% TODO: Buffered I/O (pending get_char working in noterm)
 %% TODO: File System:  pwd / cd
