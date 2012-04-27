@@ -26,8 +26,6 @@
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
 %% @copyright 2012 Beads D. Land-Trujillo
 
-%% TODO: rebar dependency directory structure
-%% TODO: built-in functions project
 %% TODO: README for bin
 %% TODO: README for nosh
 %% TODO: rebar.config to auto refresh deps and compile
