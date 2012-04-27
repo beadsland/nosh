@@ -1,35 +1,38 @@
 #!/bin/sh
 
-VERSION=0.1.4
-
-
 tabs -1	>/dev/null		# requires ncurses (noterm doesn't yet know how to process tabs)
+
+VERSION=0.1.5
+echo sh-nosh $VERSION wrapper script for Nosh
 
 echo Checking if online
 ONLINE=no; ping www.google.com > /dev/null && ONLINE=yes
+DEV=no; if [ $COMPUTERNAME = GOVMESH-BOOK ]; then DEV=yes; fi 
 
 alias crowbar='rebar $REBAR_COMMANDS | grep -v "cannot handle URI.*edoc-info"'
-
-
-
-echo sh-nosh $VERSION wrapper script for Nosh
+alias clean='grep -v "Entering directory" | grep -v "Leaving directory"'
 
 if [ $ONLINE = yes ]; then
-	echo Making nosh built-ins
-	cd /cygdrive/d/workspace/nosh_bin
-	git push origin master
+	if [ $DEV = yes ]; then
+		echo Pushing nosh built-ins repository
+		cd /cygdrive/d/workspace/nosh_bin
+		git push origin master
 
-	echo Making nosh
+		echo Pushing nosh repository
+		cd /cygdrive/d/workspace/nosh
+		git push origin master
+	fi
+
 	cd /cygdrive/d/workspace/nosh
-	git push origin master
 
 	REBAR_COMMANDS='update-deps compile doc'
-	crowbar
+	crowbar | clean
 else
 	echo "Working offline"
 	cd /cygdrive/d/workspace/nosh
+	
 	REBAR_COMMANDS='compile doc'
-	crowbar
+	crowbar | clean
 fi
 
 
