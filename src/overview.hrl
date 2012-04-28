@@ -30,7 +30,7 @@
 % Erlang module functions, `nosh' affords both the ease of a UNIX shell and the power
 % of an Erlang interpreter.
 %
-% <em>NOTICE: Code is still in rudimentary form. Doesn't do much yet.</em>
+% <em><strong>NOTICE:</strong> Code is still in rudimentary form. Doesn't do much yet.</em>
 %
 % == Contents ==
 %

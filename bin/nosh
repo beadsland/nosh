@@ -10,7 +10,8 @@ ONLINE=no; ping www.google.com > /dev/null && ONLINE=yes
 DEV=no; if [ $COMPUTERNAME = GOVMESH-BOOK ]; then DEV=yes; fi 
 MY_ENV=`uname -o`
 
-alias crowbar='rebar $REBAR_COMMANDS | grep -v "cannot handle URI.*edoc-info"'
+alias hide_edoc-info='grep -v "cannot handle URI.*edoc-info"'
+alias crowbar='rebar $REBAR_COMMANDS | hide_edoc-info'
 alias clean='grep -v "Entering directory" | grep -v "Leaving directory"'
 
 if [ $ONLINE = yes ]; then
@@ -38,7 +39,7 @@ fi
 
 
 if [ $MY_ENV = "Cygwin" ]; then
-	escript $(cygpath -wa `which mddoc`)
+	escript $(cygpath -wa `which mddoc`) | hide_edoc-info
 else								
 	SCRIPT=$(readlink -f "$0")			# won't work on MacOS, BSD(?)
 	SCRIPTPATH=`dirname "$SCRIPT"`

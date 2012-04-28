@@ -22,7 +22,7 @@ of an Erlang interpreter.
 
  
 
-_<strong>Code is still in rudimentary form. Doesn't do much yet.</strong>_
+_<strong>NOTICE:</strong> Code is still in rudimentary form. Doesn't do much yet._
 
  
 

@@ -1,6 +1,4 @@
-@todo clean mddoc
 @todo mddoc support MacOS, BSD(?)
-@todo edown git native
 @todo crowbar using cygpath for edoc
 @todo macros io:format/1
 @todo sh-nosh relative paths
