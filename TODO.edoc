@@ -1,5 +1,8 @@
-@todo refresh README.md before push
-@todo edoc to markdown
+@todo patch edoc to not use awk
+@todo edoc to markdown (escript)
+@todo crowbar using cygpath for edoc
+@todo macros io:format/1
+@todo sh-nosh relative paths
 @todo edoc transclude
 @todo quote/context semantics
 @todo warn flat package module unsafe

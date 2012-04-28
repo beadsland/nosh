@@ -1,0 +1,17 @@
+#!/usr/bin/env escript
+%% -*- erlang -*-
+%%! verbose
+
+
+% cygwin/Win invocation:  escript $(cygpath -wa `which mddoc`)
+
+main(_Words) ->
+	Pwd = filename:absname(""),
+	code:add_path(Pwd ++ "/ebin"),
+	code:add_path(Pwd ++ "/deps/edown/ebin"),
+	
+	Param = [{doclet, edown_doclet}, 
+	         {top_level_readme, {"./README.md", "http://github.com/esl/edown"}}
+	        ],
+	        
+	edoc:application(nosh, Param).
