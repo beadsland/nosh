@@ -8,6 +8,7 @@ echo sh-nosh $VERSION wrapper script for Nosh
 echo Checking if online
 ONLINE=no; ping www.google.com > /dev/null && ONLINE=yes
 DEV=no; if [ $COMPUTERNAME = GOVMESH-BOOK ]; then DEV=yes; fi 
+MY_ENV=`uname -o`
 
 alias crowbar='rebar $REBAR_COMMANDS | grep -v "cannot handle URI.*edoc-info"'
 alias clean='grep -v "Entering directory" | grep -v "Leaving directory"'
@@ -36,6 +37,13 @@ else
 fi
 
 
-html2text.py doc/overview-summary.html iso-8859-1 > README.md   # https://github.com/aaronsw/html2text
+if [ $MY_ENV = "Cygwin" ]; then
+	escript $(cygpath -wa `which mddoc`)
+else								
+	SCRIPT=$(readlink -f "$0")			# won't work on MacOS, BSD(?)
+	SCRIPTPATH=`dirname "$SCRIPT"`
+	PATH=$SCRIPTPATH:$PATH
+	mddoc
+fi
 
 erl -pa "d:/workspace/nosh/ebin" -noshell -s noterm start

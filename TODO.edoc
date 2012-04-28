@@ -1,5 +1,6 @@
-@todo patch edoc to not use awk
-@todo edoc to markdown (escript)
+@todo prelim doc notice
+@todo mddoc support MacOS, BSD(?)
+@todo edown git native
 @todo crowbar using cygpath for edoc
 @todo macros io:format/1
 @todo sh-nosh relative paths
