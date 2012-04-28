@@ -1,4 +1,5 @@
-@todo mddoc support MacOS, BSD(?)
+@todo license scripts
+@todo edown using git native??
 @todo crowbar using cygpath for edoc
 @todo macros io:format/1
 @todo sh-nosh relative paths

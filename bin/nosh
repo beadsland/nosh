@@ -2,8 +2,14 @@
 
 tabs -1	>/dev/null		# requires ncurses (noterm doesn't yet know how to process tabs)
 
-VERSION=0.1.5
+VERSION=0.1.7
 echo sh-nosh $VERSION wrapper script for Nosh
+
+# Linux and MacOS/BSD script path finder by Albert Lombarte
+PATH_TO_SCRIPT=$(cd ${0%/*} && echo $PWD/${0##*/})
+PATH_TO_FOLDER=`dirname "$PATH_TO_SCRIPT"`
+TWO_LEVELS_UP=`cd "${PATH_TO_FOLDER}/../.." && pwd -P`
+# End script path finder
 
 echo Checking if online
 ONLINE=no; ping www.google.com > /dev/null && ONLINE=yes
@@ -38,13 +44,12 @@ else
 fi
 
 
+MDDOC="$PATH_TO_FOLDER/mddoc"
+
 if [ $MY_ENV = "Cygwin" ]; then
-	escript $(cygpath -wa `which mddoc`) | hide_edoc-info
+	escript $(cygpath -wa $MDDOC) | hide_edoc-info
 else								
-	SCRIPT=$(readlink -f "$0")			# won't work on MacOS, BSD(?)
-	SCRIPTPATH=`dirname "$SCRIPT"`
-	PATH=$SCRIPTPATH:$PATH
-	mddoc
+	$MDDOC
 fi
 
 erl -pa "d:/workspace/nosh/ebin" -noshell -s noterm start
