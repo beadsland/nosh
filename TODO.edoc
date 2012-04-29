@@ -1,5 +1,5 @@
-@todo edoc transclude
 @todo quote/context semantics
+@todo refactor documentation
 @todo warn flat package module unsafe
 @todo rebar.config to auto refresh deps and compile
 @todo echo - stand-alone
