@@ -26,19 +26,18 @@
 %% -----------------------------------------------------------------------
 %% CDDL HEADER END
 
-% cygwin/Win invocation:  escript $(cygpath -wa `which mddoc`)
+% cygwin/Win invocation (sh):  escript $(cygpath -wa `which mddoc`)
 
 main(_Words) ->
 	Pwd = filename:absname(""),
 	code:add_path(Pwd ++ "/ebin"),
-	code:add_path(Pwd ++ "/deps/edown/ebin"),
-%	code:add_path(Pwd ++ "/edown"),
+%	code:add_path(Pwd ++ "/deps/edown/ebin"),
+	code:add_path(Pwd ++ "/../edown/ebin"),
 	
 	Param = [{doclet, edown_doclet}, 
 	         {top_level_readme, {"./README.md", "http://github.com/beadsland/nosh"}}
 	        ],
 	        
 	edoc:application(nosh, Param).
-%	edoc:application(edown, Param).
 	
 	
