@@ -28,16 +28,22 @@
 
 % cygwin/Win invocation (sh):  escript $(cygpath -wa `which mddoc`)
 
+version() -> "0.1.3".
+
 main(_Words) ->
+	io:format("Running mddoc ~s github README generator~n", [version()]),
+	
 	Pwd = filename:absname(""),
 	code:add_path(Pwd ++ "/ebin"),
-%	code:add_path(Pwd ++ "/deps/edown/ebin"),
-	code:add_path(Pwd ++ "/../edown/ebin"),
-	
+	code:add_path(Pwd ++ "/deps/edown/ebin"),
+%	code:add_path(Pwd ++ "/../edown/ebin"),
+
 	Param = [{doclet, edown_doclet}, 
 	         {top_level_readme, {"./README.md", "http://github.com/beadsland/nosh"}}
 	        ],
 	        
 	edoc:application(nosh, Param).
+	
+	
 	
 	
