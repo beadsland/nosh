@@ -1,5 +1,3 @@
-@todo macros io:format/1
-@todo sh-nosh relative paths
 @todo edoc transclude
 @todo quote/context semantics
 @todo warn flat package module unsafe
