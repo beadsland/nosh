@@ -1,4 +1,3 @@
-@todo $ and ,,| syntax in nosh_parse
 @todo crowbar using cygpath for edoc
 @todo macros io:format/1
 @todo sh-nosh relative paths

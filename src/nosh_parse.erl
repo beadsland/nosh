@@ -214,14 +214,14 @@ parse_quote(QT, Context, [Char | Tail]) when QT == ifnz, Char == "\)" -> {close_
 parse_quote(QT, Context, [Char | Tail]) when QT == pipe, Char == "\)" -> {close_quote, Context, [Char] ++ Tail};
 parse_quote(_QT, _Context, [Char | _Tail]) when Char == "\)" -> throw({close, pren});
  
-parse_quote(QT, Context, [Char | [Char | Tail]]) when QT == line, Char == "&" -> close_quote(ifok, [{quote, QT}] ++ Context, Tail);
-parse_quote(QT, Context, [Char | [Char | Tail]]) when QT == semi, Char == "&" -> close_quote(ifok, [{quote, QT}] ++ Context, Tail);
-parse_quote(QT, Context, [Char | [Char | Tail]]) when QT == ifok, Char == "&" -> close_quote(ifok, [{quote, QT}] ++ Context, Tail);
-parse_quote(QT, Context, [Char | [Char | Tail]]) when QT == ampi, Char == "&" -> close_quote(ifok, [{quote, QT}] ++ Context, Tail);
-parse_quote(QT, Context, [Char | [Char | Tail]]) when QT == ifnz, Char == "&" -> close_quote(ifok, [{quote, QT}] ++ Context, Tail);
-parse_quote(QT, Context, [Char | [Char | Tail]]) when QT == pipe, Char == "&" -> close_quote(ifok, [{quote, QT}] ++ Context, Tail);
-parse_quote(QT, Context, [Char | [Char | Tail]]) when QT == back, Char == "&" -> close_quote(ifok, [{quote, QT}] ++ Context, Tail);
-parse_quote(QT, Context, [Char | [Char | Tail]]) when QT == pren, Char == "&" -> close_quote(ifok, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char, Char | Tail]) when QT == line, Char == "&" -> close_quote(ifok, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char, Char | Tail]) when QT == semi, Char == "&" -> close_quote(ifok, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char, Char | Tail]) when QT == ifok, Char == "&" -> close_quote(ifok, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char, Char | Tail]) when QT == ampi, Char == "&" -> close_quote(ifok, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char, Char | Tail]) when QT == ifnz, Char == "&" -> close_quote(ifok, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char, Char | Tail]) when QT == pipe, Char == "&" -> close_quote(ifok, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char, Char | Tail]) when QT == back, Char == "&" -> close_quote(ifok, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char, Char | Tail]) when QT == pren, Char == "&" -> close_quote(ifok, [{quote, QT}] ++ Context, Tail);
 
 parse_quote(QT, Context, [Char | Tail]) when QT == line, Char == "&" -> close_quote(ampi, [{quote, QT}] ++ Context, Tail);
 parse_quote(QT, Context, [Char | Tail]) when QT == semi, Char == "&" -> close_quote(ampi, [{quote, QT}] ++ Context, Tail);
@@ -232,14 +232,14 @@ parse_quote(QT, Context, [Char | Tail]) when QT == pipe, Char == "&" -> close_qu
 parse_quote(QT, Context, [Char | Tail]) when QT == back, Char == "&" -> close_quote(ampi, [{quote, QT}] ++ Context, Tail);
 parse_quote(QT, Context, [Char | Tail]) when QT == pren, Char == "&" -> close_quote(ampi, [{quote, QT}] ++ Context, Tail);
 
-parse_quote(QT, Context, [Char | [Char | Tail]]) when QT == line, Char == "|" -> close_quote(ifnz, [{quote, QT}] ++ Context, Tail);
-parse_quote(QT, Context, [Char | [Char | Tail]]) when QT == semi, Char == "|" -> close_quote(ifnz, [{quote, QT}] ++ Context, Tail);
-parse_quote(QT, Context, [Char | [Char | Tail]]) when QT == ifok, Char == "|" -> close_quote(ifnz, [{quote, QT}] ++ Context, Tail);
-parse_quote(QT, Context, [Char | [Char | Tail]]) when QT == ampi, Char == "|" -> close_quote(ifnz, [{quote, QT}] ++ Context, Tail);
-parse_quote(QT, Context, [Char | [Char | Tail]]) when QT == ifnz, Char == "|" -> close_quote(ifnz, [{quote, QT}] ++ Context, Tail);
-parse_quote(QT, Context, [Char | [Char | Tail]]) when QT == pipe, Char == "|" -> close_quote(ifnz, [{quote, QT}] ++ Context, Tail);
-parse_quote(QT, Context, [Char | [Char | Tail]]) when QT == back, Char == "|" -> close_quote(ifnz, [{quote, QT}] ++ Context, Tail);
-parse_quote(QT, Context, [Char | [Char | Tail]]) when QT == pren, Char == "|" -> close_quote(ifnz, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char, Char | Tail]) when QT == line, Char == "|" -> close_quote(ifnz, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char, Char | Tail]) when QT == semi, Char == "|" -> close_quote(ifnz, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char, Char | Tail]) when QT == ifok, Char == "|" -> close_quote(ifnz, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char, Char | Tail]) when QT == ampi, Char == "|" -> close_quote(ifnz, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char, Char | Tail]) when QT == ifnz, Char == "|" -> close_quote(ifnz, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char, Char | Tail]) when QT == pipe, Char == "|" -> close_quote(ifnz, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char, Char | Tail]) when QT == back, Char == "|" -> close_quote(ifnz, [{quote, QT}] ++ Context, Tail);
+parse_quote(QT, Context, [Char, Char | Tail]) when QT == pren, Char == "|" -> close_quote(ifnz, [{quote, QT}] ++ Context, Tail);
 
 parse_quote(QT, Context, [Char | Tail]) when QT == line, Char == "|" -> close_quote(pipe, [{quote, QT}] ++ Context, Tail);
 parse_quote(QT, Context, [Char | Tail]) when QT == semi, Char == "|" -> close_quote(pipe, [{quote, QT}] ++ Context, Tail);
