@@ -36,6 +36,8 @@ PATH_TO_FOLDER=`dirname "$PATH_TO_SCRIPT"`
 TWO_LEVELS_UP=`cd "${PATH_TO_FOLDER}/../.." && pwd -P`
 # End script path finder
 
+WORKSPACE=$TWO_LEVELS_UP
+
 echo Checking if online
 ONLINE=no; ping www.google.com > /dev/null && ONLINE=yes
 DEV=no; if [ $COMPUTERNAME = GOVMESH-BOOK ]; then DEV=yes; fi 
@@ -48,21 +50,21 @@ alias clean='grep -v "Entering directory" | grep -v "Leaving directory"'
 if [ $ONLINE = yes ]; then
 	if [ $DEV = yes ]; then
 		echo Pushing nosh built-ins repository
-		cd /cygdrive/d/workspace/nosh_bin
+		cd $WORKSPACE/nosh_bin
 		git push origin master
 
 		echo Pushing nosh repository
-		cd /cygdrive/d/workspace/nosh
+		cd $WORKSPACE/nosh
 		git push origin master
 	fi
 
-	cd /cygdrive/d/workspace/nosh
+	cd $WORKSPACE/nosh
 
 	REBAR_COMMANDS='update-deps compile doc'
 	crowbar | clean
 else
 	echo "Working offline"
-	cd /cygdrive/d/workspace/nosh
+	cd $WORKSPACE/nosh
 	
 	REBAR_COMMANDS='compile doc'
 	crowbar | clean
@@ -73,8 +75,10 @@ MDDOC="$PATH_TO_FOLDER/mddoc"
 
 if [ $MY_ENV = "Cygwin" ]; then
 	escript $(cygpath -wa $MDDOC) | hide_edoc-info
+	erl -pa "$(cygpath -wa $WORKSPACE)/nosh/ebin" -noshell -s noterm start	
 else								
 	$MDDOC
+	erl -pa "$WORKSPACE/nosh/ebin" -noshell -s noterm start
 fi
 
-erl -pa "d:/workspace/nosh/ebin" -noshell -s noterm start
+
