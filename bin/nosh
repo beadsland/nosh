@@ -23,7 +23,7 @@
 # Copyright 2012 Beads D. Land-Trujillo.  All Rights Reserved
 # Portions Copyright 2010 Albert Lombarte
 # -----------------------------------------------------------------------
-%% CDDL HEADER END
+# CDDL HEADER END
 
 tabs -1	>/dev/null		# requires ncurses (noterm doesn't yet know how to process tabs)
 

@@ -29,9 +29,6 @@
 % cygwin/Win invocation:  escript $(cygpath -wa `which mddoc`)
 
 main(_Words) ->
-%	Exe = os:find_executable("git"),
-%	io:format("git exe: ~s~n", Exe),
-	
 	Pwd = filename:absname(""),
 	code:add_path(Pwd ++ "/ebin"),
 	code:add_path(Pwd ++ "/deps/edown/ebin"),

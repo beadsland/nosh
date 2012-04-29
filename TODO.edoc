@@ -1,4 +1,4 @@
-@todo edown using geef??
+@todo fix edoc to handle windows paths?
 @todo crowbar using cygpath for edoc
 @todo macros io:format/1
 @todo sh-nosh relative paths
