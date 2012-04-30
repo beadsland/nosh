@@ -28,24 +28,25 @@
 
 % cygwin/Win invocation (sh):  escript $(cygpath -wa `which mddoc`)
 
-version() -> "0.1.3".
+version() -> "0.1.4".
 
-main(_Words) ->
-	io:format("Running mddoc ~s github README generator~n", [version()]),
-	
+main(_Words) ->	
 	Pwd = filename:absname(""),
 	code:add_path(Pwd ++ "/ebin"),
-	code:add_path(Pwd ++ "/deps/edown/ebin"),
-%	code:add_path(Pwd ++ "/../edown/ebin"),
+	PwdList = string:tokens(Pwd, "/"),       
+	App = list_to_atom(lists:last(PwdList)),
 
-	get_git_origin(),
-	halt(),
+	io:format("Running mddoc ~s github README generator: ~p~n", [version(), App]),
+
+	NDir = filename:dirname(escript:script_name()),
+	code:add_path(NDir ++ "/../deps/edown/ebin"),
+%	code:add_path(NDir ++ "/../../edown/ebin"),
 
 	Param = [{doclet, edown_doclet}, 
-	         {top_level_readme, {"./README.md", "http://github.com/beadsland/nosh"}}
+	         {top_level_readme, {"./README.md", get_git_origin()}}
 	        ],
-	        
-	edoc:application(nosh, Param).
+		
+	edoc:application(App, Param).
 	
 get_git_origin() ->
 	Git = os:cmd("git remote show origin"),
@@ -56,4 +57,8 @@ get_git_origin() ->
 		case re:run(T, MP) of {match,_} -> true; nomatch -> false end
 	end,
 	Fetch = lists:filter(Pred, Lines),
-	io:format("Fetch: ~s~n", [Fetch]).
+	
+	[_Fetch, _URL, "git", Domain, Path] = string:tokens(lists:flatten(Fetch), " \:\@"),
+	PathPart = string:substr(lists:flatten(Path), 1, string:len(Path)-4),
+	
+	"http://" ++ Domain ++ "/" ++ PathPart.
