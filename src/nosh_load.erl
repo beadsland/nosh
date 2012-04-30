@@ -156,6 +156,8 @@ ensure_packaged(Command, Path, Stderr) ->
 						   {ok, NewModule, NewBinary} 	-> {ok, NewModule, NewBinary, Vsn};
 						   Other						-> Other
 					   end;
+		''			-> ?STDERR("~s: flat package module unsafe~n", [Command]),
+					   {ok, Module, Binary, Vsn};
 		_Else		-> {ok, Module, Binary, Vsn}
 	end.
 

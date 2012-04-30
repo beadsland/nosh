@@ -1,4 +1,3 @@
-@todo warn flat package module unsafe
 @todo refactor sh-nosh to make
 @todo echo - stand-alone
 @todo echo - under nosh
