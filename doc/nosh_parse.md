@@ -40,7 +40,7 @@ for detailed specification. (to be implemented)
 
 
 
-<pre>context_type() = {eval, eval} | {quote, <a href="#type-group_type">group_type()</a>} | {quote, <a href="#type-quote_type">quote_type()</a>}</pre>
+<pre>context_type() = {eval, eval} | {context, <a href="#type-group_type">group_type()</a>} | {context, <a href="#type-quote_type">quote_type()</a>}</pre>
 
 
 
@@ -70,7 +70,7 @@ for detailed specification. (to be implemented)
 ##Function Index##
 
 
-<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#parse-2">parse/2</a></td><td>Parse command line string and return a list of nested quoting and grouping context blocks,
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#parse-2">parse/2</a></td><td>Parse command line string and return a list of nested quoting and grouping Stack blocks,
 or else <code>failed</code> on a caught syntax exception.</td></tr></table>
 
 
@@ -93,7 +93,7 @@ or else <code>failed</code> on a caught syntax exception.</td></tr></table>
 
 
 
-Parse command line string and return a list of nested quoting and grouping context blocks,
+Parse command line string and return a list of nested quoting and grouping Stack blocks,
 or else `failed` on a caught syntax exception.
 
 Handle thrown errors for unmatched quoting and grouping characters.
