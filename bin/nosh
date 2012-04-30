@@ -27,7 +27,7 @@
 
 tabs -1	>/dev/null		# requires ncurses (noterm doesn't yet know how to process tabs)
 
-VERSION=0.1.7
+VERSION=0.1.8
 echo sh-nosh $VERSION wrapper script for Nosh
 
 # Linux and MacOS/BSD script path finder by Albert Lombarte
@@ -43,8 +43,7 @@ ONLINE=no; ping www.google.com > /dev/null && ONLINE=yes
 DEV=no; if [ $COMPUTERNAME = GOVMESH-BOOK ]; then DEV=yes; fi 
 MY_ENV=`uname -o`
 
-
-if [ $1 = "off" ]; then ONLINE=no; fi    # short-circuit
+if [ "$1" = "off" ]; then ONLINE=no; fi    # short-circuit
 
 
 alias hide_edoc-info='grep -v "cannot handle URI.*edoc-info"'
