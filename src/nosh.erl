@@ -39,9 +39,9 @@
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
 %% @copyright 2012 Beads D. Land-Trujillo
 
-%% @version 0.1.3
+%% @version 0.1.4
 -module(nosh).
--version("0.1.3").
+-version("0.1.4").
 
 %%
 %% Include files
