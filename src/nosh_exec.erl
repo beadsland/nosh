@@ -32,6 +32,7 @@
 %% TODO: set env
 %% TODO: pattern matching
 %% TODO: Alias substitution
+%% TODO: git qualified packages
 
 %% @version 0.0.0
 -module(nosh_exec).

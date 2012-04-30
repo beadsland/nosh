@@ -38,12 +38,22 @@ main(_Words) ->
 	code:add_path(Pwd ++ "/deps/edown/ebin"),
 %	code:add_path(Pwd ++ "/../edown/ebin"),
 
+	get_git_origin(),
+	halt(),
+
 	Param = [{doclet, edown_doclet}, 
 	         {top_level_readme, {"./README.md", "http://github.com/beadsland/nosh"}}
 	        ],
 	        
 	edoc:application(nosh, Param).
 	
-	
-	
-	
+get_git_origin() ->
+	Git = os:cmd("git remote show origin"),
+	Lines = string:tokens(Git, "\n"),
+	{ok, MP} = re:compile("^\s+Fetch URL\:.*"),
+	 
+	Pred = fun(T) -> 
+		case re:run(T, MP) of {match,_} -> true; nomatch -> false end
+	end,
+	Fetch = lists:filter(Pred, Lines),
+	io:format("Fetch: ~s~n", [Fetch]).
