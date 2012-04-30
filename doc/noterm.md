@@ -17,7 +17,12 @@ __Version:__ 0.1.2
 __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).<a name="description"></a>
 
 ##Description##
-  Translating standard I/O to Erlang messaging.<a name="index"></a>
+
+
+ 
+Translates standard I/O to Erlang messaging.
+
+_Full terminal emulation has yet to be implemented._<a name="index"></a>
 
 ##Function Index##
 

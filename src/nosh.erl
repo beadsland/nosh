@@ -22,7 +22,20 @@
 %% -----------------------------------------------------------------------
 %% CDDL HEADER END
 
-%% @doc The `nosh' process module, which handles messaging with a paired `noterm' process.
+%% @doc The `nosh' process module, which handles messaging with a paired 
+%% `noterm' process.
+%%
+%% <b>Draft Notes</b>
+%%
+%% % A `nosh' process is launched by first starting {@link noterm}, which 
+%% handles keyboard input, sending this to the `nosh' process as messages, 
+%% and presenting output and errors to the user as they are received in 
+%% message form from the `nosh' process.  
+%%
+%% The `nosh' process continues to run until it receives an end-of-file 
+%% message from `noterm'.  This is currently produced by typing a period 
+%% (`.') by itself on a line, followed by a `<newline>'.
+%% @end
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
 %% @copyright 2012 Beads D. Land-Trujillo
 

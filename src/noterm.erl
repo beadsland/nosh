@@ -22,8 +22,10 @@
 %% -----------------------------------------------------------------------
 %% CDDL HEADER END
 
-%% @doc Terminal emulator for `nosh'.
-%% Translating standard I/O to Erlang messaging.
+%% @doc Terminal emulator for `nosh'. 
+%% Translates standard I/O to Erlang messaging.
+%%
+%% <i>Full terminal emulation has yet to be implemented.</i>
 %% @end
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
 %% @copyright 2012 Beads D. Land-Trujillo

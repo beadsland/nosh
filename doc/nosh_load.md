@@ -14,7 +14,43 @@ Copyright (c) 2012 Beads D. Land-Trujillo
 
 __Version:__ 0.1.0
 
-__Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).<a name="index"></a>
+__Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).<a name="description"></a>
+
+##Description##
+
+
+
+
+__Draft Notes:__
+
+
+
+_The PATH search routine is not part of this module._
+
+
+
+Each Erlang module is treated as an executable in `nosh`.  When the name
+of a module appears in first position on a `nosh` command line, a matching
+`.beam` file is sought on each directory on the `PATH` environment
+variable, with one modification:  For each directory on `PATH` that
+ends in `ebin\`, and for which the current user has write access, `nosh`
+will look for a parallel `src\` directory, and if found, search for a
+matching `.erl` file therein.
+
+
+
+If an associated `.erl` file is found, and it is newer that the `.beam`
+file, or if an `.erl` file is found for which no `.beam` file appears,
+the `.erl` file will be compiled to its `ebin\` directory.  If this
+compilation is successful, the module will be loaded and evaluation and
+execution proceeds.  Otherwise, the compiler error is written to `stdout`  
+and a non-zero status is returned.
+
+If no associated `.erl` file is found, the `.beam` file on the `PATH` is
+loaded and evaluation and execution goes forward.  If no `.beam` file is
+found, the search continues to the next directory on `PATH`, returning an
+error if no `.beam` file can be found or compiled from source before the
+`PATH` is exhausted.<a name="index"></a>
 
 ##Function Index##
 
