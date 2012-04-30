@@ -39,9 +39,9 @@
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
 %% @copyright 2012 Beads D. Land-Trujillo
 
-%% @version 0.1.2
+%% @version 0.1.3
 -module(nosh).
--version("0.1.2").
+-version("0.1.3").
 
 %%
 %% Include files
@@ -54,6 +54,9 @@
 %%
 
 -export([start/1]).
+
+% private exports
+-export([loop/3]).
 
 %%
 %% API functions
@@ -77,7 +80,8 @@ start(Stdin, Stdout, Stderr) ->
 	nosh_load:test(Stderr),
 
 	loop(Stdin, Stdout, Stderr).
-		
+
+%%@private Export to allow for hotswap.
 loop(Stdin, Stdout, Stderr) ->
 	Stdout ! {self(), stdout, prompt()},
 	receive
@@ -89,6 +93,6 @@ loop(Stdin, Stdout, Stderr) ->
 		{'EXIT', ExitPid, Reason}	-> 	?STDERR("Exit ~p: ~p ~p~n", [ExitPid, Reason, self()]), 
 										init:stop()
 	end,
-	loop(Stdin, Stdout, Stderr).
+	?MODULE:loop(Stdin, Stdout, Stderr).
 
 prompt() ->	"nosh> ".

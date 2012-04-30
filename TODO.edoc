@@ -1,5 +1,5 @@
-@todo revise loops to use fully-qualified function calls
 @todo warn flat package module unsafe
+@todo refactor sh-nosh to make
 @todo echo - stand-alone
 @todo echo - under nosh
 @todo nosh_bin doc

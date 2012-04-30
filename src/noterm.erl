@@ -36,9 +36,9 @@
 %% TODO: incorporate full terminfo/ncurses support
 %% TODO: notermd - telent/ssh access
 
-%% @version 0.1.2
+%% @version 0.1.3
 -module(noterm).
--version("0.1.2").
+-version("0.1.3").
 
 %%
 %% Include files
@@ -51,7 +51,10 @@
 %%
 
 -export([start/0]).
+
+% Private Exports
 -export([key_start/1]).
+-export([msg_loop/3, key_loop/3]).
 
 %%
 %% API functions
@@ -72,6 +75,7 @@ start() ->
 %% Local functions
 %%
 
+%%@private Export to allow for hotswap.
 msg_loop(Stdin, Stdout, Stderr) ->
 	receive
 		{Stdin, stdout, Line}		-> Stdout ! {self(), stdout, strip_escapes(Line)};
@@ -84,7 +88,7 @@ msg_loop(Stdin, Stdout, Stderr) ->
 		{'EXIT', ExitPid, Reason}	-> grace(io_lib:format("Stopping on ~p exit", [ExitPid]), Reason), exit(normal);
 		{Pid, Message, Payload}		-> io:format(standard_error, "unknown message: {~p, ~p, ~p}~n", [Pid, Message, Payload])
     end,
-	msg_loop(Stdin, Stdout, Stderr).  
+	?MODULE:msg_loop(Stdin, Stdout, Stderr).  
 
 grace(Message, Reason) -> 
 	case Reason of
@@ -110,6 +114,7 @@ key_start(Pid) ->
 	?DEBUG("Listening to keyboard ~p~n", [self()]),
 	key_loop(Pid, Pid, Pid). 
 
+%%@private Export to allow for hotswap.
 key_loop(Stdin, Stdout, Stderr) ->
 	case io:get_line("") of 
 		ok			    ->  receive
@@ -122,7 +127,7 @@ key_loop(Stdin, Stdout, Stderr) ->
 		{error, Reason} ->  Stderr ! {self(), stderr, io_lib:format("error: ~p~n", [Reason])};
 		Line			->  Stdout ! {self(), stdout, Line}
 	end, 
-	key_loop(Stdin, Stdout, Stderr).
+	?MODULE:key_loop(Stdin, Stdout, Stderr).
 
 key_stop(Reason) ->
 	?DEBUG("Stopping: ~p ~p~n", [Reason, self()]),
