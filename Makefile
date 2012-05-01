@@ -62,6 +62,8 @@ clean:
 # Development rules
 #
 
+push:		push-nosh push-libs
+
 push-nosh:
 	if [ "$(DEV)" = yes ]; then (git push origin master); fi
 
