@@ -1,4 +1,10 @@
-% included to satisfy rebar
+%%-*- mode:erlang -*-
+
+%%======================================
+%%
+%% .app file provided to satisfy rebar.
+%%
+%%======================================
 
 {application, nosh,
  [
