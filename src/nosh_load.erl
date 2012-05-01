@@ -159,7 +159,7 @@ ensure_packaged(Command, Path, Stderr) ->
 	case Package of
 		default		-> ?DEBUG("l: default package detected~n"),
 					   case ensure_compiled(Command, Path, Stderr, true) of
-						   {ok, NewModule, NewBinary} 	-> {ok, NewModule, NewBinary, Vsn};
+						   {ok, NewModule, NewBinary} 	-> {ok, NewModule, NewBinary, Vsn, Package};
 						   Other						-> Other
 					   end;
 		''			-> ?DEBUG("l: flat package detected~n"),
