@@ -38,8 +38,8 @@ __<font color="red">To do</font>__* <font color="red"> Tokenizing</font>
 
 
 
-Each commandline is decomposed into a context tree, representing execution,  
-grouping, quoting, substitution and data type contexts.
+Each commandline is decomposed into a context tree, representing Execution,  
+Grouping, Quoting, Substitution and Term contexts.
 
 
 
@@ -54,7 +54,7 @@ _Not all parsing rules described below have been implemented._
 
 * [Substitution Contexts](#Substitution_Contexts)
 
-* [Data Type Contexts](#Data_Type_Contexts)
+* [Term Contexts](#Term_Contexts)
 
 
 
@@ -219,7 +219,7 @@ command(s) execution.
 The [Lists](#Lists) back quote (`[`...`]`) and
 [Tuples](#Tuples) back quote (`{`...`}`) are two special
 constructs for passing command substitution results as
-Erlang-compatible [Data Type Contexts](#Data_Type_Contexts) rathern than
+Erlang-compatible [Term Contexts](#Term_Contexts) rathern than
 Bourne-standard whitespace delimited [Words](#Words).
 
 
@@ -271,7 +271,7 @@ _Not yet implemented_.
 
 
 
-###<a name="Data_Type_Contexts">Data Type Contexts</a>##
+###<a name="Term_Contexts">Term Contexts</a>##
 
 
 
@@ -314,7 +314,7 @@ _Not yet implemented_.
 
 
 
-Zero or more data type contexts are marked as within a single List context
+Zero or more Term contexts are marked as within a single List context
 (not to be confused with a [Parameter List](#Parameter_List)) when enclosed by
 an open square bracket (`[`) and close square bracket (`]`).  Per Erlang
 syntax, elements of a List are delimited by commas (`,`), whitespace is
@@ -337,7 +337,7 @@ _Not yet implemented_.
 
 A Function Parameter List follows Erlang syntax for specifying the
 parameters (and indirectly, the arity) of a function, and consists of
-zero or more comma-delimited Data Type contexts enclosed by an
+zero or more comma-delimited Term contexts enclosed by an
 open parentheses (`(`) and close parentheses (`)`) rather than square
 brackets.  A Parameter List may only appear in second position after a
 command, and only in explicit function mode (see [`nosh_exec`](nosh_exec.md).
@@ -357,7 +357,7 @@ _Not yet implemented_.
 
 
 
-One or more Data Type contexts are marked as within a single Tuple
+One or more Term contexts are marked as within a single Tuple
 context when enclosed by an open curly bracket (`{`) and close curly
 bracket (`}`).  Per Erlang syntax, elements of a Tuple are delimited by
 commas (`,`), whitespace is ignored, and `$IFS` specified delimiters  
@@ -402,7 +402,15 @@ _Not yet implemented_.
 
 
 
-<pre>context_type() = {eval, eval} | {context, <a href="#type-group_type">group_type()</a>} | {context, <a href="#type-quote_type">quote_type()</a>}</pre>
+<pre>context_type() = {eval, eval} | {context, <a href="#type-exec_type">exec_type()</a>} | {context, <a href="#type-group_type">group_type()</a>} | {context, <a href="#type-quote_type">quote_type()</a>} | {context, <a href="#type-term_type">term_type()</a>}</pre>
+
+
+
+###<a name="type-exec_type">exec_type()</a>##
+
+
+
+<pre>exec_type() = line | erln</pre>
 
 
 
@@ -410,7 +418,7 @@ _Not yet implemented_.
 
 
 
-<pre>group_type() = line | pren | ifok | ambi | ifnz | pipe</pre>
+<pre>group_type() = pren | ifok | ambi | ifnz | pipe</pre>
 
 
 
@@ -427,6 +435,14 @@ _Not yet implemented_.
 
 
 <pre>quote_type() = back | doub | sing | escp | dbcp</pre>
+
+
+
+###<a name="type-term_type">term_type()</a>##
+
+
+
+<pre>term_type() = word | list | plst | tupl | epid | bstr</pre>
 <a name="index"></a>
 
 ##Function Index##

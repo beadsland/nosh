@@ -34,7 +34,7 @@
 -define(INIT_DEBUG(Pid), put(debug, Pid)).
 
 -ifdef(debug).
--define(DEBUG(Format, List), get(debug) ! {self(), debug, lists:flatten(io_lib:format(Format, List))}).
+-define(DEBUG(Format, List), get(debug) ! {self(), debug, lists:flatten(io_lib:format("-- " ++ Format, List))}).
 -else.
 -define(DEBUG(F, L), self() ! {ignore, F, L}).
 -endif.

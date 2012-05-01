@@ -9,9 +9,21 @@ __Version:__ 0.1.0
 
 __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).
 
-__<font color="red">To do</font>__* <font color="red">echo - stand-alone
+__<font color="red">To do</font>__* <font color="red">hot command
 </font>
-* <font color="red">echo - under nosh
+* <font color="red">nosh_parse tokens
+</font>
+* <font color="red">nosh_eval
+</font>
+* <font color="red">nosh_exec
+</font>
+* <font color="red">echo command
+</font>
+* <font color="red">nosh_erl project
+</font>
+* <font color="red">refactor hot command
+</font>
+* <font color="red">nosh_erl module
 </font>
 * <font color="red">$PATH search
 </font>

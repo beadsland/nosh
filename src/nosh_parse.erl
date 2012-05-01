@@ -258,6 +258,7 @@
 %% Include files
 %%
 
+-define(debug, true).
 -include("macro.hrl").
 
 -define(context_CHARS, "\\\\\"\'\`\n").

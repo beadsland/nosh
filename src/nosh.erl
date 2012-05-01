@@ -39,14 +39,15 @@
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
 %% @copyright 2012 Beads D. Land-Trujillo
 
-%% @version 0.1.4
+%% @version 0.1.5
 -module(nosh).
--version("0.1.4").
+-version("0.1.5").
 
 %%
 %% Include files
 %%
 
+-define(debug, true).
 -include("macro.hrl").
 
 %%
@@ -85,6 +86,7 @@ start(Stdin, Stdout, Stderr) ->
 loop(Stdin, Stdout, Stderr) ->
 	Stdout ! {self(), stdout, prompt()},
 	receive
+		{Stdin, stdout, "hot\n"}	->  hotswap_nosh(Stdout, Stderr); 
 		{Stdin, stdout, Line}		-> 	Eval = nosh_parse:parse(Line, Stderr),
 										Stdout ! {self(), stdout, io_lib:format("parse: ~p~n", [Eval])};
 		{'EXIT', Stdin, Reason}		-> 	?DEBUG("Stopping on terminal exit: ~p ~p~n", [Reason, self()]), 
@@ -94,5 +96,30 @@ loop(Stdin, Stdout, Stderr) ->
 										init:stop()
 	end,
 	?MODULE:loop(Stdin, Stdout, Stderr).
+
+% Development hotswapping.  This should be refactored as a command.
+hotswap_nosh(Stdout, Stderr) when is_pid(Stdout) ->
+	Stdout ! {self(), stdout, "Hotswapping nosh modules\n"},
+	hotswap(noterm, Stderr),
+	hotswap(nosh, Stderr),
+	hotswap_nosh(code:all_loaded(), Stderr);
+
+hotswap_nosh([], _Stderr) -> ok;
+hotswap_nosh([{Module, _Path} | Tail], Stderr) ->
+	{ok, MP} = re:compile("^nosh_"),
+	case re:run(atom_to_list(Module), MP, [{capture, none}]) of
+		match	->	?DEBUG("see ~p~n", [Module]),
+					hotswap(Module, Stderr);
+		nomatch	->	true
+	end,
+	hotswap_nosh(Tail, Stderr).
+
+hotswap(Module, Stderr) ->
+	{file, Filename} = code:is_loaded(Module),
+	try
+		nosh_load:load(atom_to_list(Module), filename:dirname(Filename), Stderr)
+	catch
+		{Error, Detail}	->	?STDERR("~p: ~p~nDetail: ~p~n", [Module, Error, Detail]) 
+    end.
 
 prompt() ->	"nosh> ".

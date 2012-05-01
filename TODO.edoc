@@ -1,8 +1,10 @@
 @todo nosh_parse tokens
 @todo nosh_eval
 @todo nosh_exec
-@todo echo
-@todo nosh_erl
+@todo echo command
+@todo nosh_erl project
+@todo refactor hot command
+@todo nosh_erl module
 @todo $PATH search
 @todo doc update:  first character, lower case:  atom; upper case:  variable
 @todo nosh_parse: tokenizing

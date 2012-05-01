@@ -53,19 +53,20 @@
 %% @copyright 2012 Beads D. Land-Trujillo
 
 %% TODO: document this module
+%% TODO: soft purge and force option
 %% TODO: module binary service (to avoid repetitive slurps)
 %% TODO: conservative module loader
 
-%% @version 0.1.0
+%% @version 0.1.1
 -module(nosh_load).
--version("0.1.0").
+-version("0.1.1").
 
 %%
 %% Include files
 %%
 
 -include_lib("kernel/include/file.hrl").
-%-define(debug, true). 
+%-define(debug, true).
 -include("macro.hrl").
 
 %%
@@ -107,7 +108,6 @@ test(Stderr) ->
 load(Command, Path, Stderr) when is_atom(Command) -> load(atom_to_list(Command), Path, Stderr);
 load(Command, Path, Stderr) -> 
 	case ensure_compiled(Command, Path, Stderr) of
-		error						-> throw({load_failed, unspecified_compiler_error});
 		{error, Errors, Warnings}	-> throw({load_failed, {compiler, {Errors, Warnings}}}); 
 		{info, no_src}				-> ?DEBUG("l: no source file~n");
 		{info, readonly}			-> ?DEBUG("l: readonly binary~n");
@@ -119,26 +119,32 @@ load(Command, Path, Stderr) ->
 		{error, Errors2, Warnings2}	-> throw({recompile_failed, {Errors2, Warnings2}});
 		{info, no_src}				-> throw({recompile_failed, src_file_missing});
 		{info, readonly}			-> throw({recompile_failed, beam_file_readonly});
-		{ok, Module, Binary, Vsn} 	-> NewFile = ?FILENAME(Path, Command, ".beam"),
-									   ?DEBUG("attribute: -package(~p)~n", [read_beam_attribute(Binary, package)]),
-									   ensure_loaded(NewFile, Module, Binary, Vsn, Stderr)
-	end.
+		{ok, Mod, Bin, Vsn, Pkg} 	-> NewFile = ?FILENAME(Path, Command, ".beam"),
+									   ?DEBUG("attribute: -package(~p)~n", [read_beam_attribute(Bin, package)]),
+									   ensure_loaded(NewFile, Mod, Bin, Vsn, Pkg, Stderr)
+	end. 
 
 %%
 %% Local functions
 %%
 
-ensure_loaded(NewFile, NewModule, Binary, NewVsn, Stderr) ->
+ensure_loaded(NewFile, NewModule, Binary, NewVsn, Package, Stderr) ->
 	case confirm_loaded(NewModule) of
 		{ok, OldFile, OldVsn} 	-> 
 			if OldFile /= NewFile 	-> ?STDERR("~s: hotswap namespace collision~n", [NewModule]);
 			   true					-> false
 			end,
-			if OldVsn /= NewVsn		-> case code:load_binary(NewModule, NewFile, Binary) of
+			if OldVsn /= NewVsn		-> if OldFile == NewFile, Package == '' -> 
+											  ?STDERR("~s: flat package module unsafe~n", [NewModule]);
+										  true -> false
+									   end,
+				   					   code:purge(NewModule),
+									   code:delete(NewModule),
+									   case code:load_binary(NewModule, NewFile, Binary) of
 										   {module, NewModule}	-> {module, NewModule};
 										   {error, What}		-> throw({load_failed, What})
 									   end;
-			   true 				-> false 
+			   true 				-> ?DEBUG("~s: already current~n", [NewModule]) 
 			end;
 		false					->
 			case code:load_binary(NewModule, NewFile, Binary) of
@@ -156,9 +162,9 @@ ensure_packaged(Command, Path, Stderr) ->
 						   {ok, NewModule, NewBinary} 	-> {ok, NewModule, NewBinary, Vsn};
 						   Other						-> Other
 					   end;
-		''			-> ?STDERR("~s: flat package module unsafe~n", [Command]),
-					   {ok, Module, Binary, Vsn};
-		_Else		-> {ok, Module, Binary, Vsn}
+		''			-> ?DEBUG("l: flat package detected~n"),
+					   {ok, Module, Binary, Vsn, Package};
+		_Else		-> {ok, Module, Binary, Vsn, Package}
 	end.
 
 confirm_loaded(NewModule) ->
@@ -213,7 +219,7 @@ ensure_compiled(Command, Path, Stderr, Force) ->
 				   ?DEBUG("compare: ~p > ~p~n", [SrcMod, BinMod]),
 				   if SrcMod > BinMod 		-> do_compile(SrcPath, Command, Project, Path);
 					  Force 				-> do_compile(SrcPath, Command, Project, Path);
-					  true					-> ok   
+					  true					-> ok    
 				   end;
 			   no_src 					-> {info, no_src} 
 		   end;
@@ -228,7 +234,7 @@ do_compile(SrcPath, Command, Project, Path) when is_atom(Project) ->
 	?DEBUG("c: ~p~n", [{Filename, Options}]),
 	Compile = compile:file(Filename, Options),
 	case Compile of
-		error								-> error;
+		error								-> {error, [], []};
 		{error, Errors, Warnings}			-> {error, Errors, Warnings};
 		{ok, ModuleName, Binary} 			-> Outfile = ?FILENAME(Path, Command, ".beam"),
 											   case file:write_file(Outfile, Binary) of
