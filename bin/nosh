@@ -74,15 +74,6 @@ else
 fi
 
 
-MDDOC="$PATH_TO_FOLDER/mddoc"
+erl -pa "$WORKSPACE/nosh/ebin" -noshell -s noterm start
 
-if [ $MY_ENV = "Cygwin" ]; then
-	cd $WORKSPACE/nosh_bin; escript $(cygpath -wa $MDDOC) | hide_edoc-info
-	cd $WORKSPACE/nosh; escript $(cygpath -wa $MDDOC) | hide_edoc-info
 
-	erl -pa "$(cygpath -wa $WORKSPACE)/nosh/ebin" -noshell -s noterm start	
-else								
-	cd $WORKSPACE/nosh_bin; $MDDOC
-	cd $WORKSPACE/nosh; $MDDOC
-	erl -pa "$WORKSPACE/nosh/ebin" -noshell -s noterm start
-fi

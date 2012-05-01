@@ -1,6 +1,6 @@
-@todo multidoc
-@todo new edown push request
-@todo multidoc w/o deps
+@todo multidoc documentation
+@todo github name links
+@todo multidoc ignore deps
 @todo refactor sh-nosh to Makefile
 @todo echo - stand-alone
 @todo echo - under nosh
