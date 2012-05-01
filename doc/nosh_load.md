@@ -14,7 +14,12 @@ Copyright (c) 2012 Beads D. Land-Trujillo
 
 __Version:__ 0.1.0
 
-__Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).<a name="description"></a>
+__Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).
+
+__<font color="red">To do</font>__* <font color="red"> document this module</font>
+* <font color="red"> module binary service (to avoid repetitive slurps)</font>
+* <font color="red"> conservative module loader</font>
+<a name="description"></a>
 
 ##Description##
 

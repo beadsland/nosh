@@ -86,5 +86,3 @@ else
 	cd $WORKSPACE/nosh; $MDDOC
 	erl -pa "$WORKSPACE/nosh/ebin" -noshell -s noterm start
 fi
-
-

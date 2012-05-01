@@ -1,7 +1,7 @@
-@todo rebar both edoc_doclet & edown_doclet?
-@todo edown get_git_branch
-@todo run both doclets at once?
-@todo refactor sh-nosh to make
+@todo multidoc
+@todo new edown push request
+@todo multidoc w/o deps
+@todo refactor sh-nosh to Makefile
 @todo echo - stand-alone
 @todo echo - under nosh
 @todo nosh_bin doc

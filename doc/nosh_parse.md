@@ -20,6 +20,17 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 __References__* See [Shell Basics](http://sayle.net/book/basics.htm) for overview of functionality.  (to be implemented)
 * See [Shell Command Language](http://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.md)
 for detailed specification. (to be implemented)
+
+
+__<font color="red">To do</font>__* <font color="red"> Tokenizing</font>
+* <font color="red"> [...] Lists</font>
+* <font color="red"> [`...`] Lists command substituion</font>
+* <font color="red"> (...) second position parameter Lists</font>
+* <font color="red"> {...} Tuples</font>
+* <font color="red"> `<...>` Pids</font>
+* <font color="red"> `<<...>>` Bitstrings</font>
+* <font color="red"> Erlang Stack</font>
+* <font color="red"> Line continuation</font>
 <a name="description"></a>
 
 ##Description##

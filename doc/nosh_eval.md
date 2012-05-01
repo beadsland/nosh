@@ -12,7 +12,18 @@ Copyright (c) 2012 Beads D. Land-Trujillo
 
 __Version:__ 0.0.0
 
-__Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).<a name="description"></a>
+__Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).
+
+__<font color="red">To do</font>__* <font color="red"> Tilde expansion</font>
+* <font color="red"> Reserved words</font>
+* <font color="red"> $ - Parameter expansion</font>
+* <font color="red"> ${...} - Parameter expansion</font>
+* <font color="red"> $(...) - Command substitution</font>
+* <font color="red"> $((...)) - Arithmetic Expansion</font>
+* <font color="red"> Fileglobs</font>
+* <font color="red"> Redirection</font>
+* <font color="red"> Here document</font>
+<a name="description"></a>
 
 ##Description##
 

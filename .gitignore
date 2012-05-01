@@ -1,7 +1,7 @@
 .project
 .settings
-/doc
-!/doc/*.md
-/ebin
-/erl_crash.dump
-/deps
+doc
+!doc/*.md
+ebin
+erl_crash.dump
+deps

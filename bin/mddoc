@@ -42,7 +42,8 @@ main(_Words) ->
 	code:add_path(NDir ++ "/../deps/edown/ebin"),
 %	code:add_path(NDir ++ "/../../edown/ebin"),
 
-	Param = [{doclet, edown_doclet}, 
+	Param = [{doclet, edoc_doclet},
+			 {doclet, edown_doclet}, 
 	         {top_level_readme, {"./README.md", get_git_origin()}}
 	        ],
 		
