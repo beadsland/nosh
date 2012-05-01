@@ -27,24 +27,46 @@
 # CDDL HEADER END
 
 SHELL	= 	/bin/sh
-MYENV	=	$(shell uname -o)
 
-ifeq ($(MYENV),Cygwin)
-	CYGPATH 	=	`cygpath -wa $(PWD)`
+ifeq ($(COMPUTERNAME),GOVMESH-BOOK)
+	DEV			=	yes
 endif
 
 HIDE_EDOC_WARN	=	grep -v "cannot handle URI.*edoc-info"
+SUCCINCT	=	grep -v "Entering directory" | grep -v "Leaving directory"
 
+#
+# Build rules start
+#
+
+all:		push-nosh current nosh
+
+run:		compile nosh
+
+nosh:	
+	tabs -1	>/dev/null # requires ncurses (noterm doesn't know tabs)
+	erl -pa ebin -noshell -s noterm
+	
+compile:
+	rebar compile doc | $(HIDE_EDOC_WARN)
+
+current:	push-libs
+	rebar update-deps compile doc | $(HIDE_EDOC_WARN)
 
 clean: 
 	rm -rf deps
 	rebar clean get-deps
+	
+	
+#
+# Development rules
+#
 
-current:
-	rebar update-deps compile doc | $(HIDE_EDOC_WARN)
+push-nosh:
+	if [ "$(DEV)" = yes ]; then (git push origin master); fi
 
-compile:
-	rebar compile doc | $(HIDE_EDOC_WARN)
+push-libs:	push-bin
 
-run:
-	erl -pa ebin -noshell -s noterm start
+
+push-bin:
+	if [ "$(DEV)" = yes ]; then (cd ../nosh_bin; git push origin master); fi

@@ -9,9 +9,7 @@ __Version:__ 0.1.0
 
 __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).
 
-__<font color="red">To do</font>__* <font color="red">multidoc ignore deps
-</font>
-* <font color="red">refactor sh-nosh to Makefile
+__<font color="red">To do</font>__* <font color="red">refactor sh-nosh to Makefile
 </font>
 * <font color="red">echo - stand-alone
 </font>
