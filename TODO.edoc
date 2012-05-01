@@ -1,10 +1,6 @@
-@todo multidoc documentation
-@todo github name links
-@todo multidoc ignore deps
 @todo refactor sh-nosh to Makefile
 @todo echo - stand-alone
 @todo echo - under nosh
-@todo nosh_bin doc
 @todo $PATH search
 @todo doc update:  first character, lower case:  atom; upper case:  variable
 @todo nosh_parse: tokenizing
