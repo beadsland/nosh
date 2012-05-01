@@ -22,7 +22,7 @@
 %%
 %% API Functions
 %%
-start() -> ?DEBUG("Hello, world!  My name is ~p.~n", [?MODULE]). 
+start() -> ?DEBUG("Hello, world!  My name is ~p.~n", [?MODULE]).
 
 %%
 %% Local Functions
