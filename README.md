@@ -9,9 +9,7 @@ __Version:__ 0.1.0
 
 __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).
 
-__<font color="red">To do</font>__* <font color="red">hot command
-</font>
-* <font color="red">nosh_parse tokens
+__<font color="red">To do</font>__* <font color="red">nosh_parse tokens
 </font>
 * <font color="red">nosh_eval
 </font>

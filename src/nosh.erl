@@ -25,6 +25,12 @@
 %% @doc The `nosh' process module, which handles messaging with a paired 
 %% `noterm' process.
 %%
+%% Commands:
+%% <dl>
+%% <dt>`.'</dt><dd>end-of-file (exit nosh application)</dd>
+%% <dt>`hot'</dt><dd>hotswap nosh modules</dd>
+%% </dl>
+%%
 %% <b>Draft Notes</b>
 %%
 %% % A `nosh' process is launched by first starting {@link noterm}, which 
