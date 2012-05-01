@@ -1,6 +1,8 @@
-@todo refactor sh-nosh to Makefile
-@todo echo - stand-alone
-@todo echo - under nosh
+@todo nosh_parse tokens
+@todo nosh_eval
+@todo nosh_exec
+@todo echo
+@todo nosh_erl
 @todo $PATH search
 @todo doc update:  first character, lower case:  atom; upper case:  variable
 @todo nosh_parse: tokenizing
