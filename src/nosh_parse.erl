@@ -280,10 +280,10 @@
 %% Handle thrown errors for unmatched quoting and grouping characters.
 %% @end
 -type io_proc() :: pid().
--type term_type() :: word | list | plst | tupl | epid | bstr
+-type term_type() :: word | list | plst | tupl | epid | bstr. 
 -type quote_type() :: back | doub | sing | escp | dbcp.
 -type group_type() :: pren | ifok | ambi | ifnz | pipe.
--type exec_type() :: brne | erln
+-type exec_type() :: brne | erln.
 -type context_type() :: {eval, eval} | {context, exec_type()} | {context, group_type()} | {context, quote_type()} | {context, term_type()}.
 -type block() :: nonempty_string() | {context_type(), list(block())}.
 -spec parse(Subject :: nonempty_string(), Stderr :: io_proc()) -> failed | list(block()).
@@ -298,7 +298,7 @@ parse(Subject, Stderr) ->
 	
 	QuoteErr = "Quote error: Closing ~s missing~n", 
 	GroupErr = "Group error: Closing ~s missing~n", 
-	ExecErr = "Context error: Closing ~s missing"
+	ExecErr = "Context error: Closing ~s missing",
 	try close_context(brne, [eval], CleanSplit) of
 		{Parse, [eval]} -> [{{context, brne}, StackList}, close_eval] = Parse, StackList	
 	catch
