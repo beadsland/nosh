@@ -93,9 +93,8 @@ msg_loop(Stdin, Stdout, Stderr) ->
 grace(Message, Reason) -> 
 	case Reason of
 		{{Exception, ExcReason}, Trace} 	-> 
-			Format = "~s: ~p ~p~nContext: ~p~nTrace: ~p~n",
-			io:format(standard_error, Format, [Message, Exception, self(), ExcReason, Trace]),
-			init:stop(); 
+			Format = "~s: ~p ~p~nReason: ~p~nTrace: ~p~n",
+			io:format(standard_error, Format, [Message, Exception, self(), ExcReason, Trace]);
 		Else						->
 			io:format(standard_error, "~s: ~p ~p~n", [Message, Else, self()])
 	end.

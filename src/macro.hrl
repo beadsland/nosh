@@ -36,6 +36,6 @@
 -ifdef(debug).
 -define(DEBUG(Format, List), get(debug) ! {self(), debug, lists:flatten(io_lib:format("-- " ++ Format, List))}).
 -else.
--define(DEBUG(F, L), self() ! {ignore, F, L}).
+-define(DEBUG(F, L), put(debug_garbage, {F,L})).
 -endif.
 -define(DEBUG(String), ?DEBUG(String, [])).  

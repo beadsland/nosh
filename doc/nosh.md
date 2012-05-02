@@ -60,12 +60,30 @@ message from `noterm`.  This is currently produced by typing a period
 ##Function Index##
 
 
-<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#start-1">start/1</a></td><td>Start nosh, passing Pid of process providing standard i/o messaging.</td></tr></table>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#command_loop-1">command_loop/1</a></td><td></td></tr><tr><td valign="top"><a href="#command_run-4">command_run/4</a></td><td></td></tr><tr><td valign="top"><a href="#start-1">start/1</a></td><td>Start nosh, passing Pid of process providing standard i/o messaging.</td></tr></table>
 
 
 <a name="functions"></a>
 
 ##Function Details##
+
+<a name="command_loop-1"></a>
+
+###command_loop/1##
+
+
+
+
+`command_loop(CmdPid) -> any()`
+
+<a name="command_run-4"></a>
+
+###command_run/4##
+
+
+
+
+`command_run(Line, Stdin, Stdout, Stderr) -> any()`
 
 <a name="start-1"></a>
 

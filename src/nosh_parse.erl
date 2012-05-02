@@ -354,6 +354,8 @@ close_context(QType, Stack, List) ->
 
 
 %% @doc Unwind context and group stream.
+%parse_context(QT, Stack, [Char | Tail]) when QT == line, Char == "\ " -> {close_term, Stack, Tail};
+
 parse_context(QT, Stack, [Char | Tail]) when QT == line, Char == "\n" -> {close_context, Stack, Tail};
 parse_context(QT, Stack, [Char | Tail]) when QT == semi, Char == "\n" -> {close_context, Stack, [Char] ++ Tail};
 parse_context(QT, Stack, [Char | Tail]) when QT == ifok, Char == "\n" -> {close_context, Stack, [Char] ++ Tail};

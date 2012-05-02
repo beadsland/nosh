@@ -402,7 +402,7 @@ _Not yet implemented_.
 
 
 
-<pre>context_type() = {eval, eval} | {context, <a href="#type-exec_type">exec_type()</a>} | {context, <a href="#type-group_type">group_type()</a>} | {context, <a href="#type-quote_type">quote_type()</a>} | {context, <a href="#type-term_type">term_type()</a>}</pre>
+<pre>context_type() = {context, <a href="#type-exec_type">exec_type()</a>} | {context, <a href="#type-group_type">group_type()</a>} | {context, <a href="#type-quote_type">quote_type()</a>} | {context, <a href="#type-term_type">term_type()</a>}</pre>
 
 
 
@@ -410,7 +410,7 @@ _Not yet implemented_.
 
 
 
-<pre>exec_type() = line | erln</pre>
+<pre>exec_type() = brne | line | erln</pre>
 
 
 

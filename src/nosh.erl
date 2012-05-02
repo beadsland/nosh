@@ -63,7 +63,7 @@
 -export([start/1]).
 
 % private exports
--export([loop/3]).
+-export([loop/3,command_run/4,command_loop/1]).
 
 %%
 %% API functions
@@ -92,20 +92,43 @@ start(Stdin, Stdout, Stderr) ->
 loop(Stdin, Stdout, Stderr) ->
 	Stdout ! {self(), stdout, prompt()},
 	receive
-		{Stdin, stdout, "hot\n"}	->  hotswap_nosh(Stdout, Stderr); 
-		{Stdin, stdout, Line}		-> 	try
-											Eval = nosh_parse:parse(Line, Stderr),
-											Stdout ! {self(), stdout, io_lib:format("parse: ~p~n", [Eval])}
-										catch
-											Err -> ?STDERR("parse: ~p~n", [Err])
-										end; 
-		{'EXIT', Stdin, Reason}		-> 	?DEBUG("Stopping on terminal exit: ~p ~p~n", [Reason, self()]), 
-										init:stop();
-		{'EXIT', ExitPid, normal}	-> 	?DEBUG("Saw process exit: ~p~n", [ExitPid]);
-		{'EXIT', ExitPid, Reason}	-> 	?STDERR("Exit ~p: ~p ~p~n", [ExitPid, Reason, self()]), 
-										init:stop()
+		{Stdin, stdout, "hot\n"}	-> hotswap_nosh(Stdout, Stderr); 
+		{Stdin, stdout, Line}		-> command(Line, Stdin, Stdout, Stderr);
+		{'EXIT', Stdin, Reason}		-> ?DEBUG("Stopping on terminal exit: ~p ~p~n", [Reason, self()]),
+									   init:stop();
+		{'EXIT', ExitPid, normal}	-> ?DEBUG("Saw process exit: ~p~n", [ExitPid]);
+		{'EXIT', ExitPid, Reason}	-> ?STDERR("Exit ~p: ~p ~p~n", [ExitPid, Reason, self()]), 
+									   init:stop();
+		{Pid, Message, Payload}		-> io:format(standard_error, "unknown message: {~p, ~p, ~p}~n", [Pid, Message, Payload])
 	end,
 	?MODULE:loop(Stdin, Stdout, Stderr).
+
+prompt() ->	"nosh> ".
+
+% We spawn command as separate process and then wait on it.
+% This allows us to catch the exit status of runtime errors.
+
+command(Line, Stdin, Stdout, Stderr) ->
+	CmdPid = spawn_link(nosh, command_run, [Line, Stdin, Stdout, Stderr]),
+	case command_loop(CmdPid) of
+		{ok, Result} 				-> ?DEBUG("~s: ~p", [Line, Result]);
+		{{Except, Reason}, Trace} 	-> Format = "~s: ~p ~p~nReason: ~p~nTrace: ~p~n",
+									   ?STDERR(Format, [Line, Except, self(), Reason, Trace]);
+		Else						-> ?STDERR("~s: ~p ~p~n", [Line, Else, self()])
+	end. 
+
+command_run(Line, _Stdin, _Stdout, Stderr) ->
+	Parse = nosh_parse:parse(Line, Stderr),
+	exit(Parse).
+
+command_loop(CmdPid) ->
+	receive
+		{'EXIT', CmdPid, normal} 	-> {ok, normal};
+		{'EXIT', CmdPid, ok}		-> {ok, ok};
+		{'EXIT', CmdPid, {ok, Etc}}	-> {ok, Etc};
+		{'EXIT', CmdPid, Other}		-> Other
+	end.
+
 
 % Development hotswapping.  This should be refactored as a command.
 hotswap_nosh(Stdout, Stderr) when is_pid(Stdout) ->
@@ -131,5 +154,3 @@ hotswap(Module, Stderr) ->
 	catch
 		{Error, Detail}	->	?STDERR("~p: ~p~nDetail: ~p~n", [Module, Error, Detail]) 
     end.
-
-prompt() ->	"nosh> ".
