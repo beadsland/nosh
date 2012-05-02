@@ -110,11 +110,12 @@ prompt() ->	"nosh> ".
 
 command(Line, Stdin, Stdout, Stderr) ->
 	CmdPid = spawn_link(nosh, command_run, [Line, Stdin, Stdout, Stderr]),
+	Command = string:tokens(Line, "\n"),
 	case command_loop(CmdPid) of
-		{ok, Result} 				-> ?DEBUG("~s: ~p", [Line, Result]);
-		{{Except, Reason}, Trace} 	-> Format = "~s: ~p ~p~nReason: ~p~nTrace: ~p~n",
-									   ?STDERR(Format, [Line, Except, self(), Reason, Trace]);
-		Else						-> ?STDERR("~s: ~p ~p~n", [Line, Else, self()])
+		{ok, Result} 				-> ?DEBUG("~s: ~p", [Command, Result]);
+		{{Except, Reason}, Trace} 	-> Format = "~s: ~p~nReason: ~p~nTrace: ~p~n",
+									   ?STDERR(Format, [Command, Except, Reason, Trace]);
+		Else						-> ?STDERR("~s: ~p~n", [Command, Else])
 	end. 
 
 command_run(Line, _Stdin, _Stdout, Stderr) ->

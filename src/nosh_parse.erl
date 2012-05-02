@@ -290,6 +290,7 @@
 -spec parse(Subject :: nonempty_string(), Stderr :: io_proc()) -> failed | list(block()).
 %%
 parse(Subject, Stderr) ->
+	?INIT_DEBUG(Stderr),
 	Pattern = io_lib:format("([~s~s~s])", [?context_CHARS, ?GROUP_CHARS, ?SPACE_CHARS]),
 	{ok, MP} = re:compile(Pattern),
 
