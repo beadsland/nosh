@@ -284,8 +284,8 @@
 -type term_type() :: word | list | plst | tupl | epid | bstr. 
 -type quote_type() :: back | doub | sing | escp | dbcp.
 -type group_type() :: pren | ifok | ambi | ifnz | pipe.
--type exec_type() :: line | erln.
--type context_type() :: {eval, eval} | {context, exec_type()} | {context, group_type()} | {context, quote_type()} | {context, term_type()}.
+-type exec_type() :: brne | line | erln.
+-type context_type() :: {context, exec_type()} | {context, group_type()} | {context, quote_type()} | {context, term_type()}.
 -type block() :: nonempty_string() | {context_type(), list(block())}.
 -spec parse(Subject :: nonempty_string(), Stderr :: io_proc()) -> failed | list(block()).
 %%
@@ -300,10 +300,9 @@ parse(Subject, Stderr) ->
 	QuoteErr = "Quote error: Closing ~s missing~n", 
 	GroupErr = "Group error: Closing ~s missing~n", 
 	ExecErr = "Context error: Closing ~s missing~n",
-	try close_context(line, [eval], CleanSplit) of
-		{Parse, [eval]} -> [{{context, line}, StackList}, close_eval] = Parse, StackList	
+	try close_context(line, [{context, brne}], CleanSplit) of
+		{Parse, [{context, brne}]} -> [{{context, line}, StackList}, {close_context, brne}] = Parse, StackList	
 	catch
-		{eval, eval}  		-> ?STDERR("Eval error: shouldn't happen~n"), failed;
 		{context, line} 	-> ?STDERR(ExecErr, ["EOL"]), failed;
 		{context, semi}		-> ?STDERR(GroupErr, ["EOL"]), failed;
 		{context, pren}		-> ?STDERR(GroupErr, ["\)"]), failed;
@@ -321,7 +320,7 @@ parse(Subject, Stderr) ->
 %% Parse list of strings split on quoting and grouping characters, according to current Stack type.
 %% Return tuple of block list and Stack stack OR tuple of 'close_context', Stack stack, and trailing Stack tree.
 %% Throw exception for unmatched quoting or grouping character.
-parse(eval, [], []) -> {[close_eval], []};
+parse({context, brne}, [], []) -> {[{close_context, brne}], []};
 parse(Type, _Stack, []) -> throw(Type);
 parse(Type, Stack, [[] | Tail]) -> parse(Type, Stack, Tail);
 parse(Type, Stack, [Head | Tail]) when is_integer(Head) ->
@@ -330,9 +329,9 @@ parse(Type, Stack, [Head | Tail]) when is_integer(Head) ->
 parse({context, QType}, Stack, List) -> 	
 	?DEBUG("parse_context(~p, ~p, ~p)~n", [QType, Stack, List]), 	
 	Parse = parse_context(QType, Stack, List), 
-	?DEBUG("~nparse_context(~p, ~p, ~p) ->~n     ~p~n", [QType, Stack, List, Parse]), 
+	?DEBUG("parse_context(~p, ~p, ~p) ->~n     ~p~n", [QType, Stack, List, Parse]), 
 										 
-	case Parse of 							
+	case Parse of					
 		{close_context, Stack, Tail}	-> Close = {close_context, QType},
 										   [SuperType | SuperStack] = Stack,
 										   {Post, _ReturnStack} = parse(SuperType, SuperStack, Tail),
@@ -342,7 +341,7 @@ parse({context, QType}, Stack, List) ->
 
 %% Wind up context block.
 close_context(QType, Stack, List) ->
-	?DEBUG("# parse_context(~p, ~p, ~p)~n", [QType, Stack, List]),
+	?DEBUG("close_context(~p, ~p, ~p)~n", [QType, Stack, List]),
 	{Tail, _ReturnStack} = parse({context, QType}, Stack, List), 
 	Close = {close_context, QType},
 	Pred = fun(T) -> T /= Close end,

@@ -115,7 +115,6 @@ load(Command, Path, Stderr) ->
 		ok							-> ?DEBUG("l: file current~n") 
     end,
 	case ensure_packaged(Command, Path, Stderr) of
-		error						-> throw({recompile_failed, unspecified_compiler_error});
 		{error, Errors2, Warnings2}	-> throw({recompile_failed, {Errors2, Warnings2}});
 		{info, no_src}				-> throw({recompile_failed, src_file_missing});
 		{info, readonly}			-> throw({recompile_failed, beam_file_readonly});

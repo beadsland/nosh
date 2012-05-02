@@ -93,8 +93,12 @@ loop(Stdin, Stdout, Stderr) ->
 	Stdout ! {self(), stdout, prompt()},
 	receive
 		{Stdin, stdout, "hot\n"}	->  hotswap_nosh(Stdout, Stderr); 
-		{Stdin, stdout, Line}		-> 	Eval = nosh_parse:parse(Line, Stderr),
-										Stdout ! {self(), stdout, io_lib:format("parse: ~p~n", [Eval])};
+		{Stdin, stdout, Line}		-> 	try
+											Eval = nosh_parse:parse(Line, Stderr),
+											Stdout ! {self(), stdout, io_lib:format("parse: ~p~n", [Eval])}
+										catch
+											Err -> ?STDERR("parse: ~p~n", [Err])
+										end; 
 		{'EXIT', Stdin, Reason}		-> 	?DEBUG("Stopping on terminal exit: ~p ~p~n", [Reason, self()]), 
 										init:stop();
 		{'EXIT', ExitPid, normal}	-> 	?DEBUG("Saw process exit: ~p~n", [ExitPid]);
