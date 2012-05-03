@@ -60,11 +60,16 @@
 %% API functions
 %%
 
-%% @doc Start terminal, launching message loop and keyboard listening process.
+%% @doc Start terminal, launching message loop and keyboard listening 
+%% process.
+%% @end
 start() ->
 	process_flag(trap_exit, true),
-	io:format("Starting Noterm ~s terminal emulator on ~p ~p~n", [?VERSION(?MODULE), node(), self()]),
+	io:format("Starting Noterm ~s terminal emulator on ~p ~p~n", 
+			  [?VERSION(?MODULE), node(), self()]),
+
 	KeyPid = spawn_link(?MODULE, key_start, [self()]),
+
 	try spawn_link(nosh, start, [self()]) of
 		NoshPid 			-> msg_loop(KeyPid, NoshPid, NoshPid)
 	catch
@@ -78,16 +83,28 @@ start() ->
 %%@private Export to allow for hotswap.
 msg_loop(Stdin, Stdout, Stderr) ->
 	receive
-		{_Pid, purging, _Mod}		-> true; % chase your tail
-		{Stdin, stdout, Line}		-> Stdout ! {self(), stdout, strip_escapes(Line)};
-		{Stdin, stderr, Line}		-> io:format(standard_error, "** ~s", [Line]); % key err doesn't go to shell
+		{_Pid, purging, _Mod}		-> true; % chase your tail 
+		{Stdin, stdout, Line}		-> ?STDOUT(strip_escapes(Line));
+		{Stdin, stderr, Line}		-> io:format(standard_error, "** ~s", 
+												 [Line]); 
 		{Stdout, stdout, Line} 		-> io:format(Line, []);
-		{Stderr, stderr, Line} 		-> io:format(standard_error, "** ~s", [Line]);
-		{_Pid, debug, Line}			-> io:format(standard_error, Line, []);
-		{'EXIT', Stdin, Reason}  	-> grace("Stopping on keyboard exit", Reason), exit(normal);
-		{'EXIT', Stdout, Reason}	-> grace("Stopping on shell exit", Reason), init:stop();
-		{'EXIT', ExitPid, Reason}	-> grace(io_lib:format("Stopping on ~p exit", [ExitPid]), Reason), exit(normal);
-		Noise						-> io:format(standard_error, "noise: ~p ~p~n", [Noise, self()])
+		{Stderr, stderr, Line} 		-> io:format(standard_error, "** ~s", 
+												 [Line]);
+		{_Pid, debug, Line}			-> io:format(standard_error, Line);
+		{'EXIT', Stdin, Reason}  	-> grace("Stopping on keyboard exit", 
+											 Reason), 
+									   exit(normal);
+		{'EXIT', Stdout, Reason}	-> grace("Stopping on shell exit", 
+											 Reason), 
+									   init:stop();
+		{'EXIT', ExitPid, Reason}	-> Message = io_lib:format(
+												   "Stopping on ~p exit", 
+												   [ExitPid]),
+									   grace(Message, Reason),
+									   exit(normal);
+		Noise						-> io:format(standard_error, 
+												 "noise: ~p ~p~n", 
+												 [Noise, self()])
     end,
 	?MODULE:msg_loop(Stdin, Stdout, Stderr).  
 
@@ -95,9 +112,11 @@ grace(Message, Reason) ->
 	case Reason of
 		{{Exception, ExcReason}, Trace} 	-> 
 			Format = "~s: ~p ~p~nReason: ~p~nTrace: ~p~n",
-			io:format(standard_error, Format, [Message, Exception, self(), ExcReason, Trace]);
+			io:format(standard_error, Format, 
+					  [Message, Exception, self(), ExcReason, Trace]);
 		Else						->
-			io:format(standard_error, "~s: ~p ~p~n", [Message, Else, self()])
+			io:format(standard_error, "~s: ~p ~p~n", 
+					  [Message, Else, self()])
 	end.
 
 strip_escapes(Subject) ->
@@ -117,19 +136,24 @@ key_start(Pid) ->
 %%@private Export to allow for hotswap.
 key_loop(Stdin, Stdout, Stderr) ->
 	case io:get_line("") of 
-		ok			    ->  receive
-								{_Pid, purging, _Mod}		-> true; % chase your tail
-								{'EXIT', Stdin, Reason} 	-> io:format("~s exit: ~s~n", [?MODULE, Reason]);
-								Noise						-> ?STDERR("noise: ~p ~p~n", [Noise, self()])
-							after 
-								1 -> false		
-							end;
-		eof 			->	key_stop(eof);
-		".\n"			->  key_stop(eof);
-		{error, Reason} ->  Stderr ! {self(), stderr, io_lib:format("error: ~p~n", [Reason])};
-		Line			->  Stdout ! {self(), stdout, Line}
+		ok			    -> key_receive(Stdin, Stdout, Stderr);
+		eof 			-> key_stop(eof); 
+		".\n"			-> key_stop(eof);
+		{error, Reason} -> ?STDERR("error: ~p~n", [Reason]);
+		Line			-> ?STDOUT(Line)
 	end, 
 	?MODULE:key_loop(Stdin, Stdout, Stderr).
+
+key_receive(Stdin, _Stdout, Stderr) ->
+	receive
+		{_Pid, purging, _Mod}		-> true; % chase your tail
+		{'EXIT', Stdin, Reason} 	-> io:format("~s exit: ~s~n", 
+												 [?MODULE, Reason]);
+		Noise						-> ?STDERR("noise: ~p ~p~n", 
+											   [Noise, self()])
+	after 
+		1 -> false		
+	end.
 
 key_stop(Reason) ->
 	?DEBUG("Stopping: ~p ~p~n", [Reason, self()]),

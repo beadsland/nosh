@@ -69,7 +69,9 @@
 %% API functions
 %%
 
-%% @doc Start nosh, passing Pid of process providing standard i/o messaging.
+%% @doc Start nosh, passing Pid of process providing standard i/o
+%% messaging.
+%% @end
 start(Pid) -> start(Pid, Pid, Pid).
 
 %%
@@ -80,7 +82,8 @@ start(Stdin, Stdout, Stderr) ->
 	error_logger:tty(false),
 	process_flag(trap_exit, true),
 	?INIT_DEBUG(Stderr), 
-	Stdout ! {self(), stdout, io_lib:format("Starting Nosh ~s nosql shell ~p~n", [?VERSION(?MODULE), self()])},
+	?STDOUT("Starting Nosh ~s nosql shell ~p~n", [?VERSION(?MODULE), 
+												  self()]),
 	?DEBUG("Using rev. ~s command line parser~n", [?VERSION(nosh_parse)]),
 	?DEBUG("Using rev. ~s module loader~n", [?VERSION(nosh_load)]),
 	
@@ -91,34 +94,46 @@ start(Stdin, Stdout, Stderr) ->
 
 %%@private Export to allow for hotswap.
 loop(Stdin, Stdout, Stderr, Command, CmdPid) ->
-	%?DEBUG("loop(~p, ~p, ~p, ~p, ~p)~n", [Stdin, Stdout, Stderr, Command, CmdPid]),
 	receive
-		{_Pid, purging, _Mod}		-> true, % chase your tail
-									   ?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid);
-
+		{_Pid, purging, _Mod} -> 
+			true, % chase your tail
+            ?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid);
+		
 		% Listen for executing command exit.
-		{'EXIT', CmdPid, Reason} 	-> command_return(Command, Reason, Stderr),
-									   prompt(Stdout),
-									   ?MODULE:loop(Stdin, Stdout, Stderr, ?MODULE, self());
+		{'EXIT', CmdPid, Reason} -> 
+			command_return(Command, Reason, Stderr),
+			prompt(Stdout),
+			?MODULE:loop(Stdin, Stdout, Stderr, ?MODULE, self());
 		
 		% Listen for next command to execute.
-		{Stdin, stdout, "hot\n"} when CmdPid == self() 	-> 
-                                       hotswap_nosh(Stdout, Stderr), prompt(Stdout),
-									   ?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid);
-		{Stdin, stdout, Line} when CmdPid == self()		-> 
-	                                   NewPid = spawn_link(nosh, command_run, [Line, Stdin, Stdout, Stderr]),
-                                       NewCom = string:tokens(Line, "\n"),
-									   ?MODULE:loop(Stdin, Stdout, Stderr, NewCom, NewPid);
+		{Stdin, stdout, "hot\n"} when CmdPid == self() -> 
+            hotswap_nosh(Stdout, Stderr),
+			prompt(Stdout),
+			?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid);
+		
+		{Stdin, stdout, Line} when CmdPid == self()	->
+			NewPid = spawn_link(nosh, command_run, 
+								[Stdin, Stdout, Stderr, Line]),
+            NewCom = string:tokens(Line, "\n"),
+			?MODULE:loop(Stdin, Stdout, Stderr, NewCom, NewPid);
+		
 		% Listen for termination of shell process.
-		{'EXIT', Stdin, Reason}		-> ?DEBUG("Stopping on terminal exit: ~p ~p~n", [Reason, self()]),
-									   init:stop();
-		{'EXIT', ExitPid, normal}	-> ?DEBUG("Saw process exit: ~p~n", [ExitPid]),
-									   ?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid);		
-		{'EXIT', ExitPid, Reason}	-> ?STDERR("Exit ~p: ~p ~p~n", [ExitPid, Reason, self()]), 
-									   init:stop();
+		{'EXIT', Stdin, Reason}	-> 
+			?DEBUG("Stopping on terminal exit: ~p ~p~n", [Reason, self()]),
+			init:stop();
+		
+		{'EXIT', ExitPid, normal} -> 
+			?DEBUG("Saw process exit: ~p~n", [ExitPid]),
+			?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid);
+		
+		{'EXIT', ExitPid, Reason} -> 
+			?STDERR("Exit ~p: ~p ~p~n", [ExitPid, Reason, self()]), 
+			init:stop();
+		
 		% Listen for any other noise.
-		Noise						-> ?STDERR("noise: ~p ~p~n", [Noise, self()]),
-									   ?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid)
+		Noise -> 
+			?STDERR("noise: ~p ~p~n", [Noise, self()]),
+			?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid)
 	end.
 
 prompt(Stdout) -> 
@@ -130,20 +145,31 @@ prompt(Stdout) ->
 
 command_return(Command, Status, Stderr) -> 
 	case Status of
-		normal						-> ?DEBUG("~s: ~p~n", [Command, Status]);
-		ok							-> ?DEBUG("~s: ~p~n", [Command, Status]);
-		{ok, Result} 				-> ?DEBUG("~s: ~p~n", [Command, Result]);
-		{{Except, Reason}, Trace} 	-> Format = "~s: ~p~nReason: ~p~nTrace: ~p~n",
-									   ?STDERR(Format, [Command, Except, Reason, Trace]);
-		Else						-> ?STDERR("~s: ~p~n", [Command, Else])
+		normal -> 
+			?DEBUG("~s: ~p~n", [Command, Status]);
+		
+		ok -> 
+			?DEBUG("~s: ~p~n", [Command, Status]);
+		
+		{ok, Result} -> 
+			?DEBUG("~s: ~p~n", [Command, Result]);
+		
+		{{Except, Reason}, Trace} -> 
+			Format = "~s: ~p~nReason: ~p~nTrace: ~p~n",
+			?STDERR(Format, [Command, Except, Reason, Trace]);
+		
+		Else -> 
+			?STDERR("~s: ~p~n", [Command, Else])
 	end.
 
-command_run(Line, _Stdin, _Stdout, Stderr) ->
+% spawned as a process
+command_run(_Stdin, _Stdout, Stderr, Line) ->
 	Parse = nosh_parse:parse(Line, Stderr),
 	exit(Parse).
 
-
+%%%%
 % Development hotswapping.  This should be refactored as a command.
+%%%%
 hotswap_nosh(Stdout, Stderr) when is_pid(Stdout) ->
 	Stdout ! {self(), stdout, "Hotswapping nosh modules\n"},
 	hotswap(noterm, Stderr),

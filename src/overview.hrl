@@ -43,8 +43,8 @@
 %
 % `nosh' emulates much of the functionality of the Bourne shell (`sh').
 %
-% Currently all `nosh' does is {@link nosh_parse. parse} a command line and 
-% return a tree representing quoting and grouping relationships.  
+% Currently all `nosh' does is {@link nosh_parse. parse} a command line 
+% and return a tree representing quoting and grouping relationships.  
 % <i>Execution functions are not yet implemented</i>.
 %	
 % Two syntax regimes are supported by `nosh', identified as Bourne Context
@@ -62,25 +62,28 @@
 % human-thinkable alternative to the Erl shell 
 % ([http://www.erlang.org/doc/man/erl.html]).  
 % 
-% The Erlang syntax, while perfectly appropriate for functional programming, 
-% can prove frustrating in the imperative paradigm of a shell environment, 
-% and compiling and loading modules can be unduly cumbersome and non-intuitive.
+% The Erlang syntax, while perfectly appropriate for functional 
+% programming, can prove frustrating in the imperative paradigm of a 
+% shell environment, and compiling and loading modules can be unduly 
+% cumbersome and non-intuitive.
 % 
 % `nosh' operates in Bourne Context by default, while still supporting 
 % Erlang data types, and allowing Erlang Context to be embedded in 
-% commandlines as needed.  Within Bourne Context, Erlang modules are invoked 
-% like UNIX commands, and {@link nosh_load. compile and load on-the-fly}, 
-% parameters being passed (and functions called) with minimal typing.
+% commandlines as needed.  Within Bourne Context, Erlang modules are 
+% invoked like UNIX commands, and {@link nosh_load. compile and load 
+% on-the-fly}, parameters being passed (and functions called) with 
+% minimal typing.
 %  
 % === Erl Commands ===
 % 
-% <i>Not yet implemented:</i>  All functions available through the Erl shell 
-% are available as `nosh' commands.
+% <i>Not yet implemented:</i>  All functions available through the Erl 
+% shell are available as `nosh' commands.
 % 
 % === Erlang Context ===
 % 
-% <i>Not yet implemented:</i>  Erlang style syntax can be used on the `nosh'
-% command line as per the Erl shell.  See {link nosh_parse} for more details.
+% <i>Not yet implemented:</i>  Erlang style syntax can be used on the 
+% `nosh' command line as per the Erl shell.  See {link nosh_parse} for 
+% more details.
 % 
 % == NoSQL File System ==
 % 

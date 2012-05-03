@@ -30,6 +30,8 @@
 -import(lists).
 -define(STDERR(Format, List), Stderr ! {self(), stderr, lists:flatten(io_lib:format(Format, List))}).
 -define(STDERR(String), ?STDERR(String, [])).
+-define(STDOUT(Format, List), Stdout ! {self(), stdout, lists:flatten(io_lib:format(Format, List))}).
+-define(STDOUT(String), ?STDERR(String, [])).
 
 -define(INIT_DEBUG(Pid), put(debug, Pid)).
 

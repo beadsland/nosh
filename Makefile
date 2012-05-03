@@ -40,7 +40,8 @@ else
 	PING	=	ping -c1
 endif
 
-ONLINE	=	`$(PING) www.google.com 2>&1 >/dev/null; if [ "$$?" -eq "0" ]; then (echo yes); else (echo no); fi`
+ONLINE	=	`$(PING) www.google.com 2>&1 >/dev/null; \
+			if [ "$$?" -eq "0" ]; then (echo yes); else (echo no); fi`
 
 HIDE_EDOC_WARN	=	grep -v "cannot handle URI.*edoc-info"
 SUCCINCT	=	grep -v "Entering directory" | grep -v "Leaving directory"
@@ -64,10 +65,14 @@ current:	push-libs
 	@rebar update-deps compile doc | $(HIDE_EDOC_WARN)
 
 clean: 		online
-	@if [ "$(ONLINE)" == yes ]; then (rm -rf deps; rebar clean get-deps); else (rebar clean); fi
+	@if [ "$(ONLINE)" == yes ]; \
+			then (rm -rf deps; rebar clean get-deps); \
+			else (rebar clean); fi
 	
 online:	
-	@if [ "$(ONLINE)" == yes ]; then (echo "Working online"); else (echo "Working offline"); fi
+	@if [ "$(ONLINE)" == yes ]; \
+			then (echo "Working online"); \
+			else (echo "Working offline"); fi
 		
 #
 # Development rules
@@ -76,10 +81,12 @@ online:
 push:		push-nosh push-libs
 
 push-nosh:	online
-	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; then (git push origin master); fi
+	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
+			then (git push origin master); fi
 
 push-libs:	push-bin
 
 
 push-bin:	online
-	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; then (cd ../nosh_bin; git push origin master); fi
+	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
+			then (cd ../nosh_bin; git push origin master); fi

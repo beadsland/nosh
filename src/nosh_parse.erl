@@ -262,7 +262,7 @@
 -include("macro.hrl").
 
 -define(context_CHARS, "\\\\\"\'\`\n").
--define(GROUP_CHARS, "\;\(\)\&\|").     % curly braces are reserved words, not grouping characters
+-define(GROUP_CHARS, "\;\(\)\&\|").  
 -define(SPACE_CHARS, "\ \t\n").
 
 %%
@@ -275,8 +275,8 @@
 %% API functions
 %%
 
-%% @doc Parse command line string and return a list of nested quoting and grouping Stack blocks, 
-%% or else `failed' on a caught syntax exception.
+%% @doc Parse command line string and return a list of nested quoting and 
+%% grouping Stack blocks, or else `failed' on a caught syntax exception.
 %%
 %% Handle thrown errors for unmatched quoting and grouping characters.
 %% @end
@@ -285,13 +285,18 @@
 -type quote_type() :: back | doub | sing | escp | dbcp.
 -type group_type() :: pren | ifok | ambi | ifnz | pipe.
 -type exec_type() :: brne | line | erln.
--type context_type() :: {context, exec_type()} | {context, group_type()} | {context, quote_type()} | {context, term_type()}.
+-type context_type() :: {context, exec_type()} 
+						| {context, group_type()} 
+						| {context, quote_type()} 
+						| {context, term_type()}.
 -type block() :: nonempty_string() | {context_type(), list(block())}.
--spec parse(Subject :: nonempty_string(), Stderr :: io_proc()) -> failed | list(block()).
+-spec parse(Subject :: nonempty_string(), Stderr :: io_proc()) -> 
+		  failed | list(block()).
 %%
 parse(Subject, Stderr) ->
 	?INIT_DEBUG(Stderr),
-	Pattern = io_lib:format("([~s~s~s])", [?context_CHARS, ?GROUP_CHARS, ?SPACE_CHARS]),
+	Pattern = io_lib:format("([~s~s~s])", 
+							[?context_CHARS, ?GROUP_CHARS, ?SPACE_CHARS]),
 	{ok, MP} = re:compile(Pattern),
 
 	Split = re:split(Subject, MP, [{return, list}]),
@@ -302,24 +307,32 @@ parse(Subject, Stderr) ->
 	GroupErr = "Group error: Closing ~s missing~n", 
 	ExecErr = "Context error: Closing ~s missing~n",
 	try close_context(line, [{context, brne}], CleanSplit) of
-		{Parse, [{context, brne}]} -> [{{context, line}, StackList}, {close_context, brne}] = Parse, StackList	
+		{Parse, [{context, brne}]} -> 
+			[{{context, line}, StackList}, {close_context, brne}] = 
+				Parse, StackList		
 	catch
 		{context, line} 	-> ?STDERR(ExecErr, ["EOL"]), failed;
 		{context, semi}		-> ?STDERR(GroupErr, ["EOL"]), failed;
 		{context, pren}		-> ?STDERR(GroupErr, ["\)"]), failed;
-		{close, pren}		-> ?STDERR("Group error: Unmatched closing parentheses~n"), failed;
+		{close, pren}		-> ?STDERR("Group error: "
+								"Unmatched closing parentheses~n"), failed;
 		{context, back} 	-> ?STDERR(QuoteErr, ["\`"]), failed;
 		{context, doub} 	-> ?STDERR(QuoteErr, ["\""]), failed;
 		{context, sing} 	-> ?STDERR(QuoteErr, ["\'"]), failed;
-		{context, escp} 	-> ?STDERR("context error: Line continuation not supported~n"), failed
+		{context, escp} 	-> ?STDERR("context error: "
+								"Line continuation not supported~n"), 
+							   failed
 	end. 
 
 %%
 %% Local functions
 %%
 
-%% Parse list of strings split on quoting and grouping characters, according to current Stack type.
-%% Return tuple of block list and Stack stack OR tuple of 'close_context', Stack stack, and trailing Stack tree.
+%% Parse list of strings split on quoting and grouping characters, 
+%% according to current Stack type.  Return tuple of context tree, context
+%% stack and unparsed tail OR tuple of 'close_context', context stack, and 
+%% trailing context tree.
+%%
 %% Throw exception for unmatched quoting or grouping character.
 parse({context, brne}, [], []) -> {[{close_context, brne}], []};
 parse(Type, _Stack, []) -> throw(Type);
@@ -330,15 +343,21 @@ parse(Type, Stack, [Head | Tail]) when is_integer(Head) ->
 parse({context, QType}, Stack, List) -> 	
 	?DEBUG("parse_context(~p, ~p, ~p)~n", [QType, Stack, List]), 	
 	Parse = parse_context(QType, Stack, List), 
-	?DEBUG("parse_context(~p, ~p, ~p) ->~n     ~p~n", [QType, Stack, List, Parse]),
+	?DEBUG("parse_context(~p, ~p, ~p) ->~n     ~p~n", 
+		   [QType, Stack, List, Parse]),
 	case Parse of
-%		{close_term, Stack, Tail}		-> {Post, _ReturnStack} = parse_context(QType, Stack, Tail),
-%										   {[Close | Post], SuperStack};
-		{close_context, Stack, Tail}	-> Close = {close_context, QType},
-										   [SuperType | SuperStack] = Stack,
-										   {Post, _ReturnStack} = parse(SuperType, SuperStack, Tail),
-										   {[Close | Post], SuperStack};
-		{Tail, ReturnStack}				-> {Tail, ReturnStack}
+%		{close_term, Stack, Tail} -> 
+%			{Post, _ReturnStack} = parse_context(QType, Stack, Tail),
+%			{[Close | Post], SuperStack};
+
+		{close_context, Stack, Tail} -> 
+			Close = {close_context, QType}, 
+			[SuperType | SuperStack] = Stack,
+			{Post, _ReturnStack} = parse(SuperType, SuperStack, Tail),
+			{[Close | Post], SuperStack};
+		
+		{Tail, ReturnStack}	-> 
+			{Tail, ReturnStack}
 	end.  
 
 %% Wind up context block.
@@ -349,8 +368,12 @@ close_context(QType, Stack, List) ->
 	Pred = fun(T) -> T /= Close end,
 	{L1, L2} = lists:splitwith(Pred, Tail),
 	if
-		QType == dbcp, L1 == []	-> Context = "\\";      % Didn't escape anything, so restore backslash as regular character.
-		true					-> Context = {{context, QType}, L1}
+		QType == dbcp, L1 == []	-> 
+			Context = "\\";      % Didn't escape anything, so restore 
+								 % backslash as regular character.
+
+		true -> 
+			Context = {{context, QType}, L1}
 	end,
 	{[Context | lists:delete(Close, L2)], Stack}. 
 
