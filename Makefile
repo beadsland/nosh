@@ -29,8 +29,12 @@
 SHELL	= 	/bin/sh
 
 ifeq ($(COMPUTERNAME),GOVMESH-BOOK)
-	DEV			=	yes
+	DEV		=	yes
+else
+	DEV		=	no
 endif
+
+ONLINE	=	`ping www.google.com 2>&1 >/dev/null; if [ "$$?" -eq "0" ]; then (echo yes); else (echo no); fi`
 
 HIDE_EDOC_WARN	=	grep -v "cannot handle URI.*edoc-info"
 SUCCINCT	=	grep -v "Entering directory" | grep -v "Leaving directory"
@@ -53,22 +57,23 @@ compile:
 current:	push-libs
 	rebar update-deps compile doc | $(HIDE_EDOC_WARN)
 
-clean: 
-	rm -rf deps
-	rebar clean get-deps
+clean: 		online
+	if [ "$(ONLINE)" == yes ]; then (rm -rf deps; rebar clean get-deps); else (rebar clean); fi
 	
-	
+online:	
+	if [ "$(ONLINE)" == yes ]; then (echo "Working online"); else (echo "Working offline"); fi
+		
 #
 # Development rules
 #
 
 push:		push-nosh push-libs
 
-push-nosh:
-	if [ "$(DEV)" = yes ]; then (git push origin master); fi
+push-nosh:	online
+	if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; then (git push origin master); fi
 
 push-libs:	push-bin
 
 
-push-bin:
-	if [ "$(DEV)" = yes ]; then (cd ../nosh_bin; git push origin master); fi
+push-bin:	online
+	if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; then (cd ../nosh_bin; git push origin master); fi

@@ -123,7 +123,7 @@ command_run(Line, _Stdin, _Stdout, Stderr) ->
 	exit(Parse).
 
 command_loop(CmdPid) ->
-	receive
+	receive 
 		{'EXIT', CmdPid, normal} 	-> {ok, normal};
 		{'EXIT', CmdPid, ok}		-> {ok, ok};
 		{'EXIT', CmdPid, {ok, Etc}}	-> {ok, Etc};

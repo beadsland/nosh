@@ -1,3 +1,5 @@
+@todo Makefile silents
+@todo merge command loop
 @todo nosh_parse tokens
 @todo nosh_eval
 @todo nosh_exec
