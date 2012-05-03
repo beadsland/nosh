@@ -1,4 +1,5 @@
-@todo merge command loop
+@todo heartbeat
+@todo clean up command loop merge
 @todo nosh_parse tokens
 @todo nosh_eval
 @todo nosh_exec

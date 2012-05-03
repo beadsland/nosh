@@ -9,9 +9,9 @@ __Version:__ 0.1.0
 
 __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).
 
-__<font color="red">To do</font>__* <font color="red">Makefile silents
+__<font color="red">To do</font>__* <font color="red">heartbeat
 </font>
-* <font color="red">merge command loop
+* <font color="red">clean up command loop merge
 </font>
 * <font color="red">nosh_parse tokens
 </font>

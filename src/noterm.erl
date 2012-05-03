@@ -86,7 +86,7 @@ msg_loop(Stdin, Stdout, Stderr) ->
 		{'EXIT', Stdin, Reason}  	-> grace("Stopping on keyboard exit", Reason), exit(normal);
 		{'EXIT', Stdout, Reason}	-> grace("Stopping on shell exit", Reason), init:stop();
 		{'EXIT', ExitPid, Reason}	-> grace(io_lib:format("Stopping on ~p exit", [ExitPid]), Reason), exit(normal);
-		{Pid, Message, Payload}		-> io:format(standard_error, "unknown message: {~p, ~p, ~p}~n", [Pid, Message, Payload])
+		Noise						-> io:format(standard_error, "noise: ~p ~p~n", [Noise, self()])
     end,
 	?MODULE:msg_loop(Stdin, Stdout, Stderr).  
 
