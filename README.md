@@ -9,9 +9,9 @@ __Version:__ 0.1.0
 
 __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).
 
-__<font color="red">To do</font>__* <font color="red">heartbeat
+__<font color="red">To do</font>__* <font color="red">command loop needs be tail recursive (or will mem leak)
 </font>
-* <font color="red">clean up command loop merge
+* <font color="red">shorten line lengths (75 char max)
 </font>
 * <font color="red">nosh_parse tokens
 </font>
