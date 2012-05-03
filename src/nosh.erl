@@ -93,6 +93,8 @@ start(Stdin, Stdout, Stderr) ->
 loop(Stdin, Stdout, Stderr, Command, CmdPid) ->
 	%?DEBUG("loop(~p, ~p, ~p, ~p, ~p)~n", [Stdin, Stdout, Stderr, Command, CmdPid]),
 	receive
+		{_Pid, purging, _Mod}		-> true; % chase your tail
+
 		% Listen for executing command exit.
 		{'EXIT', CmdPid, normal} 	-> command_return(Stdin, Stdout, Stderr, Command, {ok, normal});
 		{'EXIT', CmdPid, ok}		-> command_return(Stdin, Stdout, Stderr, Command, {ok, ok});
@@ -110,7 +112,6 @@ loop(Stdin, Stdout, Stderr, Command, CmdPid) ->
 		{'EXIT', ExitPid, Reason}	-> ?STDERR("Exit ~p: ~p ~p~n", [ExitPid, Reason, self()]), 
 									   init:stop();
 		% Listen for any other noise.
-		{_Pid, purging, _Mod}		-> true; % chase your tail
 		Noise						-> ?STDERR("noise: ~p ~p~n", [Noise, self()])
 	end,
 	?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid).
