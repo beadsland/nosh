@@ -55,19 +55,19 @@ run:		compile nosh
 
 nosh:	
 	tabs -1	>/dev/null # requires ncurses (noterm doesn't know tabs)
-	erl -pa ebin -noshell -s noterm
+	@erl -pa ebin -noshell -s noterm
 	
 compile:
-	rebar compile doc | $(HIDE_EDOC_WARN)
+	@rebar compile doc | $(HIDE_EDOC_WARN)
 
 current:	push-libs
-	rebar update-deps compile doc | $(HIDE_EDOC_WARN)
+	@rebar update-deps compile doc | $(HIDE_EDOC_WARN)
 
 clean: 		online
-	if [ "$(ONLINE)" == yes ]; then (rm -rf deps; rebar clean get-deps); else (rebar clean); fi
+	@if [ "$(ONLINE)" == yes ]; then (rm -rf deps; rebar clean get-deps); else (rebar clean); fi
 	
 online:	
-	if [ "$(ONLINE)" == yes ]; then (echo "Working online"); else (echo "Working offline"); fi
+	@if [ "$(ONLINE)" == yes ]; then (echo "Working online"); else (echo "Working offline"); fi
 		
 #
 # Development rules
@@ -76,10 +76,10 @@ online:
 push:		push-nosh push-libs
 
 push-nosh:	online
-	if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; then (git push origin master); fi
+	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; then (git push origin master); fi
 
 push-libs:	push-bin
 
 
 push-bin:	online
-	if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; then (cd ../nosh_bin; git push origin master); fi
+	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; then (cd ../nosh_bin; git push origin master); fi
