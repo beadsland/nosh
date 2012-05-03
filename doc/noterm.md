@@ -16,7 +16,9 @@ __Version:__ 0.1.3
 
 __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).
 
-__<font color="red">To do</font>__* <font color="red"> io:get_char (see code in jungerl)</font>
+__<font color="red">To do</font>__
+<br></br>
+* <font color="red"> io:get_char (see code in jungerl)</font>
 * <font color="red"> escript and parameters (make it run like any other shell command)</font>
 * <font color="red"> make fully redistributable (Win/cygwin/*NIX)</font>
 * <font color="red"> incorporate full terminfo/ncurses support</font>

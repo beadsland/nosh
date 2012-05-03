@@ -14,7 +14,9 @@ __Version:__ 0.0.0
 
 __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).
 
-__<font color="red">To do</font>__* <font color="red"> implicit start</font>
+__<font color="red">To do</font>__
+<br></br>
+* <font color="red"> implicit start</font>
 * <font color="red"> explicit function</font>
 * <font color="red"> getoptions functions</font>
 * <font color="red"> set env</font>

@@ -22,7 +22,9 @@ __References__* See [Shell Basics](http://sayle.net/book/basics.htm) for overvie
 for detailed specification. (to be implemented)
 
 
-__<font color="red">To do</font>__* <font color="red"> Tokenizing</font>
+__<font color="red">To do</font>__
+<br></br>
+* <font color="red"> Tokenizing</font>
 * <font color="red"> [...] Lists</font>
 * <font color="red"> [`...`] Lists command substituion</font>
 * <font color="red"> (...) second position parameter Lists</font>

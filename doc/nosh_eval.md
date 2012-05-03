@@ -14,7 +14,9 @@ __Version:__ 0.0.0
 
 __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).
 
-__<font color="red">To do</font>__* <font color="red"> Tilde expansion</font>
+__<font color="red">To do</font>__
+<br></br>
+* <font color="red"> Tilde expansion</font>
 * <font color="red"> Reserved words</font>
 * <font color="red"> $ - Parameter expansion</font>
 * <font color="red"> ${...} - Parameter expansion</font>
