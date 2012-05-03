@@ -34,7 +34,13 @@ else
 	DEV		=	no
 endif
 
-ONLINE	=	`ping www.google.com 2>&1 >/dev/null; if [ "$$?" -eq "0" ]; then (echo yes); else (echo no); fi`
+ifeq ($(shell which ping),/cygdrive/c/Windows/system32/ping)
+	PING	=	ping -n 1
+else
+	PING	=	ping -c1
+endif
+
+ONLINE	=	`$(PING) www.google.com 2>&1 >/dev/null; if [ "$$?" -eq "0" ]; then (echo yes); else (echo no); fi`
 
 HIDE_EDOC_WARN	=	grep -v "cannot handle URI.*edoc-info"
 SUCCINCT	=	grep -v "Entering directory" | grep -v "Leaving directory"
