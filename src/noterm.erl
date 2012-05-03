@@ -86,6 +86,7 @@ msg_loop(Stdin, Stdout, Stderr) ->
 		{'EXIT', Stdin, Reason}  	-> grace("Stopping on keyboard exit", Reason), exit(normal);
 		{'EXIT', Stdout, Reason}	-> grace("Stopping on shell exit", Reason), init:stop();
 		{'EXIT', ExitPid, Reason}	-> grace(io_lib:format("Stopping on ~p exit", [ExitPid]), Reason), exit(normal);
+		{_Pid, purging, _Mod}		-> true; % chase your tail
 		Noise						-> io:format(standard_error, "noise: ~p ~p~n", [Noise, self()])
     end,
 	?MODULE:msg_loop(Stdin, Stdout, Stderr).  
@@ -117,7 +118,9 @@ key_start(Pid) ->
 key_loop(Stdin, Stdout, Stderr) ->
 	case io:get_line("") of 
 		ok			    ->  receive
-								{'EXIT', Stdin, Reason} -> io:format("~s exit: ~s~n", [?MODULE, Reason])
+								{'EXIT', Stdin, Reason} 	-> io:format("~s exit: ~s~n", [?MODULE, Reason]);
+								{_Pid, purging, _Mod}		-> true; % chase your tail
+								Noise						-> ?STDERR("noise: ~p ~p~n", [Noise, self()])
 							after 
 								1 -> false		
 							end;

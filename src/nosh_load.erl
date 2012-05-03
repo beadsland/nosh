@@ -53,7 +53,7 @@
 %% @copyright 2012 Beads D. Land-Trujillo
 
 %% TODO: document this module
-%% TODO: soft purge and force option
+%% TODO: force purge option
 %% TODO: module binary service (to avoid repetitive slurps)
 %% TODO: conservative module loader
 
@@ -137,7 +137,11 @@ ensure_loaded(NewFile, NewModule, Binary, NewVsn, Package, Stderr) ->
 											  ?STDERR("~s: flat package module unsafe~n", [NewModule]);
 										  true -> false
 									   end,
-				   					   code:purge(NewModule),
+									   case code:soft_purge(NewModule) of
+										   false 	-> purge_alert(NewModule, processes()),
+													   code:purge(NewModule);
+										   true 	-> false
+									   end,
 									   code:delete(NewModule),
 									   case code:load_binary(NewModule, NewFile, Binary) of
 										   {module, NewModule}	-> {module, NewModule};
@@ -151,6 +155,11 @@ ensure_loaded(NewFile, NewModule, Binary, NewVsn, Package, Stderr) ->
 				{error, What}		-> throw({load_failed, What})
 			end
 	end.
+
+purge_alert(_Module, []) -> ok;
+purge_alert(Module, [Head | Tail]) ->
+	Head ! {self(), purging, Module},
+	purge_alert(Module, Tail).
 
 ensure_packaged(Command, Path, Stderr) ->
 	Filename = ?FILENAME(Path, Command, ".beam"),

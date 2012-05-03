@@ -53,7 +53,7 @@
 %% Include files
 %%
 
--define(debug, true).
+%-define(debug, true).
 -include("macro.hrl").
 
 %%
@@ -100,7 +100,7 @@ loop(Stdin, Stdout, Stderr, Command, CmdPid) ->
 		{'EXIT', CmdPid, Other}		-> command_return(Stdin, Stdout, Stderr, Command, Other);
 		
 		% Listen for next command to execute.
-		{Stdin, stdout, "hot\n"} when CmdPid == self() 	-> hotswap_nosh(Stdout, Stderr); 
+		{Stdin, stdout, "hot\n"} when CmdPid == self() 	-> hotswap_nosh(Stdout, Stderr), prompt(Stdout);
 		{Stdin, stdout, Line} when CmdPid == self()		-> command(Stdin, Stdout, Stderr, Line);
 		
 		% Listen for termination of shell process.
@@ -110,7 +110,8 @@ loop(Stdin, Stdout, Stderr, Command, CmdPid) ->
 		{'EXIT', ExitPid, Reason}	-> ?STDERR("Exit ~p: ~p ~p~n", [ExitPid, Reason, self()]), 
 									   init:stop();
 		% Listen for any other noise.
-		Noise						-> io:format(standard_error, "noise: ~p ~p~n", [Noise, self()])
+		{_Pid, purging, _Mod}		-> true; % chase your tail
+		Noise						-> ?STDERR("noise: ~p ~p~n", [Noise, self()])
 	end,
 	?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid).
 

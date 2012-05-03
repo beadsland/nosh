@@ -1,5 +1,5 @@
-@todo heartbeat
-@todo clean up command loop merge
+@todo command loop needs be tail recursive (or will mem leak)
+@todo shorten line lengths (75 char max)
 @todo nosh_parse tokens
 @todo nosh_eval
 @todo nosh_exec
