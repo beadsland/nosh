@@ -45,9 +45,9 @@
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
 %% @copyright 2012 Beads D. Land-Trujillo
 
-%% @version 0.1.5
+%% @version 0.1.6
 -module(nosh).
--version("0.1.5").
+-version("0.1.6").
 
 %%
 %% Include files
@@ -93,28 +93,33 @@ start(Stdin, Stdout, Stderr) ->
 loop(Stdin, Stdout, Stderr, Command, CmdPid) ->
 	%?DEBUG("loop(~p, ~p, ~p, ~p, ~p)~n", [Stdin, Stdout, Stderr, Command, CmdPid]),
 	receive
-		{_Pid, purging, _Mod}		-> true; % chase your tail
+		{_Pid, purging, _Mod}		-> true, % chase your tail
+									   ?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid);
 
 		% Listen for executing command exit.
-		{'EXIT', CmdPid, normal} 	-> command_return(Stdin, Stdout, Stderr, Command, {ok, normal});
-		{'EXIT', CmdPid, ok}		-> command_return(Stdin, Stdout, Stderr, Command, {ok, ok});
-		{'EXIT', CmdPid, {ok, Etc}}	-> command_return(Stdin, Stdout, Stderr, Command, {ok, Etc});
-		{'EXIT', CmdPid, Other}		-> command_return(Stdin, Stdout, Stderr, Command, Other);
+		{'EXIT', CmdPid, Reason} 	-> command_return(Command, Reason, Stderr),
+									   prompt(Stdout),
+									   ?MODULE:loop(Stdin, Stdout, Stderr, ?MODULE, self());
 		
 		% Listen for next command to execute.
-		{Stdin, stdout, "hot\n"} when CmdPid == self() 	-> hotswap_nosh(Stdout, Stderr), prompt(Stdout);
-		{Stdin, stdout, Line} when CmdPid == self()		-> command(Stdin, Stdout, Stderr, Line);
-		
+		{Stdin, stdout, "hot\n"} when CmdPid == self() 	-> 
+                                       hotswap_nosh(Stdout, Stderr), prompt(Stdout),
+									   ?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid);
+		{Stdin, stdout, Line} when CmdPid == self()		-> 
+	                                   NewPid = spawn_link(nosh, command_run, [Line, Stdin, Stdout, Stderr]),
+                                       NewCom = string:tokens(Line, "\n"),
+									   ?MODULE:loop(Stdin, Stdout, Stderr, NewCom, NewPid);
 		% Listen for termination of shell process.
 		{'EXIT', Stdin, Reason}		-> ?DEBUG("Stopping on terminal exit: ~p ~p~n", [Reason, self()]),
 									   init:stop();
-		{'EXIT', ExitPid, normal}	-> ?DEBUG("Saw process exit: ~p~n", [ExitPid]);
+		{'EXIT', ExitPid, normal}	-> ?DEBUG("Saw process exit: ~p~n", [ExitPid]),
+									   ?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid);		
 		{'EXIT', ExitPid, Reason}	-> ?STDERR("Exit ~p: ~p ~p~n", [ExitPid, Reason, self()]), 
 									   init:stop();
 		% Listen for any other noise.
-		Noise						-> ?STDERR("noise: ~p ~p~n", [Noise, self()])
-	end,
-	?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid).
+		Noise						-> ?STDERR("noise: ~p ~p~n", [Noise, self()]),
+									   ?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid)
+	end.
 
 prompt(Stdout) -> 
 	Prompt = "nosh> ",
@@ -123,20 +128,15 @@ prompt(Stdout) ->
 % We spawn command as separate process and then wait on it.
 % This allows us to catch the exit status of runtime errors.
 
-command(Stdin, Stdout, Stderr, Line) ->
-	CmdPid = spawn_link(nosh, command_run, [Line, Stdin, Stdout, Stderr]),
-	Command = string:tokens(Line, "\n"),
-	?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid).
-
-command_return(Stdin, Stdout, Stderr, Command, Status) ->
+command_return(Command, Status, Stderr) -> 
 	case Status of
-		{ok, Result} 				-> ?DEBUG("~s: ~p", [Command, Result]);
+		normal						-> ?DEBUG("~s: ~p~n", [Command, Status]);
+		ok							-> ?DEBUG("~s: ~p~n", [Command, Status]);
+		{ok, Result} 				-> ?DEBUG("~s: ~p~n", [Command, Result]);
 		{{Except, Reason}, Trace} 	-> Format = "~s: ~p~nReason: ~p~nTrace: ~p~n",
 									   ?STDERR(Format, [Command, Except, Reason, Trace]);
 		Else						-> ?STDERR("~s: ~p~n", [Command, Else])
-	end,
-	prompt(Stdout),
-	?MODULE:loop(Stdin, Stdout, Stderr, ?MODULE, self()). 
+	end.
 
 command_run(Line, _Stdin, _Stdout, Stderr) ->
 	Parse = nosh_parse:parse(Line, Stderr),

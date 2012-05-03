@@ -1,5 +1,3 @@
-@todo fix todo list in edown
-@todo command loop needs be tail recursive (or will mem leak)
 @todo shorten line lengths (75 char max)
 @todo nosh_parse tokens
 @todo nosh_eval

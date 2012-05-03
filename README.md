@@ -11,10 +11,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">fix todo list in edown
-</font>
-* <font color="red">command loop needs be tail recursive (or will mem leak)
-</font>
 * <font color="red">shorten line lengths (75 char max)
 </font>
 * <font color="red">nosh_parse tokens
