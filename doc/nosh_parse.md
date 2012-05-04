@@ -420,7 +420,7 @@ _Not yet implemented_.
 
 
 
-<pre>group_type() = pren | ifok | ambi | ifnz | pipe</pre>
+<pre>group_type() = pren | semi | ifok | ambi | ifnz | pipe</pre>
 
 
 

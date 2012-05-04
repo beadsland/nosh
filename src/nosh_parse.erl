@@ -283,7 +283,7 @@
 -type io_proc() :: pid().
 -type term_type() :: word | list | plst | tupl | epid | bstr. 
 -type quote_type() :: back | doub | sing | escp | dbcp.
--type group_type() :: pren | ifok | ambi | ifnz | pipe.
+-type group_type() :: pren | semi | ifok | ambi | ifnz | pipe.
 -type exec_type() :: brne | line | erln.
 -type context_type() :: {context, exec_type()} 
 						| {context, group_type()} 
@@ -377,36 +377,76 @@ close_context(QType, Stack, List) ->
 	end,
 	{[Context | lists:delete(Close, L2)], Stack}. 
 
--define(PARSE_CONTEXT(WhenQT, WhenChar, Return),
-		parse_context(QT, Stack, [Char | Tail]) 
-	   			when QT == WhenQT, Char == WhenChar -> Return).
+%% Pass non-symbols along unchanged (this should be tokenizing).
+pass_context(QT, Stack, Symbol, Tail) ->
+	{NewTail, _ReturnStack} = parse({context, QT}, Stack, Tail),
+	{[Symbol | NewTail], Stack}.
 
-%% doc Unwind context and group stream.
-%parse_context(QT, Stack, [Char | Tail]) when QT == line, Char == "\ " -> {close_term, Stack, Tail};
+%% @doc Unwind context and group stream.
+parse_context(escp, [Type | Stack], [Head | Tail]) -> 
+	[First | Rest] = Head,
+	Escape = [First, {close_context, escp}],
+	{NewTail, Stack} = parse(Type, Stack, [Rest | Tail]), 
+	{Escape ++ NewTail, [Type | Stack]};
 
-%@hidden
-?PARSE_CONTEXT(line, "\n", {close_context, Stack, Tail});
-?PARSE_CONTEXT(semi, "\n", {close_context, Stack, [Char | Tail]});
-?PARSE_CONTEXT(ifok, "\n", {close_context, Stack, [Char | Tail]});
-?PARSE_CONTEXT(ampi, "\n", {close_context, Stack, [Char | Tail]});
-?PARSE_CONTEXT(ifnz, "\n", {close_context, Stack, [Char | Tail]});
-?PARSE_CONTEXT(pipe, "\n", {close_context, Stack, [Char | Tail]});
+parse_context(dbcp, [Type | Stack], [Head | Tail]) -> 
+	[First | Rest] = Head,
+	case [First] of 
+		"\$"	-> Escape = [[First], {close_context, dbcp}], Left = [Rest];
+		"\`"	-> Escape = [[First], {close_context, dbcp}], Left = [Rest];
+		"\""	-> Escape = [[First], {close_context, dbcp}], Left = [Rest];
+		"\\"	-> Escape = [[First], {close_context, dbcp}], Left = [Rest]; 
+		"\n"	-> Escape = throw({context, escp}), Left = [Rest]; 
+		_Other	-> Escape = [{close_context, dbcp}, "\\"], Left = [Head]
+	end,  
+	{NewTail, Stack} = parse(Type, Stack, [Left | Tail]), 
+	{Escape ++ NewTail, [Type | Stack]};
 
-%parse_context(QT, Stack, [Char | Tail]) when QT == line, Char == "\n" -> {close_context, Stack, Tail};
-%parse_context(QT, Stack, [Char | Tail]) when QT == semi, Char == "\n" -> {close_context, Stack, [Char | Tail]};
-%parse_context(QT, Stack, [Char | Tail]) when QT == ifok, Char == "\n" -> {close_context, Stack, [Char | Tail]};
-%parse_context(QT, Stack, [Char | Tail]) when QT == ampi, Char == "\n" -> {close_context, Stack, [Char | Tail]};
-%parse_context(QT, Stack, [Char | Tail]) when QT == ifnz, Char == "\n" -> {close_context, Stack, [Char | Tail]};
-%parse_context(QT, Stack, [Char | Tail]) when QT == pipe, Char == "\n" -> {close_context, Stack, [Char | Tail]};
+parse_context(QT, Stack, [Symbol | Tail]) when Symbol == "\n" ->
+	case QT	of
+		line 	-> {close_context, Stack, Tail};
+ 
+		semi 	-> {close_context, Stack, [Symbol | Tail]};
+		ifok 	-> {close_context, Stack, [Symbol | Tail]};
+		ampi 	-> {close_context, Stack, [Symbol | Tail]};
+		ifnz 	-> {close_context, Stack, [Symbol | Tail]};
+		pipe 	-> {close_context, Stack, [Symbol | Tail]};
 
-parse_context(QT, Stack, [Char | Tail]) when QT == line, Char == "\;" -> close_context(semi, [{context, QT} | Stack], Tail);
-parse_context(QT, Stack, [Char | Tail]) when QT == semi, Char == "\;" -> close_context(semi, [{context, QT} | Stack], Tail);
-parse_context(QT, Stack, [Char | Tail]) when QT == ifok, Char == "\;" -> close_context(semi, [{context, QT} | Stack], Tail);
-parse_context(QT, Stack, [Char | Tail]) when QT == ampi, Char == "\;" -> close_context(semi, [{context, QT} | Stack], Tail);
-parse_context(QT, Stack, [Char | Tail]) when QT == ifnz, Char == "\;" -> close_context(semi, [{context, QT} | Stack], Tail);
-parse_context(QT, Stack, [Char | Tail]) when QT == pipe, Char == "\;" -> close_context(semi, [{context, QT} | Stack], Tail);
-parse_context(QT, Stack, [Char | Tail]) when QT == back, Char == "\;" -> close_context(semi, [{context, QT} | Stack], Tail);
-parse_context(QT, Stack, [Char | Tail]) when QT == pren, Char == "\;" -> close_context(semi, [{context, QT} | Stack], Tail);
+		pren	-> throw({context, pren});
+		back	-> throw({context, back});
+		doub	-> throw({context, doub});
+		sing	-> throw({context, sing});
+
+		_Other	-> pass_context(QT, Stack, Symbol, Tail)
+	end;
+
+parse_context(QT, Stack, [Symbol, Symbol | Tail]) when Symbol == "\&";
+													   Symbol == "\|" ->
+	case QT of
+		doub	-> pass_context(QT, Stack, Symbol, Tail);
+		sing	-> pass_context(QT, Stack, Symbol, Tail);
+
+		_Other	-> 
+			case Symbol of
+				"\&" -> close_context(ifok, [{context, QT} | Stack], Tail);
+				"\|" -> close_context(ifnz, [{content, QT} | Stack], Tail)
+			end
+	end;
+	
+parse_context(QT, Stack, [Symbol | Tail]) when Symbol == "\;"; 
+											   Symbol == "\&";
+											   Symbol == "\|" ->
+	case QT of
+		doub	-> pass_context(QT, Stack, Symbol, Tail);
+		sing	-> pass_context(QT, Stack, Symbol, Tail);
+
+		_Other	-> 
+			case Symbol of
+				"\;" -> close_context(semi, [{context, QT} | Stack], Tail);
+				"\&" -> close_context(ampi, [{context, QT} | Stack], Tail);
+				"\|" -> close_context(pipe, [{content, QT} | Stack], Tail)
+			end
+	end;
 
 parse_context(QT, Stack, [Char | Tail]) when QT == line, Char == "\"" -> close_context(doub, [{context, QT} | Stack], Tail);
 parse_context(QT, Stack, [Char | Tail]) when QT == semi, Char == "\"" -> close_context(doub, [{context, QT} | Stack], Tail);
@@ -465,64 +505,7 @@ parse_context(QT, Stack, [Char | Tail]) when QT == ifnz, Char == "\)" -> {close_
 parse_context(QT, Stack, [Char | Tail]) when QT == pipe, Char == "\)" -> {close_context, Stack, [Char | Tail]};
 parse_context(_QT, _Stack, [Char | _Tail]) when Char == "\)" -> throw({close, pren});
  
-parse_context(QT, Stack, [Char, Char | Tail]) when QT == line, Char == "&" -> close_context(ifok, [{context, QT} | Stack], Tail);
-parse_context(QT, Stack, [Char, Char | Tail]) when QT == semi, Char == "&" -> close_context(ifok, [{context, QT} | Stack], Tail);
-parse_context(QT, Stack, [Char, Char | Tail]) when QT == ifok, Char == "&" -> close_context(ifok, [{context, QT} | Stack], Tail);
-parse_context(QT, Stack, [Char, Char | Tail]) when QT == ampi, Char == "&" -> close_context(ifok, [{context, QT} | Stack], Tail);
-parse_context(QT, Stack, [Char, Char | Tail]) when QT == ifnz, Char == "&" -> close_context(ifok, [{context, QT} | Stack], Tail);
-parse_context(QT, Stack, [Char, Char | Tail]) when QT == pipe, Char == "&" -> close_context(ifok, [{context, QT} | Stack], Tail);
-parse_context(QT, Stack, [Char, Char | Tail]) when QT == back, Char == "&" -> close_context(ifok, [{context, QT} | Stack], Tail);
-parse_context(QT, Stack, [Char, Char | Tail]) when QT == pren, Char == "&" -> close_context(ifok, [{context, QT} | Stack], Tail);
 
-parse_context(QT, Stack, [Char | Tail]) when QT == line, Char == "&" -> close_context(ampi, [{context, QT} | Stack], Tail);
-parse_context(QT, Stack, [Char | Tail]) when QT == semi, Char == "&" -> close_context(ampi, [{context, QT} | Stack], Tail);
-parse_context(QT, Stack, [Char | Tail]) when QT == ifok, Char == "&" -> close_context(ampi, [{context, QT} | Stack], Tail);
-parse_context(QT, Stack, [Char | Tail]) when QT == ampi, Char == "&" -> close_context(ampi, [{context, QT} | Stack], Tail);
-parse_context(QT, Stack, [Char | Tail]) when QT == ifnz, Char == "&" -> close_context(ampi, [{context, QT} | Stack], Tail);
-parse_context(QT, Stack, [Char | Tail]) when QT == pipe, Char == "&" -> close_context(ampi, [{context, QT} | Stack], Tail);
-parse_context(QT, Stack, [Char | Tail]) when QT == back, Char == "&" -> close_context(ampi, [{context, QT} | Stack], Tail);
-parse_context(QT, Stack, [Char | Tail]) when QT == pren, Char == "&" -> close_context(ampi, [{context, QT} | Stack], Tail);
-
-parse_context(QT, Stack, [Char, Char | Tail]) when QT == line, Char == "|" -> close_context(ifnz, [{context, QT} | Stack], Tail);
-parse_context(QT, Stack, [Char, Char | Tail]) when QT == semi, Char == "|" -> close_context(ifnz, [{context, QT} | Stack], Tail);
-parse_context(QT, Stack, [Char, Char | Tail]) when QT == ifok, Char == "|" -> close_context(ifnz, [{context, QT} | Stack], Tail);
-parse_context(QT, Stack, [Char, Char | Tail]) when QT == ampi, Char == "|" -> close_context(ifnz, [{context, QT} | Stack], Tail);
-parse_context(QT, Stack, [Char, Char | Tail]) when QT == ifnz, Char == "|" -> close_context(ifnz, [{context, QT} | Stack], Tail);
-parse_context(QT, Stack, [Char, Char | Tail]) when QT == pipe, Char == "|" -> close_context(ifnz, [{context, QT} | Stack], Tail);
-parse_context(QT, Stack, [Char, Char | Tail]) when QT == back, Char == "|" -> close_context(ifnz, [{context, QT} | Stack], Tail);
-parse_context(QT, Stack, [Char, Char | Tail]) when QT == pren, Char == "|" -> close_context(ifnz, [{context, QT} | Stack], Tail);
-
-parse_context(QT, Stack, [Char | Tail]) when QT == line, Char == "|" -> close_context(pipe, [{context, QT} | Stack], Tail);
-parse_context(QT, Stack, [Char | Tail]) when QT == semi, Char == "|" -> close_context(pipe, [{context, QT} | Stack], Tail);
-parse_context(QT, Stack, [Char | Tail]) when QT == ifok, Char == "|" -> close_context(pipe, [{context, QT} | Stack], Tail);
-parse_context(QT, Stack, [Char | Tail]) when QT == ampi, Char == "|" -> close_context(pipe, [{context, QT} | Stack], Tail);
-parse_context(QT, Stack, [Char | Tail]) when QT == ifnz, Char == "|" -> close_context(pipe, [{context, QT} | Stack], Tail);
-parse_context(QT, Stack, [Char | Tail]) when QT == pipe, Char == "|" -> close_context(pipe, [{context, QT} | Stack], Tail);
-parse_context(QT, Stack, [Char | Tail]) when QT == back, Char == "|" -> close_context(pipe, [{context, QT} | Stack], Tail);
-parse_context(QT, Stack, [Char | Tail]) when QT == pren, Char == "|" -> close_context(pipe, [{context, QT} | Stack], Tail);
-
-parse_context(escp, _Stack, ["\n"]) -> throw({context, escp}); 
-parse_context(escp, Stack, [[] | Tail]) -> parse_context(escp, Stack, Tail);
-parse_context(escp, [Type | Stack], [Head | Tail]) -> 
-	[First | Rest] = Head,
-	Escape = [First, {close_context, escp}],
-	{NewTail, Stack} = parse(Type, Stack, [Rest | Tail]), 
-	{Escape ++ NewTail, [Type | Stack]};
-
-parse_context(dbcp, _Stack, ["\n"]) -> throw({context, escp});
-parse_context(dbcp, Stack, [[] | Tail]) -> parse_context(dbcp, Stack, Tail);
-parse_context(dbcp, [Type | Stack], [Head | Tail]) -> 
-	[First | Rest] = Head,
-	case [First] of 
-		"\$"	-> Escape = [[First], {close_context, dbcp}], Left = [Rest];
-		"\`"	-> Escape = [[First], {close_context, dbcp}], Left = [Rest];
-		"\""	-> Escape = [[First], {close_context, dbcp}], Left = [Rest];
-		"\\"	-> Escape = [[First], {close_context, dbcp}], Left = [Rest]; 
-		"\n"	-> Escape = throw({context, escp}), Left = [Rest]; 
-		_Other	-> Escape = [{close_context, dbcp}], Left = [Head]
-	end,  
-	{NewTail, Stack} = parse(Type, Stack, [Left | Tail]), 
-	{Escape ++ NewTail, [Type | Stack]};
 
 parse_context(QType, Stack, [Head | Tail]) -> 
 	{NewTail, _ReturnStack} = parse({context, QType}, Stack, Tail), 
