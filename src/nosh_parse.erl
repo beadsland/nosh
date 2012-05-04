@@ -250,9 +250,9 @@
 %% TODO: Erlang Stack
 %% TODO: Line continuation
 
-%% @version 0.1.3
+%% @version 0.1.4
 -module(nosh_parse).
--version("0.1.3").
+-version("0.1.4").
 
 %%
 %% Include files

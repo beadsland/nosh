@@ -28,26 +28,26 @@
 %%
 %% <i>The PATH search routine is not part of this module.</i>
 %%
-%% Each Erlang module is treated as an executable in `nosh'.  When the name 
-%% of a module appears in first position on a `nosh' command line, a matching
-%% `.beam' file is sought on each directory on the `PATH' environment 
-%% variable, with one modification:  For each directory on `PATH' that
-%% ends in `ebin\', and for which the current user has write access, `nosh' 
-%% will look for a parallel `src\' directory, and if found, search for a 
-%% matching `.erl' file therein.
+%% Each Erlang module is treated as an executable in `nosh'.  When the 
+%% name of a module appears in first position on a `nosh' command line, a 
+%% matching `.beam' file is sought on each directory on the `PATH' 
+%% environment variable, with one modification:  For each directory on 
+%% `PATH' that ends in `ebin\', and for which the current user has write 
+%% access, `nosh' will look for a parallel `src\' directory, and if found, 
+%% search for a matching `.erl' file therein.
 %% 
 %% If an associated `.erl' file is found, and it is newer that the `.beam' 
 %% file, or if an `.erl' file is found for which no `.beam' file appears, 
 %% the `.erl' file will be compiled to its `ebin\' directory.  If this 
-%% compilation is successful, the module will be loaded and evaluation and
-%% execution proceeds.  Otherwise, the compiler error is written to `stdout' 
-%% and a non-zero status is returned.  
+%% compilation is successful, the module will be loaded and evaluation 
+%% and execution proceeds.  Otherwise, the compiler error is written to 
+%% `stdout' and a non-zero status is returned.  
 %% 
-%% If no associated `.erl' file is found, the `.beam' file on the `PATH' is 
-%% loaded and evaluation and execution goes forward.  If no `.beam' file is 
-%% found, the search continues to the next directory on `PATH', returning an 
-%% error if no `.beam' file can be found or compiled from source before the 
-%% `PATH' is exhausted.
+%% If no associated `.erl' file is found, the `.beam' file on the `PATH'
+%% is loaded and evaluation and execution goes forward.  If no `.beam' 
+%% file is found, the search continues to the next directory on `PATH', 
+%% returning an error if no `.beam' file can be found or compiled from 
+%% source before the `PATH' is exhausted.
 %% @end
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
 %% @copyright 2012 Beads D. Land-Trujillo
@@ -77,7 +77,8 @@
 
 -define(FILENAME(Path, Command, Extn), Path ++ "/" ++ Command ++ Extn).
 -define(FILENAME(Path, Command), ?FILENAME(Path, Command, "")).
--define(MODIFIED(Path, Command, Extn), last_modified(?FILENAME(Path, Command, Extn))).
+-define(MODIFIED(Path, Command, Extn), 
+		last_modified(?FILENAME(Path, Command, Extn))).
 
 %%
 %% API functions
@@ -105,22 +106,30 @@ test(Stderr) ->
 
 	?DEBUG("~ntest: done~n").
 	
-load(Command, Path, Stderr) when is_atom(Command) -> load(atom_to_list(Command), Path, Stderr);
+load(Command, Path, Stderr) when is_atom(Command) -> 
+	load(atom_to_list(Command), Path, Stderr);
 load(Command, Path, Stderr) -> 
 	case ensure_compiled(Command, Path, Stderr) of
-		{error, Errors, Warnings}	-> throw({load_failed, {compiler, {Errors, Warnings}}}); 
+		{error, Errors, Warnings}	-> throw({load_failed, 
+											  {compiler, 
+											   {Errors, Warnings}}}); 
 		{info, no_src}				-> ?DEBUG("l: no source file~n");
 		{info, readonly}			-> ?DEBUG("l: readonly binary~n");
 		{ok, _Module, _Binary}		-> ?DEBUG("l: compiled~n");
 		ok							-> ?DEBUG("l: file current~n") 
     end,
 	case ensure_packaged(Command, Path, Stderr) of
-		{error, Errors2, Warnings2}	-> throw({recompile_failed, {Errors2, Warnings2}});
-		{info, no_src}				-> throw({recompile_failed, src_file_missing});
-		{info, readonly}			-> throw({recompile_failed, beam_file_readonly});
-		{ok, Mod, Bin, Vsn, Pkg} 	-> NewFile = ?FILENAME(Path, Command, ".beam"),
-									   ?DEBUG("attribute: -package(~p)~n", [read_beam_attribute(Bin, package)]),
-									   ensure_loaded(NewFile, Mod, Bin, Vsn, Pkg, Stderr)
+		{error, Errors2, Warnings2}	-> 
+			throw({recompile_failed, {Errors2, Warnings2}});
+		{info, no_src}				-> 
+			throw({recompile_failed, src_file_missing});
+		{info, readonly}			-> 
+			throw({recompile_failed, beam_file_readonly});
+		{ok, Mod, Bin, Vsn, Pkg} 	-> 
+			NewFile = ?FILENAME(Path, Command, ".beam"),
+			Package = read_beam_attribute(Bin, package),
+			?DEBUG("attribute: -package(~p)~n", [Package]),						   
+			ensure_loaded(NewFile, Mod, Bin, Vsn, Pkg, Stderr)
 	end. 
 
 %%
@@ -130,30 +139,49 @@ load(Command, Path, Stderr) ->
 ensure_loaded(NewFile, NewModule, Binary, NewVsn, Package, Stderr) ->
 	case confirm_loaded(NewModule) of
 		{ok, OldFile, OldVsn} 	-> 
-			if OldFile /= NewFile 	-> ?STDERR("~s: hotswap namespace collision~n", [NewModule]);
-			   true					-> false
-			end,
-			if OldVsn /= NewVsn		-> if OldFile == NewFile, Package == '' -> 
-											  ?STDERR("~s: flat package module unsafe~n", [NewModule]);
-										  true -> false
-									   end,
-									   case code:soft_purge(NewModule) of
-										   false 	-> purge_alert(NewModule, processes()),
-													   code:purge(NewModule);
-										   true 	-> false
-									   end,
-									   code:delete(NewModule),
-									   case code:load_binary(NewModule, NewFile, Binary) of
-										   {module, NewModule}	-> {module, NewModule};
-										   {error, What}		-> throw({load_failed, What})
-									   end;
-			   true 				-> ?DEBUG("~s: already current~n", [NewModule]) 
-			end;
+			test_namespace(OldFile, NewFile, NewModule, Stderr),
+
+			ensure_loaded(NewFile, NewModule, Binary, NewVsn, Package, 
+						  OldFile, OldVsn, Stderr);
 		false					->
 			case code:load_binary(NewModule, NewFile, Binary) of
 				{module, NewModule}	-> {module, NewModule};
 				{error, What}		-> throw({load_failed, What})
 			end
+	end.
+
+ensure_loaded(_NewFile, NewModule, _Binary, NewVsn, _Package, 
+			  _OldFile, OldVsn, _Stderr) when OldVsn == NewVsn ->
+	?DEBUG("~s: already current~n", [NewModule]);
+	
+ensure_loaded(NewFile, NewModule, Binary, _NewVsn, Package, 
+			  OldFile, _OldVsn, Stderr) ->
+	test_flatpackage(OldFile, NewFile, NewModule, Package, Stderr),
+	
+	case code:soft_purge(NewModule) of
+		false 	-> purge_alert(NewModule, processes()),
+				   code:purge(NewModule);
+		true 	-> false
+	end,
+	code:delete(NewModule),
+	
+	case code:load_binary(NewModule, NewFile, Binary) of
+		{module, NewModule}	-> {module, NewModule};
+		{error, What}		-> throw({load_failed, What})
+	end.
+
+test_namespace(OldFile, NewFile, NewModule, Stderr) ->
+	if OldFile /= NewFile 	->
+		   ?STDERR("~s: hotswap namespace collision~n", [NewModule]);
+	   true					-> 
+			false
+	end.
+
+test_flatpackage(OldFile, NewFile, NewModule, Package, Stderr) ->
+  	if OldFile == NewFile, Package == '' -> 
+		?STDERR("~s: flat package module unsafe~n", [NewModule]);
+	true -> 
+		false
 	end.
 
 purge_alert(_Module, []) -> ok;
