@@ -1,3 +1,4 @@
+@todo fix hot to not fail on crash
 @todo shorten line lengths (75 char max)
 @todo review style guides
 @todo nosh_parse tokens

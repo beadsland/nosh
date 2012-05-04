@@ -11,7 +11,11 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
+* <font color="red">fix hot to not fail on crash
+</font>
 * <font color="red">shorten line lengths (75 char max)
+</font>
+* <font color="red">review style guides
 </font>
 * <font color="red">nosh_parse tokens
 </font>
@@ -100,8 +104,8 @@ _<strong>NOTICE:</strong> Code is still in rudimentary form. Doesn't do much yet
 
  
 
-Currently all `nosh` does is [parse](http://github.com/beadsland/nosh/blob/master/doc/nosh_parse.md) a command line and
- return a tree representing quoting and grouping relationships.
+Currently all `nosh` does is [parse](http://github.com/beadsland/nosh/blob/master/doc/nosh_parse.md) a command line
+ and return a tree representing quoting and grouping relationships.
  _Execution functions are not yet implemented_.
 	
  
@@ -130,17 +134,19 @@ project.
 
  
 
-The Erlang syntax, while perfectly appropriate for functional programming, 
-can prove frustrating in the imperative paradigm of a shell environment, 
-and compiling and loading modules can be unduly cumbersome and non-intuitive.
+The Erlang syntax, while perfectly appropriate for functional 
+programming, can prove frustrating in the imperative paradigm of a 
+shell environment, and compiling and loading modules can be unduly 
+cumbersome and non-intuitive.
 
  
 
 `nosh` operates in Bourne Context by default, while still supporting
  Erlang data types, and allowing Erlang Context to be embedded in
- commandlines as needed.  Within Bourne Context, Erlang modules are invoked
- like UNIX commands, and [compile and load on-the-fly](http://github.com/beadsland/nosh/blob/master/doc/nosh_load.md), 
-parameters being passed (and functions called) with minimal typing.
+ commandlines as needed.  Within Bourne Context, Erlang modules are
+ invoked like UNIX commands, and [compile and load
+ on-the-fly](http://github.com/beadsland/nosh/blob/master/doc/nosh_load.md), parameters being passed (and functions called) with 
+minimal typing.
 
  
 
@@ -149,8 +155,8 @@ parameters being passed (and functions called) with minimal typing.
 
  
 
-_Not yet implemented:_  All functions available through the Erl shell
- are available as `nosh` commands.
+_Not yet implemented:_  All functions available through the Erl
+ shell are available as `nosh` commands.
 
  
 
@@ -159,8 +165,9 @@ _Not yet implemented:_  All functions available through the Erl shell
 
  
 
-_Not yet implemented:_  Erlang style syntax can be used on the `nosh` 
-command line as per the Erl shell.  See {link nosh_parse} for more details.
+_Not yet implemented:_  Erlang style syntax can be used on the
+ `nosh` command line as per the Erl shell.  See {link nosh_parse} for 
+more details.
 
  
 

@@ -60,7 +60,8 @@ message from `noterm`.  This is currently produced by typing a period
 ##Function Index##
 
 
-<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#command_run-4">command_run/4</a></td><td></td></tr><tr><td valign="top"><a href="#start-1">start/1</a></td><td>Start nosh, passing Pid of process providing standard i/o messaging.</td></tr></table>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#command_run-4">command_run/4</a></td><td></td></tr><tr><td valign="top"><a href="#hotswap_run-4">hotswap_run/4</a></td><td></td></tr><tr><td valign="top"><a href="#start-1">start/1</a></td><td>Start nosh, passing Pid of process providing standard i/o
+messaging.</td></tr></table>
 
 
 <a name="functions"></a>
@@ -74,7 +75,16 @@ message from `noterm`.  This is currently produced by typing a period
 
 
 
-`command_run(Line, Stdin, Stdout, Stderr) -> any()`
+`command_run(Stdin, Stdout, Stderr, Line) -> any()`
+
+<a name="hotswap_run-4"></a>
+
+###hotswap_run/4##
+
+
+
+
+`hotswap_run(Stdin, Stdout, Stderr, Line) -> any()`
 
 <a name="start-1"></a>
 
@@ -87,4 +97,5 @@ message from `noterm`.  This is currently produced by typing a period
 
 
 
-Start nosh, passing Pid of process providing standard i/o messaging.
+Start nosh, passing Pid of process providing standard i/o
+messaging.

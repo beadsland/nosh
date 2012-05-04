@@ -377,9 +377,19 @@ close_context(QType, Stack, List) ->
 	end,
 	{[Context | lists:delete(Close, L2)], Stack}. 
 
+-define(PARSE_CONTEXT(WhenQT, WhenChar, Return),
+		parse_context(QT, Stack, [Char | Tail]) 
+	   			when QT == WhenQT, Char == WhenChar -> Return).
 
 %% @doc Unwind context and group stream.
 %parse_context(QT, Stack, [Char | Tail]) when QT == line, Char == "\ " -> {close_term, Stack, Tail};
+
+%?PARSE_CONTEXT(line, "\n", {close_context, Stack, Tail});
+%?PARSE_CONTEXT(semi, "\n", {close_context, Stack, [Char | Tail]});
+%?PARSE_CONTEXT(ifok, "\n", {close_context, Stack, [Char | Tail]});
+%?PARSE_CONTEXT(ampi, "\n", {close_context, Stack, [Char | Tail]});
+%?PARSE_CONTEXT(ifnz, "\n", {close_context, Stack, [Char | Tail]});
+%?PARSE_CONTEXT(pipe, "\n", {close_context, Stack, [Char | Tail]});
 
 parse_context(QT, Stack, [Char | Tail]) when QT == line, Char == "\n" -> {close_context, Stack, Tail};
 parse_context(QT, Stack, [Char | Tail]) when QT == semi, Char == "\n" -> {close_context, Stack, [Char | Tail]};

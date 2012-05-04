@@ -90,7 +90,7 @@ msg_loop(Stdin, Stdout, Stderr) ->
 		{Stdout, stdout, Line} 		-> io:format(Line, []);
 		{Stderr, stderr, Line} 		-> io:format(standard_error, "** ~s", 
 												 [Line]);
-		{_Pid, debug, Line}			-> io:format(standard_error, Line);
+		{_Pid, debug, Line}			-> io:format(standard_error, Line, []);
 		{'EXIT', Stdin, Reason}  	-> grace("Stopping on keyboard exit", 
 											 Reason), 
 									   exit(normal);
@@ -147,7 +147,7 @@ key_loop(Stdin, Stdout, Stderr) ->
 key_receive(Stdin, _Stdout, Stderr) ->
 	receive
 		{_Pid, purging, _Mod}		-> true; % chase your tail
-		{'EXIT', Stdin, Reason} 	-> io:format("~s exit: ~s~n", 
+		{'EXIT', Stdin, Reason} 	-> io:format("~p exit: ~p~n", 
 												 [?MODULE, Reason]);
 		Noise						-> ?STDERR("noise: ~p ~p~n", 
 											   [Noise, self()])

@@ -63,7 +63,7 @@
 -export([start/1]).
 
 % private exports
--export([loop/5,command_run/4]).
+-export([loop/5,command_run/4,hotswap_run/4]).
 
 %%
 %% API functions
@@ -99,7 +99,19 @@ loop(Stdin, Stdout, Stderr, Command, CmdPid) ->
 			true, % chase your tail
             ?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid);
 		
-		% Listen for executing command exit.
+		% Listen for executing command.
+		{CmdPid, stdout, Line} -> 
+			Stdout ! {self(), stdout, Line},
+            ?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid);
+		
+		{CmdPid, stderr, Line} -> 
+			Stderr ! {self(), stderr, Line},
+			?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid);
+
+		{CmdPid, debug, Line} -> 
+			Stderr ! {self(), debug, Line},
+			?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid);
+		
 		{'EXIT', CmdPid, Reason} -> 
 			command_return(Command, Reason, Stderr),
 			prompt(Stdout),
@@ -107,13 +119,14 @@ loop(Stdin, Stdout, Stderr, Command, CmdPid) ->
 		
 		% Listen for next command to execute.
 		{Stdin, stdout, "hot\n"} when CmdPid == self() -> 
-            hotswap_nosh(Stdout, Stderr),
+            HotPid = spawn_link(nosh, hotswap_run,
+							   	[self(), self(), self(), "hot\n"]),
 			prompt(Stdout),
-			?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid);
+			?MODULE:loop(Stdin, Stdout, Stderr, "hot", HotPid);
 		
 		{Stdin, stdout, Line} when CmdPid == self()	->
 			NewPid = spawn_link(nosh, command_run, 
-								[Stdin, Stdout, Stderr, Line]),
+								[self(), self(), self(), Line]),
             NewCom = string:tokens(Line, "\n"),
 			?MODULE:loop(Stdin, Stdout, Stderr, NewCom, NewPid);
 		
@@ -170,11 +183,12 @@ command_run(_Stdin, _Stdout, Stderr, Line) ->
 %%%%
 % Development hotswapping.  This should be refactored as a command.
 %%%%
-hotswap_nosh(Stdout, Stderr) when is_pid(Stdout) ->
-	Stdout ! {self(), stdout, "Hotswapping nosh modules\n"},
+hotswap_run(_Stdin, Stdout, Stderr, _Line) ->
+	?STDOUT("Hotswapping nosh modules\n"), 
 	hotswap(noterm, Stderr),
 	hotswap(nosh, Stderr),
-	hotswap_nosh(code:all_loaded(), Stderr);
+	hotswap_nosh(code:all_loaded(), Stderr),
+	exit(ok).
 
 hotswap_nosh([], _Stderr) -> ok;
 hotswap_nosh([{Module, _Path} | Tail], Stderr) ->

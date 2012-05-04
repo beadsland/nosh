@@ -36,7 +36,8 @@ _Full terminal emulation has yet to be implemented._<a name="index"></a>
 ##Function Index##
 
 
-<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#start-0">start/0</a></td><td>Start terminal, launching message loop and keyboard listening process.</td></tr></table>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#start-0">start/0</a></td><td>Start terminal, launching message loop and keyboard listening
+process.</td></tr></table>
 
 
 <a name="functions"></a>
@@ -54,4 +55,5 @@ _Full terminal emulation has yet to be implemented._<a name="index"></a>
 
 
 
-Start terminal, launching message loop and keyboard listening process.
+Start terminal, launching message loop and keyboard listening
+process.

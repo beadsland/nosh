@@ -450,8 +450,8 @@ _Not yet implemented_.
 ##Function Index##
 
 
-<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#parse-2">parse/2</a></td><td>Parse command line string and return a list of nested quoting and grouping Stack blocks,
-or else <code>failed</code> on a caught syntax exception.</td></tr></table>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#parse-2">parse/2</a></td><td>Parse command line string and return a list of nested quoting and
+grouping Stack blocks, or else <code>failed</code> on a caught syntax exception.</td></tr></table>
 
 
 <a name="functions"></a>
@@ -473,7 +473,7 @@ or else <code>failed</code> on a caught syntax exception.</td></tr></table>
 
 
 
-Parse command line string and return a list of nested quoting and grouping Stack blocks,
-or else `failed` on a caught syntax exception.
+Parse command line string and return a list of nested quoting and
+grouping Stack blocks, or else `failed` on a caught syntax exception.
 
 Handle thrown errors for unmatched quoting and grouping characters.
