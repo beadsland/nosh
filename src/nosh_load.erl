@@ -142,7 +142,7 @@ ensure_loaded(NewFile, NewModule, Binary, NewVsn, Package, Stderr) ->
 			test_namespace(OldFile, NewFile, NewModule, Stderr),
 
 			ensure_loaded(NewFile, NewModule, Binary, NewVsn, Package, 
-						  OldFile, OldVsn, Stderr);
+						  Stderr, OldFile, OldVsn);
 		false					->
 			case code:load_binary(NewModule, NewFile, Binary) of
 				{module, NewModule}	-> {module, NewModule};
@@ -151,11 +151,11 @@ ensure_loaded(NewFile, NewModule, Binary, NewVsn, Package, Stderr) ->
 	end.
 
 ensure_loaded(_NewFile, NewModule, _Binary, NewVsn, _Package, 
-			  _OldFile, OldVsn, _Stderr) when OldVsn == NewVsn ->
+			  _Stderr, _OldFile, OldVsn) when OldVsn == NewVsn ->
 	?DEBUG("~s: already current~n", [NewModule]);
 	
 ensure_loaded(NewFile, NewModule, Binary, _NewVsn, Package, 
-			  OldFile, _OldVsn, Stderr) ->
+			  Stderr, OldFile, _OldVsn) ->
 	test_flatpackage(OldFile, NewFile, NewModule, Package, Stderr),
 	
 	case code:soft_purge(NewModule) of
@@ -193,20 +193,27 @@ ensure_packaged(Command, Path, Stderr) ->
 	Filename = ?FILENAME(Path, Command, ".beam"),
 	{ok, Module, Binary, Vsn, Package} = slurp_binary(Filename),
 	case Package of
-		default		-> ?DEBUG("l: default package detected~n"),
-					   case ensure_compiled(Command, Path, Stderr, true) of
-						   {ok, NewModule, NewBinary} 	-> {ok, NewModule, NewBinary, Vsn, Package};
-						   Other						-> Other
-					   end;
+		default		-> ensure_packaged(Command, Path, Stderr, 
+									   Vsn, Package);
 		''			-> ?DEBUG("l: flat package detected~n"),
 					   {ok, Module, Binary, Vsn, Package};
 		_Else		-> {ok, Module, Binary, Vsn, Package}
 	end.
 
+ensure_packaged(Command, Path, Stderr, Vsn, Package) ->
+	?DEBUG("l: default package detected~n"),
+	case ensure_compiled(Command, Path, Stderr, true) of
+		{ok, NewModule, NewBinary} 	-> {ok, NewModule, NewBinary, 
+										Vsn, Package};
+		Other						-> Other
+	end.
+
 confirm_loaded(NewModule) ->
 	case code:is_loaded(NewModule) of
-		{file, Loaded} 	-> ?DEBUG("old: ~p~n", [{NewModule, Loaded, ?ATTRIB(NewModule, vsn)}]),
-						   {ok, Loaded, ?ATTRIB(NewModule, vsn)};
+		{file, Loaded} 	-> Version = ?ATTRIB(NewModule, vsn),
+						   ?DEBUG("old: ~p~n", 
+								  [{NewModule, Loaded, Version}]),
+						   {ok, Loaded, Version};
 		false			-> false
 	end.
 
@@ -214,54 +221,69 @@ read_beam_attribute(Binary, Attribute) ->
 	case beam_lib:chunks(Binary, [attributes], [allow_missing_chunks]) of
 		{ok, {_Module, [{attributes, AttrList}]}} ->
 			case lists:keyfind(Attribute, 1, AttrList) of
-				{Attribute, missing_chunk}	-> {error, missing_chunk};
-				{Attribute, [Value]} 		-> Value;
-				{Attribute, Value}			-> ?DEBUG("misformed attribute: ~p~n", [{Attribute, Value}]), Value;
-				false						-> false
+				{Attribute, missing_chunk}	-> 
+					{error, missing_chunk};
+				{Attribute, [Value]} 		-> 
+					Value;
+				{Attribute, Value}			-> 
+					?DEBUG("misformed attribute: ~p~n", 
+						   [{Attribute, Value}]), 
+					Value;
+				false						-> 
+					false
 			end
 	end.
 
 slurp_binary(NewFile) ->
 	?DEBUG("slurping ~s~n", [NewFile]),
 	case file:read_file(NewFile) of
-		{ok, Binary} 	-> ?DEBUG("got binary~n"),
-						   Info = beam_lib:info(Binary),
-						   {module, Module} = lists:keyfind(module, 1, Info),
-						   case read_beam_attribute(Binary, package) of
-							   false	-> ModStr = atom_to_list(Module),
-										   case string:rstr(ModStr, ".") of
-											   0	-> Package = '';
-											   Last	-> PackStr = string:substr(ModStr, 0, Last-1),
-													   Package = list_to_atom(PackStr)
-										   end;
-							   Package 	-> Package
-						   end,
-						   ?DEBUG("package: ~p~n", [Package]),
-						   {ok, {Module, Version}} = beam_lib:version(Binary),
-						   ?DEBUG("new: ~p~n", [{Module, NewFile, Version}]),
-						   {ok, Module, Binary, Version, Package};
+		{ok, Binary} 	-> slurp_binary(NewFile, Binary);
 		{error, Reason} -> throw({file, {NewFile, Reason}})
 	end.
 
-ensure_compiled(Command, Path, Stderr) -> ensure_compiled(Command, Path, Stderr, false).
-ensure_compiled(Command, Path, Stderr, Force) ->
-	Writeable = can_write(Path, Stderr) andalso can_write(?FILENAME(Path, Command, ".beam"), Stderr),
-	if Writeable 	->
-		   ?DEBUG("writeable: ~s~n", [?FILENAME(Path, Command, ".beam")]),
-		   case parallel_src(Path, Command) of
-			   {ok, SrcPath, Project}	-> 
-				   SrcMod = ?MODIFIED(SrcPath, Command, ".erl"),
-				   BinMod = ?MODIFIED(Path, Command, ".beam"),
-				   ?DEBUG("compare: ~p > ~p~n", [SrcMod, BinMod]),
-				   if SrcMod > BinMod 		-> do_compile(SrcPath, Command, Project, Path);
-					  Force 				-> do_compile(SrcPath, Command, Project, Path);
-					  true					-> ok    
+slurp_binary(NewFile, Binary) ->
+	?DEBUG("got binary~n"),
+	Info = beam_lib:info(Binary),
+	{module, Module} = lists:keyfind(module, 1, Info),
+	case read_beam_attribute(Binary, package) of
+		false	-> ModStr = atom_to_list(Module),
+				   case string:rstr(ModStr, ".") of
+					   0	-> Package = '';
+					   Last	-> PackStr = string:substr(ModStr, 0, Last-1),
+							   Package = list_to_atom(PackStr)
 				   end;
-			   no_src 					-> {info, no_src} 
-		   end;
-	   true			-> {info, readonly}
-	end.												 
+		Package 	-> Package
+    end,
+    ?DEBUG("package: ~p~n", [Package]),
+    {ok, {Module, Version}} = beam_lib:version(Binary),
+    ?DEBUG("new: ~p~n", [{Module, NewFile, Version}]),
+    {ok, Module, Binary, Version, Package}.
 
+ensure_compiled(Command, Path, Stderr) -> 
+	ensure_compiled(Command, Path, Stderr, false).
+
+ensure_compiled(Command, Path, Stderr, Force) ->
+	Writeable = can_write(Path, Stderr) andalso 
+					can_write(?FILENAME(Path, Command, ".beam"), Stderr),
+	ensure_compiled(Command, Path, Stderr, Force, Writeable).
+
+ensure_compiled(_Command, _Path, _Stderr, _Force, Writeable) 
+  when Writeable == false -> {info, readonly};
+ensure_compiled(Command, Path, Stderr, Force, _Writeable) ->
+	?DEBUG("writeable: ~s~n", [?FILENAME(Path, Command, ".beam")]),
+	case parallel_src(Path, Command) of
+		{ok, SrcPath, Project}	-> 
+			SrcMod = ?MODIFIED(SrcPath, Command, ".erl"),
+			BinMod = ?MODIFIED(Path, Command, ".beam"),
+			?DEBUG("compare: ~p > ~p~n", [SrcMod, BinMod]),
+			if SrcMod > BinMod; Force	-> 
+				   do_compile(SrcPath, Command, Project, Path);
+			   true 					->
+				   ok
+			end;
+		no_src 					-> {info, no_src}
+	end.
+	
 do_compile(SrcPath, Command, Project, Path) when is_atom(Project) ->
 	file:make_dir(Path),
 	Options = [verbose, warnings_as_errors, return_errors, binary,
@@ -270,13 +292,19 @@ do_compile(SrcPath, Command, Project, Path) when is_atom(Project) ->
 	?DEBUG("c: ~p~n", [{Filename, Options}]),
 	Compile = compile:file(Filename, Options),
 	case Compile of
-		error								-> {error, [], []};
-		{error, Errors, Warnings}			-> {error, Errors, Warnings};
-		{ok, ModuleName, Binary} 			-> Outfile = ?FILENAME(Path, Command, ".beam"),
-											   case file:write_file(Outfile, Binary) of
-											   		{error, Reason}	-> {error, [{binary_write, Reason}], []};
-													ok				-> {ok, ModuleName, Binary}
-											   end
+		error						-> 
+			{error, [], []};
+		{error, Errors, Warnings}	-> 
+			{error, Errors, Warnings};
+		{ok, ModuleName, Binary} 	-> 
+			do_compile(SrcPath, Command, Project, Path, ModuleName, Binary)
+	end.
+
+do_compile(_SrcPath, Command, _Project, Path, ModuleName, Binary) ->
+	Outfile = ?FILENAME(Path, Command, ".beam"),
+	case file:write_file(Outfile, Binary) of
+		{error, Reason}	-> {error, [{binary_write, Reason}], []};
+		ok				-> {ok, ModuleName, Binary}
 	end.
 
 last_modified(Filename) ->
@@ -287,34 +315,56 @@ last_modified(Filename) ->
 
 can_write(Filename, Stderr) ->
 	case file:read_file_info(Filename) of 
-		{ok, FileInfo}	-> case FileInfo#file_info.access of write -> true; read_write -> true; _Else2 -> false end;
-		{error, enoent}	-> true;  				% file does not exist, so is writeable if directory is
-		{error, Reason}	-> ?STDERR("file error: ~p~n", [{Filename, Reason}]), false
+		{ok, FileInfo}	-> case FileInfo#file_info.access of 
+							   write		-> true;
+							   read_write 	-> true;
+							   _Else 		-> false
+						   end;
+		{error, enoent}	-> true;  		% File does not exist, so is 
+										% writeable if directory is.
+		{error, Reason}	-> ?STDERR("file error: ~p~n", 
+								   [{Filename, Reason}]), 
+						   false
 	end.
 
 can_read(Filename) ->
 	case file:read_file_info(Filename) of 
-		{ok, FileInfo}		-> case FileInfo#file_info.access of read -> true; read_write -> true; _Else2 -> false end;
-		{error, Reason}		-> ?DEBUG("read error: ~p~n", [{Filename, Reason}]), false
+		{ok, FileInfo}		-> case FileInfo#file_info.access of 
+								   read 		-> true; 
+								   read_write 	-> true; 
+								   _Else 		-> false 
+							   end;
+		{error, Reason}		-> ?DEBUG("read error: ~p~n", 
+									  [{Filename, Reason}]), 
+							   false
 	end.
 	
 parallel_src(Path, Command) ->
 	Split = re:split(Path, "/", [{return, list}]),	
 	case ebin_to_src(Split) of 
-		{true, SrcPath, Project} 	-> case can_read(?FILENAME(SrcPath, Command, ".erl")) of
-										   true 	-> ?DEBUG("readable: ~s~n", [?FILENAME(SrcPath, Command, ".erl")]),
-													   {ok, SrcPath, Project}; 
-										   false 	-> no_src 
-									   end;
+		{true, SrcPath, Project}	-> parallel_src(Path, Command, SrcPath, 
+													Project);
 		_Else						-> no_src
 	end.
 
-ebin_to_src([Head | []]) -> if Head == "ebin" -> {true, "src"}; true -> {false, Head} end;
+parallel_src(_Path, Command, SrcPath, Project) ->
+	case can_read(?FILENAME(SrcPath, Command, ".erl")) of
+		true 	-> ?DEBUG("readable: ~s~n", 
+						  [?FILENAME(SrcPath, Command, ".erl")]), 
+				   {ok, SrcPath, Project}; 
+		false 	-> no_src
+	end.
+
+ebin_to_src([Head | []]) -> 
+	if Head == "ebin" -> {true, "src"}; true -> {false, Head} end;
 ebin_to_src([Head | Tail]) ->
 	case ebin_to_src(Tail) of
-		{true, SrcPath, Project}	-> {true, Head ++ "/" ++ SrcPath, Project};
-		{true, SrcPath}				-> {true, Head ++ "/" ++ SrcPath, list_to_atom(Head)};
-		{false, BinPath}			-> if Head == "ebin" 	-> {true, "src/" ++ BinPath}; 
-										  true 				-> {false, Head ++ "/" ++ BinPath} end
+		{true, SrcPath, Project}	-> 
+			{true, Head ++ "/" ++ SrcPath, Project};
+		{true, SrcPath}				-> 
+			{true, Head ++ "/" ++ SrcPath, list_to_atom(Head)};
+		{false, BinPath}			-> 
+			if Head == "ebin" 	-> {true, "src/" ++ BinPath}; 
+			   true 				-> {false, Head ++ "/" ++ BinPath} 
+			end
 	end.
-		
