@@ -70,6 +70,10 @@ line_info(FileID) ->
 function_length(Count, Line) ->
 	{ok, MP} = re:compile("^[^\\%]+\\.\\ *$"),
 	case re:run(Line, MP, [{capture, none}]) of
-		nomatch	-> Count + 1;
-		match	-> 1
+		match	-> 1;
+		nomatch -> case Line of
+						[$%, $% | _More]	-> Count;
+						"\n"				-> Count;
+						_Else				-> Count + 1
+				   end
 	end.
