@@ -83,14 +83,14 @@ start() ->
 %%@private Export to allow for hotswap.
 msg_loop(Stdin, Stdout, Stderr) ->
 	receive
-		{_Pid, purging, _Mod}		-> true; % chase your tail 
-		{Stdin, stdout, Line}		-> ?STDOUT(strip_escapes(Line));
-		{Stdin, stderr, Line}		-> io:format(standard_error, "** ~s", 
+		{purging, _Pid, _Mod}		-> true; % chase your tail 
+		{stdout, Stdin, Line}		-> ?STDOUT(strip_escapes(Line));
+		{stderr, Stdin, Line}		-> io:format(standard_error, "** ~s", 
 												 [Line]); 
-		{Stdout, stdout, Line} 		-> io:format(Line, []);
-		{Stderr, stderr, Line} 		-> io:format(standard_error, "** ~s", 
+		{stdout, Stdout, Line} 		-> io:format(Line, []);
+		{stderr, Stderr, Line} 		-> io:format(standard_error, "** ~s", 
 												 [Line]);
-		{_Pid, debug, Line}			-> io:format(standard_error, Line, []);
+		{debug, _Pid, Line}			-> io:format(standard_error, Line, []);
 		{'EXIT', Stdin, Reason}  	-> grace("Stopping on keyboard exit", 
 											 Reason), 
 									   exit(normal);
@@ -146,7 +146,7 @@ key_loop(Stdin, Stdout, Stderr) ->
 
 key_receive(Stdin, _Stdout, Stderr) ->
 	receive
-		{_Pid, purging, _Mod}		-> true; % chase your tail
+		{purging, _Pid, _Mod}		-> true; % chase your tail
 		{'EXIT', Stdin, Reason} 	-> io:format("~p exit: ~p~n", 
 												 [?MODULE, Reason]);
 		Noise						-> ?STDERR("noise: ~p ~p~n", 

@@ -95,21 +95,21 @@ start(Stdin, Stdout, Stderr) ->
 %%@private Export to allow for hotswap.
 loop(Stdin, Stdout, Stderr, Command, CmdPid) ->
 	receive
-		{_Pid, purging, _Mod} -> 
+		{purging, _Pid, purging, _Mod} -> 
 			true, % chase your tail
             ?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid);
 		
 		% Listen for executing command.
-		{CmdPid, stdout, Line} -> 
-			Stdout ! {self(), stdout, Line},
+		{stdout, CmdPid, Line} -> 
+			Stdout ! {stdout, self(), Line},
             ?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid);
 		
-		{CmdPid, stderr, Line} -> 
-			Stderr ! {self(), stderr, Line},
+		{stderr, CmdPid, Line} -> 
+			Stderr ! {stderr, self(), Line},
 			?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid);
 
-		{CmdPid, debug, Line} -> 
-			Stderr ! {self(), debug, Line},
+		{debug, CmdPid, Line} -> 
+			Stderr ! {debug, self(), Line},
 			?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid);
 		
 		{'EXIT', CmdPid, Reason} -> 
@@ -151,7 +151,7 @@ loop(Stdin, Stdout, Stderr, Command, CmdPid) ->
 
 prompt(Stdout) -> 
 	Prompt = "nosh> ",
-	Stdout ! {self(), stdout, Prompt}.
+	Stdout ! {stdout, self(), Prompt}.
 
 % We spawn command as separate process and then wait on it.
 % This allows us to catch the exit status of runtime errors.
