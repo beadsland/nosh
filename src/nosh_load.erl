@@ -269,7 +269,7 @@ ensure_compiled(Command, Path, Stderr, Force) ->
 
 ensure_compiled(_Command, _Path, _Stderr, _Force, Writeable) 
   when Writeable == false -> {info, readonly};
-ensure_compiled(Command, Path, Stderr, Force, _Writeable) ->
+ensure_compiled(Command, Path, _Stderr, Force, _Writeable) ->
 	?DEBUG("writeable: ~s~n", [?FILENAME(Path, Command, ".beam")]),
 	case parallel_src(Path, Command) of
 		{ok, SrcPath, Project}	-> 

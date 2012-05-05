@@ -1,0 +1,33 @@
+#!/usr/bin/env escript
+%% -*- erlang -*-
+%%! verbose
+
+main(_Arg) ->
+	Src = filename:absname("src"),
+	{ok, Listing} = file:list_dir(Src),
+	review(Src, Listing).
+	
+review(_Dir, []) -> ok;
+review(Dir, [Head | Tail]) ->
+	{ok, MP} = re:compile("\.erl$"),
+	case re:run(Head, MP, [{capture, none}]) of
+		nomatch	-> review(Dir, Tail);
+		match	-> test_lines(Dir, Head), review(Dir, Tail)
+	end.
+	
+test_lines(Dir, File) ->
+	{ok, FileID} = file:open(Dir ++ "/" ++ File, [read]),
+	{ok, MP} = re:compile("^(.*)\.erl$"),
+	{match, [Module]} = re:run(File, MP, [{capture, [1], list}]),
+	Max = max_length(FileID),
+	if Max > 78 ->
+			io:format("~s: avoid long lines (~p char line detected)~n", 
+					[Module, Max]);
+	   true -> false
+	end.
+	
+max_length(FileID) ->
+	case file:read_line(FileID) of
+		eof			-> 0;
+		{ok, Line} 	-> max(string:len(Line), max_length(FileID))
+	end.

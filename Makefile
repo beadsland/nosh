@@ -73,7 +73,12 @@ online:
 	@if [ "$(ONLINE)" == yes ]; \
 			then (echo "Working online"); \
 			else (echo "Working offline"); fi
-		
+
+good:
+	@if [ `uname -o` == Cygwin ]; \
+			then escript `cygpath -wa bin/good` \
+			else bin/good; fi
+
 #
 # Development rules
 #
