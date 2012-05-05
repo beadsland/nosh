@@ -17,8 +17,9 @@ __Version:__ 0.1.4
 
 __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).
 
-__References__* See [Shell Basics](http://sayle.net/book/basics.htm) for overview of functionality.  (to be implemented)
-* See [Shell Command Language](http://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.md)
+__References__* See [Shell
+Basics](http://sayle.net/book/basics.htm) for overview of functionality.  (to be implemented)
+* See [Shell Command Language](http://goo.gl/edyre)
 for detailed specification. (to be implemented)
 
 
@@ -40,8 +41,8 @@ __<font color="red">To do</font>__
 
 
 
-Each commandline is decomposed into a context tree, representing Execution,  
-Grouping, Quoting, Substitution and Term contexts.
+Each commandline is decomposed into a context tree, representing  
+Execution, Grouping, Quoting, Substitution and Term contexts.
 
 
 
@@ -82,14 +83,15 @@ _The below discussion of Erlang Context describes functionalityyet to be impleme
 
 
 
-The Erlang Context is invoked with a left-wise conjunction, period (`.`),  
-which causes all words and subcontexts within the current context to be  
-interpreted according to Erlang syntax.  Erlang Context sequences may  
-be enclosed arbitrarily within grouping contexts.  For example:
+The Erlang Context is invoked with a left-wise conjunction,
+period (`.`), which causes all words and subcontexts within the current  
+context to be interpreted according to Erlang syntax.  Erlang Context  
+sequences may be enclosed arbitrarily within grouping contexts.  
+For example:
 
 
 
-`> PARAM='value'; Result = my_mod:my_func($PARAM). && echo Success`
+`> PARAM='value'; Result = my_mod:my_func($PARAM). &&echo Success`
 
 
 
@@ -97,9 +99,9 @@ This results in a tree of nested contexts that would be evaluated first
 as an environment variable assignment in Bourne Context, followed by an
 Erlang Context function call (receiving a parameter by Bourne Context
 parameter expansion) and single-assignment variable match, and finally
-followed by an echo command in Bourne Context if and only if the previous,
-Erlang Context, statement returns the equivalent of a Bourne non-zero
-exit code (either an Erlang `ok` atom or `{ok, ...}` tuple).
+followed by an echo command in Bourne Context if and only if the
+previous, Erlang Context, statement returns the equivalent of a Bourne
+non-zero exit code (either an Erlang `ok` atom or `{ok, ...}` tuple).
 
 
 
@@ -110,13 +112,14 @@ exit code (either an Erlang `ok` atom or `{ok, ...}` tuple).
 
 Grouping is parsed for entire line prior to evaluation and execution,  
 unlike Bourne standard.  Thus transactional integrity is preserved:  
-command execution only occurs if entire command sequence parses correctly.
+command execution only occurs if entire command sequence parses  
+correctly.
 
 
 
-The parentheses context is parsed without respect to its function either  
-as a Bourne subshell grouping or an Erlang function parameter list  
-(this distinction being left to the evaluation step.)
+The parentheses context is parsed without respect to its function  
+either as a Bourne subshell grouping or an Erlang function parameter  
+list (this distinction being left to the evaluation step.)
 
 
 
@@ -172,8 +175,8 @@ output streams.
 
 
 
-The single ampersand (`&`) conjunction marks the preceding command group
-as a background job as per `bash` (Bourne Again Shell) syntax.
+The single ampersand (`&`) conjunction marks the preceding command
+group as a background job as per `bash` (Bourne Again Shell) syntax.
 
 
 
@@ -226,8 +229,8 @@ Bourne-standard whitespace delimited [Words](#Words).
 
 
 
-The backslash character (`\`) operates to escape the following character,  
-as per both Bourne and Erlang syntax.
+The backslash character (`\`) operates to escape the following  
+character, as per both Bourne and Erlang syntax.
 
 
 
@@ -295,9 +298,9 @@ treated as a word for this purpose (see [Quoting Contexts](#Quoting_Contexts)).
 
 
 
-Unquoted (_i.e._ bare) words that begin with a lower case character
-and single quote contexts are passed to Erlang functions as type `atom()`,
-while double quote contexts are passed as type `string()`.
+Unquoted (_i.e._ bare) words that begin with a lower case
+character and single quote contexts are passed to Erlang functions as
+type `atom()`, while double quote contexts are passed as type `string()`.
 
 
 
@@ -318,9 +321,10 @@ _Not yet implemented_.
 
 Zero or more Term contexts are marked as within a single List context
 (not to be confused with a [Parameter List](#Parameter_List)) when enclosed by
-an open square bracket (`[`) and close square bracket (`]`).  Per Erlang
-syntax, elements of a List are delimited by commas (`,`), whitespace is
-ignored, and `$IFS` specified delimiters have no special meaning.
+an open square bracket (`[`) and close square bracket (`]`).  Per
+Erlang syntax, elements of a List are delimited by commas (`,`),
+whitespace is ignored, and `IFS` specified delimiters have no special  
+meaning.
 
 
 

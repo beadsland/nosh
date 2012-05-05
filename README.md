@@ -11,15 +11,15 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">line length checker
+* <font color="red">tagged messaging
 </font>
-* <font color="red">shorten line lengths (75 char max)
+* <font color="red">good function types
 </font>
-* <font color="red">missing comments todo
-</font>
-* <font color="red">file length alert
+* <font color="red">good comments
 </font>
 * <font color="red">review style guides
+</font>
+* <font color="red">make good
 </font>
 * <font color="red">nosh_parse tokens
 </font>
