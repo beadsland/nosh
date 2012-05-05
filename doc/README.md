@@ -11,9 +11,13 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">fix hot to not fail on crash
+* <font color="red">line length checker
 </font>
 * <font color="red">shorten line lengths (75 char max)
+</font>
+* <font color="red">missing comments todo
+</font>
+* <font color="red">file length alert
 </font>
 * <font color="red">review style guides
 </font>

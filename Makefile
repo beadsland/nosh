@@ -50,7 +50,7 @@ SUCCINCT	=	grep -v "Entering directory" | grep -v "Leaving directory"
 # Build rules start
 #
 
-all:		push-nosh current nosh
+all:		push-nosh current good nosh
 
 run:		compile nosh
 
@@ -59,15 +59,15 @@ nosh:
 	@erl -pa ebin -noshell -s noterm
 	
 compile:
-	@rebar compile doc | $(HIDE_EDOC_WARN)
+	@rebar compile doc | $(HIDE_EDOC_WARN) | $(SUCCINCT)
 
 current:	push-libs
-	@rebar update-deps compile doc | $(HIDE_EDOC_WARN)
+	@rebar update-deps compile doc | $(HIDE_EDOC_WARN) | $(SUCCINCT)
 
 clean: 		online
 	@if [ "$(ONLINE)" == yes ]; \
-			then (rm -rf deps; rebar clean get-deps); \
-			else (rebar clean); fi
+			then (rm -rf deps; rebar clean get-deps | $(SUCCINCT)); \
+			else (rebar clean | $(SUCCINCT)); fi
 	
 online:	
 	@if [ "$(ONLINE)" == yes ]; \

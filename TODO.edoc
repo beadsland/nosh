@@ -1,7 +1,6 @@
-@todo line length checker
-@todo shorten line lengths (75 char max)
-@todo missing comments todo
 @todo file length alert
+@todo missing comments todo
+@todo make good
 @todo review style guides
 @todo nosh_parse tokens
 @todo nosh_eval
