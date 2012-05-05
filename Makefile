@@ -57,7 +57,10 @@ run:		compile nosh
 nosh:	
 	tabs -1	>/dev/null # requires ncurses (noterm doesn't know tabs)
 	@erl -pa ebin -noshell -s noterm
-	
+
+good:	current
+	@erl -pa deps -noshell -s superl -s init stop
+		
 compile:
 	@rebar compile doc | $(HIDE_EDOC_WARN) | $(SUCCINCT)
 
@@ -74,11 +77,6 @@ online:
 			then (echo "Working online"); \
 			else (echo "Working offline"); fi
 
-good:
-	@if [ `uname -o` == Cygwin ]; \
-			then escript `cygpath -wa bin/good` \
-			else bin/good; fi
-
 #
 # Development rules
 #
@@ -89,9 +87,13 @@ push-nosh:	online
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
 			then (git push origin master); fi
 
-push-libs:	push-bin
+push-libs:	push-bin push-superl
 
 
 push-bin:	online
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
 			then (cd ../nosh_bin; git push origin master); fi
+			
+push-superl:	online
+	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
+			then (cd ../superl; git push origin master); fi
