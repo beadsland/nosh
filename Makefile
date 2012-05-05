@@ -50,16 +50,16 @@ SUCCINCT	=	grep -v "Entering directory" | grep -v "Leaving directory"
 # Build rules start
 #
 
-all:		push-nosh current good nosh
+all:		push-nosh current nosh
 
 run:		compile nosh
 
 nosh:	
 	tabs -1	>/dev/null # requires ncurses (noterm doesn't know tabs)
-	@erl -pa ebin -noshell -s noterm
+	@erl -noshell -pa deps/superl/ebin -s superl -pa ebin -s noterm
 
 good:	current
-	@erl -pa deps -noshell -s superl -s init stop
+	@erl -noshell -pa deps/superl/ebin -s superl -s init stop
 		
 compile:
 	@rebar compile doc | $(HIDE_EDOC_WARN) | $(SUCCINCT)
@@ -81,13 +81,13 @@ online:
 # Development rules
 #
 
-push:		push-nosh push-libs
+push:		push-nosh push-libs push-superl
 
 push-nosh:	online
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
 			then (git push origin master); fi
 
-push-libs:	push-bin push-superl
+push-libs:	push-bin
 
 
 push-bin:	online

@@ -11,10 +11,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">new good project
-</font>
-* <font color="red">good function types
-</font>
 * <font color="red">erlang xref
 </font>
 * <font color="red">nosh_parse tokens
