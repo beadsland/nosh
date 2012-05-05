@@ -46,6 +46,7 @@ test_lines(Dir, File) ->
 	{ok, MP} = re:compile("^(.*)\.[he]rl$"),
 	{match, [Module]} = re:run(File, MP, [{capture, [1], list}]),
 	Info = line_info(FileID),
+	Ratio = round(Info#lineinfo.hlines / Info#lineinfo.clines * 100),
 	if Info#lineinfo.max > 78 ->
 			io:format("~s: avoid long lines (~p char line detected)~n", 
 					[Module, Info#lineinfo.max]);
@@ -55,9 +56,7 @@ test_lines(Dir, File) ->
 	   Info#lineinfo.bigfunc > 18 ->
 	   		io:format("~s: avoid long functions (~p line function detected)~n", 
 	   				[Module, Info#lineinfo.bigfunc]);
-	   	
 	   true ->
-	   		Ratio = round(Info#lineinfo.hlines / Info#lineinfo.clines * 100),
 	   		io:format("~s: comment to code ratio = ~p%~n", [Module, Ratio])
 	end.
 	
@@ -97,7 +96,7 @@ line_info(FileID) ->
 function_length(Count, Line) ->
 	{ok, MP} = re:compile("^[^\\%]+\\.\\ *$"),
 	case re:run(Line, MP, [{capture, none}]) of
-		match	-> {1, 0};
+		match	-> {1, code};
 		nomatch -> case Line of
 						[$%, $% | _More]	-> {Count, header};
 						"\n"				-> {Count, blank};
