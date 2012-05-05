@@ -19,15 +19,21 @@ test_lines(Dir, File) ->
 	{ok, FileID} = file:open(Dir ++ "/" ++ File, [read]),
 	{ok, MP} = re:compile("^(.*)\.erl$"),
 	{match, [Module]} = re:run(File, MP, [{capture, [1], list}]),
-	Max = max_length(FileID),
+	{Max, Total} = line_info(FileID),
 	if Max > 78 ->
 			io:format("~s: avoid long lines (~p char line detected)~n", 
 					[Module, Max]);
+	   Total > 400 ->
+	   		io:format("~s: avoid long modules (~p lines detected)~n",
+	   				[Module, Total]);
 	   true -> false
 	end.
 	
-max_length(FileID) ->
+line_info(FileID) ->
 	case file:read_line(FileID) of
-		eof			-> 0;
-		{ok, Line} 	-> max(string:len(Line), max_length(FileID))
+		eof			-> {0, 0};
+		{ok, Line} 	-> {Max, Total} = line_info(FileID),
+					   NewMax = max(string:len(Line), Max),
+					   NewTotal = Total + 1,
+					   {NewMax, NewTotal}
 	end.

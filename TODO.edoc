@@ -1,7 +1,7 @@
-@todo file length alert
+@todo stylistic conventions: http://www.erlang.se/doc/programming_rules.shtml#REF29671
 @todo missing comments todo
-@todo make good
 @todo review style guides
+@todo make good
 @todo nosh_parse tokens
 @todo nosh_eval
 @todo nosh_exec

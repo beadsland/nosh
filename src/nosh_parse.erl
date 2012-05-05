@@ -24,8 +24,8 @@
 
 %% @doc This is a preliminary draft of the commandline parser for `nosh'.
 %%
-%% Each commandline is decomposed into a context tree, representing Execution,
-%% Grouping, Quoting, Substitution and Term contexts.  
+%% Each commandline is decomposed into a context tree, representing 
+%% Execution, Grouping, Quoting, Substitution and Term contexts.  
 %%
 %% <i>Not all parsing rules described below have been implemented.</i>
 %%
@@ -48,30 +48,33 @@
 %%
 %% === Erlang Context ===
 %% 
-%% The Erlang Context is invoked with a left-wise conjunction, period (`.'),
-%% which causes all words and subcontexts within the current context to be
-%% interpreted according to Erlang syntax.  Erlang Context sequences may
-%% be enclosed arbitrarily within grouping contexts.  For example:
+%% The Erlang Context is invoked with a left-wise conjunction, 
+%% period (`.'), which causes all words and subcontexts within the current
+%% context to be interpreted according to Erlang syntax.  Erlang Context 
+%% sequences may be enclosed arbitrarily within grouping contexts.  
+%% For example:
 %%
-%% <code>&gt; PARAM='value'; Result = my_mod:my_func($PARAM). &amp;&amp; echo Success</code>
+%% <code>&gt; PARAM='value'; Result = my_mod:my_func($PARAM). &amp;&amp; 
+%% echo Success</code>
 %%
 %% This results in a tree of nested contexts that would be evaluated first
 %% as an environment variable assignment in Bourne Context, followed by an
 %% Erlang Context function call (receiving a parameter by Bourne Context
 %% parameter expansion) and single-assignment variable match, and finally
-%% followed by an echo command in Bourne Context if and only if the previous,
-%% Erlang Context, statement returns the equivalent of a Bourne non-zero
-%% exit code (either an Erlang `ok' atom or `{ok, ...}' tuple).
+%% followed by an echo command in Bourne Context if and only if the 
+%% previous, Erlang Context, statement returns the equivalent of a Bourne 
+%% non-zero exit code (either an Erlang `ok' atom or `{ok, ...}' tuple).
 %%
 %% === Grouping Contexts ===
 %% 
 %% Grouping is parsed for entire line prior to evaluation and execution, 
 %% unlike Bourne standard.  Thus transactional integrity is preserved:  
-%% command execution only occurs if entire command sequence parses correctly.
+%% command execution only occurs if entire command sequence parses 
+%% correctly.
 %% 
-%% The parentheses context is parsed without respect to its function either
-%% as a Bourne subshell grouping or an Erlang function parameter list
-%% (this distinction being left to the evaluation step.) 
+%% The parentheses context is parsed without respect to its function 
+%% either as a Bourne subshell grouping or an Erlang function parameter 
+%% list (this distinction being left to the evaluation step.) 
 %% 
 %% The faux within-shell grouping syntax of Bourne shell 
 %% (`{ ...; };')--implemented with the open curly bracket (`{') and closed 
@@ -107,8 +110,8 @@
 %% 
 %% === Background Jobs ===
 %%
-%% The single ampersand (`&') conjunction marks the preceding command group
-%% as a background job as per `bash' (Bourne Again Shell) syntax.
+%% The single ampersand (`&') conjunction marks the preceding command 
+%% group as a background job as per `bash' (Bourne Again Shell) syntax.
 %%
 %% === Quoting Contexts ===
 %% 
@@ -144,8 +147,8 @@
 %% Erlang-compatible {@section Term Contexts} rathern than
 %% Bourne-standard whitespace delimited {@section Words}.
 %% 
-%% The backslash character (`\') operates to escape the following character,
-%% as per both Bourne and Erlang syntax.
+%% The backslash character (`\') operates to escape the following 
+%% character, as per both Bourne and Erlang syntax.
 %% 
 %% === Multiline Parsing ===
 %%
@@ -178,9 +181,9 @@
 %% if `IFS' is undefined.  Each single and/or double quoted context is 
 %% treated as a word for this purpose (see {@section Quoting Contexts}).  
 %% 
-%% Unquoted (<i>i.e.</i> bare) words that begin with a lower case character 
-%% and single quote contexts are passed to Erlang functions as type `atom()', 
-%% while double quote contexts are passed as type `string()'.
+%% Unquoted (<i>i.e.</i> bare) words that begin with a lower case 
+%% character and single quote contexts are passed to Erlang functions as 
+%% type `atom()', while double quote contexts are passed as type `string()'.
 %%
 %% Bare words that begin with an upper case character are treated as
 %% Erlang single-assignment variables as any such variables are defined
@@ -192,9 +195,10 @@
 %%
 %% Zero or more Term contexts are marked as within a single List context 
 %% (not to be confused with a {@section Parameter List}) when enclosed by 
-%% an open square bracket (`[') and close square bracket (`]').  Per Erlang 
-%% syntax, elements of a List are delimited by commas (`,'), whitespace is 
-%% ignored, and `$IFS' specified delimiters have no special meaning.
+%% an open square bracket (`[') and close square bracket (`]').  Per 
+%% Erlang syntax, elements of a List are delimited by commas (`,'), 
+%% whitespace is ignored, and `IFS' specified delimiters have no special 
+%% meaning.
 %% 
 %% {@section Command Substitution} may be used to generate an Erlang List, 
 %% through use of the Lists back quote construct (<code>[`'...`']</code>).
@@ -235,8 +239,10 @@
 %% @end
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
 %% @copyright 2012 Beads D. Land-Trujillo
-%% @reference See <a href="http://sayle.net/book/basics.htm">Shell Basics</a> for overview of functionality.  (to be implemented)
-%% @reference See <a href="http://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html">Shell Command Language</a> 
+%% @reference See <a href="http://sayle.net/book/basics.htm">Shell 
+%% Basics</a> for overview of functionality.  (to be implemented)
+%% @end
+%% @reference See <a href="http://goo.gl/edyre">Shell Command Language</a> 
 %% for detailed specification. (to be implemented)
 %% @end
 
