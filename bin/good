@@ -56,8 +56,10 @@ test_lines(Dir, File) ->
 	   Info#lineinfo.bigfunc > 18 ->
 	   		io:format("~s: avoid long functions (~p line function detected)~n", 
 	   				[Module, Info#lineinfo.bigfunc]);
-	   true ->
-	   		io:format("~s: comment to code ratio = ~p%~n", [Module, Ratio])
+	   Ratio < 20 ->
+	   		io:format("~s: document code (~p% CtC ratio)~n", 
+	   				[Module, Ratio]);
+	   true -> false
 	end.
 	
 line_info(FileID) ->
