@@ -26,6 +26,8 @@
 %% -----------------------------------------------------------------------
 %% CDDL HEADER END
 
+-record(lineinfo, {	max, total, bigfunc, curfunc, hlines, clines } ).
+
 main(_Arg) ->
 	Src = filename:absname("src"),
 	{ok, Listing} = file:list_dir(Src),
@@ -33,7 +35,7 @@ main(_Arg) ->
 	
 review(_Dir, []) -> ok;
 review(Dir, [Head | Tail]) ->
-	{ok, MP} = re:compile("\.erl$"),
+	{ok, MP} = re:compile("\.[he]rl$"),
 	case re:run(Head, MP, [{capture, none}]) of
 		nomatch	-> review(Dir, Tail);
 		match	-> test_lines(Dir, Head), review(Dir, Tail)
@@ -41,39 +43,64 @@ review(Dir, [Head | Tail]) ->
 	
 test_lines(Dir, File) ->
 	{ok, FileID} = file:open(Dir ++ "/" ++ File, [read]),
-	{ok, MP} = re:compile("^(.*)\.erl$"),
+	{ok, MP} = re:compile("^(.*)\.[he]rl$"),
 	{match, [Module]} = re:run(File, MP, [{capture, [1], list}]),
-	{Max, Total, BigFunc, _CurFunc} = line_info(FileID),
-	if Max > 78 ->
+	Info = line_info(FileID),
+	if Info#lineinfo.max > 78 ->
 			io:format("~s: avoid long lines (~p char line detected)~n", 
-					[Module, Max]);
-	   Total > 380 ->
+					[Module, Info#lineinfo.max]);
+	   Info#lineinfo.total > 380 ->
 	   		io:format("~s: avoid long modules (~p lines detected)~n",
-	   				[Module, Total]);
-	   BigFunc > 18 ->
+	   				[Module, Info#lineinfo.total]);
+	   Info#lineinfo.bigfunc > 18 ->
 	   		io:format("~s: avoid long functions (~p line function detected)~n", 
-	   				[Module, BigFunc]);
-	   true -> false
+	   				[Module, Info#lineinfo.bigfunc]);
+	   	
+	   true ->
+	   		Ratio = round(Info#lineinfo.hlines / Info#lineinfo.clines * 100),
+	   		io:format("~s: comment to code ratio = ~p%~n", [Module, Ratio])
 	end.
 	
 line_info(FileID) ->
 	case file:read_line(FileID) of
-		eof			-> {0, 0, 0, 0};
-		{ok, Line} 	-> {Max, Total, BigFunc, CurFunc} = line_info(FileID),
-					   NewMax = max(string:len(Line), Max),
-					   NewTotal = Total + 1,
-					   NewCurFunc = function_length(CurFunc, Line),
-					   NewBigFunc = max(BigFunc, NewCurFunc), 
-					   {NewMax, NewTotal, NewBigFunc, NewCurFunc}
+		eof			-> #lineinfo{	max = 0,
+									total = 0,
+									curfunc = 0,
+									bigfunc = 0,
+									hlines = 0,
+									clines = 0 };
+		{ok, Line} 	-> Info = line_info(FileID),
+					   
+					   NewMax = max(string:len(Line), Info#lineinfo.max),
+					   NewTotal = Info#lineinfo.total + 1,
+					   {NewCurFunc, LineType} = 
+					   		function_length(Info#lineinfo.curfunc, Line),
+					   NewBigFunc = max(Info#lineinfo.bigfunc, NewCurFunc),
+					   if LineType == header ->
+					   		NewHLine = Info#lineinfo.hlines + 1,
+					   		NewCLine = Info#lineinfo.clines;
+					   	  LineType == code ->
+					   	    NewHLine = Info#lineinfo.hlines,
+					   	    NewCLine = Info#lineinfo.clines + 1;
+					   	  true ->	% LineType == blank
+					   	    NewHLine = Info#lineinfo.hlines,
+					   	    NewCLine = Info#lineinfo.clines
+					   end,
+					   Info#lineinfo{	max = NewMax, 
+					   					total = NewTotal,
+					   					curfunc = NewCurFunc,
+					   					bigfunc = NewBigFunc,
+					   					hlines = NewHLine,
+					   					clines = NewCLine	}
 	end.
 	
 function_length(Count, Line) ->
 	{ok, MP} = re:compile("^[^\\%]+\\.\\ *$"),
 	case re:run(Line, MP, [{capture, none}]) of
-		match	-> 1;
+		match	-> {1, 0};
 		nomatch -> case Line of
-						[$%, $% | _More]	-> Count;
-						"\n"				-> Count;
-						_Else				-> Count + 1
+						[$%, $% | _More]	-> {Count, header};
+						"\n"				-> {Count, blank};
+						_Else				-> {Count + 1, code}
 				   end
 	end.
