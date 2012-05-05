@@ -19,21 +19,33 @@ test_lines(Dir, File) ->
 	{ok, FileID} = file:open(Dir ++ "/" ++ File, [read]),
 	{ok, MP} = re:compile("^(.*)\.erl$"),
 	{match, [Module]} = re:run(File, MP, [{capture, [1], list}]),
-	{Max, Total} = line_info(FileID),
+	{Max, Total, BigFunc, _CurFunc} = line_info(FileID),
 	if Max > 78 ->
 			io:format("~s: avoid long lines (~p char line detected)~n", 
 					[Module, Max]);
-	   Total > 400 ->
+	   Total > 380 ->
 	   		io:format("~s: avoid long modules (~p lines detected)~n",
 	   				[Module, Total]);
+	   BigFunc > 18 ->
+	   		io:format("~s: avoid long functions (~p line function detected)~n", 
+	   				[Module, BigFunc]);
 	   true -> false
 	end.
 	
 line_info(FileID) ->
 	case file:read_line(FileID) of
-		eof			-> {0, 0};
-		{ok, Line} 	-> {Max, Total} = line_info(FileID),
+		eof			-> {0, 0, 0, 0};
+		{ok, Line} 	-> {Max, Total, BigFunc, CurFunc} = line_info(FileID),
 					   NewMax = max(string:len(Line), Max),
 					   NewTotal = Total + 1,
-					   {NewMax, NewTotal}
+					   NewCurFunc = function_length(CurFunc, Line),
+					   NewBigFunc = max(BigFunc, NewCurFunc), 
+					   {NewMax, NewTotal, NewBigFunc, NewCurFunc}
+	end.
+	
+function_length(Count, Line) ->
+	{ok, MP} = re:compile("^[^\\%]+\\.\\ *$"),
+	case re:run(Line, MP, [{capture, none}]) of
+		nomatch	-> Count + 1;
+		match	-> 1
 	end.
