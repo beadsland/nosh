@@ -60,7 +60,10 @@ nosh:
 
 good:	current
 	@erl -noshell -pa deps/superl/ebin -s superl -s init stop
-		
+
+doc:
+	@rebar doc | $(HIDE_EDOC_WARN) | $(SUCCINCT)
+	
 compile:
 	@rebar compile doc | $(HIDE_EDOC_WARN) | $(SUCCINCT)
 

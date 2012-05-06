@@ -22,9 +22,9 @@
 %% -----------------------------------------------------------------------
 %% CDDL HEADER END
 
-%% @doc This is a preliminary draft of the commandline parser for `nosh'.
+%% @doc This is a preliminary draft of the command line parser for `nosh'.
 %%
-%% Each commandline is decomposed into a context tree, representing 
+%% Each command line is decomposed into a context tree, representing 
 %% Execution, Grouping, Quoting, Substitution and Term contexts.  
 %%
 %% <i>Not all parsing rules described below have been implemented.</i>
@@ -39,7 +39,7 @@
 %% 
 %% == Execution Contexts ==
 %% 
-%% The default context of all commandlines is Bourne Context, and all
+%% The default context of all command lines is Bourne Context, and all
 %% grouping, quoting, and substitution contexts are parsed in accordance
 %% with Bourne shell syntax.  
 %%
@@ -177,8 +177,8 @@
 %%
 %% The simplest `nosh' command line consists of a command followed by zero 
 %% or more word contexts, each being delimited by the characters in the 
-%% `IFS' environment variable, or `<space>', `<tab>' and `<newline>'
-%% if `IFS' is undefined.  Each single and/or double quoted context is 
+%% `IFS' environment variable (or `<space>', `<tab>' and `<newline>'
+%% if `IFS' is undefined).  Each single and/or double quoted context is 
 %% treated as a word for this purpose (see {@section Quoting Contexts}).  
 %% 
 %% Unquoted (<i>i.e.</i> bare) words that begin with a lower case 
@@ -253,6 +253,7 @@
 %% TODO: {...} Tuples
 %% TODO: `<...>' Pids
 %% TODO: `<<...>>' Bitstrings
+%% TODO: refactor documentation to eval/exec/etc.
 %% TODO: Erlang Stack
 %% TODO: Line continuation
 
@@ -509,4 +510,3 @@ parse_context(QT, Stack, [Symbol | Tail]) when Symbol == "\\" ->
 parse_context(QType, Stack, [Head | Tail]) -> 
 	{NewTail, _ReturnStack} = parse({context, QType}, Stack, Tail), 
 	{[Head | NewTail], Stack}.
-	
