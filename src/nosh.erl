@@ -29,9 +29,10 @@
 %%
 %% Commands:
 %% <dl>
-%% <dt>`.'</dt><dd>end-of-file (exit nosh application)</dd>
 %% <dt>`hot'</dt><dd>hotswap nosh modules</dd>
 %% <dt>`good'</dt><dd>check for superly good nosh code</dd>
+%% <dt>`!<i>command</i></dt><dd>pass <i>command</i> to native shell</dd>
+%% <dt>`.'</dt><dd>end-of-file (exit nosh application)</dd>
 %% </dl>
 %%
 %% <b>Draft Notes</b>
@@ -66,7 +67,7 @@
 -export([start/1]).
 
 % private exports
--export([loop/5,command_run/4,hotswap_run/4]).
+-export([loop/5,bang_run/4,command_run/4,hotswap_run/4]).
 
 %%
 %% API functions
@@ -104,8 +105,8 @@ loop(Stdin, Stdout, Stderr, Cmd, CmdPid) ->
 			do_exit(Stdin, Stdout, Stderr, Cmd, CmdPid, ExitPid, Reason);
 		{stdout, Stdin, Line} when CmdPid == self()	->
 			do_line(Stdin, Stdout, Stderr, Line);			
-		{MsgTag, CmdPid, Output} ->
-			do_output(Stdin, Stdout, Stderr, Cmd, CmdPid, MsgTag, Output);
+		{MsgTag, CmdPid, Payload} ->
+			do_output(Stdin, Stdout, Stderr, Cmd, CmdPid, MsgTag, Payload);
 		Noise when CmdPid /= self() -> 
 			do_noise(Stdin, Stdout, Stderr, Cmd, CmdPid, Noise)
 	end.
@@ -129,6 +130,10 @@ do_output(Stdin, Stdout, Stderr, Command, CmdPid, MsgTag, Output) ->
 %% @todo refactor bang commands as direct invocations
 do_line(Stdin, Stdout, Stderr, Line) ->
 	case Line of
+		[$! | BangCmd] ->
+			BangPid = spawn_link(nosh, bang_run, 
+								 [self(), self(), self(), BangCmd]),
+			?MODULE:loop(Stdin, Stdout, Stderr, bang, BangPid);
 		"hot\n"	->
 			HotPid = spawn_link(nosh, hotswap_run,
 							   	[self(), self(), self(), "hot\n"]),
@@ -136,9 +141,6 @@ do_line(Stdin, Stdout, Stderr, Line) ->
 		"good\n" ->
 			GoodPid = spawn_link(superl, start, []),
 			?MODULE:loop(Stdin, Stdout, Stderr, good, GoodPid);
-		[$! | BangCmd] ->
-			?STDOUT("~p: ~p", [BangCmd, os:cmd(BangCmd)]),
-			?MODULE:loop(Stdin, Stdout, Stderr, ?MODULE, self());
 		_Line ->
 			NewPid = spawn_link(nosh, command_run, 
 								[self(), self(), self(), Line]),
@@ -193,6 +195,16 @@ command_return(Command, Status, Stderr) ->
 		Else -> 
 			?STDERR("~s: ~p~n", [Command, Else])
 	end.
+
+% spawned as process.
+bang_run(_Stdin, Stdout, _Stderr, BangCmd) ->
+	Chop = string:strip(BangCmd, right, $\n),
+	Output = os:cmd(Chop),
+	if is_atom(Output)	-> exit(Output);
+       Output == []		-> exit(ok);
+       true				-> ?STDOUT("~s: ~s", [Chop, Output]),
+						   exit(ok)
+    end.
 
 % spawned as a process
 command_run(_Stdin, _Stdout, Stderr, Line) ->
