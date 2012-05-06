@@ -11,7 +11,7 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">refactor with Stdio record
+* <font color="red">get nosh.test working again
 </font>
 * <font color="red">refactor prompt as macro
 </font>

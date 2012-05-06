@@ -66,7 +66,7 @@
 %%
 
 -include_lib("kernel/include/file.hrl").
-%-define(debug, true).
+-define(debug, true).
 -include("macro.hrl").
 
 %%
@@ -98,11 +98,11 @@ test(IO) ->
 	load(IO, test, Alt2Path),
 	test:start(),
 
-%	?DEBUG("~n"),	
-%	FlatPath = "d:/workspace/nosh/ebin",
-%	load(IO, test, FlatPath),
-%	nosh.test:start(),
-%	test:start(),
+	?DEBUG("~n"),	
+	FlatPath = "d:/workspace/nosh/ebin",
+	load(IO, test, FlatPath),
+	nosh.test:start(),
+	test:start(),
 
 	?DEBUG("~ntest: done~n").
 	
