@@ -57,9 +57,9 @@
 %% TODO: module binary service (to avoid repetitive slurps)
 %% TODO: conservative module loader
 
-%% @version 0.1.1
+%% @version 0.1.2
 -module(nosh_load).
--version("0.1.1").
+-version("0.1.2").
 
 %%
 %% Include files
@@ -84,32 +84,32 @@
 %% API functions
 %%
 
-test(Stderr) ->
-	?INIT_DEBUG(Stderr),
+test(IO) ->
+	?INIT_DEBUG,
 	?DEBUG("Running ver. ~s nosh_load test.~n", [?VERSION(?MODULE)]), 
 
 	?DEBUG("~n"),
 	AltPath = "d:/workspace/nosh/ebin/alt",
-	load(test, AltPath, Stderr),
+	load(IO, test, AltPath),
 	test:start(),
 
 	?DEBUG("~n"),
 	Alt2Path = "d:/workspace/nosh/ebin/alt2",
-	load(test, Alt2Path, Stderr),
+	load(IO, test, Alt2Path),
 	test:start(),
 
-	?DEBUG("~n"),	
-	FlatPath = "d:/workspace/nosh/ebin",
-	load(test, FlatPath, Stderr),
-	nosh.test:start(),
-	test:start(),
+%	?DEBUG("~n"),	
+%	FlatPath = "d:/workspace/nosh/ebin",
+%	load(IO, test, FlatPath),
+%	nosh.test:start(),
+%	test:start(),
 
 	?DEBUG("~ntest: done~n").
 	
-load(Command, Path, Stderr) when is_atom(Command) -> 
-	load(atom_to_list(Command), Path, Stderr);
-load(Command, Path, Stderr) -> 
-	case ensure_compiled(Command, Path, Stderr) of
+load(IO, Command, Path) when is_atom(Command) -> 
+	load(IO, atom_to_list(Command), Path);
+load(IO, Command, Path) -> 
+	case ensure_compiled(IO, Command, Path) of
 		{error, Errors, Warnings}	-> throw({load_failed, 
 											  {compiler, 
 											   {Errors, Warnings}}}); 
@@ -118,7 +118,7 @@ load(Command, Path, Stderr) ->
 		{ok, _Module, _Binary}		-> ?DEBUG("l: compiled~n");
 		ok							-> ?DEBUG("l: file current~n") 
     end,
-	case ensure_packaged(Command, Path, Stderr) of
+	case ensure_packaged(IO, Command, Path) of
 		{error, Errors2, Warnings2}	-> 
 			throw({recompile_failed, {Errors2, Warnings2}});
 		{info, no_src}				-> 
@@ -129,20 +129,20 @@ load(Command, Path, Stderr) ->
 			NewFile = ?FILENAME(Path, Command, ".beam"),
 			Package = read_beam_attribute(Bin, package),
 			?DEBUG("attribute: -package(~p)~n", [Package]),						   
-			ensure_loaded(NewFile, Mod, Bin, Vsn, Pkg, Stderr)
+			ensure_loaded(IO, NewFile, Mod, Bin, Vsn, Pkg)
 	end. 
 
 %%
 %% Local functions
 %%
 
-ensure_loaded(NewFile, NewModule, Binary, NewVsn, Package, Stderr) ->
+ensure_loaded(IO, NewFile, NewModule, Binary, NewVsn, Package) ->
 	case confirm_loaded(NewModule) of
 		{ok, OldFile, OldVsn} 	-> 
-			test_namespace(OldFile, NewFile, NewModule, Stderr),
+			test_namespace(IO, OldFile, NewFile, NewModule),
 
-			ensure_loaded(NewFile, NewModule, Binary, NewVsn, Package, 
-						  Stderr, OldFile, OldVsn);
+			ensure_loaded(IO, NewFile, NewModule, Binary, NewVsn, Package, 
+						  OldFile, OldVsn);
 		false					->
 			case code:load_binary(NewModule, NewFile, Binary) of
 				{module, NewModule}	-> {module, NewModule};
@@ -150,13 +150,13 @@ ensure_loaded(NewFile, NewModule, Binary, NewVsn, Package, Stderr) ->
 			end
 	end.
 
-ensure_loaded(_NewFile, NewModule, _Binary, NewVsn, _Package, 
-			  _Stderr, _OldFile, OldVsn) when OldVsn == NewVsn ->
+ensure_loaded(_IO, _NewFile, NewModule, _Binary, NewVsn, _Package, 
+			  _OldFile, OldVsn) when OldVsn == NewVsn ->
 	?DEBUG("~s: already current~n", [NewModule]);
 	
-ensure_loaded(NewFile, NewModule, Binary, _NewVsn, Package, 
-			  Stderr, OldFile, _OldVsn) ->
-	test_flatpackage(OldFile, NewFile, NewModule, Package, Stderr),
+ensure_loaded(IO, NewFile, NewModule, Binary, _NewVsn, Package, 
+			  OldFile, _OldVsn) ->
+	test_flatpackage(IO, OldFile, NewFile, NewModule, Package),
 	
 	case code:soft_purge(NewModule) of
 		false 	-> purge_alert(NewModule, processes()),
@@ -170,14 +170,14 @@ ensure_loaded(NewFile, NewModule, Binary, _NewVsn, Package,
 		{error, What}		-> throw({load_failed, What})
 	end.
 
-test_namespace(OldFile, NewFile, NewModule, Stderr) ->
+test_namespace(IO, OldFile, NewFile, NewModule) ->
 	if OldFile /= NewFile 	->
 		   ?STDERR("~s: hotswap namespace collision~n", [NewModule]);
 	   true					-> 
 			false
 	end.
 
-test_flatpackage(OldFile, NewFile, NewModule, Package, Stderr) ->
+test_flatpackage(IO, OldFile, NewFile, NewModule, Package) ->
   	if OldFile == NewFile, Package == '' -> 
 		?STDERR("~s: flat package module unsafe~n", [NewModule]);
 	true -> 
@@ -189,20 +189,19 @@ purge_alert(Module, [Head | Tail]) ->
 	Head ! {self(), purging, Module},
 	purge_alert(Module, Tail).
 
-ensure_packaged(Command, Path, Stderr) ->
+ensure_packaged(IO, Command, Path) ->
 	Filename = ?FILENAME(Path, Command, ".beam"),
 	{ok, Module, Binary, Vsn, Package} = slurp_binary(Filename),
 	case Package of
-		default		-> ensure_packaged(Command, Path, Stderr, 
-									   Vsn, Package);
+		default		-> ensure_packaged(IO, Command, Path, Vsn, Package);
 		''			-> ?DEBUG("l: flat package detected~n"),
 					   {ok, Module, Binary, Vsn, Package};
 		_Else		-> {ok, Module, Binary, Vsn, Package}
 	end.
 
-ensure_packaged(Command, Path, Stderr, Vsn, Package) ->
+ensure_packaged(IO, Command, Path, Vsn, Package) ->
 	?DEBUG("l: default package detected~n"),
-	case ensure_compiled(Command, Path, Stderr, true) of
+	case ensure_compiled(IO, Command, Path, true) of
 		{ok, NewModule, NewBinary} 	-> {ok, NewModule, NewBinary, 
 										Vsn, Package};
 		Other						-> Other
@@ -259,17 +258,17 @@ slurp_binary(NewFile, Binary) ->
     ?DEBUG("new: ~p~n", [{Module, NewFile, Version}]),
     {ok, Module, Binary, Version, Package}.
 
-ensure_compiled(Command, Path, Stderr) -> 
-	ensure_compiled(Command, Path, Stderr, false).
+ensure_compiled(IO, Command, Path) -> 
+	ensure_compiled(IO, Command, Path, false).
 
-ensure_compiled(Command, Path, Stderr, Force) ->
-	Writeable = can_write(Path, Stderr) andalso 
-					can_write(?FILENAME(Path, Command, ".beam"), Stderr),
-	ensure_compiled(Command, Path, Stderr, Force, Writeable).
+ensure_compiled(IO, Command, Path, Force) ->
+	Writeable = can_write(IO, Path) andalso 
+					can_write(IO, ?FILENAME(Path, Command, ".beam")),
+	ensure_compiled(IO, Command, Path, Force, Writeable).
 
-ensure_compiled(_Command, _Path, _Stderr, _Force, Writeable) 
+ensure_compiled(_IO, _Command, _Path, _Force, Writeable) 
   when Writeable == false -> {info, readonly};
-ensure_compiled(Command, Path, _Stderr, Force, _Writeable) ->
+ensure_compiled(_IO, Command, Path, Force, _Writeable) ->
 	?DEBUG("writeable: ~s~n", [?FILENAME(Path, Command, ".beam")]),
 	case parallel_src(Path, Command) of
 		{ok, SrcPath, Project}	-> 
@@ -313,7 +312,7 @@ last_modified(Filename) ->
 		_Else			-> _Else
 	end.
 
-can_write(Filename, Stderr) ->
+can_write(IO, Filename) ->
 	case file:read_file_info(Filename) of 
 		{ok, FileInfo}	-> case FileInfo#file_info.access of 
 							   write		-> true;

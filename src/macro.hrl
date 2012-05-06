@@ -27,17 +27,21 @@
 		proplists:get_value(Attribute, Module:module_info(attributes))).
 -define(VERSION(Module), ?ATTRIB(Module, version)).
 
+-record(std, {in :: pid(), out :: pid(), err :: pid()}).
+-define(IO(In, Out, Err), #std{in=In, out=Out, err=Err}).
+-define(IO(Pid), #std{in=Pid, out=Pid, err=Pid}).
+
 -import(io_lib).
 -import(lists).
 -define(STDERR(Format, List), 
-		Stderr ! {stderr, self(), lists:flatten(io_lib:format(Format, List))}).
+		IO#std.err ! {stderr, self(), lists:flatten(io_lib:format(Format, List))}).
 -define(STDERR(String), ?STDERR(String, [])).
 -define(STDOUT(Format, List), 
-		Stdout ! {stdout, self(), lists:flatten(io_lib:format(Format, List))}).
+		IO#std.out ! {stdout, self(), lists:flatten(io_lib:format(Format, List))}).
 -define(STDOUT(String), ?STDOUT(String, [])).
 
 % Debug is special case of Stderr
--define(INIT_DEBUG(Pid), put(debug, Pid)).
+-define(INIT_DEBUG, put(debug, IO#std.err)).
 -ifdef(debug).
 -define(DEBUG(Format, List), 
 		get(debug) ! 

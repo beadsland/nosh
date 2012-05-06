@@ -1,4 +1,6 @@
-@todo refactor with Stdio record
+@todo get nosh.test working again
+@todo refactor prompt as macro
+@todo refactor nosh_load errors
 @todo make good
 @todo nosh_parse tokens
 @todo nosh_eval

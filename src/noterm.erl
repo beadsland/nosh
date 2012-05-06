@@ -54,7 +54,7 @@
 
 % Private Exports
 -export([key_start/1]).
--export([msg_loop/3, key_loop/3]).
+-export([msg_loop/1, key_loop/1]).
 
 %%
 %% API functions
@@ -71,7 +71,7 @@ start() ->
 	KeyPid = spawn_link(?MODULE, key_start, [self()]),
 
 	try spawn_link(nosh, start, [self()]) of
-		NoshPid 			-> msg_loop(KeyPid, NoshPid, NoshPid)
+		NoshPid 			-> msg_loop(?IO(KeyPid, NoshPid, NoshPid))
 	catch
 		{Message, Reason}	-> grace(Message, Reason), init:stop()
 	end.
@@ -81,55 +81,52 @@ start() ->
 %%
 
 %%@private Export to allow for hotswap.
-msg_loop(Stdin, Stdout, Stderr) ->
+msg_loop(IO) ->
 	receive
-		{purging, _Pid, _Mod}		-> % chase your tail
-			?MODULE:msg_loop(Stdin, Stdout, Stderr);
-		{'EXIT', ExitPid, Reason}	-> 
-			do_exit(Stdin, Stdout, Stderr, ExitPid, Reason);
-		{MsgTag, Stdin, Line}		-> 
-			do_keyin(Stdin, Stdout, Stderr, MsgTag, Line);
-		{MsgTag, Stdout, Line}		-> 
-			do_noshout(Stdin, Stdout, Stderr, MsgTag, Line);
-		{MsgTag, Stderr, Line}		->
-			do_noshout(Stdin, Stdout, Stderr, MsgTag, Line);
-		Noise						-> 
-			do_noise(Stdin, Stdout, Stderr, Noise)
+		{purging, _Pid, _Mod}		-> ?MODULE:msg_loop(IO);
+		{'EXIT', ExitPid, Reason}	-> do_exit(IO, ExitPid, Reason);
+		{MsgTag, Stdin, Line} 
+		  when Stdin == IO#std.in 	-> do_keyin(IO, MsgTag, Line);
+		{MsgTag, Stdout, Line}
+		  when Stdout == IO#std.out	-> do_noshout(IO, MsgTag, Line);
+		{MsgTag, Stderr, Line}
+		  when Stderr == IO#std.err	-> do_noshout(IO, MsgTag, Line);
+		Noise						-> do_noise(IO, Noise)
     end.
 
 % Handle nosh process messages.
-do_noshout(Stdin, Stdout, Stderr, MsgTag, Line) ->
+do_noshout(IO, MsgTag, Line) ->
 	case MsgTag of
 		stdout	-> io:format(Line, []);
 		stderr	-> io:format(standard_error, "** ~s", [Line]);
 		debug	-> io:format(standard_error, "-- ~s", [Line])
 	end,
-	?MODULE:msg_loop(Stdin, Stdout, Stderr).  
+	?MODULE:msg_loop(IO).  
 
 % Handle keyboard process messages.
-do_keyin(Stdin, Stdout, Stderr, MsgTag, Line) ->
+do_keyin(IO, MsgTag, Line) ->
 	case MsgTag of
 		stdout	-> ?STDOUT(strip_escapes(Line));
 		stderr	-> io:format(standard_error, "** ~s", [Line])
 	end,
-	?MODULE:msg_loop(Stdin, Stdout, Stderr).  
+	?MODULE:msg_loop(IO).  
 	
 % Handle exit signals.
-do_exit(Stdin, Stdout, _Stderr, ExitPid, Reason) ->
+do_exit(IO, ExitPid, Reason) ->
 	case ExitPid of
-		Stdin	-> grace("Stopping on keyboard exit", Reason),
-				   exit(normal);
-		Stdout	-> grace("Stopping on shell exit", Reason),
-				   init:stop();
-		_Other	-> Message = io_lib:format("Stopping on ~p exit", [ExitPid]),
-				   grace(Message, Reason),
-				   exit(normal)
+		Stdin when Stdin == IO#std.in		-> 
+			grace("Stopping on keyboard exit", Reason), exit(normal);
+		Stdout when Stdout == IO#std.out	-> 
+			grace("Stopping on shell exit", Reason), init:stop();
+		_Other								-> 
+			Message = io_lib:format("Stopping on ~p exit", [ExitPid]),
+			grace(Message, Reason), exit(normal)
 	end.
 
 % Handle message queue noise.
-do_noise(Stdin, Stdout, Stderr, Noise) ->
+do_noise(IO, Noise) ->
 	io:format(standard_error, "noise: ~p ~p~n", [Noise, self()]),
-	?MODULE:msg_loop(Stdin, Stdout, Stderr).  
+	?MODULE:msg_loop(IO).  
 	
 grace(Message, Reason) -> 
 	case Reason of
@@ -152,25 +149,27 @@ strip_escapes(Subject) ->
 
 %%@private Export to allow for spawn.
 key_start(Pid) ->
-	?INIT_DEBUG(Pid),
+	IO = ?IO(Pid),
+	?INIT_DEBUG,
 	?DEBUG("Listening to keyboard ~p~n", [self()]),
-	key_loop(Pid, Pid, Pid). 
+	key_loop(IO). 
 
 %%@private Export to allow for hotswap.
-key_loop(Stdin, Stdout, Stderr) ->
+key_loop(IO) ->
 	case io:get_line("") of 
-		ok			    -> key_receive(Stdin, Stdout, Stderr);
+		ok			    -> key_receive(IO);
 		eof 			-> key_stop(eof); 
 		".\n"			-> key_stop(eof);
 		{error, Reason} -> ?STDERR("error: ~p~n", [Reason]);
 		Line			-> ?STDOUT(Line)
 	end, 
-	?MODULE:key_loop(Stdin, Stdout, Stderr).
+	?MODULE:key_loop(IO).
 
-key_receive(Stdin, _Stdout, Stderr) ->
+key_receive(IO) ->
 	receive
 		{purging, _Pid, _Mod}		-> true; % chase your tail
-		{'EXIT', Stdin, Reason} 	-> io:format("~p exit: ~p~n", 
+		{'EXIT', Stdin, Reason}
+		  when Stdin == IO#std.in	-> io:format("~p exit: ~p~n", 
 												 [?MODULE, Reason]);
 		Noise						-> ?STDERR("noise: ~p ~p~n", 
 											   [Noise, self()])

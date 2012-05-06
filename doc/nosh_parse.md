@@ -13,7 +13,7 @@ This is a preliminary draft of the command line parser for `nosh`.
 
 Copyright (c) 2012 Beads D. Land-Trujillo
 
-__Version:__ 0.1.5
+__Version:__ 0.1.6
 
 __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).
 
@@ -431,14 +431,6 @@ _Not yet implemented_.
 
 
 
-###<a name="type-io_proc">io_proc()</a>##
-
-
-
-<pre>io_proc() = pid()</pre>
-
-
-
 ###<a name="type-parse_error">parse_error()</a>##
 
 
@@ -489,7 +481,7 @@ according to current Stack type.</td></tr></table>
 
 
 
-<pre>parse(Subject::nonempty_string(), Stderr::<a href="#type-io_proc">io_proc()</a>) -> {ok, <a href="#type-context_list">context_list()</a>} | {error, <a href="#type-parse_error">parse_error()</a>}</pre>
+<pre>parse(IO::#std{}, Subject::nonempty_string()) -> {ok, <a href="#type-context_list">context_list()</a>} | {error, <a href="#type-parse_error">parse_error()</a>}</pre>
 <br></br>
 
 

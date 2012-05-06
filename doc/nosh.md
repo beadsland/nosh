@@ -13,7 +13,7 @@ The `nosh` process module, which handles messaging with a paired
 
 Copyright (c) 2012 Beads D. Land-Trujillo
 
-__Version:__ 0.1.8
+__Version:__ 0.1.9
 
 __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).<a name="description"></a>
 
@@ -70,40 +70,39 @@ message from `noterm`.  This is currently produced by typing a period
 ##Function Index##
 
 
-<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#bang_run-4">bang_run/4</a></td><td></td></tr><tr><td valign="top"><a href="#command_run-4">command_run/4</a></td><td></td></tr><tr><td valign="top"><a href="#hotswap_run-4">hotswap_run/4</a></td><td></td></tr><tr><td valign="top"><a href="#start-1">start/1</a></td><td>Start nosh, passing Pid of process providing standard i/o
-messaging.</td></tr></table>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#bang_run-2">bang_run/2</a></td><td></td></tr><tr><td valign="top"><a href="#command_run-2">command_run/2</a></td><td></td></tr><tr><td valign="top"><a href="#hotswap_run-2">hotswap_run/2</a></td><td></td></tr><tr><td valign="top"><a href="#start-1">start/1</a></td><td>Start nosh, receiving standard I/O from noterm.</td></tr></table>
 
 
 <a name="functions"></a>
 
 ##Function Details##
 
-<a name="bang_run-4"></a>
+<a name="bang_run-2"></a>
 
-###bang_run/4##
-
-
-
-
-`bang_run(Stdin, Stdout, Stderr, BangCmd) -> any()`
-
-<a name="command_run-4"></a>
-
-###command_run/4##
+###bang_run/2##
 
 
 
 
-`command_run(Stdin, Stdout, Stderr, Line) -> any()`
+`bang_run(IO, BangCmd) -> any()`
 
-<a name="hotswap_run-4"></a>
+<a name="command_run-2"></a>
 
-###hotswap_run/4##
-
-
+###command_run/2##
 
 
-`hotswap_run(Stdin, Stdout, Stderr, Line) -> any()`
+
+
+`command_run(IO, Line) -> any()`
+
+<a name="hotswap_run-2"></a>
+
+###hotswap_run/2##
+
+
+
+
+`hotswap_run(IO, Line) -> any()`
 
 <a name="start-1"></a>
 
@@ -116,5 +115,4 @@ messaging.</td></tr></table>
 
 
 
-Start nosh, passing Pid of process providing standard i/o
-messaging.
+Start nosh, receiving standard I/O from noterm.

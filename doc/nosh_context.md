@@ -6,7 +6,7 @@
 * [Function Details](#functions)
 
 
-??.
+Submodule of [`nosh_parse`](nosh_parse.md).
 
 
 

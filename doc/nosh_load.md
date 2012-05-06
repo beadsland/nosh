@@ -12,7 +12,7 @@ This is a preliminary draft of the module loader for `nosh`.
 
 Copyright (c) 2012 Beads D. Land-Trujillo
 
-__Version:__ 0.1.1
+__Version:__ 0.1.2
 
 __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).
 
@@ -77,7 +77,7 @@ source before the `PATH` is exhausted.<a name="index"></a>
 
 
 
-`load(Command, Path, Stderr) -> any()`
+`load(IO, Command, Path) -> any()`
 
 <a name="test-1"></a>
 
@@ -86,5 +86,5 @@ source before the `PATH` is exhausted.<a name="index"></a>
 
 
 
-`test(Stderr) -> any()`
+`test(IO) -> any()`
 

@@ -282,7 +282,6 @@
 %% Handle thrown errors for unmatched quoting, grouping, and term context
 %% symbols.
 %% @end
--type io_proc() :: pid().
 -type term_type() :: word | list | plst | tupl | epid | bstr. 
 -type quote_type() :: line | back | doub | sing | escp | dbcp.
 -type group_type() :: pren | semi | ifok | ambi | ifnz | pipe.
@@ -295,11 +294,11 @@
 -type context() :: nonempty_string() | {context_type(), context_list()}.
 -type parse_error_type() :: quote | group.
 -type parse_error() :: {parse_error_type(), string()}.
--spec parse(Subject :: nonempty_string(), Stderr :: io_proc()) -> 
+-spec parse(IO :: #std{}, Subject :: nonempty_string()) -> 
 		  {ok, context_list()} | {error, parse_error()}.
 %%
-parse(Subject, Stderr) -> 
-	?INIT_DEBUG(Stderr),
+parse(IO, Subject) -> 
+	?INIT_DEBUG,
 	Pattern = io_lib:format("([~s~s~s])", 
 							[?QUOTE_CHARS, ?GROUP_CHARS, ?SPACE_CHARS]),
 	{ok, MP} = re:compile(Pattern),
