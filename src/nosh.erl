@@ -155,7 +155,7 @@ do_exit(Stdin, Stdout, Stderr, Command, CmdPid, ExitPid, Reason) ->
 		   ?DEBUG("Stopping on terminal exit: ~p ~p~n", [Reason, self()]),
 		   init:stop();
 	   ExitPid == CmdPid	->
-		   command_return(Command, Reason, Stderr),
+		   command_return(Stdin, Stdout, Stderr, Command, Reason),
 		   prompt(Stdout),
 		   ?MODULE:loop(Stdin, Stdout, Stderr, ?MODULE, self());	   
 	   Reason == normal 	->
@@ -178,7 +178,7 @@ prompt(Stdout) ->
 % We spawn command as separate process and then wait on it.
 % This allows us to catch the exit status of runtime errors.
 
-command_return(Command, Status, Stderr) -> 
+command_return(_Stdin, Stdout, Stderr, Command, Status) -> 
 	case Status of
 		normal -> 
 			?DEBUG("~s: ~p~n", [Command, Status]);
@@ -187,16 +187,13 @@ command_return(Command, Status, Stderr) ->
 			?DEBUG("~s: ~p~n", [Command, Status]);
 		
 		{ok, Result} -> 
-			?DEBUG("~s: ~p~n", [Command, Result]);
+			?STDOUT("~s: ok: ~p~n", [Command, Result]);
 		
-		{error, {Term, Data}} ->
-			?STDERR("nosh: ~p~nDetail: ~p~n", [Term, Data]);
+		{error, {Type, Message}} ->
+			?STDERR("nosh: ~p error: ~s~n", [Type, Message]);
 
-		{error, What} ->
-			?STDERR("nosh: ~s~n", [What]);
-		
 		{{Except, Reason}, Trace} -> 
-			Format = "~s: ~p~nReason: ~p~nTrace: ~p~n",
+			Format = "~s: ~p~nReason: ~p~nDetail: ~p~n",
 			?STDERR(Format, [Command, Except, Reason, Trace]);
 		
 		Else -> 

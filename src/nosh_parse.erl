@@ -293,7 +293,8 @@
 						| {context, term_type()}.
 -type context_list() :: [context()].
 -type context() :: nonempty_string() | {context_type(), context_list()}.
--type parse_error() :: string() | {noline, context_list}.
+-type parse_error_type() :: quote | group.
+-type parse_error() :: {parse_error_type(), string()}.
 -spec parse(Subject :: nonempty_string(), Stderr :: io_proc()) -> 
 		  {ok, context_list()} | {error, parse_error()}.
 %%
@@ -348,26 +349,20 @@ parse({context, QType}, Stack, List) ->
 %% Local functions
 %%
 
--define(QUOTE_ERR, "quote error: closing ~s missing").
--define(GROUP_ERR, "group error: closing ~s missing").
--define(ERRMSG(F, L), io_lib:format(F, L)).
+-define(CLOSING(T), io_lib:format("closing ~s missing", [T])).
 
 try_symbols(Symbols) ->
 	Stack = [],
 	try nosh_context:close_context(brne, Stack, Symbols) of
-		{List, Stack} -> 
-			case List of
-				[{{context, line}, LineList}]	-> {ok, LineList};
-				_Else						 	-> {error, {noline, List}}
-			end
+		{List, Stack} 		-> {ok, List}
 	catch
-		{context, line} 	-> {error, ?ERRMSG(?QUOTE_ERR, ["EOL"])};
-		{context, pren}		-> {error, ?ERRMSG(?GROUP_ERR, ["\)"])};
-		{close, pren}		-> {error, "group error: "
-								"unmatched closing parentheses"};
-		{context, back} 	-> {error, ?ERRMSG(?QUOTE_ERR, ["\`"])};
-		{context, doub} 	-> {error, ?ERRMSG(?QUOTE_ERR, ["\""])};
-		{context, sing} 	-> {error, ?ERRMSG(?QUOTE_ERR, ["\'"])};
-		{context, escp} 	-> {error, "quote error: "
-								"line continuation not supported"}
+		{context, line} 	-> {error, {quote, ?CLOSING("EOL")}};
+		{context, back} 	-> {error, {quote, ?CLOSING("\`")}};
+		{context, doub} 	-> {error, {quote, ?CLOSING("\"")}};
+		{context, sing} 	-> {error, {quote, ?CLOSING("\'")}};
+		{context, escp} 	-> {error, {quote, 
+										"line continuation not supported"}};
+		{context, pren}		-> {error, {group, ?CLOSING("\)")}};
+		{close, pren}		-> {error, {group, 
+										"unmatched closing parentheses"}}
 	end. 

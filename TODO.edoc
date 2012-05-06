@@ -1,3 +1,5 @@
+@todo strip outer contexts
+@todo refactor with Stdio record
 @todo make good
 @todo nosh_parse tokens
 @todo nosh_eval
