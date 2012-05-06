@@ -118,7 +118,8 @@ do_output(IO, Command, CmdPid, MsgTag, Output) ->
 	case MsgTag of
 		stdout	-> ?STDOUT(Output), ?MODULE:loop(IO, Command, CmdPid);
 		stderr 	-> ?STDERR(Output), ?MODULE:loop(IO, Command, CmdPid);
-		debug 	-> ?DEBUG(Output), ?MODULE:loop(IO, Command, CmdPid)
+		debug 	-> IO#std.err ! {debug, self(), Output}, 
+				   ?MODULE:loop(IO, Command, CmdPid)
 	end.
 
 %% Handle next command line to execute.
@@ -180,11 +181,15 @@ command_return(IO, Command, Status) ->
 		
 		{error, {Type, Message}} ->
 			?STDERR("nosh: ~p error: ~s~n", [Type, Message]);
-
-		{{Except, Reason}, Trace} -> 
-			Format = "~s: ~p~nReason: ~p~nDetail: ~p~n",
-			?STDERR(Format, [Command, Except, Reason, Trace]);
 		
+		{{Except, Detail}, Trace} -> 
+			Format = "~s: ~p~nDetail: ~p~nTrace: ~p~n",
+			?STDERR(Format, [Command, Except, Detail, Trace]);
+
+		{Error, [Source | Trace]} ->
+			Format = "~s: runtime error: ~p~nSource: ~p~nTrace: ~p~n",
+			?STDERR(Format, [Command, Error, Source, Trace]);
+
 		Else -> 
 			?STDERR("~s: ~p~n", [Command, Else])
 	end.

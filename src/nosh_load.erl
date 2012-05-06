@@ -66,7 +66,7 @@
 %%
 
 -include_lib("kernel/include/file.hrl").
--define(debug, true).
+%-define(debug, true).
 -include("macro.hrl").
 
 %%
@@ -85,7 +85,6 @@
 %%
 
 test(IO) ->
-	?INIT_DEBUG,
 	?DEBUG("Running ver. ~s nosh_load test.~n", [?VERSION(?MODULE)]), 
 
 	?DEBUG("~n"),
@@ -109,6 +108,7 @@ test(IO) ->
 load(IO, Command, Path) when is_atom(Command) -> 
 	load(IO, atom_to_list(Command), Path);
 load(IO, Command, Path) -> 
+	?INIT_DEBUG,
 	case ensure_compiled(IO, Command, Path) of
 		{error, Errors, Warnings}	-> throw({load_failed, 
 											  {compiler, 

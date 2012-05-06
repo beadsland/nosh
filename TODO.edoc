@@ -1,5 +1,5 @@
-@todo refactor nosh_load errors
 @todo make good
+@todo spec nosh_load
 @todo nosh_parse tokens
 @todo nosh_eval
 @todo nosh_exec
