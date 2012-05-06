@@ -22,7 +22,7 @@
 %% -----------------------------------------------------------------------
 %% CDDL HEADER END
 
-%% @doc Submodule of {@see nosh_parse}.
+%% @doc Submodule of {@link nosh_parse}.
 %%
 %% <i>May be refactored back into nosh_parse at a later date.</i>
 %% @end
