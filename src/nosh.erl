@@ -139,8 +139,9 @@ do_line(Stdin, Stdout, Stderr, Line) ->
 							   	[self(), self(), self(), "hot\n"]),
 			?MODULE:loop(Stdin, Stdout, Stderr, hot, HotPid);
 		"good\n" ->
+			code:add_path("deps/superl/ebin"),
 			GoodPid = spawn_link(superl, start, []),
-			?MODULE:loop(Stdin, Stdout, Stderr, good, GoodPid);
+			?MODULE:loop(Stdin, Stdout, Stderr, good, GoodPid);		
 		_Line ->
 			NewPid = spawn_link(nosh, command_run, 
 								[self(), self(), self(), Line]),
