@@ -24,19 +24,24 @@
 
 -define(INIT_DEBUG(Pid), put(debug, Pid)).
 -ifdef(debug).
--define(DEBUG(Format, List), get(debug) ! {debug, self(), lists:flatten(io_lib:format("-- " ++ Format, List))}).
+-define(DEBUG(Format, List), 
+		get(debug) ! {debug, self(), 
+					  lists:flatten(io_lib:format("-- " ++ Format, List))}).
 -else.
 -define(DEBUG(F, L), put(debug_garbage, {F,L})).
 -endif.
 -define(DEBUG(String), ?DEBUG(String, [])).  
 
 -import(proplists).
--define(ATTRIB(Module, Attribute), proplists:get_value(Attribute, Module:module_info(attributes))).
+-define(ATTRIB(Module, Attribute), 
+		proplists:get_value(Attribute, Module:module_info(attributes))).
 -define(VERSION(Module), ?ATTRIB(Module, version)).
 
 -import(io_lib).
 -import(lists).
--define(STDERR(Format, List), Stderr ! {stderr, self(), lists:flatten(io_lib:format(Format, List))}).
+-define(STDERR(Format, List), 
+		Stderr ! {stderr, self(), lists:flatten(io_lib:format(Format, List))}).
 -define(STDERR(String), ?STDERR(String, [])).
--define(STDOUT(Format, List), Stdout ! {stdout, self(), lists:flatten(io_lib:format(Format, List))}).
+-define(STDOUT(Format, List), 
+		Stdout ! {stdout, self(), lists:flatten(io_lib:format(Format, List))}).
 -define(STDOUT(String), ?STDOUT(String, [])).
