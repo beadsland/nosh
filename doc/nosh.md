@@ -13,7 +13,7 @@ The `nosh` process module, which handles messaging with a paired
 
 Copyright (c) 2012 Beads D. Land-Trujillo
 
-__Version:__ 0.1.6
+__Version:__ 0.1.7
 
 __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).<a name="description"></a>
 
@@ -24,20 +24,30 @@ Commands:
 
 
 
-<dt><code>.</code></dt>
-
-
-
-<dd>end-of-file (exit nosh application)</dd>
-
-
-
-
 <dt><code>hot</code></dt>
 
 
 
 <dd>hotswap nosh modules</dd>
+
+
+
+
+<dt><code>good</code></dt>
+
+
+
+<dd>check for superly good nosh code</dd>
+
+
+
+
+<dt><code>!<i>command</i></dt><dd>pass <i>command</i> to native shell</dd>
+<dt>`.</code></dt>
+
+
+
+<dd>end-of-file (exit nosh application)</dd>
 
 
 
@@ -60,13 +70,22 @@ message from `noterm`.  This is currently produced by typing a period
 ##Function Index##
 
 
-<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#command_run-4">command_run/4</a></td><td></td></tr><tr><td valign="top"><a href="#hotswap_run-4">hotswap_run/4</a></td><td></td></tr><tr><td valign="top"><a href="#start-1">start/1</a></td><td>Start nosh, passing Pid of process providing standard i/o
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#bang_run-4">bang_run/4</a></td><td></td></tr><tr><td valign="top"><a href="#command_run-4">command_run/4</a></td><td></td></tr><tr><td valign="top"><a href="#hotswap_run-4">hotswap_run/4</a></td><td></td></tr><tr><td valign="top"><a href="#start-1">start/1</a></td><td>Start nosh, passing Pid of process providing standard i/o
 messaging.</td></tr></table>
 
 
 <a name="functions"></a>
 
 ##Function Details##
+
+<a name="bang_run-4"></a>
+
+###bang_run/4##
+
+
+
+
+`bang_run(Stdin, Stdout, Stderr, BangCmd) -> any()`
 
 <a name="command_run-4"></a>
 
