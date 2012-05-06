@@ -443,7 +443,15 @@ _Not yet implemented_.
 
 
 
-<pre>parse_error() = string() | {noline, context_list}</pre>
+<pre>parse_error() = {<a href="#type-parse_error_type">parse_error_type()</a>, string()}</pre>
+
+
+
+###<a name="type-parse_error_type">parse_error_type()</a>##
+
+
+
+<pre>parse_error_type() = quote | group</pre>
 
 
 
