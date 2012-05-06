@@ -354,7 +354,9 @@ parse({context, QType}, Stack, List) ->
 try_symbols(Symbols) ->
 	Stack = [],
 	try nosh_context:close_context(brne, Stack, Symbols) of
-		{List, Stack} 		-> {ok, List}
+		{List, Stack} 		-> [{{context, brne}, Line}] = List,
+							   [{{context, line}, Terms}] = Line,
+							   {ok, Terms}
 	catch
 		{context, line} 	-> {error, {quote, ?CLOSING("EOL")}};
 		{context, back} 	-> {error, {quote, ?CLOSING("\`")}};
