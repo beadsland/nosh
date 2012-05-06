@@ -83,31 +83,54 @@ start() ->
 %%@private Export to allow for hotswap.
 msg_loop(Stdin, Stdout, Stderr) ->
 	receive
-		{purging, _Pid, _Mod}		-> true; % chase your tail 
-		{stdout, Stdin, Line}		-> ?STDOUT(strip_escapes(Line));
-		{stderr, Stdin, Line}		-> io:format(standard_error, "** ~s", 
-												 [Line]); 
-		{stdout, Stdout, Line} 		-> io:format(Line, []);
-		{stderr, Stderr, Line} 		-> io:format(standard_error, "** ~s", 
-												 [Line]);
-		{debug, _Pid, Line}			-> io:format(standard_error, Line, []);
-		{'EXIT', Stdin, Reason}  	-> grace("Stopping on keyboard exit", 
-											 Reason), 
-									   exit(normal);
-		{'EXIT', Stdout, Reason}	-> grace("Stopping on shell exit", 
-											 Reason), 
-									   init:stop();
-		{'EXIT', ExitPid, Reason}	-> Message = io_lib:format(
-												   "Stopping on ~p exit", 
-												   [ExitPid]),
-									   grace(Message, Reason),
-									   exit(normal);
-		Noise						-> io:format(standard_error, 
-												 "noise: ~p ~p~n", 
-												 [Noise, self()])
-    end,
+		{purging, _Pid, _Mod}		-> % chase your tail
+			?MODULE:msg_loop(Stdin, Stdout, Stderr);
+		{'EXIT', ExitPid, Reason}	-> 
+			do_exit(Stdin, Stdout, Stderr, ExitPid, Reason);
+		{MsgTag, Stdin, Line}		-> 
+			do_keyin(Stdin, Stdout, Stderr, MsgTag, Line);
+		{MsgTag, Stdout, Line}		-> 
+			do_noshout(Stdin, Stdout, Stderr, MsgTag, Line);
+		{MsgTag, Stderr, Line}		->
+			do_noshout(Stdin, Stdout, Stderr, MsgTag, Line);
+		Noise						-> 
+			do_noise(Stdin, Stdout, Stderr, Noise)
+    end.
+
+% Handle nosh process messages.
+do_noshout(Stdin, Stdout, Stderr, MsgTag, Line) ->
+	case MsgTag of
+		stdout	-> io:format(Line, []);
+		stderr	-> io:format(standard_error, "** ~s", [Line]);
+		debug	-> io:format(standard_error, "-- ~s", [Line])
+	end,
 	?MODULE:msg_loop(Stdin, Stdout, Stderr).  
 
+% Handle keyboard process messages.
+do_keyin(Stdin, Stdout, Stderr, MsgTag, Line) ->
+	case MsgTag of
+		stdout	-> ?STDOUT(strip_escapes(Line));
+		stderr	-> io:format(standard_error, "** ~s", [Line])
+	end,
+	?MODULE:msg_loop(Stdin, Stdout, Stderr).  
+	
+% Handle exit signals.
+do_exit(Stdin, Stdout, _Stderr, ExitPid, Reason) ->
+	case ExitPid of
+		Stdin	-> grace("Stopping on keyboard exit", Reason),
+				   exit(normal);
+		Stdout	-> grace("Stopping on shell exit", Reason),
+				   init:stop();
+		_Other	-> Message = io_lib:format("Stopping on ~p exit", [ExitPid]),
+				   grace(Message, Reason),
+				   exit(normal)
+	end.
+
+% Handle message queue noise.
+do_noise(Stdin, Stdout, Stderr, Noise) ->
+	io:format(standard_error, "noise: ~p ~p~n", [Noise, self()]),
+	?MODULE:msg_loop(Stdin, Stdout, Stderr).  
+	
 grace(Message, Reason) -> 
 	case Reason of
 		{{Exception, ExcReason}, Trace} 	-> 
