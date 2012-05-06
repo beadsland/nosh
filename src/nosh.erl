@@ -102,39 +102,43 @@ loop(Stdin, Stdout, Stderr, Cmd, CmdPid) ->
             ?MODULE:loop(Stdin, Stdout, Stderr, Cmd, CmdPid);
 		{'EXIT', ExitPid, Reason}	->
 			do_exit(Stdin, Stdout, Stderr, Cmd, CmdPid, ExitPid, Reason);
-		{stdout, Stdin, Payload} when CmdPid == self()	->
-			do_line(Stdin, Stdout, Stderr, Payload);			
-		{MsgTag, CmdPid, Payload} ->
-			do_output(Stdin, Stdout, Stderr, Cmd, CmdPid, MsgTag, Payload);
+		{stdout, Stdin, Line} when CmdPid == self()	->
+			do_line(Stdin, Stdout, Stderr, Line);			
+		{MsgTag, CmdPid, Output} ->
+			do_output(Stdin, Stdout, Stderr, Cmd, CmdPid, MsgTag, Output);
 		Noise when CmdPid /= self() -> 
 			do_noise(Stdin, Stdout, Stderr, Cmd, CmdPid, Noise)
 	end.
 
 % Handle messages from executing command.
-do_output(Stdin, Stdout, Stderr, Command, CmdPid, MsgTag, Payload) ->
+do_output(Stdin, Stdout, Stderr, Command, CmdPid, MsgTag, Output) ->
 	case MsgTag of
 		stdout	->
-			Stdout ! {stdout, self(), Payload},
+			Stdout ! {stdout, self(), Output},
             ?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid);
 		stderr 	->
-			Stderr ! {stderr, self(), Payload},
+			Stderr ! {stderr, self(), Output},
 			?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid);
 		debug 	->
-			Stderr ! {debug, self(), Payload},
+			Stderr ! {debug, self(), Output},
 			?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid)
 	end.
 
 %% Handle next command line to execute.
 %% @todo refactor `hot' and `good' as library commands
+%% @todo refactor bang commands as direct invocations
 do_line(Stdin, Stdout, Stderr, Line) ->
 	case Line of
 		"hot\n"	->
 			HotPid = spawn_link(nosh, hotswap_run,
 							   	[self(), self(), self(), "hot\n"]),
-			?MODULE:loop(Stdin, Stdout, Stderr, "hot", HotPid);
+			?MODULE:loop(Stdin, Stdout, Stderr, hot, HotPid);
 		"good\n" ->
 			GoodPid = spawn_link(superl, start, []),
-			?MODULE:loop(Stdin, Stdout, Stderr, "good", GoodPid);
+			?MODULE:loop(Stdin, Stdout, Stderr, good, GoodPid);
+		[$! | BangCmd] ->
+			?STDOUT("~p: ~p", [BangCmd, os:cmd(BangCmd)]),
+			?MODULE:loop(Stdin, Stdout, Stderr, ?MODULE, self());
 		_Line ->
 			NewPid = spawn_link(nosh, command_run, 
 								[self(), self(), self(), Line]),
