@@ -247,19 +247,13 @@
 %% @end
 
 %% TODO: Tokenizing
-%% TODO: [...] Lists
-%% TODO: [`'...`'] Lists command substituion
-%% TODO: (...) second position parameter Lists
-%% TODO: {...} Tuples
-%% TODO: `<...>' Pids
-%% TODO: `<<...>>' Bitstrings
 %% TODO: refactor documentation to eval/exec/etc.
 %% TODO: Erlang Stack
 %% TODO: Line continuation
 
-%% @version 0.1.4
+%% @version 0.1.5
 -module(nosh_parse).
--version("0.1.4").
+-version("0.1.5").
 
 %%
 %% Include files
@@ -276,7 +270,7 @@
 %% Exported functions
 %%
 
--export([parse/2]).
+-export([parse/2, parse/3]).
 
 %%
 %% API functions
@@ -300,7 +294,7 @@
 -spec parse(Subject :: nonempty_string(), Stderr :: io_proc()) -> 
 		  failed | list(block()).
 %%
-parse(Subject, Stderr) ->
+parse(Subject, Stderr) -> 
 	?INIT_DEBUG(Stderr),
 	Pattern = io_lib:format("([~s~s~s])", 
 							[?context_CHARS, ?GROUP_CHARS, ?SPACE_CHARS]),
@@ -313,7 +307,7 @@ parse(Subject, Stderr) ->
 	QuoteErr = "Quote error: Closing ~s missing~n", 
 	GroupErr = "Group error: Closing ~s missing~n", 
 	ExecErr = "Context error: Closing ~s missing~n",
-	try close_context(line, [{context, brne}], CleanSplit) of
+	try nosh_context:close_context(line, [{context, brne}], CleanSplit) of
 		{Parse, [{context, brne}]} -> 
 			[{{context, line}, StackList}, {close_context, brne}] = 
 				Parse, StackList		
@@ -331,16 +325,14 @@ parse(Subject, Stderr) ->
 							   failed
 	end. 
 
-%%
-%% Local functions
-%%
-
-%% Parse list of strings split on quoting and grouping characters, 
+%% @doc Parse list of strings split on quoting and grouping characters, 
 %% according to current Stack type.  Return tuple of context tree, context
 %% stack and unparsed tail OR tuple of 'close_context', context stack, and 
 %% trailing context tree.
 %%
 %% Throw exception for unmatched quoting or grouping character.
+%% @end
+%% @todo spec this function
 parse({context, brne}, [], []) -> {[{close_context, brne}], []};
 parse(Type, _Stack, []) -> throw(Type);
 parse(Type, Stack, [[] | Tail]) -> parse(Type, Stack, Tail);
@@ -349,7 +341,7 @@ parse(Type, Stack, [Head | Tail]) when is_integer(Head) ->
 	parse(Type, Stack, [HeadStr | Tail]);
 parse({context, QType}, Stack, List) -> 	
 	?DEBUG("parse_context(~p, ~p, ~p)~n", [QType, Stack, List]), 	
-	Parse = parse_context(QType, Stack, List), 
+	Parse = nosh_context:parse_context(QType, Stack, List), 
 	?DEBUG("parse_context(~p, ~p, ~p) ->~n     ~p~n", 
 		   [QType, Stack, List, Parse]),
 	case Parse of
@@ -367,146 +359,8 @@ parse({context, QType}, Stack, List) ->
 			{Tail, ReturnStack}
 	end.  
 
-%% Wind up context block.
-close_context(QType, Stack, List) ->
-	?DEBUG("close_context(~p, ~p, ~p)~n", [QType, Stack, List]),
-	{Tail, _ReturnStack} = parse({context, QType}, Stack, List), 
-	Close = {close_context, QType},
-	Pred = fun(T) -> T /= Close end,
-	{L1, L2} = lists:splitwith(Pred, Tail),
-	if
-		QType == dbcp, L1 == []	-> 
-			Context = "\\";      % Didn't escape anything, so restore 
-								 % backslash as regular character.
+%%
+%% Local functions
+%%
 
-		true -> 
-			Context = {{context, QType}, L1}
-	end,
-	{[Context | lists:delete(Close, L2)], Stack}. 
 
-%% Pass non-symbols along unchanged (this should be tokenizing).
-pass_context(QT, Stack, Symbol, Tail) ->
-	{NewTail, _ReturnStack} = parse({context, QT}, Stack, Tail),
-	{[Symbol | NewTail], Stack}.
-
-%% @doc Unwind context and group stream.
-parse_context(escp, [Type | Stack], [Head | Tail]) -> 
-	[First | Rest] = Head,
-	Escape = [First, {close_context, escp}],
-	{NewTail, Stack} = parse(Type, Stack, [Rest | Tail]), 
-	{Escape ++ NewTail, [Type | Stack]};
-
-parse_context(dbcp, [Type | Stack], [Head | Tail]) -> 
-	[First | Rest] = Head,
-	case [First] of 
-		"\$"	-> Escape = [[First], {close_context, dbcp}], Left = [Rest];
-		"\`"	-> Escape = [[First], {close_context, dbcp}], Left = [Rest];
-		"\""	-> Escape = [[First], {close_context, dbcp}], Left = [Rest];
-		"\\"	-> Escape = [[First], {close_context, dbcp}], Left = [Rest]; 
-		"\n"	-> Escape = throw({context, escp}), Left = [Rest]; 
-		_Other	-> Escape = [{close_context, dbcp}], Left = [Head]
-	end,  
-	{NewTail, Stack} = parse(Type, Stack, [Left | Tail]), 
-	{Escape ++ NewTail, [Type | Stack]};
-
-parse_context(QT, Stack, [Symbol | Tail]) when Symbol == "\n" ->
-	case QT	of
-		line 	-> {close_context, Stack, Tail};
- 
-		semi 	-> {close_context, Stack, [Symbol | Tail]};
-		ifok 	-> {close_context, Stack, [Symbol | Tail]};
-		ampi 	-> {close_context, Stack, [Symbol | Tail]};
-		ifnz 	-> {close_context, Stack, [Symbol | Tail]};
-		pipe 	-> {close_context, Stack, [Symbol | Tail]};
-
-		pren	-> throw({context, pren});
-		back	-> throw({context, back});
-		doub	-> throw({context, doub});
-		sing	-> throw({context, sing});
-
-		_Other	-> pass_context(QT, Stack, Symbol, Tail)
-	end;
-
-parse_context(QT, Stack, [Symbol, Symbol | Tail]) when Symbol == "\&";
-													   Symbol == "\|" ->
-	case QT of
-		doub	-> pass_context(QT, Stack, Symbol, Tail);
-		sing	-> pass_context(QT, Stack, Symbol, Tail);
-
-		_Other	-> 
-			case Symbol of
-				"\&" -> close_context(ifok, [{context, QT} | Stack], Tail);
-				"\|" -> close_context(ifnz, [{content, QT} | Stack], Tail)
-			end
-	end;
-	
-parse_context(QT, Stack, [Symbol | Tail]) when Symbol == "\;"; 
-											   Symbol == "\&";
-											   Symbol == "\|" ->
-	case QT of
-		doub	-> pass_context(QT, Stack, Symbol, Tail);
-		sing	-> pass_context(QT, Stack, Symbol, Tail);
-
-		_Other	-> 
-			case Symbol of
-				"\;" -> close_context(semi, [{context, QT} | Stack], Tail);
-				"\&" -> close_context(ampi, [{context, QT} | Stack], Tail);
-				"\|" -> close_context(pipe, [{content, QT} | Stack], Tail)
-			end
-	end;
-
-parse_context(QT, Stack, [Symbol | Tail]) when Symbol == "\(" ->
-	case QT of
-		doub	-> pass_context(QT, Stack, Symbol, Tail);
-		sing	-> pass_context(QT, Stack, Symbol, Tail);
-
-		_Other	-> close_context(pren, [{context, QT} | Stack], Tail)
-	end;
-
-parse_context(QT, Stack, [Symbol | Tail]) when Symbol == "\)" ->
-	case QT of
-		doub	-> pass_context(QT, Stack, Symbol, Tail);
-		sing	-> pass_context(QT, Stack, Symbol, Tail);
-
-		pren	-> {close_context, Stack, Tail};
-		line	-> throw({close, pren});
-			
-		_Other	-> {close_context, Stack, [Symbol | Tail]}
-	end;
-
-parse_context(QT, Stack, [Symbol | Tail]) when Symbol == "\`" ->
-	case QT of
-		sing	-> pass_context(QT, Stack, Symbol, Tail);
-		
-		back	-> {close_context, Stack, Tail};
-
-		_Other	-> close_context(back, [{context, QT} | Stack], Tail)
-	end;
-
-parse_context(QT, Stack, [Symbol | Tail]) when Symbol == "\"" ->
-	case QT of
-		doub	-> {close_context, Stack, Tail};
-		sing	-> pass_context(QT, Stack, Symbol, Tail);
-			
-		_Other	-> close_context(doub, [{context, QT} | Stack], Tail)
-	end;
-
-parse_context(QT, Stack, [Symbol | Tail]) when Symbol == "\'" ->
-	case QT of
-		doub	-> pass_context(QT, Stack, Symbol, Tail);
-		sing	-> {close_context, Stack, Tail};
-			
-		_Other	-> close_context(sing, [{context, QT} | Stack], Tail)
-	end;
-
-parse_context(QT, Stack, [Symbol | Tail]) when Symbol == "\\" ->
-	case QT of
-		doub	-> close_context(dbcp, [{context, QT} | Stack], Tail);
-		sing	-> pass_context(QT, Stack, Symbol, Tail);
-			
-		_Other	-> close_context(escp, [{context, QT} | Stack], Tail)
-	end;
-
-parse_context(QType, Stack, [Head | Tail]) -> 
-	{NewTail, _ReturnStack} = parse({context, QType}, Stack, Tail), 
-	{[Head | NewTail], Stack}.
