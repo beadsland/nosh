@@ -11,7 +11,7 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">erlang xref
+* <font color="red">make good
 </font>
 * <font color="red">nosh_parse tokens
 </font>

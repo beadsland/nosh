@@ -95,61 +95,70 @@ start(Stdin, Stdout, Stderr) ->
 	?MODULE:loop(Stdin, Stdout, Stderr, ?MODULE, self()).
 
 %%@private Export to allow for hotswap.
-loop(Stdin, Stdout, Stderr, Command, CmdPid) ->
+loop(Stdin, Stdout, Stderr, Cmd, CmdPid) ->
 	receive
-		{purging, _Pid, purging, _Mod} -> 
-			true, % chase your tail
-            ?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid);
-		
-		% Listen for executing command.
-		{stdout, CmdPid, Line} -> 
-			Stdout ! {stdout, self(), Line},
-            ?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid);
-		
-		{stderr, CmdPid, Line} -> 
-			Stderr ! {stderr, self(), Line},
-			?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid);
+		{purging, _Pid, _Mod} -> % chase your tail
+            ?MODULE:loop(Stdin, Stdout, Stderr, Cmd, CmdPid);
+		{'EXIT', ExitPid, Reason}	->
+			do_exit(Stdin, Stdout, Stderr, Cmd, CmdPid, ExitPid, Reason);
+		{stdout, Stdin, Payload} when CmdPid == self()	->
+			do_line(Stdin, Stdout, Stderr, Payload);			
+		{MsgTag, CmdPid, Payload} ->
+			do_output(Stdin, Stdout, Stderr, Cmd, CmdPid, MsgTag, Payload);
+		Noise when CmdPid /= self() -> 
+			do_noise(Stdin, Stdout, Stderr, Cmd, CmdPid, Noise)
+	end.
 
-		{debug, CmdPid, Line} -> 
-			Stderr ! {debug, self(), Line},
+% Handle messages from executing command.
+do_output(Stdin, Stdout, Stderr, Command, CmdPid, MsgTag, Payload) ->
+	case MsgTag of
+		stdout	->
+			Stdout ! {stdout, self(), Payload},
+            ?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid);
+		stderr 	->
+			Stderr ! {stderr, self(), Payload},
 			?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid);
-		
-		{'EXIT', CmdPid, Reason} -> 
-			command_return(Command, Reason, Stderr),
-			prompt(Stdout),
-			?MODULE:loop(Stdin, Stdout, Stderr, ?MODULE, self());
-		
-		% Listen for next command to execute.
-		{Stdin, stdout, "hot\n"} when CmdPid == self() -> 
-            HotPid = spawn_link(nosh, hotswap_run,
+		debug 	->
+			Stderr ! {debug, self(), Payload},
+			?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid)
+	end.
+
+% Handle next command line to execute.
+do_line(Stdin, Stdout, Stderr, Line) ->
+	case Line of
+		"hot\n"	->
+			HotPid = spawn_link(nosh, hotswap_run,
 							   	[self(), self(), self(), "hot\n"]),
 			prompt(Stdout),
 			?MODULE:loop(Stdin, Stdout, Stderr, "hot", HotPid);
-		
-		{Stdin, stdout, Line} when CmdPid == self()	->
+		_Line ->
 			NewPid = spawn_link(nosh, command_run, 
 								[self(), self(), self(), Line]),
             NewCom = string:tokens(Line, "\n"),
-			?MODULE:loop(Stdin, Stdout, Stderr, NewCom, NewPid);
-		
-		% Listen for termination of shell process.
-		{'EXIT', Stdin, Reason}	-> 
-			?DEBUG("Stopping on terminal exit: ~p ~p~n", [Reason, self()]),
-			init:stop();
-		
-		{'EXIT', ExitPid, normal} -> 
-			?DEBUG("Saw process exit: ~p~n", [ExitPid]),
-			?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid);
-		
-		{'EXIT', ExitPid, Reason} -> 
-			?STDERR("Exit ~p: ~p ~p~n", [ExitPid, Reason, self()]), 
-			init:stop();
-		
-		% Listen for any other noise.
-		Noise -> 
-			?STDERR("noise: ~p ~p~n", [Noise, self()]),
-			?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid)
+			?MODULE:loop(Stdin, Stdout, Stderr, NewCom, NewPid)
 	end.
+
+% Handle termination of processes.
+do_exit(Stdin, Stdout, Stderr, Command, CmdPid, ExitPid, Reason) ->
+	if ExitPid == Stdin 	->
+		   ?DEBUG("Stopping on terminal exit: ~p ~p~n", [Reason, self()]),
+		   init:stop();
+	   ExitPid == CmdPid	->
+		   command_return(Command, Reason, Stderr),
+		   prompt(Stdout),
+		   ?MODULE:loop(Stdin, Stdout, Stderr, ?MODULE, self());	   
+	   Reason == normal 	->
+		   ?DEBUG("Saw process exit: ~p~n", [ExitPid]),
+		   ?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid);
+	   true 				->
+		   ?STDERR("Exit ~p: ~p ~p~n", [ExitPid, Reason, self()]), 
+		   init:stop()
+	end.
+		   
+% Handle noise on the message queue.
+do_noise(Stdin, Stdout, Stderr, Command, CmdPid, Noise) ->
+	?STDERR("noise: ~p ~p~n", [Noise, self()]),
+	?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid).
 
 prompt(Stdout) -> 
 	Prompt = "nosh> ",
@@ -205,7 +214,8 @@ hotswap_nosh([{Module, _Path} | Tail], Stderr) ->
 hotswap(Module, Stderr) ->
 	{file, Filename} = code:is_loaded(Module),
 	try
-		nosh_load:load(atom_to_list(Module), filename:dirname(Filename), Stderr)
+		nosh_load:load(Module, filename:dirname(Filename), Stderr)
 	catch
-		{Error, Detail}	->	?STDERR("~p: ~p~nDetail: ~p~n", [Module, Error, Detail]) 
+		{Error, Detail}	-> 
+			?STDERR("~p: ~p~nDetail: ~p~n", [Module, Error, Detail]) 
     end.
