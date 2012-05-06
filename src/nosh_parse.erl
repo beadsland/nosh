@@ -24,8 +24,8 @@
 
 %% @doc This is a preliminary draft of the command line parser for `nosh'.
 %%
-%% Each command line is decomposed into a context tree, representing 
-%% Execution, Grouping, Quoting, Substitution and Term contexts.  
+%% Each command line is decomposed into a context tree, representing
+%% Execution, Grouping, Quoting, Substitution and Term contexts.
 %%
 %% <i>Not all parsing rules described below have been implemented.</i>
 %%
@@ -41,7 +41,7 @@
 %% 
 %% The default context of all command lines is Bourne Context, and all
 %% grouping, quoting, and substitution contexts are parsed in accordance
-%% with Bourne shell syntax.  
+%% with Bourne shell syntax.
 %%
 %% <i>The below discussion of Erlang Context describes functionality
 %% yet to be implemented.</i>
