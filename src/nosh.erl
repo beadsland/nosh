@@ -60,6 +60,9 @@
 %-define(debug, true).
 -include("macro.hrl").
 
+% This will eventually draw from ENV...
+-define(PROMPT, ?STDOUT("nosh> ")).
+
 %%
 %% Exported functions
 %%
@@ -87,7 +90,7 @@ start(IO) ->
 	
 	nosh_load:test(IO),
 
-	prompt(IO),
+	?PROMPT,
 	?MODULE:loop(IO, ?MODULE, self()).
 
 %%
@@ -146,7 +149,7 @@ do_exit(IO, Command, CmdPid, ExitPid, Reason) ->
 		   init:stop();
 	   ExitPid == CmdPid	->
 		   command_return(IO, Command, Reason),
-		   prompt(IO),
+		   ?PROMPT,
 		   ?MODULE:loop(IO, ?MODULE, self());	   
 	   Reason == normal 	->
 		   ?DEBUG("Saw process exit: ~p~n", [ExitPid]),
@@ -160,10 +163,6 @@ do_exit(IO, Command, CmdPid, ExitPid, Reason) ->
 do_noise(IO, Command, CmdPid, Noise) ->
 	?STDERR("noise: ~p ~p~n", [Noise, self()]),
 	?MODULE:loop(IO, Command, CmdPid).
-
-prompt(IO) -> 
-	Prompt = "nosh> ",
-	?STDOUT(Prompt).
 
 % We spawn command as separate process and then wait on it.
 % This allows us to catch the exit status of runtime errors.
