@@ -1,30 +1,33 @@
 
 
-#Modulenosh#
+#Module nosh#
 * [Description](#description)
 * [Function Index](#index)
 * [Function Details](#functions)
 
 
-The`nosh` process module, which handles messaging with a paired`noterm` process.
+The `nosh` process module, which handles messaging with a paired
+`noterm` process.
 
 
 
-Copyright (c)2012 Beads D. Land-Trujillo
+Copyright (c) 2012 Beads D. Land-Trujillo
 
-__Version:__0.1.9
+__Version:__ 0.1.9
 
-__Authors:__Beads D. Land-Trujillo (_web site:_[`http://twitter.com/beadsland`](http://twitter.com/beadsland)).<a name="description"></a>
+__Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).<a name="description"></a>
 
 ##Description##
+ Commands:
 
-Commands:
+
 
 <dt><code>hot</code></dt>
 
 
 
 <dd>hotswap nosh modules</dd>
+
 
 
 
@@ -36,34 +39,36 @@ Commands:
 
 
 
-<dt><code>!<i>command</i></dt><dd>pass<i>command</i> to native shell</dd><dt>`.</code></dt>
+
+<dt><code>!<i>command</i></dt><dd>pass <i>command</i> to native shell</dd>
+<dt>`.</code></dt>
 
 
 
 <dd>end-of-file (exit nosh application)</dd>
 
 
+ 
 
+__Draft Notes__ 
 
-__Draft Notes__
-
-
-% A`nosh` process is launched by first starting[`noterm`](noterm.md), which
-handles keyboard input, sending this to the`nosh` process as messages,
+% A `nosh` process is launched by first starting [`noterm`](noterm.md), which
+handles keyboard input, sending this to the `nosh` process as messages,
 and presenting output and errors to the user as they are received in
-message form from the`nosh` process.
-The`nosh` process continues to run until it receives an end-of-file
-message from`noterm`.  This is currently produced by typing a period
-(`.`) by itself on a line, followed by a`<newline>`.<a name="index"></a>
+message form from the `nosh` process. The `nosh` process continues to run until it receives an end-of-file
+message from `noterm`.  This is currently produced by typing a period
+(`.`) by itself on a line, followed by a `<newline>`.<a name="index"></a>
 
 ##Function Index##
 
 
 <table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#bang_run-2">bang_run/2</a></td><td></td></tr><tr><td valign="top"><a href="#command_run-2">command_run/2</a></td><td></td></tr><tr><td valign="top"><a href="#hotswap_run-2">hotswap_run/2</a></td><td></td></tr><tr><td valign="top"><a href="#start-1">start/1</a></td><td>Start nosh, receiving standard I/O from noterm.</td></tr></table>
 
+
 <a name="functions"></a>
 
 ##Function Details##
+
 <a name="bang_run-2"></a>
 
 ###bang_run/2##
@@ -71,7 +76,7 @@ message from`noterm`.  This is currently produced by typing a period
 
 
 
-`bang_run(IO,BangCmd) -> any()`
+`bang_run(IO, BangCmd) -> any()`
 
 <a name="command_run-2"></a>
 
@@ -80,7 +85,7 @@ message from`noterm`.  This is currently produced by typing a period
 
 
 
-`command_run(IO,Line) -> any()`
+`command_run(IO, Line) -> any()`
 
 <a name="hotswap_run-2"></a>
 
@@ -89,7 +94,7 @@ message from`noterm`.  This is currently produced by typing a period
 
 
 
-`hotswap_run(IO,Line) -> any()`
+`hotswap_run(IO, Line) -> any()`
 
 <a name="start-1"></a>
 
