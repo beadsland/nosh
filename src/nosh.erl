@@ -31,6 +31,7 @@
 %% <dl>
 %% <dt>`.'</dt><dd>end-of-file (exit nosh application)</dd>
 %% <dt>`hot'</dt><dd>hotswap nosh modules</dd>
+%% <dt>`good'</dt><dd>check for superly good nosh code</dd>
 %% </dl>
 %%
 %% <b>Draft Notes</b>
@@ -47,9 +48,9 @@
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
 %% @copyright 2012 Beads D. Land-Trujillo
 
-%% @version 0.1.6
+%% @version 0.1.7
 -module(nosh).
--version("0.1.6").
+-version("0.1.7").
 
 %%
 %% Include files
@@ -123,14 +124,17 @@ do_output(Stdin, Stdout, Stderr, Command, CmdPid, MsgTag, Payload) ->
 			?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid)
 	end.
 
-% Handle next command line to execute.
+%% Handle next command line to execute.
+%% @todo refactor `hot' and `good' as library commands
 do_line(Stdin, Stdout, Stderr, Line) ->
 	case Line of
 		"hot\n"	->
 			HotPid = spawn_link(nosh, hotswap_run,
 							   	[self(), self(), self(), "hot\n"]),
-			prompt(Stdout),
 			?MODULE:loop(Stdin, Stdout, Stderr, "hot", HotPid);
+		"good\n" ->
+			GoodPid = spawn_link(superl, start, []),
+			?MODULE:loop(Stdin, Stdout, Stderr, "good", GoodPid);
 		_Line ->
 			NewPid = spawn_link(nosh, command_run, 
 								[self(), self(), self(), Line]),
@@ -155,7 +159,7 @@ do_exit(Stdin, Stdout, Stderr, Command, CmdPid, ExitPid, Reason) ->
 		   init:stop()
 	end.
 		   
-% Handle noise on the message queue.
+% Handle noise on message queue.
 do_noise(Stdin, Stdout, Stderr, Command, CmdPid, Noise) ->
 	?STDERR("noise: ~p ~p~n", [Noise, self()]),
 	?MODULE:loop(Stdin, Stdout, Stderr, Command, CmdPid).
