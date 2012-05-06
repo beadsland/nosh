@@ -186,6 +186,7 @@ more details.
 
 <table width="100%" border="0" summary="list of modules">
 <tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/nosh.md" class="module">nosh</a></td></tr>
+<tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/nosh_context.md" class="module">nosh_context</a></td></tr>
 <tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/nosh_eval.md" class="module">nosh_eval</a></td></tr>
 <tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/nosh_exec.md" class="module">nosh_exec</a></td></tr>
 <tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/nosh_load.md" class="module">nosh_load</a></td></tr>

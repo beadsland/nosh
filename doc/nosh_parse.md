@@ -13,7 +13,7 @@ This is a preliminary draft of the command line parser for `nosh`.
 
 Copyright (c) 2012 Beads D. Land-Trujillo
 
-__Version:__ 0.1.4
+__Version:__ 0.1.5
 
 __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).
 
@@ -26,12 +26,6 @@ for detailed specification. (to be implemented)
 __<font color="red">To do</font>__
 <br></br>
 * <font color="red"> Tokenizing</font>
-* <font color="red"> [...] Lists</font>
-* <font color="red"> [`...`] Lists command substituion</font>
-* <font color="red"> (...) second position parameter Lists</font>
-* <font color="red"> {...} Tuples</font>
-* <font color="red"> `<...>` Pids</font>
-* <font color="red"> `<<...>>` Bitstrings</font>
 * <font color="red"> refactor documentation to eval/exec/etc.</font>
 * <font color="red"> Erlang Stack</font>
 * <font color="red"> Line continuation</font>
@@ -397,11 +391,19 @@ _Not yet implemented_.
 
 
 
-###<a name="type-block">block()</a>##
+###<a name="type-context">context()</a>##
 
 
 
-<pre>block() = nonempty_string() | {<a href="#type-context_type">context_type()</a>, [<a href="#type-block">block()</a>]}</pre>
+<pre>context() = nonempty_string() | {<a href="#type-context_type">context_type()</a>, <a href="#type-context_list">context_list()</a>}</pre>
+
+
+
+###<a name="type-context_list">context_list()</a>##
+
+
+
+<pre>context_list() = [<a href="#type-context">context()</a>]</pre>
 
 
 
@@ -417,7 +419,7 @@ _Not yet implemented_.
 
 
 
-<pre>exec_type() = brne | line | erln</pre>
+<pre>exec_type() = brne | erln</pre>
 
 
 
@@ -437,11 +439,19 @@ _Not yet implemented_.
 
 
 
+###<a name="type-parse_error">parse_error()</a>##
+
+
+
+<pre>parse_error() = string() | {noline, context_list}</pre>
+
+
+
 ###<a name="type-quote_type">quote_type()</a>##
 
 
 
-<pre>quote_type() = back | doub | sing | escp | dbcp</pre>
+<pre>quote_type() = line | back | doub | sing | escp | dbcp</pre>
 
 
 
@@ -455,8 +465,9 @@ _Not yet implemented_.
 ##Function Index##
 
 
-<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#parse-2">parse/2</a></td><td>Parse command line string and return a list of nested quoting and
-grouping Stack blocks, or else <code>failed</code> on a caught syntax exception.</td></tr></table>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#parse-2">parse/2</a></td><td>Parse command line string and return a list of nested contexts,
+or else <code>failed</code> on a caught syntax exception.</td></tr><tr><td valign="top"><a href="#parse-3">parse/3</a></td><td>Parse list of strings split on quoting and grouping characters,  
+according to current Stack type.</td></tr></table>
 
 
 <a name="functions"></a>
@@ -470,7 +481,7 @@ grouping Stack blocks, or else <code>failed</code> on a caught syntax exception.
 
 
 
-<pre>parse(Subject::nonempty_string(), Stderr::<a href="#type-io_proc">io_proc()</a>) -> failed | [<a href="#type-block">block()</a>]</pre>
+<pre>parse(Subject::nonempty_string(), Stderr::<a href="#type-io_proc">io_proc()</a>) -> {ok, <a href="#type-context_list">context_list()</a>} | {error, <a href="#type-parse_error">parse_error()</a>}</pre>
 <br></br>
 
 
@@ -478,7 +489,30 @@ grouping Stack blocks, or else <code>failed</code> on a caught syntax exception.
 
 
 
-Parse command line string and return a list of nested quoting and
-grouping Stack blocks, or else `failed` on a caught syntax exception.
+Parse command line string and return a list of nested contexts,
+or else `failed` on a caught syntax exception.
 
-Handle thrown errors for unmatched quoting and grouping characters.
+Handle thrown errors for unmatched quoting, grouping, and term context
+symbols.<a name="parse-3"></a>
+
+###parse/3##
+
+
+
+
+`parse(Type, Stack, List) -> any()`
+
+
+
+
+
+Parse list of strings split on quoting and grouping characters,  
+according to current Stack type.  Return tuple of context tree, context  
+stack and unparsed tail OR tuple of 'close_context', context stack, and  
+trailing context tree.
+
+Throw exception for unmatched quoting or grouping character.
+
+__<font color="red">To do</font>__
+<br></br>
+* <font color="red">spec this function</font>

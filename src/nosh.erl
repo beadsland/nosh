@@ -189,6 +189,12 @@ command_return(Command, Status, Stderr) ->
 		{ok, Result} -> 
 			?DEBUG("~s: ~p~n", [Command, Result]);
 		
+		{error, {Term, Data}} ->
+			?STDERR("nosh: ~p~nDetail: ~p~n", [Term, Data]);
+
+		{error, What} ->
+			?STDERR("nosh: ~s~n", [What]);
+		
 		{{Except, Reason}, Trace} -> 
 			Format = "~s: ~p~nReason: ~p~nTrace: ~p~n",
 			?STDERR(Format, [Command, Except, Reason, Trace]);

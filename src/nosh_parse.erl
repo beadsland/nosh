@@ -262,7 +262,7 @@
 -define(debug, true).
 -include("macro.hrl").
 
--define(context_CHARS, "\\\\\"\'\`\n").
+-define(QUOTE_CHARS, "\\\\\"\'\`\n").
 -define(GROUP_CHARS, "\;\(\)\&\|").  
 -define(SPACE_CHARS, "\ \t\n").
 
@@ -276,54 +276,39 @@
 %% API functions
 %%
 
-%% @doc Parse command line string and return a list of nested quoting and 
-%% grouping Stack blocks, or else `failed' on a caught syntax exception.
+%% @doc Parse command line string and return a list of nested contexts, 
+%% or else `failed' on a caught syntax exception.
 %%
-%% Handle thrown errors for unmatched quoting and grouping characters.
+%% Handle thrown errors for unmatched quoting, grouping, and term context
+%% symbols.
 %% @end
 -type io_proc() :: pid().
 -type term_type() :: word | list | plst | tupl | epid | bstr. 
--type quote_type() :: back | doub | sing | escp | dbcp.
+-type quote_type() :: line | back | doub | sing | escp | dbcp.
 -type group_type() :: pren | semi | ifok | ambi | ifnz | pipe.
--type exec_type() :: brne | line | erln.
+-type exec_type() :: brne | erln.
 -type context_type() :: {context, exec_type()} 
 						| {context, group_type()} 
 						| {context, quote_type()} 
 						| {context, term_type()}.
--type block() :: nonempty_string() | {context_type(), list(block())}.
+-type context_list() :: [context()].
+-type context() :: nonempty_string() | {context_type(), context_list()}.
+-type parse_error() :: string() | {noline, context_list}.
 -spec parse(Subject :: nonempty_string(), Stderr :: io_proc()) -> 
-		  failed | list(block()).
+		  {ok, context_list()} | {error, parse_error()}.
 %%
 parse(Subject, Stderr) -> 
 	?INIT_DEBUG(Stderr),
 	Pattern = io_lib:format("([~s~s~s])", 
-							[?context_CHARS, ?GROUP_CHARS, ?SPACE_CHARS]),
+							[?QUOTE_CHARS, ?GROUP_CHARS, ?SPACE_CHARS]),
 	{ok, MP} = re:compile(Pattern),
 
 	Split = re:split(Subject, MP, [{return, list}]),
 	Pred = fun(T) -> case T of [] -> false; _Else -> true end end,
 	CleanSplit = lists:filter(Pred, Split), 
-	
-	QuoteErr = "Quote error: Closing ~s missing~n", 
-	GroupErr = "Group error: Closing ~s missing~n", 
-	ExecErr = "Context error: Closing ~s missing~n",
-	try nosh_context:close_context(line, [{context, brne}], CleanSplit) of
-		{Parse, [{context, brne}]} -> 
-			[{{context, line}, StackList}, {close_context, brne}] = 
-				Parse, StackList		
-	catch
-		{context, line} 	-> ?STDERR(ExecErr, ["EOL"]), failed;
-		{context, semi}		-> ?STDERR(GroupErr, ["EOL"]), failed;
-		{context, pren}		-> ?STDERR(GroupErr, ["\)"]), failed;
-		{close, pren}		-> ?STDERR("Group error: "
-								"Unmatched closing parentheses~n"), failed;
-		{context, back} 	-> ?STDERR(QuoteErr, ["\`"]), failed;
-		{context, doub} 	-> ?STDERR(QuoteErr, ["\""]), failed;
-		{context, sing} 	-> ?STDERR(QuoteErr, ["\'"]), failed;
-		{context, escp} 	-> ?STDERR("context error: "
-								"Line continuation not supported~n"), 
-							   failed
-	end. 
+
+	try_symbols(CleanSplit).
+
 
 %% @doc Parse list of strings split on quoting and grouping characters, 
 %% according to current Stack type.  Return tuple of context tree, context
@@ -334,6 +319,7 @@ parse(Subject, Stderr) ->
 %% @end
 %% @todo spec this function
 parse({context, brne}, [], []) -> {[{close_context, brne}], []};
+parse({context, brne}, [], List) -> nosh_context:close_context(line, [{context, brne}], List);
 parse(Type, _Stack, []) -> throw(Type);
 parse(Type, Stack, [[] | Tail]) -> parse(Type, Stack, Tail);
 parse(Type, Stack, [Head | Tail]) when is_integer(Head) ->
@@ -348,7 +334,6 @@ parse({context, QType}, Stack, List) ->
 %		{close_term, Stack, Tail} -> 
 %			{Post, _ReturnStack} = parse_context(QType, Stack, Tail),
 %			{[Close | Post], SuperStack};
-
 		{close_context, Stack, Tail} -> 
 			Close = {close_context, QType}, 
 			[SuperType | SuperStack] = Stack,
@@ -363,4 +348,26 @@ parse({context, QType}, Stack, List) ->
 %% Local functions
 %%
 
+-define(QUOTE_ERR, "quote error: closing ~s missing").
+-define(GROUP_ERR, "group error: closing ~s missing").
+-define(ERRMSG(F, L), io_lib:format(F, L)).
 
+try_symbols(Symbols) ->
+	Stack = [],
+	try nosh_context:close_context(brne, Stack, Symbols) of
+		{List, Stack} -> 
+			case List of
+				[{{context, line}, LineList}]	-> {ok, LineList};
+				_Else						 	-> {error, {noline, List}}
+			end
+	catch
+		{context, line} 	-> {error, ?ERRMSG(?QUOTE_ERR, ["EOL"])};
+		{context, pren}		-> {error, ?ERRMSG(?GROUP_ERR, ["\)"])};
+		{close, pren}		-> {error, "group error: "
+								"unmatched closing parentheses"};
+		{context, back} 	-> {error, ?ERRMSG(?QUOTE_ERR, ["\`"])};
+		{context, doub} 	-> {error, ?ERRMSG(?QUOTE_ERR, ["\""])};
+		{context, sing} 	-> {error, ?ERRMSG(?QUOTE_ERR, ["\'"])};
+		{context, escp} 	-> {error, "quote error: "
+								"line continuation not supported"}
+	end. 
