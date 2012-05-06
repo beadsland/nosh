@@ -1,5 +1,7 @@
-@todo make good
+@todo edown hard breaking
 @todo spec nosh_load
+@todo recode nosh_load as piped stream
+@todo make good
 @todo nosh_parse tokens
 @todo nosh_eval
 @todo nosh_exec

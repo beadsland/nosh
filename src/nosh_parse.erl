@@ -43,7 +43,7 @@
 %% grouping, quoting, and substitution contexts are parsed in accordance
 %% with Bourne shell syntax.
 %%
-%% <i>The below discussion of Erlang Context describes functionality
+%% <i>The below discussion of Erlang Context describes functionality 
 %% yet to be implemented.</i>
 %%
 %% === Erlang Context ===
