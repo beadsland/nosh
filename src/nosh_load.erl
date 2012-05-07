@@ -111,7 +111,7 @@ test(IO) ->
 	Mod3:start(),
 	test:start(),
 
-	?DEBUG("~ntest: done~n").
+	?DEBUG("test: done~n").
 
 %%
 %% Local functions
@@ -126,21 +126,24 @@ run(IO, Command, [Head | Tail]) ->
 									   run(IO, Command, Head, slurp);
 		{ok, _Filename}				-> run(IO, Command, Head, slurp);
 		{ok, Module, Binary}		-> run(IO, Command, Head, Module, Binary);
-		{error, What}				-> ?STDERR({load, What})
+		{error, What}				-> ?STDERR({load, What}),
+									   {error, {load, What}}
 	end.
 
 % Having found command, slurp binary from file.
 run(IO, Command, Dir, slurp) ->
 	Filename = ?FILENAME(Dir, Command, ".beam"),
-	{ok, Module, Binary} = slurp_binary(Filename),
-	run(IO, Command, Dir, Module, Binary).
+	case slurp_binary(Filename) of
+		{ok, Module, Binary}	-> run(IO, Command, Dir, Module, Binary);
+		{error, What}			-> {error, {slurp, What}}
+	end.
 
 % Load new current module from binary.
 run(IO, Command, Dir, Module, Binary) ->
 	case run_load(Command, Dir, Module, Binary) of
-		{error, What}		-> {error, What};
 		{ok, Module, Warn}	-> ?STDERR({load, Warn}), {module, Module};
-		{ok, Module}		-> {module, Module}
+		{ok, Module}		-> {module, Module};
+		{error, What}		-> {error, What}
 	end.
   
 %%%
@@ -314,8 +317,9 @@ ensure_compiled(Cmd, BinDir, Force, SrcDir, Proj, SrcMod, BinMod) ->
 % Make sure we've got a directory to write to.
 do_compile(SrcDir, Cmd, Project, BinDir)  ->
 	case file:make_dir(BinDir) of
-		{error, What}	-> {error, {What, BinDir}};
-		ok				-> do_compile(SrcDir, Cmd, Project, BinDir, true)
+		ok				-> do_compile(SrcDir, Cmd, Project, BinDir, true); 
+		{error, eexist} -> do_compile(SrcDir, Cmd, Project, BinDir, true);
+		{error, What}	-> {error, {What, BinDir}}
 	end.
 
 % Compile to a binary in memory.
@@ -454,6 +458,7 @@ can_read(Filename) ->
 last_modified(Filename) ->
 	case file:read_file_info(Filename) of
     	{ok, FileInfo}	-> {ok, FileInfo#file_info.mtime};
+		{error, enoent}	-> {ok, nofile};
 		{error, What}	-> {error, {What, Filename}}
 	end.
 
@@ -467,8 +472,7 @@ parallel_src(BinDir, Cmd) ->
 parallel_src(_BinDir, Command, SrcDir, Project) ->
 	Filename = ?FILENAME(SrcDir, Command, ".erl"),
 	case can_read(Filename) of
-		true 	-> ?DEBUG("readable: ~s~n", [Filename]), 
-				   {ok, SrcDir, Project}; 
+		true 	-> {ok, SrcDir, Project}; 
 		false 	-> nosrc
 	end.
 
