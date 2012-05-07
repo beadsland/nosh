@@ -11,15 +11,13 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">stdout guard error
-</font>
 * <font color="red">noterm erlerr
 </font>
 * <font color="red">recode nosh_load as piped stream
 </font>
-* <font color="red">domain
-</font>
 * <font color="red">revised edown pull request
+</font>
+* <font color="red">domain
 </font>
 * <font color="red">nosh_parse context_type doc too long
 </font>

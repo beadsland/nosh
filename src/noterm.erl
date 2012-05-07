@@ -95,11 +95,13 @@ msg_loop(IO) ->
     end.
 
 % Handle nosh process messages.
-do_noshout(IO, MsgTag, Line) ->
+do_noshout(IO, MsgTag, Output) ->
 	case MsgTag of
-		stdout	-> io:format(Line, []);
-		stderr	-> io:format(standard_error, "** ~s", [Line]);
-		debug	-> io:format(standard_error, "-- ~s", [Line])
+		stdout	-> io:format(Output);
+		erlout	-> io:format("~p: ~p~n", [nosh, Output]);
+		erlerr	-> io:format(standard_error, "~p: ~p~n", [nosh, Output]);
+		stderr	-> io:format(standard_error, "** ~s", [Output]);
+		debug	-> io:format(standard_error, "-- ~s", [Output])
 	end,
 	?MODULE:msg_loop(IO).  
 
