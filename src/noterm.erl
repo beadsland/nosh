@@ -105,8 +105,9 @@ do_noshout(IO, MsgTag, Line) ->
 
 % Handle keyboard process messages.
 do_keyin(IO, MsgTag, Line) ->
+	Clean = strip_escapes(Line),
 	case MsgTag of
-		stdout	-> ?STDOUT(strip_escapes(Line));
+		stdout	-> ?STDOUT(Clean);
 		stderr	-> io:format(standard_error, "** ~s", [Line])
 	end,
 	?MODULE:msg_loop(IO).  
