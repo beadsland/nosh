@@ -44,7 +44,7 @@
 -define(STDOUT(What), 
 		if is_tuple(What);
 		   is_atom(What)	-> IO#std.out ! {erlout, self(), What};
-		   true				-> ?STDOUT(String, []) end).
+		   true				-> ?STDOUT(What, []) end).
 
 % Debug is special case of Stderr
 -define(INIT_DEBUG, put(debug, IO#std.err)).
