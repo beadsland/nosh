@@ -36,15 +36,19 @@
 -define(STDERR(Format, List), 
 		IO#std.err ! {stderr, self(), lists:flatten(io_lib:format(Format, List))}).
 -define(STDERR(What), 
-		if is_tuple(What);
-		   is_atom(What)	-> IO#std.err ! {erlerr, self(), What};
-		   true				-> ?STDERR(What, []) end).
+		Erlerr = nosh_util:is_erldata(What), 
+		case Erlerr of 
+			true 	-> IO#std.err ! {erlerr, self(), What}; 
+			false 	-> ?STDERR(What, []) 
+		end).
 -define(STDOUT(Format, List), 
 		IO#std.out ! {stdout, self(), lists:flatten(io_lib:format(Format, List))}).
--define(STDOUT(What), 
-		if is_tuple(What);
-		   is_atom(What)	-> IO#std.out ! {erlout, self(), What};
-		   true				-> ?STDOUT(What, []) end).
+-define(STDOUT(What),
+		Erlout = nosh_util:is_erldata(What), 
+		case Erlout of 
+			true 	-> IO#std.out ! {erlout, self(), What}; 
+			false 	-> ?STDOUT(What, []) 
+		end).
 
 % Debug is special case of Stderr
 -define(INIT_DEBUG, put(debug, IO#std.err)).
@@ -55,4 +59,3 @@
 -define(DEBUG(F, L), debug, put(debug_garbage, {F,L})).
 -endif.
 -define(DEBUG(String), ?DEBUG(String, [])).  
-

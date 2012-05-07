@@ -2,6 +2,7 @@
 
 #Module nosh_load#
 * [Description](#description)
+* [Data Types](#types)
 * [Function Index](#index)
 * [Function Details](#functions)
 
@@ -12,7 +13,7 @@ This is a preliminary draft of the module loader for `nosh`.
 
 Copyright (c) 2012 Beads D. Land-Trujillo
 
-__Version:__ 0.1.2
+__Version:__ 0.1.3
 
 __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).
 
@@ -48,27 +49,47 @@ and execution proceeds.  Otherwise, the compiler error is written to
 is loaded and evaluation and execution goes forward.  If no `.beam`
 file is found, the search continues to the next directory on `PATH`,
 returning an error if no `.beam` file can be found or compiled from
-source before the `PATH` is exhausted.<a name="index"></a>
+source before the `PATH` is exhausted.
+<a name="types"></a>
+
+##Data Types##
+
+
+
+
+###<a name="type-command">command()</a>##
+
+
+
+<pre>command() = string() | atom()</pre>
+<a name="index"></a>
 
 ##Function Index##
 
 
-<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#load-3">load/3</a></td><td></td></tr><tr><td valign="top"><a href="#test-1">test/1</a></td><td></td></tr></table>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#run-2">run/2</a></td><td></td></tr><tr><td valign="top"><a href="#test-1">test/1</a></td><td></td></tr></table>
 
 
 <a name="functions"></a>
 
 ##Function Details##
 
-<a name="load-3"></a>
+<a name="run-2"></a>
 
-###load/3##
-
-
+###run/2##
 
 
-`load(IO, Command, Path) -> any()`
 
+
+<pre>run(IO::#std{}, Command::<a href="#type-command">command()</a>) -> no_return()</pre>
+<br></br>
+
+
+
+
+__<font color="red">To do</font>__
+<br></br>
+* <font color="red">get PATH from environment</font>
 <a name="test-1"></a>
 
 ###test/1##

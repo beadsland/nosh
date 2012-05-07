@@ -11,11 +11,25 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">edown hard breaking
+* <font color="red">stdout guard error
 </font>
-* <font color="red">spec nosh_load
+* <font color="red">noterm erlerr
 </font>
 * <font color="red">recode nosh_load as piped stream
+</font>
+* <font color="red">domain
+</font>
+* <font color="red">revised edown pull request
+</font>
+* <font color="red">nosh_parse context_type doc too long
+</font>
+* <font color="red">standard behaviour
+</font>
+* <font color="red">convert nosh:start/1 to nosh:run/1
+</font>
+* <font color="red">nosh_erl project (hot, good, bang)
+</font>
+* <font color="red">does term pass params to shell?
 </font>
 * <font color="red">make good
 </font>
@@ -155,6 +169,7 @@ more details.
 <tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/nosh_exec.md" class="module">nosh_exec</a></td></tr>
 <tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/nosh_load.md" class="module">nosh_load</a></td></tr>
 <tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/nosh_parse.md" class="module">nosh_parse</a></td></tr>
+<tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/nosh_util.md" class="module">nosh_util</a></td></tr>
 <tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/noterm.md" class="module">noterm</a></td></tr>
 <tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/test.md" class="module">test</a></td></tr></table>
 

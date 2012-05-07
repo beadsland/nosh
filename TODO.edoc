@@ -1,5 +1,8 @@
+@todo stdout guard error
+@todo noterm erlerr
 @todo recode nosh_load as piped stream
 @todo domain
+@todo revised edown pull request
 @todo nosh_parse context_type doc too long
 @todo standard behaviour
 @todo convert nosh:start/1 to nosh:run/1
