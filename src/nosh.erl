@@ -116,11 +116,13 @@ loop(IO, Cmd, CmdPid) ->
 % Handle messages from executing command.
 do_output(IO, Command, CmdPid, MsgTag, Output) ->
 	case MsgTag of
-		stdout	-> ?STDOUT(Output), ?MODULE:loop(IO, Command, CmdPid);
-		stderr 	-> ?STDERR(Output), ?MODULE:loop(IO, Command, CmdPid);
-		debug 	-> IO#std.err ! {debug, self(), Output}, 
-				   ?MODULE:loop(IO, Command, CmdPid)
-	end.
+		erlout	-> ?STDOUT("~s: ~p~n", [Command, Output]);
+		erlerr	-> ?STDERR("~s: ~p~n", [Command, Output]);
+		stdout	-> ?STDOUT(Output);
+		stderr 	-> ?STDERR(Output);
+		debug 	-> IO#std.err ! {debug, self(), Output}
+	end,
+	?MODULE:loop(IO, Command, CmdPid).
 
 %% Handle next command line to execute.
 %% @todo refactor `hot' and `good' as library commands

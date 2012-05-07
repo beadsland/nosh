@@ -1,6 +1,10 @@
-@todo edown hard breaking
-@todo spec nosh_load
 @todo recode nosh_load as piped stream
+@todo domain
+@todo nosh_parse context_type doc too long
+@todo standard behaviour
+@todo convert nosh:start/1 to nosh:run/1
+@todo nosh_erl project (hot, good, bang)
+@todo does term pass params to shell?
 @todo make good
 @todo nosh_parse tokens
 @todo nosh_eval
