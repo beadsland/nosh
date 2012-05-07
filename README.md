@@ -13,11 +13,17 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">noterm erlerr
 </font>
+* <font color="red">dialyze errors
+</font>
 * <font color="red">recode nosh_load as piped stream
 </font>
 * <font color="red">revised edown pull request
 </font>
 * <font color="red">domain
+</font>
+* <font color="red">makefile dialyze
+</font>
+* <font color="red">refactor format_erlerr
 </font>
 * <font color="red">nosh_parse context_type doc too long
 </font>

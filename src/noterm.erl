@@ -36,9 +36,9 @@
 %% TODO: incorporate full terminfo/ncurses support
 %% TODO: notermd - telent/ssh access
 
-%% @version 0.1.3
+%% @version 0.1.4
 -module(noterm).
--version("0.1.3").
+-version("0.1.4").
 
 %%
 %% Include files
@@ -98,12 +98,22 @@ msg_loop(IO) ->
 do_noshout(IO, MsgTag, Output) ->
 	case MsgTag of
 		stdout	-> io:format(Output);
-		erlout	-> io:format("~p: ~p~n", [nosh, Output]);
-		erlerr	-> io:format(standard_error, "~p: ~p~n", [nosh, Output]);
+		erlout	-> io:format("~p: error: ~p~n", [nosh, Output]);
+		erlerr	-> Erlerr = format_erlerr(Output),
+				   io:format(standard_error, "~p: ~s~n", [nosh, Erlerr]);
 		stderr	-> io:format(standard_error, "** ~s", [Output]);
 		debug	-> io:format(standard_error, "-- ~s", [Output])
 	end,
 	?MODULE:msg_loop(IO).  
+
+% @todo refactor this to serve grace and nosh erlerr functions
+format_erlerr(What) ->
+	case What of 
+		{Atom, Tuple} when is_atom(Atom), is_tuple(Tuple) ->
+			io_lib:format("~p: ~p", [Atom, format_erlerr(Tuple)]);
+		_Else ->
+			io_lib:format("~p", [What])
+	end.
 
 % Handle keyboard process messages.
 do_keyin(IO, MsgTag, Line) ->
