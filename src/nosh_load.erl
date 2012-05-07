@@ -66,7 +66,7 @@
 %%
 
 -include_lib("kernel/include/file.hrl").
-%-define(debug, true).
+-define(debug, true).
 -include("macro.hrl").
 
 -define(FILENAME(Path, Command, Extn), Path ++ "/" ++ Command ++ Extn).
@@ -262,7 +262,7 @@ ensure_compiled(Command, Path) -> ensure_compiled(Command, Path, false).
 % Check if we can write to the ebin directory.
 ensure_compiled(Cmd, Dir, Force) ->
 	case can_write(Dir) of
-		{error, What}	-> {error, {What, Dir}};
+		{error, What}	-> {error, {file, What}};
 		false			-> {info, readonly_dir};
 		true			-> ensure_compiled(Cmd, Dir, Force, true_dir)
 	end.
@@ -271,7 +271,7 @@ ensure_compiled(Cmd, Dir, Force) ->
 ensure_compiled(Cmd, Dir, Force, true_dir) ->
 	Filename = ?FILENAME(Dir, Cmd, ".beam"),
 	case can_write(Filename) of
-		{error, What}	-> {error, {What, Filename}};
+		{error, What}	-> {error, {file, What}};
 		false			-> {info, readonly};
 		true			-> ensure_compiled(Cmd, Dir, Force, true_both)
 	end;
@@ -290,7 +290,7 @@ ensure_compiled(Cmd, BinDir, Force, SrcDir, Proj) ->
 	SrcFile = ?FILENAME(SrcDir, Cmd, ".erl"),
 	case last_modified(SrcFile) of
 		{error, What}	-> 
-			{error, {What, SrcFile}};
+			{error, {file, What}};
 		SrcMod			->
 			ensure_compiled(Cmd, BinDir, Force, SrcDir, Proj, SrcMod)
 	end.
@@ -300,7 +300,7 @@ ensure_compiled(Cmd, BinDir, Force, SrcDir, Proj, SrcMod) ->
 	BinFile = ?FILENAME(BinDir, Cmd, ".beam"),
 	case last_modified(BinFile) of
 		{error, What}	->
-			{error, {What, BinFile}};
+			{error, {file, What}};
 		BinMod 			->
 			ensure_compiled(Cmd, BinDir, Force, SrcDir, Proj, SrcMod, BinMod)
 	end.

@@ -109,8 +109,10 @@ do_noshout(IO, MsgTag, Output) ->
 % @todo refactor this to serve grace and nosh erlerr functions
 format_erlerr(What) ->
 	case What of 
-		{Atom, Tuple} when is_atom(Atom), is_tuple(Tuple) ->
-			io_lib:format("~p: ~p", [Atom, format_erlerr(Tuple)]);
+		{Atom, Data} when is_atom(Atom) ->
+			io_lib:format("~p: ~s", [Atom, format_erlerr(Data)]);
+		List when is_list(List) ->
+			io_lib:format("~s", [List]);
 		_Else ->
 			io_lib:format("~p", [What])
 	end.
