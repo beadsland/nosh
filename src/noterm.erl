@@ -100,7 +100,7 @@ do_noshout(IO, MsgTag, Output) ->
 		stdout	-> io:format(Output);
 		erlout	-> io:format("~p: error: ~p~n", [nosh, Output]);
 		erlerr	-> Erlerr = format_erlerr(Output),
-				   io:format(standard_error, "** ~p: ~s~n", [nosh, Erlerr]);
+				   io:format(standard_error, "** ~s~n", [Erlerr]);
 		stderr	-> io:format(standard_error, "** ~s", [Output]);
 		debug	-> io:format(standard_error, "-- ~s", [Output])
 	end,

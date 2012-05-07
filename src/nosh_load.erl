@@ -141,9 +141,14 @@ run(IO, Command, Dir, slurp) ->
 % Load new current module from binary.
 run(IO, Command, Dir, Module, Binary) ->
 	case run_load(Command, Dir, Module, Binary) of
-		{ok, Module, Warn}	-> ?STDERR({load, Warn}), {module, Module};
-		{ok, Module}		-> {module, Module};
-		{error, What}		-> {error, What}
+		{ok, Module, diff_path}	-> ?STDERR({Module, "namespace collision"}),
+								   {module, Module};
+		{ok, Module, flat_pkg} 	-> ?STDERR({Module, "flat package unsafe"}),
+								   {module, Module};
+		{ok, Module, Warn}		-> ?STDERR({load, Warn}), 
+								   {module, Module};
+		{ok, Module}			-> {module, Module};
+		{error, What}			-> {error, What}
 	end.
   
 %%%
@@ -196,7 +201,7 @@ ensure_loaded(Module, BinFile, Bin, BinVsn, Pkg, MemFile) ->
 	if BinFile == MemFile, BinVsn == MemVsn, Pkg /= '' 	-> 
 		   {ok, Module};
 	   BinFile == MemFile, BinVsn == MemVsn				->
-		   {ok, Module, flat_package};
+		   {ok, Module, flat_pkg};
 	   BinFile /= MemFile					  			->
 			ensure_loaded(Module, BinFile, Bin, BinVsn, Pkg, MemFile, diff_path);
 	   BinVsn /= MemVsn								->
@@ -204,16 +209,18 @@ ensure_loaded(Module, BinFile, Bin, BinVsn, Pkg, MemFile) ->
 	end.
 
 % Load the new module version.
-ensure_loaded(Module, BinFile, Bin, _BinVsn, _Pkg, _MemFile, Why) ->
+ensure_loaded(Module, BinFile, Bin, _BinVsn, Pkg, _MemFile, Why) ->
 	if Why /= not_loaded -> do_purge_delete(Module); true -> false end,
 	case code:load_binary(Module, BinFile, Bin) of
 		{error, What}		-> 
 			{error, {load, What}};
 		{module, Module}	->
 			case Why of
-				not_loaded	-> {ok, Module};
-				diff_path	-> {ok, Module, diff_path};
-				diff_vsn	-> {ok, Module}
+				not_loaded	-> if Pkg == '' -> {ok, Module, flat_pkg};
+								  true		-> {ok, Module} end;
+				diff_vsn	-> if Pkg == '' -> {ok, Module, flat_pkg};
+								  true		-> {ok, Module} end;
+				diff_path	-> {ok, Module, diff_path}
 			end
 	end.
 
