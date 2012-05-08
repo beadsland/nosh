@@ -122,7 +122,7 @@ run(_IO, _Command, []) -> {error, notfound};
 run(IO, Command, [Head | Tail]) ->
 	case ensure_compiled(Command, Head) of
 		{info, nofile}				-> run(IO, Command, Tail);
-		{info, Info}				-> ?DEBUG("l: ~p~n", Info),
+		{info, Info}				-> ?DEBUG("l: ~p~n", [Info]),
 									   run(IO, Command, Head, slurp);
 		{ok, _Filename}				-> run(IO, Command, Head, slurp);
 		{ok, Module, Binary}		-> run(IO, Command, Head, Module, Binary);
@@ -145,7 +145,7 @@ run(IO, Command, Dir, Module, Binary) ->
 								   {module, Module};
 		{ok, Module, flat_pkg} 	-> ?STDERR({Module, "flat package unsafe"}),
 								   {module, Module};
-		{ok, Module, Warn}		-> ?STDERR({load, Warn}), 
+		{ok, Module, Warn}		-> ?STDERR({Module, Warn}), 
 								   {module, Module};
 		{ok, Module}			-> {module, Module};
 		{error, What}			-> {error, What}

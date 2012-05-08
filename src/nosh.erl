@@ -234,7 +234,7 @@ hotswap_nosh(IO, [{Module, _Path} | Tail]) ->
 hotswap(IO, Module) ->
 	{file, Filename} = code:is_loaded(Module),
 	try
-		nosh_load:load(IO, Module, filename:dirname(Filename))
+		nosh_load:run(IO, Module)
 	catch
 		{Error, Detail}	-> 
 			?STDERR("~p: ~p~nDetail: ~p~n", [Module, Error, Detail]) 

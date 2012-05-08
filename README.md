@@ -11,10 +11,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">noterm erlerr
-</font>
-* <font color="red">dialyze errors
-</font>
 * <font color="red">recode nosh_load as piped stream
 </font>
 * <font color="red">revised edown pull request
