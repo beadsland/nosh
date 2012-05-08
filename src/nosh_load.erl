@@ -145,8 +145,6 @@ run(IO, Command, Dir, OrigModule, Binary) ->
 								   {module, Module};
 		{ok, Module, flat_pkg} 	-> ?STDERR({Module, "flat package unsafe"}),
 								   {module, Module};
-		{ok, Module, Warn}		-> ?STDERR({Module, Warn}), 
-								   {module, Module};
 		{ok, Module}			-> ?DEBUG("got module: ~p~n", [Module]),
 								   {module, Module};
 		{error, What}			-> {error, What}
