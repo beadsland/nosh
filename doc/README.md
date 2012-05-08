@@ -13,24 +13,18 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">candidate interviews
 </font>
-* <font color="red">domain consolidation
-</font>
-* <font color="red">nosh_util specs
-</font>
-* <font color="red">makefile dialyze
-</font>
-* <font color="red">nosh_parse context_type doc too long
-</font>
-* <font color="red">standard behaviour
+* <font color="red">
+
+domain consolidation </font>
+* <font color="red">make good
 </font>
 * <font color="red">convert nosh:start/1 to nosh:run/1
 </font>
 * <font color="red">nosh_erl project (hot, good, bang)
 </font>
-* <font color="red">does term pass params to shell?
-</font>
-* <font color="red">make good
-</font>
+* <font color="red">
+
+does term pass params to shell? </font>
 * <font color="red">nosh_parse tokens
 </font>
 * <font color="red">nosh_eval

@@ -34,16 +34,28 @@
 %% Include files
 %%
 
+-include_lib("kernel/include/file.hrl").
+
 -include("macro.hrl").
 
 %%
 %% Exported Functions
 %%
+
+% Standard I/O
 -export([send_stderr/2, send_stdout/2, format_erlerr/1]).
+
+% File Properties
+-export([can_read/1, can_write/1, last_modified/1]).
+
 
 %%
 %% API Functions
 %%
+
+%%%
+% Standard I/O functions
+%%%
 
 %% @doc Smart STDOUT/1 macro function.
 -type output() :: {atom(), any()} | string().
@@ -76,6 +88,54 @@ format_erlerr(What) ->
             io_lib:format("~s", [List]);
         _Else ->
             io_lib:format("~p", [What])
+    end.
+
+%%%
+% File property functions
+%%%
+
+%% @doc Test if file or directory is writeable.
+-type filename() :: string().
+-type file_error() :: {error, {atom(), filename()}}.
+-spec can_write(Filename :: filename()) -> boolean() | file_error().
+can_write(Filename) ->
+    case file:read_file_info(Filename) of 
+        {ok, FileInfo}  -> 
+            case FileInfo#file_info.access of
+                write       -> true;
+                read_write  -> true;
+                _Else       -> false
+            end;
+        {error, enoent} -> 
+            true;   % File does not exist, so is writeable if directory is.
+        {error, What}   -> 
+            {error, {What, Filename}}
+    end.
+
+%% @doc Test if file or directory is readable.
+-spec can_read(Filename :: filename()) -> boolean() | file_error().
+can_read(Filename) ->
+    case file:read_file_info(Filename) of 
+        {ok, FileInfo}      -> 
+            case FileInfo#file_info.access of 
+                read        -> true; 
+                read_write  -> true; 
+                _Else       -> false 
+            end;
+        {error, What}       -> 
+            {error, {What, Filename}}
+    end.
+
+%% @doc Get last date and time file last modified.
+-type date_time() :: calendar:date_time().
+-spec last_modified(Filename :: filename()) -> 
+          {ok, date_time()} | file_error().
+%
+last_modified(Filename) ->
+    case file:read_file_info(Filename) of
+        {ok, FileInfo}  -> {ok, FileInfo#file_info.mtime};
+        {error, enoent} -> {ok, nofile};
+        {error, What}   -> {error, {What, Filename}}
     end.
 
 %%

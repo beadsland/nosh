@@ -273,7 +273,15 @@ _Not yet implemented_.
 
 
 
-<pre>context() = nonempty_string() | {<a href="#type-context_type">context_type()</a>, <a href="#type-context_list">context_list()</a>}</pre>
+<pre>context() = nonempty_string() | {<a href="#type-context_desc">context_desc()</a>, <a href="#type-context_list">context_list()</a>}</pre>
+
+
+
+###<a name="type-context_desc">context_desc()</a>##
+
+
+
+<pre>context_desc() = {context, <a href="#type-context_type">context_type()</a>}</pre>
 
 
 
@@ -289,7 +297,7 @@ _Not yet implemented_.
 
 
 
-<pre>context_type() = {context, <a href="#type-exec_type">exec_type()</a>} | {context, <a href="#type-group_type">group_type()</a>} | {context, <a href="#type-quote_type">quote_type()</a>} | {context, <a href="#type-term_type">term_type()</a>}</pre>
+<pre>context_type() = <a href="#type-term_type">term_type()</a> | <a href="#type-quote_type">quote_type()</a> | <a href="#type-group_type">group_type()</a> | <a href="#type-exec_type">exec_type()</a></pre>
 
 
 

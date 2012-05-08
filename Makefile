@@ -58,7 +58,7 @@ nosh:
 	tabs -1	>/dev/null # requires ncurses (noterm doesn't know tabs)
 	@erl -noshell -pa deps/superl/ebin -s superl -pa ebin -s noterm
 
-good:	current
+good:	compile
 	@erl -noshell -pa deps/superl/ebin -s superl -s init stop
 
 doc:	compile

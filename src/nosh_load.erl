@@ -65,13 +65,11 @@
 %% Include files
 %%
 
--include_lib("kernel/include/file.hrl").
 %-define(debug, true).
 -include("macro.hrl").
 
 -define(FILENAME(Path, Command, Extn), Path ++ "/" ++ Command ++ Extn).
 -define(FILENAME(Path, Command), ?FILENAME(Path, Command, "")).
-
 
 %%
 %% Exported functions
@@ -268,7 +266,7 @@ ensure_compiled(Command, Path) -> ensure_compiled(Command, Path, false).
 
 % Check if we can write to the ebin directory.
 ensure_compiled(Cmd, Dir, Force) ->
-	case can_write(Dir) of
+	case nosh_util:can_write(Dir) of
 		{error, What}	-> {error, {file, What}};
 		false			-> {info, readonly_dir};
 		true			-> ensure_compiled(Cmd, Dir, Force, write_dir)
@@ -277,11 +275,11 @@ ensure_compiled(Cmd, Dir, Force) ->
 % Check if we can write to the beam file.
 ensure_compiled(Cmd, Dir, Force, write_dir) ->
 	Filename = ?FILENAME(Dir, Cmd, ".beam"),
-	case can_write(Filename) of
+	case nosh_util:can_write(Filename) of
 		{error, What}	-> 
 			{error, {file, What}};
 		false			-> 
-			HaveBinary = can_read(?FILENAME(Dir, Cmd, ".beam")),
+			HaveBinary = nosh_util:can_read(?FILENAME(Dir, Cmd, ".beam")),
 			if HaveBinary 	-> {info, readonly};
 			   true			-> {info, nobin}  % i.e., search next dir in path
 			end;
@@ -292,7 +290,7 @@ ensure_compiled(Cmd, Dir, Force, write_dir) ->
 ensure_compiled(Cmd, BinDir, Force, write_both) ->
 	case parallel_src(BinDir, Cmd) of
 		nosrc					->
-			HaveBinary = can_read(?FILENAME(BinDir, Cmd, ".beam")),
+			HaveBinary = nosh_util:can_read(?FILENAME(BinDir, Cmd, ".beam")),
 			if HaveBinary 	-> {info, nosrc};
 			   true			-> {info, nobin}  % i.e., search next dir in path
 			end;
@@ -303,7 +301,7 @@ ensure_compiled(Cmd, BinDir, Force, write_both) ->
 % Get modification date of source file.
 ensure_compiled(Cmd, BinDir, Force, SrcDir, Proj) ->
 	SrcFile = ?FILENAME(SrcDir, Cmd, ".erl"),
-	case last_modified(SrcFile) of
+	case nosh_util:last_modified(SrcFile) of
 		{error, What}	-> 
 			{error, {file, What}};
 		SrcMod			->
@@ -313,7 +311,7 @@ ensure_compiled(Cmd, BinDir, Force, SrcDir, Proj) ->
 % Get modification date of binary file.
 ensure_compiled(Cmd, BinDir, Force, SrcDir, Proj, SrcMod) ->
 	BinFile = ?FILENAME(BinDir, Cmd, ".beam"),
-	case last_modified(BinFile) of
+	case nosh_util:last_modified(BinFile) of
 		{error, What}	->
 			{error, {file, What}};
 		BinMod 			->
@@ -436,44 +434,11 @@ read_beam_attribute(_Binary, Attribute, AttrList) ->
 		false						-> noattr
 	end.
 
-
 %%%
-% File property functions
+% Find parallel source directory
 %%%
 
-can_write(Filename) ->
-	case file:read_file_info(Filename) of 
-		{ok, FileInfo}	-> 
-			case FileInfo#file_info.access of
-				write		-> true;
-				read_write 	-> true;
-				_Else 		-> false
-			end;
-		{error, enoent}	-> 
-			true;  	% File does not exist, so is writeable if directory is.
-		{error, What}	-> 
-			{error, {What, Filename}}
-	end.
-
-can_read(Filename) ->
-	case file:read_file_info(Filename) of 
-		{ok, FileInfo}		-> 
-			case FileInfo#file_info.access of 
-				read 		-> true; 
-				read_write 	-> true; 
-				_Else 		-> false 
-			end;
-		{error, What}		-> 
-			{error, {What, Filename}}
-	end.
-
-last_modified(Filename) ->
-	case file:read_file_info(Filename) of
-    	{ok, FileInfo}	-> {ok, FileInfo#file_info.mtime};
-		{error, enoent}	-> {ok, nofile};
-		{error, What}	-> {error, {What, Filename}}
-	end.
-
+% Find candidate src directory parallel to ebin.
 parallel_src(BinDir, Cmd) ->
 	Split = re:split(BinDir, "/", [{return, list}]),	
 	case ebin_to_src(Split) of 
@@ -481,13 +446,15 @@ parallel_src(BinDir, Cmd) ->
 		_Else					-> nosrc
 	end.
 
+% Confirm it's readable and return result.
 parallel_src(_BinDir, Command, SrcDir, Project) ->
 	Filename = ?FILENAME(SrcDir, Command, ".erl"),
-	case can_read(Filename) of
+	case nosh_util:can_read(Filename) of
 		true 	-> {ok, SrcDir, Project}; 
 		false 	-> nosrc
 	end.
 
+% Walk absolute directory path, finding where parallel would occur.
 ebin_to_src([Head | []]) -> 
 	if Head == "ebin" -> {true, "src"}; true -> {false, Head} end;
 ebin_to_src([Head | Tail]) ->

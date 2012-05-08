@@ -286,7 +286,8 @@
 -type quote_type() :: line | back | doub | sing | escp | dbcp.
 -type group_type() :: pren | semi | ifok | ambi | ifnz | pipe.
 -type exec_type() :: brne | erln.
--type context_type() :: term_type() | quote_type() | group_type() | exec_type().
+-type context_type() :: term_type() | quote_type() 
+                        | group_type() | exec_type().
 -type context_desc() :: {context, context_type()}.
 -type context_list() :: [context()].
 -type context() :: nonempty_string() | {context_desc(), context_list()}.
@@ -317,7 +318,8 @@ parse(IO, Subject) ->
 %% @end
 %% @todo spec this function
 parse({context, brne}, [], []) -> {[{close_context, brne}], []};
-parse({context, brne}, [], List) -> nosh_context:close_context(line, [{context, brne}], List);
+parse({context, brne}, [], List) -> 
+    nosh_context:close_context(line, [{context, brne}], List);
 parse(Type, _Stack, []) -> throw(Type);
 parse(Type, Stack, [[] | Tail]) -> parse(Type, Stack, Tail);
 parse(Type, Stack, [Head | Tail]) when is_integer(Head) ->
@@ -329,22 +331,22 @@ parse({context, QType}, Stack, List) ->
 	?DEBUG("parse_context(~p, ~p, ~p) ->~n     ~p~n", 
 		   [QType, Stack, List, Parse]),
 	case Parse of
-%		{close_term, Stack, Tail} -> 
-%			{Post, _ReturnStack} = parse_context(QType, Stack, Tail),
-%			{[Close | Post], SuperStack};
 		{close_context, Stack, Tail} -> 
-			Close = {close_context, QType}, 
-			[SuperType | SuperStack] = Stack,
-			{Post, _ReturnStack} = parse(SuperType, SuperStack, Tail),
-			{[Close | Post], SuperStack};
-		
+			parse_close(QType, Stack, Tail);		
 		{Tail, ReturnStack}	-> 
 			{Tail, ReturnStack}
-	end.  
+	end.
 
 %%
 %% Local functions
 %%
+
+% close_context clause of parse/3
+parse_close(QType, Stack, Tail) ->
+    Close = {close_context, QType}, 
+    [SuperType | SuperStack] = Stack,
+    {Post, _ReturnStack} = parse(SuperType, SuperStack, Tail),
+    {[Close | Post], SuperStack}.
 
 -define(CLOSING(T), io_lib:format("closing ~s missing", [T])).
 

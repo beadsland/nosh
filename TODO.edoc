@@ -1,12 +1,11 @@
 @todo candidate interviews
 @todo domain consolidation
 
-@todo standard behaviour
+@todo make good
 @todo convert nosh:start/1 to nosh:run/1
 @todo nosh_erl project (hot, good, bang)
 @todo does term pass params to shell?
 
-@todo make good
 @todo nosh_parse tokens
 @todo nosh_eval
 @todo nosh_exec

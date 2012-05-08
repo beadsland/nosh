@@ -174,25 +174,19 @@ do_noise(IO, Command, CmdPid, Noise) ->
 command_return(IO, Command, Status) -> 
 	case Status of
 		normal -> 
-			?DEBUG("~s: ~p~n", [Command, Status]);
-		
+			?DEBUG("~s: ~p~n", [Command, Status]);		
 		ok -> 
 			?DEBUG("~s: ~p~n", [Command, Status]);
-		
 		{ok, Result} -> 
 			?STDOUT("~s: ok: ~p~n", [Command, Result]);
-		
 		{error, {Type, Message}} ->
 			?STDERR("nosh: ~p error: ~s~n", [Type, Message]);
-		
 		{{Except, Detail}, Trace} -> 
 			Format = "~s: ~p~nDetail: ~p~nTrace: ~p~n",
 			?STDERR(Format, [Command, Except, Detail, Trace]);
-
 		{Error, [Source | Trace]} ->
 			Format = "~s: runtime error: ~p~nSource: ~p~nTrace: ~p~n",
 			?STDERR(Format, [Command, Error, Source, Trace]);
-
 		Else -> 
 			?STDERR("~s: ~p~n", [Command, Else])
 	end.
