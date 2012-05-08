@@ -231,8 +231,8 @@ hotswap_nosh(IO, [{Module, _Path} | Tail]) ->
 	end,
 	hotswap_nosh(IO, Tail).
 
+% @todo refactor this given new nosh_load implementation
 hotswap(IO, Module) ->
-	{file, Filename} = code:is_loaded(Module),
 	try
 		nosh_load:run(IO, Module)
 	catch
