@@ -50,7 +50,7 @@ send_stdout(IO, What) ->
 	Erlout = is_erldata(What), 
 	case Erlout of 
 		true 	-> IO#std.out ! {erlout, self(), What}; 
-		false 	-> ?STDERR(What, []) 
+		false 	-> ?STDOUT(What, []) 
 	end.
 
 %% @doc Smart STDERR/1 macro function.

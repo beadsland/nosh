@@ -1,6 +1,5 @@
 @todo 124: {info, nobin} not happening
-@todo hot nosrc
-@todo recode nosh_load as piped stream
+@todo clean run of nosh_load
 @todo revised edown pull request
 @todo domain
 @todo nosh_util specs
