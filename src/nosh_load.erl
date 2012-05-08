@@ -131,7 +131,7 @@ run(IO, Command, [Head | Tail]) ->
 % Having found command, slurp binary from file.
 run(IO, Command, Dir, slurp) ->
 	Filename = ?FILENAME(Dir, Command, ".beam"),
-	case slurp_binary(Filename) of
+	case nosh_beam:slurp_binary(Filename) of
 		{ok, Module, Binary}	-> run(IO, Command, Dir, Module, Binary);
 		{error, What}			-> {error, {slurp, What}}
 	end.
@@ -154,7 +154,7 @@ run(IO, Command, Dir, OrigModule, Binary) ->
 
 % Get version and package details from binary.
 run_load(Cmd, Dir, Module, Binary) ->
-	case get_binary_detail(Module, Binary) of
+	case nosh_beam:get_binary_detail(Module, Binary) of
 		{error, What}			-> 
 			{error, {get_detail, What}};
 		{ok, Version, Package}	-> 
@@ -252,7 +252,7 @@ ensure_packaged(_Command, _Dir, _Package) -> ok.
 
 % Return binary with details
 ensure_packaged(_Command, _Dir, Module, Binary) ->
-	case get_binary_detail(Module, Binary) of
+	case nosh_beam:get_binary_detail(Module, Binary) of
 		{error, What}			-> {error, {get_detail, What}};
 		{ok, Version, Package}	-> {ok, Module, Binary, Version, Package}
 	end.
@@ -352,86 +352,6 @@ do_compile(_SrcDir, Cmd, _Project, BinDir, ModuleName, Binary) ->
 	case file:write_file(Outfile, Binary) of
 		{error, What}	-> {error, {What, Outfile}};
 		ok				-> {ok, ModuleName, Binary}
-	end.
-
-%%%
-% Get binary detail
-%%%
-
-% Get version of binary
-get_binary_detail(Module, Binary) ->
-	case beam_lib:version(Binary) of
-		{error, beam_lib, What} -> {error, {beam_lib, What}};
-		{ok, {Module, Version}}	-> get_binary_detail(Module, Binary, Version)
-	end.
-
-% Get package attribute of binary
-get_binary_detail(Module, Binary, Version) ->		
-	case read_beam_attribute(Binary, package) of
-		{error, What}	-> {error, {read_beam, What}};
-		{ok, Package}	-> {ok, Version, Package};
-		noattr			-> get_binary_detail(Module, Binary, Version, noattr)
-	end.
-
-% Figure out explicit package if no attribute found
-get_binary_detail(Module, _Binary, Version, noattr) ->
-	ModStr = atom_to_list(Module),
-	case string:rstr(ModStr, ".") of
-		0		-> {ok, Version, ''};
-		Last	-> PackStr = string:substr(ModStr, 0, Last-1),
-				   Package = list_to_atom(PackStr),
-				   {ok, Version, Package}
-	end.
-
-%%%
-% Slurp binary
-%%%
-
-% Read binary file into memory.
-slurp_binary(NewFile) ->
-	case file:read_file(NewFile) of
-		{ok, Binary} 	-> slurp_binary(NewFile, Binary);
-		{error, What} 	-> {error, {read, What}}
-	end.
-
-% Extract meta information about binary.
-slurp_binary(NewFile, Binary) ->
-	case beam_lib:info(Binary) of
-		{error, beam_lib, Reason}	-> 
-			{error, {beam_lib, Reason}};
-		InfoList					-> 
-			slurp_binary(NewFile, Binary, InfoList)
-	end.
-
-% Return binary with its fully qualified module name.
-slurp_binary(_NewFile, Binary, Info) ->
-	case lists:keyfind(module, 1, Info) of
-		{module, Module}	-> {ok, Module, Binary};
-		false				-> {error, nomodule}
-	end.
-
-%%%
-% Read beam attribute.
-%%% 
-
-% Retrieve attributes chunk.
-read_beam_attribute(Binary, Attribute) ->
-	case beam_lib:chunks(Binary, [attributes], [allow_missing_chunks]) of
-		{error, beam_lib, Reason} 					->
-			{error, {beam_lib, Reason}};
-		{ok, {_Module, [{attributes, AttrList}]}} 	->
-			read_beam_attribute(Binary, Attribute, AttrList)
-	end.
-
-% Extract desired attribute value.
-read_beam_attribute(_Binary, Attribute, AttrList) ->
-	case lists:keyfind(Attribute, 1, AttrList) of
-		{Attribute, missing_chunk}	-> {error, {missing_chunk, Attribute}};
-		{Attribute, [Value]} 		-> {ok, Value};
-		{Attribute, Value}			-> ?DEBUG("misformed attribute: ~p~n",
-											  [{Attribute, Value}]),
-									   {ok, Value};
-		false						-> noattr
 	end.
 
 %%%
