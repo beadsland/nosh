@@ -286,12 +286,10 @@
 -type quote_type() :: line | back | doub | sing | escp | dbcp.
 -type group_type() :: pren | semi | ifok | ambi | ifnz | pipe.
 -type exec_type() :: brne | erln.
--type context_type() :: {context, exec_type()} 
-						| {context, group_type()} 
-						| {context, quote_type()} 
-						| {context, term_type()}.
+-type context_type() :: term_type() | quote_type() | group_type() | exec_type().
+-type context_desc() :: {context, context_type()}.
 -type context_list() :: [context()].
--type context() :: nonempty_string() | {context_type(), context_list()}.
+-type context() :: nonempty_string() | {context_desc(), context_list()}.
 -type parse_error_type() :: quote | group.
 -type parse_error() :: {parse_error_type(), string()}.
 -spec parse(IO :: #std{}, Subject :: nonempty_string()) -> 
