@@ -66,7 +66,7 @@
 %%
 
 -include_lib("kernel/include/file.hrl").
--define(debug, true).
+%-define(debug, true).
 -include("macro.hrl").
 
 -define(FILENAME(Path, Command, Extn), Path ++ "/" ++ Command ++ Extn).
@@ -197,10 +197,8 @@ ensure_loaded(Module, BinFile, Bin, Vsn, Pkg, false) ->
 	ensure_loaded(Module, BinFile, Bin, Vsn, Pkg, false, not_loaded);
 ensure_loaded(Module, BinFile, Bin, BinVsn, Pkg, MemFile) ->
 	MemVsn = ?ATTRIB(Module, vsn),
-	if BinFile == MemFile, BinVsn == MemVsn, Pkg /= '' 	-> 
+	if BinFile == MemFile, BinVsn == MemVsn				->
 		   {ok, Module};
-	   BinFile == MemFile, BinVsn == MemVsn				->
-		   {ok, Module, flat_pkg};
 	   BinFile /= MemFile					  			->
 			ensure_loaded(Module, BinFile, Bin, BinVsn, Pkg, MemFile, diff_path);
 	   BinVsn /= MemVsn								->
