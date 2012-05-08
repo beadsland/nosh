@@ -99,23 +99,12 @@ do_noshout(IO, MsgTag, Output) ->
 	case MsgTag of
 		stdout	-> io:format(Output);
 		erlout	-> io:format("~p: error: ~p~n", [nosh, Output]);
-		erlerr	-> Erlerr = format_erlerr(Output),
+		erlerr	-> Erlerr = nosh_util:format_erlerr(Output),
 				   io:format(standard_error, "** ~s~n", [Erlerr]);
 		stderr	-> io:format(standard_error, "** ~s", [Output]);
 		debug	-> io:format(standard_error, "-- ~s", [Output])
 	end,
 	?MODULE:msg_loop(IO).  
-
-% @todo refactor this to serve grace and nosh erlerr functions
-format_erlerr(What) ->
-	case What of 
-		{Atom, Data} when is_atom(Atom) ->
-			io_lib:format("~p: ~s", [Atom, format_erlerr(Data)]);
-		List when is_list(List) ->
-			io_lib:format("~s", [List]);
-		_Else ->
-			io_lib:format("~p", [What])
-	end.
 
 % Handle keyboard process messages.
 do_keyin(IO, MsgTag, Line) ->

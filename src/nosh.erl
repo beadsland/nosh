@@ -117,7 +117,8 @@ loop(IO, Cmd, CmdPid) ->
 do_output(IO, Command, CmdPid, MsgTag, Output) ->
 	case MsgTag of
 		erlout	-> ?STDOUT("~s: ~p~n", [Command, Output]);
-		erlerr	-> ?STDERR("~s: ~p~n", [Command, Output]);
+		erlerr	-> Erlerr = nosh_util:format_erlerr(Output),
+                   ?STDERR("~s: ~s~n", [Command, Erlerr]);
 		stdout	-> ?STDOUT(Output);
 		stderr 	-> ?STDERR(Output);
 		debug 	-> IO#std.err ! {debug, self(), Output}

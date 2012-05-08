@@ -39,7 +39,7 @@
 %%
 %% Exported Functions
 %%
--export([send_stderr/2, send_stdout/2]).
+-export([send_stderr/2, send_stdout/2, format_erlerr/1]).
 
 %%
 %% API Functions
@@ -60,6 +60,17 @@ send_stderr(IO, What) ->
 		true 	-> IO#std.err ! {erlerr, self(), What}; 
 		false 	-> ?STDERR(What, []) 
 	end.
+
+%% @doc Smartly format erlerr messages.
+format_erlerr(What) ->
+    case What of 
+        {Atom, Data} when is_atom(Atom) ->
+            io_lib:format("~p: ~s", [Atom, format_erlerr(Data)]);
+        List when is_list(List) ->
+            io_lib:format("~s", [List]);
+        _Else ->
+            io_lib:format("~p", [What])
+    end.
 
 %%
 %% Local Functions

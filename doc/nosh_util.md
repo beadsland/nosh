@@ -22,14 +22,25 @@ __<font color="red">To do</font>__
 ##Function Index##
 
 
-<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#send_stderr-2">send_stderr/2</a></td><td>Smart STDERR/1 macro function.</td></tr><tr><td valign="top"><a href="#send_stdout-2">send_stdout/2</a></td><td>Smart STDOUT/1 macro function.</td></tr></table>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#format_erlerr-1">format_erlerr/1</a></td><td>Smartly format erlerr messages.</td></tr><tr><td valign="top"><a href="#send_stderr-2">send_stderr/2</a></td><td>Smart STDERR/1 macro function.</td></tr><tr><td valign="top"><a href="#send_stdout-2">send_stdout/2</a></td><td>Smart STDOUT/1 macro function.</td></tr></table>
 
 
 <a name="functions"></a>
 
 ##Function Details##
 
-<a name="send_stderr-2"></a>
+<a name="format_erlerr-1"></a>
+
+###format_erlerr/1##
+
+
+
+
+`format_erlerr(What) -> any()`
+
+
+
+Smartly format erlerr messages.<a name="send_stderr-2"></a>
 
 ###send_stderr/2##
 

@@ -11,7 +11,9 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">hotswap test
+* <font color="red">hotswap error format
+</font>
+* <font color="red">no unsafe warning when no change
 </font>
 * <font color="red">revised edown pull request
 </font>
