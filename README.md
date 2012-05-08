@@ -11,15 +11,7 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">nosh.test bails on clean run
-</font>
-* <font color="red">"hello" does nothing
-</font>
-* <font color="red">"hot" does nothing
-</font>
-* <font color="red">124: {info, nobin} not happening
-</font>
-* <font color="red">clean run of nosh_load
+* <font color="red">hotswap test
 </font>
 * <font color="red">revised edown pull request
 </font>

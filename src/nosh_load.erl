@@ -91,7 +91,7 @@
 run(IO, Command) when is_atom(Command) -> run(IO, atom_to_list(Command));
 run(IO, Command) ->
 	?INIT_DEBUG,
-	Path = [filename:absname("")],
+	Path = [filename:absname("ebin")],
 	run(IO, Command, Path).
 
 %% Test that we can throw appropriate warnings in various scenarios.

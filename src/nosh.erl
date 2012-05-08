@@ -57,7 +57,7 @@
 %% Include files
 %%
 
-%-define(debug, true).
+-define(debug, true).
 -include("macro.hrl").
 
 % This will eventually draw from ENV...

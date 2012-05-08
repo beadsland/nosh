@@ -1,7 +1,5 @@
-@todo "hello" does nothing
-@todo "hot" does nothing
-@todo 124: {info, nobin} not happening
-@todo clean run of nosh_load
+@todo hotswap error format
+@todo no unsafe warning when no change
 @todo revised edown pull request
 @todo domain
 @todo nosh_util specs
