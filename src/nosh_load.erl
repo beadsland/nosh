@@ -139,10 +139,8 @@ run(IO, Command, Dir, slurp) ->
 	end.
 
 % Load new current module from binary.
-run(IO, Command, Dir, Module, Binary) ->
-	Load = run_load(Command, Dir, Module, Binary),
-	?DEBUG("load: ~p~n", [Load]),
-	case Load of
+run(IO, Command, Dir, OrigModule, Binary) ->
+	case run_load(Command, Dir, OrigModule, Binary) of
 		{ok, Module, diff_path}	-> ?STDERR({Module, "namespace collision"}),
 								   {module, Module};
 		{ok, Module, flat_pkg} 	-> ?STDERR({Module, "flat package unsafe"}),
