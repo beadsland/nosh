@@ -12,27 +12,43 @@ Utility function library.
 
 Copyright (c) 2012 Beads D. Land-Trujillo
 
-__Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).<a name="index"></a>
+__Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).
+
+__<font color="red">To do</font>__
+<br></br>
+* <font color="red">spec API functions</font>
+<a name="index"></a>
 
 ##Function Index##
 
 
-<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#is_erldata-1">is_erldata/1</a></td><td>Used by STDOUT and ERROUT macros.</td></tr></table>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#send_stderr-2">send_stderr/2</a></td><td>Smart STDERR/1 macro function.</td></tr><tr><td valign="top"><a href="#send_stdout-2">send_stdout/2</a></td><td>Smart STDOUT/1 macro function.</td></tr></table>
 
 
 <a name="functions"></a>
 
 ##Function Details##
 
-<a name="is_erldata-1"></a>
+<a name="send_stderr-2"></a>
 
-###is_erldata/1##
-
-
-
-
-`is_erldata(What) -> any()`
+###send_stderr/2##
 
 
 
-Used by STDOUT and ERROUT macros.
+
+`send_stderr(IO, What) -> any()`
+
+
+
+Smart STDERR/1 macro function.<a name="send_stdout-2"></a>
+
+###send_stdout/2##
+
+
+
+
+`send_stdout(IO, What) -> any()`
+
+
+
+Smart STDOUT/1 macro function.

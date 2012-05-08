@@ -11,11 +11,17 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
+* <font color="red">124: {info, nobin} not happening
+</font>
+* <font color="red">hot nosrc
+</font>
 * <font color="red">recode nosh_load as piped stream
 </font>
 * <font color="red">revised edown pull request
 </font>
 * <font color="red">domain
+</font>
+* <font color="red">nosh_util specs
 </font>
 * <font color="red">makefile dialyze
 </font>

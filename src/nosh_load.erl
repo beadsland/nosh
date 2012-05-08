@@ -281,8 +281,13 @@ ensure_compiled(Cmd, Dir, Force) ->
 ensure_compiled(Cmd, Dir, Force, write_dir) ->
 	Filename = ?FILENAME(Dir, Cmd, ".beam"),
 	case can_write(Filename) of
-		{error, What}	-> {error, {file, What}};
-		false			-> {info, readonly};
+		{error, What}	-> 
+			{error, {file, What}};
+		false			-> 
+			HaveBinary = can_read(?FILENAME(Dir, Cmd, ".beam")),
+			if HaveBinary 	-> {info, readonly};
+			   true			-> {info, nobin}  % i.e., search next dir in path
+			end;
 		true			-> ensure_compiled(Cmd, Dir, Force, write_both)
 	end;
 
