@@ -47,22 +47,24 @@
 
 %% @doc Smart STDOUT/1 macro function.
 -type output() :: {atom(), any()} | string().
--spec send_stdout(IO :: #std{}, What :: output()) -> no_return().
+-spec send_stdout(IO :: #std{}, What :: output()) -> ok.
 send_stdout(IO, What) ->
 	Erlout = is_erldata(What), 
 	case Erlout of 
 		true 	-> IO#std.out ! {erlout, self(), What}; 
 		false 	-> ?STDOUT(What, []) 
-	end.
+	end,
+    ok.
 
 %% @doc Smart STDERR/1 macro function.
--spec send_stderr(IO :: #std{}, What :: output()) -> no_return().
+-spec send_stderr(IO :: #std{}, What :: output()) -> ok.
 send_stderr(IO, What) ->
 	Erlerr = is_erldata(What), 
 	case Erlerr of 
 		true 	-> IO#std.err ! {erlerr, self(), What}; 
 		false 	-> ?STDERR(What, []) 
-	end.
+	end,
+    ok.
 
 %% @doc Smartly format erlerr messages.
 -spec format_erlerr(What :: any()) -> string().
