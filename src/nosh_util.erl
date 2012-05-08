@@ -26,19 +26,43 @@
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
 %% @copyright 2012 Beads D. Land-Trujillo
 
+%% @todo spec API functions
+
 -module(nosh_util).
 
 %%
 %% Include files
 %%
 
+-include("macro.hrl").
+
 %%
 %% Exported Functions
 %%
--export([is_erldata/1]).
+-export([send_stderr/2, send_stdout/2]).
 
 %%
 %% API Functions
+%%
+
+%% @doc Smart STDOUT/1 macro function.
+send_stdout(IO, What) ->
+	Erlout = is_erldata(What), 
+	case Erlout of 
+		true 	-> IO#std.out ! {erlout, self(), What}; 
+		false 	-> ?STDERR(What, []) 
+	end.
+
+%% @doc Smart STDERR/1 macro function.
+send_stderr(IO, What) ->
+	Erlerr = is_erldata(What), 
+	case Erlerr of 
+		true 	-> IO#std.err ! {erlerr, self(), What}; 
+		false 	-> ?STDERR(What, []) 
+	end.
+
+%%
+%% Local Functions
 %%
 
 %% @doc Used by STDOUT and ERROUT macros.
@@ -46,8 +70,4 @@ is_erldata(What) ->
 	if is_tuple(What); is_atom(What)	-> true;
        is_list(What)					-> false
 	end.
-
-%%
-%% Local Functions
-%%
 

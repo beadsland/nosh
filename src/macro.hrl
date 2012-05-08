@@ -35,20 +35,10 @@
 -import(lists).
 -define(STDERR(Format, List), 
 		IO#std.err ! {stderr, self(), lists:flatten(io_lib:format(Format, List))}).
--define(STDERR(What), 
-		Erlerr = nosh_util:is_erldata(What), 
-		case Erlerr of 
-			true 	-> IO#std.err ! {erlerr, self(), What}; 
-			false 	-> ?STDERR(What, []) 
-		end).
+-define(STDERR(What), nosh_util:send_stderr(IO, What)).
 -define(STDOUT(Format, List), 
 		IO#std.out ! {stdout, self(), lists:flatten(io_lib:format(Format, List))}).
--define(STDOUT(What),
-		Erlout = nosh_util:is_erldata(What), 
-		case Erlout of 
-			true 	-> IO#std.out ! {erlout, self(), What}; 
-			false 	-> ?STDOUT(What, []) 
-		end).
+-define(STDOUT(What), nosh_util:send_stdout(IO, What)).
 
 % Debug is special case of Stderr
 -define(INIT_DEBUG, put(debug, IO#std.err)).

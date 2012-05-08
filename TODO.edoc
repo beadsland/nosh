@@ -1,6 +1,9 @@
+@todo nosh_load stderr
+@todo hot nosrc
 @todo recode nosh_load as piped stream
 @todo revised edown pull request
 @todo domain
+@todo nosh_util specs
 @todo makefile dialyze
 @todo refactor format_erlerr
 @todo nosh_parse context_type doc too long
