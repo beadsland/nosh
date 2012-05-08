@@ -1,3 +1,6 @@
+@todo nosh.test bails on clean run
+@todo "hello" does nothing
+@todo "hot" does nothing
 @todo 124: {info, nobin} not happening
 @todo clean run of nosh_load
 @todo revised edown pull request
