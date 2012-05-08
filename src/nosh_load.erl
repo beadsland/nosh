@@ -121,7 +121,7 @@ test(IO) ->
 run(_IO, _Command, []) -> {error, notfound};
 run(IO, Command, [Head | Tail]) ->
 	case ensure_compiled(Command, Head) of
-		{info, nofile}				-> run(IO, Command, Tail);
+		{info, nobin}				-> run(IO, Command, Tail);
 		{info, Info}				-> ?DEBUG("l: ~p~n", [Info]),
 									   run(IO, Command, Head, slurp);
 		{ok, _Filename}				-> run(IO, Command, Head, slurp);
@@ -274,23 +274,26 @@ ensure_compiled(Cmd, Dir, Force) ->
 	case can_write(Dir) of
 		{error, What}	-> {error, {file, What}};
 		false			-> {info, readonly_dir};
-		true			-> ensure_compiled(Cmd, Dir, Force, true_dir)
+		true			-> ensure_compiled(Cmd, Dir, Force, write_dir)
 	end.
 
 % Check if we can write to the beam file.
-ensure_compiled(Cmd, Dir, Force, true_dir) ->
+ensure_compiled(Cmd, Dir, Force, write_dir) ->
 	Filename = ?FILENAME(Dir, Cmd, ".beam"),
 	case can_write(Filename) of
 		{error, What}	-> {error, {file, What}};
 		false			-> {info, readonly};
-		true			-> ensure_compiled(Cmd, Dir, Force, true_both)
+		true			-> ensure_compiled(Cmd, Dir, Force, write_both)
 	end;
 
-% Find our source file.
-ensure_compiled(Cmd, BinDir, Force, true_both) ->
+% Find our source file, and if none found, confirm there is even a binary.
+ensure_compiled(Cmd, BinDir, Force, write_both) ->
 	case parallel_src(BinDir, Cmd) of
-		nosrc 					-> 
-			{info, nosrc};
+		nosrc					->
+			HaveBinary = can_read(?FILENAME(BinDir, Cmd, ".beam")),
+			if HaveBinary 	-> {info, nosrc};
+			   true			-> {info, nobin}  % i.e., search next dir in path
+			end;
 		{ok, SrcDir, Project}	-> 
 			ensure_compiled(Cmd, BinDir, Force, SrcDir, Project)
 	end.

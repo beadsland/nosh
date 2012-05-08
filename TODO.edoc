@@ -1,4 +1,4 @@
-@todo nosh_load stderr
+@todo 124: {info, nobin} not happening
 @todo hot nosrc
 @todo recode nosh_load as piped stream
 @todo revised edown pull request
