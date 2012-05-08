@@ -2,6 +2,7 @@
 
 #Module nosh_util#
 * [Description](#description)
+* [Data Types](#types)
 * [Function Index](#index)
 * [Function Details](#functions)
 
@@ -17,6 +18,19 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 __<font color="red">To do</font>__
 <br></br>
 * <font color="red">spec API functions</font>
+
+<a name="types"></a>
+
+##Data Types##
+
+
+
+
+###<a name="type-output">output()</a>##
+
+
+
+<pre>output() = {atom(), any()} | string()</pre>
 <a name="index"></a>
 
 ##Function Index##
@@ -36,7 +50,9 @@ __<font color="red">To do</font>__
 
 
 
-`format_erlerr(What) -> any()`
+<pre>format_erlerr(What::any()) -&gt; string()</pre>
+<br></br>
+
 
 
 
@@ -47,7 +63,9 @@ Smartly format erlerr messages.<a name="send_stderr-2"></a>
 
 
 
-`send_stderr(IO, What) -> any()`
+<pre>send_stderr(IO::#std{}, What::<a href="#type-output">output()</a>) -> no_return()</pre>
+<br></br>
+
 
 
 
@@ -58,7 +76,9 @@ Smart STDERR/1 macro function.<a name="send_stdout-2"></a>
 
 
 
-`send_stdout(IO, What) -> any()`
+<pre>send_stdout(IO::#std{}, What::<a href="#type-output">output()</a>) -> no_return()</pre>
+<br></br>
+
 
 
 

@@ -11,19 +11,13 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">hotswap error format
+* <font color="red">candidate interviews
 </font>
-* <font color="red">no unsafe warning when no change
-</font>
-* <font color="red">revised edown pull request
-</font>
-* <font color="red">domain
+* <font color="red">domain consolidation
 </font>
 * <font color="red">nosh_util specs
 </font>
 * <font color="red">makefile dialyze
-</font>
-* <font color="red">refactor format_erlerr
 </font>
 * <font color="red">nosh_parse context_type doc too long
 </font>

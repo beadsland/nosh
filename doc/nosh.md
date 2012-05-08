@@ -13,7 +13,7 @@ The `nosh` process module, which handles messaging with a paired
 
 Copyright (c) 2012 Beads D. Land-Trujillo
 
-__Version:__ 0.1.9
+__Version:__ 0.1.10
 
 __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).<a name="description"></a>
 

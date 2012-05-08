@@ -46,6 +46,8 @@
 %%
 
 %% @doc Smart STDOUT/1 macro function.
+-type output() :: {atom(), any()} | string().
+-spec send_stdout(IO :: #std{}, What :: output()) -> no_return().
 send_stdout(IO, What) ->
 	Erlout = is_erldata(What), 
 	case Erlout of 
@@ -54,6 +56,7 @@ send_stdout(IO, What) ->
 	end.
 
 %% @doc Smart STDERR/1 macro function.
+-spec send_stderr(IO :: #std{}, What :: output()) -> no_return().
 send_stderr(IO, What) ->
 	Erlerr = is_erldata(What), 
 	case Erlerr of 
@@ -62,6 +65,7 @@ send_stderr(IO, What) ->
 	end.
 
 %% @doc Smartly format erlerr messages.
+-spec format_erlerr(What :: any()) -> string().
 format_erlerr(What) ->
     case What of 
         {Atom, Data} when is_atom(Atom) ->

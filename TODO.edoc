@@ -1,8 +1,6 @@
-@todo revised edown pull request
-@todo domain
-@todo nosh_util specs
+@todo candidate interviews
+@todo domain consolidation
 @todo makefile dialyze
-@todo refactor format_erlerr
 @todo nosh_parse context_type doc too long
 @todo standard behaviour
 @todo convert nosh:start/1 to nosh:run/1
