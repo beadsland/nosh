@@ -1,10 +1,10 @@
-@todo candidate interviews
-@todo domain consolidation
-
+@todo superl check for tabs
 @todo make good
 @todo convert nosh:start/1 to nosh:run/1
 @todo nosh_erl project (hot, good, bang)
 @todo does term pass params to shell?
+
+@todo domain consolidation
 
 @todo nosh_parse tokens
 @todo nosh_eval
