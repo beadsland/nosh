@@ -97,7 +97,7 @@ msg_loop(IO) ->
 % Handle nosh process messages.
 do_noshout(IO, MsgTag, Output) ->
   case MsgTag of
-    stdout	-> io:format(Output);
+    stdout	-> io:format("~s", [Output]);
     erlout	-> io:format("~p: error: ~p~n", [nosh, Output]);
     erlerr	-> Erlerr = nosh_util:format_erlerr(Output),
            io:format(standard_error, "** ~s~n", [Erlerr]);

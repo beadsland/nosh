@@ -34,10 +34,12 @@
 -import(io_lib).
 -import(lists).
 -define(STDERR(Format, List),
-    IO#std.err ! {stderr, self(), lists:flatten(io_lib:format(Format, List))}).
+        String = io_lib:format(Format, List),
+        IO#std.err ! {stderr, self(), lists:flatten(String)}).
 -define(STDERR(What), nosh_util:send_stderr(IO, What)).
 -define(STDOUT(Format, List),
-    IO#std.out ! {stdout, self(), lists:flatten(io_lib:format(Format, List))}).
+        String = io_lib:format(Format, List),
+        IO#std.out ! {stdout, self(), lists:flatten(String)}).
 -define(STDOUT(What), nosh_util:send_stdout(IO, What)).
 
 % Debug is special case of Stderr

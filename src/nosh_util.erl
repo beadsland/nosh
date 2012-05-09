@@ -64,7 +64,7 @@ send_stdout(IO, What) ->
   Erlout = is_erldata(What),
   case Erlout of
     true 	-> IO#std.out ! {erlout, self(), What};
-    false 	-> ?STDOUT(What, [])
+    false 	-> ?STDOUT("~s", [What])
   end,
     ok.
 
@@ -74,7 +74,7 @@ send_stderr(IO, What) ->
   Erlerr = is_erldata(What),
   case Erlerr of
     true 	-> IO#std.err ! {erlerr, self(), What};
-    false 	-> ?STDERR(What, [])
+    false 	-> ?STDERR("~s", [What])
   end,
     ok.
 
@@ -98,6 +98,7 @@ format_erlerr(What) ->
 -type filename() :: string().
 -type file_error() :: {error, {atom(), filename()}}.
 -spec can_write(Filename :: filename()) -> boolean() | file_error().
+%
 can_write(Filename) ->
     case file:read_file_info(Filename) of
         {ok, FileInfo}  ->
@@ -147,3 +148,4 @@ is_erldata(What) ->
   if is_tuple(What); is_atom(What)	-> true;
        is_list(What)					-> false
   end.
+
