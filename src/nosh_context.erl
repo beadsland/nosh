@@ -50,6 +50,7 @@
 %%
 %% Exported Functions
 %%
+
 -export([close_context/3, parse_context/3]).
 
 %%
@@ -57,7 +58,16 @@
 %%
 
 %% @doc Wind up context block.
-%% @todo spec this function
+-type context_type() :: nosh_parse:context_type().
+-type context_desc() :: nosh_parse:context_desc().
+-type context_stack() :: [context_desc()].
+-type symbol() :: nonempty_string().
+-type symbol_list() :: [symbol()].
+-type context_list() :: nosh_parse:context_list().
+-type context_result() :: {context_list(), context_stack()}.
+-spec close_context(QType :: context_type(), Stack :: context_stack(),
+                    List :: symbol_list()) -> context_result().
+%
 close_context(QType, Stack, List) ->
   ?DEBUG("close_context(~p, ~p, ~p)~n", [QType, Stack, List]),
   {Tail, _ReturnStack} = nosh_parse:parse({context, QType}, Stack, List),
@@ -74,7 +84,11 @@ close_context(QType, Stack, List) ->
   {[Context | lists:delete(Close, L2)], Stack}.
 
 %% @doc Unwind context and group stream.
-%% @todo spec this function
+-type close_result() :: {close_context, context_stack(), symbol_list()}.
+-type parse_result() :: context_result() | close_result().
+-spec parse_context(QType :: context_type(), Stack :: context_stack(),
+                    List :: symbol_list()) -> parse_result().
+%
 parse_context(escp, Stack, List) -> parse_context_escp(Stack, List);
 parse_context(dbcp, Stack, List) -> parse_context_dbcp(Stack, List);
 parse_context(QT, Stack, [Symbol | Tail]) ->
@@ -84,12 +98,14 @@ parse_context(QT, Stack, [Symbol | Tail]) ->
 %% Local Functions
 %%
 
+% Escape next character.
 parse_context_escp([Type | Stack], [Head | Tail]) ->
   [First | Rest] = Head,
   Escape = [First, {close_context, escp}],
   {NewTail, Stack} = nosh_parse:parse(Type, Stack, [Rest | Tail]),
   {Escape ++ NewTail, [Type | Stack]}.
 
+% Escape next character if escapable within double quotes.
 parse_context_dbcp([Type | Stack], [Head | Tail]) ->
   [First | Rest] = Head,
   case [First] of
@@ -103,6 +119,7 @@ parse_context_dbcp([Type | Stack], [Head | Tail]) ->
   {NewTail, Stack} = nosh_parse:parse(Type, Stack, [Left | Tail]),
   {Escape ++ NewTail, [Type | Stack]}.
 
+% Parse symbols that switch to a nested context.
 parse_context_symbol(QT, Stack, Symbol, Tail) ->
   case Symbol of
     "\n"    -> parse_symbol_eol(QT, Stack, Symbol, Tail);
@@ -118,6 +135,7 @@ parse_context_symbol(QT, Stack, Symbol, Tail) ->
     _Other  -> parse_context_other(QT, Stack, Symbol, Tail)
   end.
 
+% Parse end-of-line.
 parse_symbol_eol(QT, Stack, Symbol, Tail) ->
   case QT   of
     line    -> {close_context, Stack, Tail};
@@ -136,6 +154,7 @@ parse_symbol_eol(QT, Stack, Symbol, Tail) ->
     _Other  -> pass_context(QT, Stack, Symbol, Tail)
   end.
 
+% Parse semicolons and single and double ampersands and vertical bars.
 parse_symbol_conjunct(QT, Stack, Symbol, Tail)
      when Symbol == "\&"; Symbol == "\|" ->
   case QT of
@@ -161,6 +180,7 @@ parse_symbol_conjunct(QT, Stack, Symbol, Tail) ->
       end
   end.
 
+% Parse open parentheses entry to context.
 parse_symbol_openparen(QT, Stack, Symbol, Tail) ->
   case QT of
     doub    -> pass_context(QT, Stack, Symbol, Tail);
@@ -169,6 +189,7 @@ parse_symbol_openparen(QT, Stack, Symbol, Tail) ->
     _Other  -> close_context(pren, [{context, QT} | Stack], Tail)
   end.
 
+% Parse close parentheses exit from context.
 parse_symbol_closeparen(QT, Stack, Symbol, Tail) ->
   case QT of
     doub    -> pass_context(QT, Stack, Symbol, Tail);
@@ -180,6 +201,7 @@ parse_symbol_closeparen(QT, Stack, Symbol, Tail) ->
     _Other  -> {close_context, Stack, [Symbol | Tail]}
   end.
 
+% Parse command substitution back ticks.
 parse_symbol_backquote(QT, Stack, Symbol, Tail) ->
   case QT of
     sing    -> pass_context(QT, Stack, Symbol, Tail);
@@ -189,6 +211,7 @@ parse_symbol_backquote(QT, Stack, Symbol, Tail) ->
     _Other  -> close_context(back, [{context, QT} | Stack], Tail)
   end.
 
+% Parse substitution-friendly double quotes.
 parse_symbol_doubquote(QT, Stack, Symbol, Tail) ->
   case QT of
     doub    -> {close_context, Stack, Tail};
@@ -197,6 +220,7 @@ parse_symbol_doubquote(QT, Stack, Symbol, Tail) ->
     _Other  -> close_context(doub, [{context, QT} | Stack], Tail)
   end.
 
+% Parse substitution-free single quotes.
 parse_symbol_singquote(QT, Stack, Symbol, Tail) ->
   case QT of
     doub    -> pass_context(QT, Stack, Symbol, Tail);
@@ -205,6 +229,7 @@ parse_symbol_singquote(QT, Stack, Symbol, Tail) ->
     _Other  -> close_context(sing, [{context, QT} | Stack], Tail)
   end.
 
+% Parse escaped character.
 parse_symbol_backslash(QT, Stack, Symbol, Tail) ->
   case QT of
     doub    -> close_context(dbcp, [{context, QT} | Stack], Tail);
@@ -213,6 +238,7 @@ parse_symbol_backslash(QT, Stack, Symbol, Tail) ->
     _Other  -> close_context(escp, [{context, QT} | Stack], Tail)
   end.
 
+% Parse any other symbols and words.
 parse_context_other(QType, Stack, Head, Tail) ->
   {NewTail, _ReturnStack} = nosh_parse:parse({context, QType}, Stack, Tail),
   {[Head | NewTail], Stack}.

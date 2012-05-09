@@ -272,6 +272,8 @@
 
 -export([parse/2, parse/3]).
 
+-export_type([context_type/0, context_desc/0, context_list/0]).
+
 %%
 %% API functions
 %%
