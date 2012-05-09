@@ -62,7 +62,7 @@ __<font color="red">To do</font>__
 
 
 
-`parse_context(QT, Stack, Tail) -> any()`
+`parse_context(QT, Stack, List) -> any()`
 
 
 

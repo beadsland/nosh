@@ -75,130 +75,147 @@ close_context(QType, Stack, List) ->
 
 %% @doc Unwind context and group stream.
 %% @todo spec this function
-parse_context(escp, [Type | Stack], [Head | Tail]) ->
+parse_context(escp, Stack, List) -> parse_context_escp(Stack, List);
+parse_context(dbcp, Stack, List) -> parse_context_dbcp(Stack, List);
+parse_context(QT, Stack, [Symbol | Tail]) ->
+  parse_context_symbol(QT, Stack, Symbol, Tail).
+
+%%
+%% Local Functions
+%%
+
+parse_context_escp([Type | Stack], [Head | Tail]) ->
   [First | Rest] = Head,
   Escape = [First, {close_context, escp}],
   {NewTail, Stack} = nosh_parse:parse(Type, Stack, [Rest | Tail]),
-  {Escape ++ NewTail, [Type | Stack]};
+  {Escape ++ NewTail, [Type | Stack]}.
 
-parse_context(dbcp, [Type | Stack], [Head | Tail]) ->
+parse_context_dbcp([Type | Stack], [Head | Tail]) ->
   [First | Rest] = Head,
   case [First] of
-    "\$"	-> Escape = [[First], {close_context, dbcp}], Left = [Rest];
-    "\`"	-> Escape = [[First], {close_context, dbcp}], Left = [Rest];
-    "\""	-> Escape = [[First], {close_context, dbcp}], Left = [Rest];
-    "\\"	-> Escape = [[First], {close_context, dbcp}], Left = [Rest];
-    "\n"	-> Escape = throw({context, escp}), Left = [Rest];
-    _Other	-> Escape = [{close_context, dbcp}], Left = [Head]
+    "\$"    -> Escape = [[First], {close_context, dbcp}], Left = [Rest];
+    "\`"    -> Escape = [[First], {close_context, dbcp}], Left = [Rest];
+    "\""    -> Escape = [[First], {close_context, dbcp}], Left = [Rest];
+    "\\"    -> Escape = [[First], {close_context, dbcp}], Left = [Rest];
+    "\n"    -> Escape = throw({context, escp}), Left = [Rest];
+    _Other  -> Escape = [{close_context, dbcp}], Left = [Head]
   end,
   {NewTail, Stack} = nosh_parse:parse(Type, Stack, [Left | Tail]),
-  {Escape ++ NewTail, [Type | Stack]};
+  {Escape ++ NewTail, [Type | Stack]}.
 
-parse_context(QT, Stack, [Symbol | Tail]) when Symbol == "\n" ->
-  case QT	of
-    line 	-> {close_context, Stack, Tail};
+parse_context_symbol(QT, Stack, Symbol, Tail) ->
+  case Symbol of
+    "\n"    -> parse_symbol_eol(QT, Stack, Symbol, Tail);
+    "\&"    -> parse_symbol_conjunct(QT, Stack, Symbol, Tail);
+    "\|"    -> parse_symbol_conjunct(QT, Stack, Symbol, Tail);
+    "\;"    -> parse_symbol_conjunct(QT, Stack, Symbol, Tail);
+    "\("    -> parse_symbol_openparen(QT, Stack, Symbol, Tail);
+    "\)"    -> parse_symbol_closeparen(QT, Stack, Symbol, Tail);
+    "\`"    -> parse_symbol_backquote(QT, Stack, Symbol, Tail);
+    "\""    -> parse_symbol_doubquote(QT, Stack, Symbol, Tail);
+    "\'"    -> parse_symbol_singquote(QT, Stack, Symbol, Tail);
+    "\\"    -> parse_symbol_backslash(QT, Stack, Symbol, Tail);
+    _Other  -> parse_context_other(QT, Stack, Symbol, Tail)
+  end.
 
-    semi 	-> {close_context, Stack, [Symbol | Tail]};
-    ifok 	-> {close_context, Stack, [Symbol | Tail]};
-    ampi 	-> {close_context, Stack, [Symbol | Tail]};
-    ifnz 	-> {close_context, Stack, [Symbol | Tail]};
-    pipe 	-> {close_context, Stack, [Symbol | Tail]};
+parse_symbol_eol(QT, Stack, Symbol, Tail) ->
+  case QT   of
+    line    -> {close_context, Stack, Tail};
 
-    pren	-> throw({context, pren});
-    back	-> throw({context, back});
-    doub	-> throw({context, doub});
-    sing	-> throw({context, sing});
+    semi    -> {close_context, Stack, [Symbol | Tail]};
+    ifok    -> {close_context, Stack, [Symbol | Tail]};
+    ampi    -> {close_context, Stack, [Symbol | Tail]};
+    ifnz    -> {close_context, Stack, [Symbol | Tail]};
+    pipe    -> {close_context, Stack, [Symbol | Tail]};
 
-    _Other	-> pass_context(QT, Stack, Symbol, Tail)
-  end;
+    pren    -> throw({context, pren});
+    back    -> throw({context, back});
+    doub    -> throw({context, doub});
+    sing    -> throw({context, sing});
 
-parse_context(QT, Stack, [Symbol, Symbol | Tail]) when Symbol == "\&";
-                             Symbol == "\|" ->
+    _Other  -> pass_context(QT, Stack, Symbol, Tail)
+  end.
+
+parse_symbol_conjunct(QT, Stack, Symbol, Tail)
+     when Symbol == "\&"; Symbol == "\|" ->
   case QT of
-    doub	-> pass_context(QT, Stack, Symbol, Tail);
-    sing	-> pass_context(QT, Stack, Symbol, Tail);
+    doub    -> pass_context(QT, Stack, Symbol, Tail);
+    sing    -> pass_context(QT, Stack, Symbol, Tail);
 
-    _Other	->
+    _Other  ->
       case Symbol of
         "\&" -> close_context(ifok, [{context, QT} | Stack], Tail);
         "\|" -> close_context(ifnz, [{content, QT} | Stack], Tail)
       end
   end;
-
-parse_context(QT, Stack, [Symbol | Tail]) when Symbol == "\;";
-                         Symbol == "\&";
-                         Symbol == "\|" ->
+parse_symbol_conjunct(QT, Stack, Symbol, Tail) ->
   case QT of
-    doub	-> pass_context(QT, Stack, Symbol, Tail);
-    sing	-> pass_context(QT, Stack, Symbol, Tail);
+    doub    -> pass_context(QT, Stack, Symbol, Tail);
+    sing    -> pass_context(QT, Stack, Symbol, Tail);
 
-    _Other	->
+    _Other  ->
       case Symbol of
         "\;" -> close_context(semi, [{context, QT} | Stack], Tail);
         "\&" -> close_context(ampi, [{context, QT} | Stack], Tail);
         "\|" -> close_context(pipe, [{content, QT} | Stack], Tail)
       end
-  end;
+  end.
 
-parse_context(QT, Stack, [Symbol | Tail]) when Symbol == "\(" ->
+parse_symbol_openparen(QT, Stack, Symbol, Tail) ->
   case QT of
-    doub	-> pass_context(QT, Stack, Symbol, Tail);
-    sing	-> pass_context(QT, Stack, Symbol, Tail);
+    doub    -> pass_context(QT, Stack, Symbol, Tail);
+    sing    -> pass_context(QT, Stack, Symbol, Tail);
 
-    _Other	-> close_context(pren, [{context, QT} | Stack], Tail)
-  end;
+    _Other  -> close_context(pren, [{context, QT} | Stack], Tail)
+  end.
 
-parse_context(QT, Stack, [Symbol | Tail]) when Symbol == "\)" ->
+parse_symbol_closeparen(QT, Stack, Symbol, Tail) ->
   case QT of
-    doub	-> pass_context(QT, Stack, Symbol, Tail);
-    sing	-> pass_context(QT, Stack, Symbol, Tail);
+    doub    -> pass_context(QT, Stack, Symbol, Tail);
+    sing    -> pass_context(QT, Stack, Symbol, Tail);
 
-    pren	-> {close_context, Stack, Tail};
-    line	-> throw({close, pren});
+    pren    -> {close_context, Stack, Tail};
+    line    -> throw({close, pren});
 
-    _Other	-> {close_context, Stack, [Symbol | Tail]}
-  end;
+    _Other  -> {close_context, Stack, [Symbol | Tail]}
+  end.
 
-parse_context(QT, Stack, [Symbol | Tail]) when Symbol == "\`" ->
+parse_symbol_backquote(QT, Stack, Symbol, Tail) ->
   case QT of
-    sing	-> pass_context(QT, Stack, Symbol, Tail);
+    sing    -> pass_context(QT, Stack, Symbol, Tail);
 
-    back	-> {close_context, Stack, Tail};
+    back    -> {close_context, Stack, Tail};
 
-    _Other	-> close_context(back, [{context, QT} | Stack], Tail)
-  end;
+    _Other  -> close_context(back, [{context, QT} | Stack], Tail)
+  end.
 
-parse_context(QT, Stack, [Symbol | Tail]) when Symbol == "\"" ->
+parse_symbol_doubquote(QT, Stack, Symbol, Tail) ->
   case QT of
-    doub	-> {close_context, Stack, Tail};
-    sing	-> pass_context(QT, Stack, Symbol, Tail);
+    doub    -> {close_context, Stack, Tail};
+    sing    -> pass_context(QT, Stack, Symbol, Tail);
 
-    _Other	-> close_context(doub, [{context, QT} | Stack], Tail)
-  end;
+    _Other  -> close_context(doub, [{context, QT} | Stack], Tail)
+  end.
 
-parse_context(QT, Stack, [Symbol | Tail]) when Symbol == "\'" ->
+parse_symbol_singquote(QT, Stack, Symbol, Tail) ->
   case QT of
-    doub	-> pass_context(QT, Stack, Symbol, Tail);
-    sing	-> {close_context, Stack, Tail};
+    doub    -> pass_context(QT, Stack, Symbol, Tail);
+    sing    -> {close_context, Stack, Tail};
 
-    _Other	-> close_context(sing, [{context, QT} | Stack], Tail)
-  end;
+    _Other  -> close_context(sing, [{context, QT} | Stack], Tail)
+  end.
 
-parse_context(QT, Stack, [Symbol | Tail]) when Symbol == "\\" ->
+parse_symbol_backslash(QT, Stack, Symbol, Tail) ->
   case QT of
-    doub	-> close_context(dbcp, [{context, QT} | Stack], Tail);
-    sing	-> pass_context(QT, Stack, Symbol, Tail);
+    doub    -> close_context(dbcp, [{context, QT} | Stack], Tail);
+    sing    -> pass_context(QT, Stack, Symbol, Tail);
 
-    _Other	-> close_context(escp, [{context, QT} | Stack], Tail)
-  end;
+    _Other  -> close_context(escp, [{context, QT} | Stack], Tail)
+  end.
 
-parse_context(QType, Stack, [Head | Tail]) ->
+parse_context_other(QType, Stack, Head, Tail) ->
   {NewTail, _ReturnStack} = nosh_parse:parse({context, QType}, Stack, Tail),
   {[Head | NewTail], Stack}.
-
-%%
-%% Local Functions
-%%
 
 %% Pass non-symbols along unchanged (this should be tokenizing).
 pass_context(QT, Stack, Symbol, Tail) ->
