@@ -11,8 +11,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">superl check for tabs
-</font>
 * <font color="red">make good
 </font>
 * <font color="red">convert nosh:start/1 to nosh:run/1

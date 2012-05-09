@@ -52,10 +52,8 @@
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
 %% @copyright 2012 Beads D. Land-Trujillo
 
-%% TODO: document this module
-%% TODO: force purge option
 %% TODO: module binary service (to avoid repetitive slurps)
-%% TODO: conservative module loader
+%% TODO: conservative module loader (to preserve against collisions)
 
 %% @version 0.1.3
 -module(nosh_load).
@@ -119,13 +117,13 @@ test(IO) ->
 run(_IO, _Command, []) -> {error, notfound};
 run(IO, Command, [Head | Tail]) ->
   case ensure_compiled(Command, Head) of
-    {info, nobin}				-> run(IO, Command, Tail);
-    {info, Info}				-> ?DEBUG("l: ~p~n", [Info]),
-                     run(IO, Command, Head, slurp);
-    {ok, _Filename}				-> run(IO, Command, Head, slurp);
-    {ok, Module, Binary}		-> run(IO, Command, Head, Module, Binary);
-    {error, What}				-> ?STDERR({load, What}),
-                     {error, {load, What}}
+    {info, nobin}           -> run(IO, Command, Tail);
+    {info, Info}            -> ?DEBUG("l: ~p~n", [Info]),
+                               run(IO, Command, Head, slurp);
+    {ok, _Filename}			-> run(IO, Command, Head, slurp);
+    {ok, Module, Binary}	-> run(IO, Command, Head, Module, Binary);
+    {error, What}			-> ?STDERR({load, What}),
+                               {error, {load, What}}
   end.
 
 % Having found command, slurp binary from file.
@@ -276,27 +274,25 @@ ensure_compiled(Cmd, Dir, Force) ->
 ensure_compiled(Cmd, Dir, Force, write_dir) ->
   Filename = ?FILENAME(Dir, Cmd, ".beam"),
   case nosh_util:can_write(Filename) of
-    {error, What}	->
-      {error, {file, What}};
-    false			->
-      HaveBinary = nosh_util:can_read(?FILENAME(Dir, Cmd, ".beam")),
-      if HaveBinary     -> {info, readonly};
-         true			-> {info, nobin}  % i.e., search next dir in path
-      end;
+    {error, What}	-> {error, {file, What}};
+    false			-> ensure_binary(Cmd, Dir, readonly);
     true			-> ensure_compiled(Cmd, Dir, Force, write_both)
   end;
 
 % Find our source file, and if none found, confirm there is even a binary.
 ensure_compiled(Cmd, BinDir, Force, write_both) ->
   case parallel_src(BinDir, Cmd) of
-    nosrc					->
-      HaveBinary = nosh_util:can_read(?FILENAME(BinDir, Cmd, ".beam")),
-      if HaveBinary 	-> {info, nosrc};
-         true			-> {info, nobin}  % i.e., search next dir in path
-      end;
-    {ok, SrcDir, Project}	->
-      ensure_compiled(Cmd, BinDir, Force, SrcDir, Project)
+    nosrc					-> ensure_binary(Cmd, BinDir, nosrc);
+    {ok, SrcDir, Project}	-> ensure_compiled(Cmd, BinDir, Force, SrcDir,
+                                               Project)
   end.
+
+% If we can't compile from source file, confirm we can use binary we have.
+ensure_binary(Cmd, Dir, Why) ->
+    HaveBinary = nosh_util:can_read(?FILENAME(Dir, Cmd, ".beam")),
+    if HaveBinary     -> {info, Why};
+       true           -> {info, nobin}  % i.e., search next dir in path
+    end.
 
 % Get modification date of source file.
 ensure_compiled(Cmd, BinDir, Force, SrcDir, Proj) ->
