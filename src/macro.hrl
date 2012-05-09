@@ -31,24 +31,17 @@
 -define(IO(In, Out, Err), #std{in=In, out=Out, err=Err}).
 -define(IO(Pid), #std{in=Pid, out=Pid, err=Pid}).
 
--import(io_lib).
--import(lists).
--define(STDERR(Format, List),
-        String = io_lib:format(Format, List),
-        IO#std.err ! {stderr, self(), lists:flatten(String)}).
--define(STDERR(What), nosh_util:send_stderr(IO, What)).
--define(STDOUT(Format, List),
-        String = io_lib:format(Format, List),
-        IO#std.out ! {stdout, self(), lists:flatten(String)}).
--define(STDOUT(What), nosh_util:send_stdout(IO, What)).
+-import(nosh_util).  % May be used by packaged modules.
+-define(STDERR(Format, What), stderr, nosh_util:send_stderr(IO, Format, What)).
+-define(STDERR(What), stderr, nosh_util:send_stderr(IO, What)).
+-define(STDOUT(Format, What), stdout, nosh_util:send_stdout(IO, Format, What)).
+-define(STDOUT(What), stdout, nosh_util:send_stdout(IO, What)).
 
 % Debug is special case of Stderr
 -define(INIT_DEBUG, put(debug, IO#std.err)).
 -ifdef(debug).
--define(DEBUG(Format, List),
-    debug,
-    get(debug) ! {debug, self(), lists:flatten(io_lib:format(Format, List))}).
+-define(DEBUG(Format, What), debug, nosh_util:send_debug(Format, What)).
 -else.
--define(DEBUG(F, L), debug, put(debug_garbage, {F,L})).
+-define(DEBUG(Format, What), debug, put(devnull, {Format, What})).
 -endif.
--define(DEBUG(String), ?DEBUG(String, [])).
+-define(DEBUG(String), ?DEBUG("~s", [String])).

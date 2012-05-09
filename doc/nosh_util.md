@@ -50,6 +50,14 @@ __<font color="red">To do</font>__
 
 
 
+###<a name="type-format">format()</a>##
+
+
+
+<pre>format() = <a href="io.md#type-format">io:format()</a></pre>
+
+
+
 ###<a name="type-output">output()</a>##
 
 
@@ -60,7 +68,7 @@ __<font color="red">To do</font>__
 ##Function Index##
 
 
-<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#can_read-1">can_read/1</a></td><td>Test if file or directory is readable.</td></tr><tr><td valign="top"><a href="#can_write-1">can_write/1</a></td><td>Test if file or directory is writeable.</td></tr><tr><td valign="top"><a href="#format_erlerr-1">format_erlerr/1</a></td><td>Smartly format erlerr messages.</td></tr><tr><td valign="top"><a href="#last_modified-1">last_modified/1</a></td><td>Get last date and time file last modified.</td></tr><tr><td valign="top"><a href="#send_stderr-2">send_stderr/2</a></td><td>Smart STDERR/1 macro function.</td></tr><tr><td valign="top"><a href="#send_stdout-2">send_stdout/2</a></td><td>Smart STDOUT/1 macro function.</td></tr></table>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#can_read-1">can_read/1</a></td><td>Test if file or directory is readable.</td></tr><tr><td valign="top"><a href="#can_write-1">can_write/1</a></td><td>Test if file or directory is writeable.</td></tr><tr><td valign="top"><a href="#format_erlerr-1">format_erlerr/1</a></td><td>Smartly format erlerr messages.</td></tr><tr><td valign="top"><a href="#last_modified-1">last_modified/1</a></td><td>Get last date and time file last modified.</td></tr><tr><td valign="top"><a href="#send_debug-2">send_debug/2</a></td><td>Smart DEBUG/2 macro function.</td></tr><tr><td valign="top"><a href="#send_stderr-2">send_stderr/2</a></td><td>Smart STDERR/1 macro function.</td></tr><tr><td valign="top"><a href="#send_stderr-3">send_stderr/3</a></td><td>Smart STDERR/2 macro function.</td></tr><tr><td valign="top"><a href="#send_stdout-2">send_stdout/2</a></td><td>Smart STDOUT/1 macro function.</td></tr><tr><td valign="top"><a href="#send_stdout-3">send_stdout/3</a></td><td>Smart STDOUT/2 macro function.</td></tr></table>
 
 
 <a name="functions"></a>
@@ -119,7 +127,21 @@ Smartly format erlerr messages.<a name="last_modified-1"></a>
 
 
 
-Get last date and time file last modified.<a name="send_stderr-2"></a>
+Get last date and time file last modified.<a name="send_debug-2"></a>
+
+###send_debug/2##
+
+
+
+
+<pre>send_debug(Format::<a href="#type-format">format()</a>, What::list()) -> ok</pre>
+<br></br>
+
+
+
+
+Smart DEBUG/2 macro function.
+Retrieves debug pid from process dictionary.  (Set by macro.)<a name="send_stderr-2"></a>
 
 ###send_stderr/2##
 
@@ -132,7 +154,20 @@ Get last date and time file last modified.<a name="send_stderr-2"></a>
 
 
 
-Smart STDERR/1 macro function.<a name="send_stdout-2"></a>
+Smart STDERR/1 macro function.<a name="send_stderr-3"></a>
+
+###send_stderr/3##
+
+
+
+
+<pre>send_stderr(IO::#std{}, Format::<a href="#type-format">format()</a>, What::list()) -> ok</pre>
+<br></br>
+
+
+
+
+Smart STDERR/2 macro function.<a name="send_stdout-2"></a>
 
 ###send_stdout/2##
 
@@ -145,4 +180,17 @@ Smart STDERR/1 macro function.<a name="send_stdout-2"></a>
 
 
 
-Smart STDOUT/1 macro function.
+Smart STDOUT/1 macro function.<a name="send_stdout-3"></a>
+
+###send_stdout/3##
+
+
+
+
+<pre>send_stdout(IO::#std{}, Format::<a href="#type-format">format()</a>, What::list()) -> ok</pre>
+<br></br>
+
+
+
+
+Smart STDOUT/2 macro function.

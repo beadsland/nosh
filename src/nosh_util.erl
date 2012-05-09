@@ -43,11 +43,11 @@
 %%
 
 % Standard I/O
--export([send_stderr/2, send_stdout/2, format_erlerr/1]).
+-export([send_stderr/2, send_stderr/3, send_stdout/2, send_stdout/3,
+         send_debug/2, format_erlerr/1]).
 
 % File Properties
 -export([can_read/1, can_write/1, last_modified/1]).
-
 
 %%
 %% API Functions
@@ -57,26 +57,49 @@
 % Standard I/O functions
 %%%
 
+%% @doc Smart STDOUT/2 macro function.
+-type format() :: io:format().
+-spec send_stdout(IO :: #std{}, Format :: format(), What :: list()) -> ok.
+%
+send_stdout(IO, Format, What) ->
+  send_stdout(IO, io_lib:format(Format, What)),
+  ok.
+
 %% @doc Smart STDOUT/1 macro function.
 -type output() :: {atom(), any()} | string().
 -spec send_stdout(IO :: #std{}, What :: output()) -> ok.
+%
 send_stdout(IO, What) ->
-  Erlout = is_erldata(What),
-  case Erlout of
-    true 	-> IO#std.out ! {erlout, self(), What};
-    false 	-> ?STDOUT("~s", [What])
+  if is_tuple(What);
+     is_atom(What)  -> IO#std.out ! {erlout, self(), What};
+     is_list(What)  -> IO#std.out ! {stdout, self(), What};
+     true           -> ?STDOUT("~p", [What])
   end,
-    ok.
+  ok.
+
+%% @doc Smart STDERR/2 macro function.
+-spec send_stderr(IO :: #std{}, Format:: format(), What :: list()) -> ok.
+send_stderr(IO, Format, What) ->
+  send_stderr(IO, io_lib:format(Format, What)),
+  ok.
 
 %% @doc Smart STDERR/1 macro function.
 -spec send_stderr(IO :: #std{}, What :: output()) -> ok.
 send_stderr(IO, What) ->
-  Erlerr = is_erldata(What),
-  case Erlerr of
-    true 	-> IO#std.err ! {erlerr, self(), What};
-    false 	-> ?STDERR("~s", [What])
+  if is_tuple(What);
+     is_atom(What)  -> IO#std.out ! {erlerr, self(), What};
+     is_list(What)  -> IO#std.out ! {stderr, self(), What};
+     true           -> ?STDERR("~p", [What])
   end,
-    ok.
+  ok.
+
+%% @doc Smart DEBUG/2 macro function.
+%% Retrieves debug pid from process dictionary.  (Set by macro.)
+%% @end
+-spec send_debug(Format :: format(), What :: list()) -> ok.
+send_debug(Format, What) ->
+  get(debug) ! {debug, self(), io_lib:format(Format, What)},
+  ok.
 
 %% @doc Smartly format erlerr messages.
 -spec format_erlerr(What :: any()) -> string().
@@ -143,9 +166,4 @@ last_modified(Filename) ->
 %% Local Functions
 %%
 
-%% @doc Used by STDOUT and ERROUT macros.
-is_erldata(What) ->
-  if is_tuple(What); is_atom(What)	-> true;
-       is_list(What)					-> false
-  end.
 
