@@ -1,3 +1,5 @@
+@todo get working under wicked shell
+
 @todo reformat shell exit message
 @todo make good
 @todo convert nosh:start/1 to nosh:run/1
