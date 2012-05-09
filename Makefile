@@ -55,6 +55,7 @@ all:		push-nosh current nosh
 run:		compile nosh
 
 nosh:	
+	@rm erl_crash.dump
 	tabs -1	>/dev/null # requires ncurses (noterm doesn't know tabs)
 	@erl -noshell -pa deps/superl/ebin -s superl -pa ebin -s noterm
 
