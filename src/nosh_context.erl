@@ -156,28 +156,18 @@ parse_symbol_eol(QT, Stack, Symbol, Tail) ->
 
 % Parse semicolons and single and double ampersands and vertical bars.
 parse_symbol_conjunct(QT, Stack, Symbol, Tail)
+     when QT == doub; QT == sing -> pass_context(QT, Stack, Symbol, Tail);
+parse_symbol_conjunct(QT, Stack, Symbol, [Symbol | Tail])
      when Symbol == "\&"; Symbol == "\|" ->
-  case QT of
-    doub    -> pass_context(QT, Stack, Symbol, Tail);
-    sing    -> pass_context(QT, Stack, Symbol, Tail);
-
-    _Other  ->
-      case Symbol of
-        "\&" -> close_context(ifok, [{context, QT} | Stack], Tail);
-        "\|" -> close_context(ifnz, [{content, QT} | Stack], Tail)
-      end
+  case Symbol of
+    "\&" -> close_context(ifok, [{context, QT} | Stack], Tail);
+    "\|" -> close_context(ifnz, [{content, QT} | Stack], Tail)
   end;
 parse_symbol_conjunct(QT, Stack, Symbol, Tail) ->
-  case QT of
-    doub    -> pass_context(QT, Stack, Symbol, Tail);
-    sing    -> pass_context(QT, Stack, Symbol, Tail);
-
-    _Other  ->
-      case Symbol of
-        "\;" -> close_context(semi, [{context, QT} | Stack], Tail);
-        "\&" -> close_context(ampi, [{context, QT} | Stack], Tail);
-        "\|" -> close_context(pipe, [{content, QT} | Stack], Tail)
-      end
+  case Symbol of
+    "\;" -> close_context(semi, [{context, QT} | Stack], Tail);
+    "\&" -> close_context(ampi, [{context, QT} | Stack], Tail);
+    "\|" -> close_context(pipe, [{content, QT} | Stack], Tail)
   end.
 
 % Parse open parentheses entry to context.
