@@ -44,7 +44,8 @@
 -define(INIT_DEBUG, put(debug, IO#std.err)).
 -ifdef(debug).
 -define(DEBUG(Format, List),
-    debug, get(debug) ! {debug, self(), lists:flatten(io_lib:format(Format, List))}).
+    debug,
+    get(debug) ! {debug, self(), lists:flatten(io_lib:format(Format, List))}).
 -else.
 -define(DEBUG(F, L), debug, put(debug_garbage, {F,L})).
 -endif.
