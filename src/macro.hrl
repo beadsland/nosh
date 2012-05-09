@@ -1,10 +1,10 @@
 %% CDDL HEADER START
 %% -----------------------------------------------------------------------
-%% The contents of this file are subject to the Common Development and 
-%% Distribution License, Version 1.0 (the "License"); you may not use 
-%% this file except in compliance with the License.  You should have 
-%% received a copy of the Common Development and Distribution License 
-%% along with this software.  If not, it can be retrieved online at 
+%% The contents of this file are subject to the Common Development and
+%% Distribution License, Version 1.0 (the "License"); you may not use
+%% this file except in compliance with the License.  You should have
+%% received a copy of the Common Development and Distribution License
+%% along with this software.  If not, it can be retrieved online at
 %% http://www.opensource.org/licenses/CDDL-1.0
 %%
 %% Software distributed under the License is distributed on an "AS IS"
@@ -23,8 +23,8 @@
 %% CDDL HEADER END
 
 -import(proplists).
--define(ATTRIB(Module, Attribute), 
-		proplists:get_value(Attribute, Module:module_info(attributes))).
+-define(ATTRIB(Module, Attribute),
+    proplists:get_value(Attribute, Module:module_info(attributes))).
 -define(VERSION(Module), ?ATTRIB(Module, version)).
 
 -record(std, {in :: pid(), out :: pid(), err :: pid()}).
@@ -33,19 +33,19 @@
 
 -import(io_lib).
 -import(lists).
--define(STDERR(Format, List), 
-		IO#std.err ! {stderr, self(), lists:flatten(io_lib:format(Format, List))}).
+-define(STDERR(Format, List),
+    IO#std.err ! {stderr, self(), lists:flatten(io_lib:format(Format, List))}).
 -define(STDERR(What), nosh_util:send_stderr(IO, What)).
--define(STDOUT(Format, List), 
-		IO#std.out ! {stdout, self(), lists:flatten(io_lib:format(Format, List))}).
+-define(STDOUT(Format, List),
+    IO#std.out ! {stdout, self(), lists:flatten(io_lib:format(Format, List))}).
 -define(STDOUT(What), nosh_util:send_stdout(IO, What)).
 
 % Debug is special case of Stderr
 -define(INIT_DEBUG, put(debug, IO#std.err)).
 -ifdef(debug).
--define(DEBUG(Format, List), 
-		debug, get(debug) ! {debug, self(), lists:flatten(io_lib:format(Format, List))}).
+-define(DEBUG(Format, List),
+    debug, get(debug) ! {debug, self(), lists:flatten(io_lib:format(Format, List))}).
 -else.
 -define(DEBUG(F, L), debug, put(debug_garbage, {F,L})).
 -endif.
--define(DEBUG(String), ?DEBUG(String, [])).  
+-define(DEBUG(String), ?DEBUG(String, [])).
