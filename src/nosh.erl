@@ -168,9 +168,7 @@ do_noise(IO, Command, CmdPid, Noise) ->
   ?STDERR("noise: ~p ~p~n", [Noise, self()]),
   ?MODULE:loop(IO, Command, CmdPid).
 
-% We spawn command as separate process and then wait on it.
-% This allows us to catch the exit status of runtime errors.
-
+%% Handle exit message from command process.
 command_return(IO, Command, Status) ->
   case Status of
     normal ->
