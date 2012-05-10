@@ -1,4 +1,5 @@
-@todo get working under wicked shell
+@todo wicked shell message re: separators/delimiters
+@todo makefile alias
 
 @todo reformat shell exit message
 @todo make good
@@ -33,3 +34,4 @@
 @todo Erl commands
 @todo Couch commands
 @todo Add support for line continuation (currently throws error)
+@todo integrate with wicked shell

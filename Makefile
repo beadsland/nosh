@@ -42,24 +42,32 @@ endif
 
 ONLINE	=	`$(PING) www.google.com 2>&1 >/dev/null; \
 			if [ "$$?" -eq "0" ]; then (echo yes); else (echo no); fi`
+TTY	=	`tty`
+
 
 HIDE_EDOC_WARN	=	grep -v "cannot handle URI.*edoc-info"
 SUCCINCT	=	grep -v "Entering directory" | grep -v "Leaving directory"
 
 #
-# Build rules start
+# Execution rules start
 #
 
 all:		push-nosh current nosh
 
 run:		compile nosh
 
-nosh:	nodump
-	tabs -1	>/dev/null # requires ncurses (noterm doesn't know tabs)
+nosh:	nodump tabs
 	@erl -noshell -pa deps/superl/ebin -s superl -pa ebin -s noterm
 
 nodump:
 	@if [ -e erl_crash.dump ]; then (rm erl_crash.dump); fi
+
+tabs:
+	@if [ "$(TTY)" != "not a tty" ]; then (tabs -1 >/dev/null); fi
+
+#
+# Build rules start
+#
 
 good:	compile
 	@erl -noshell -pa deps/superl/ebin -s superl -s init stop
@@ -70,7 +78,10 @@ compile:
 	@rebar compile doc | $(HIDE_EDOC_WARN) | $(SUCCINCT)
 
 current:	push-libs
-	@rebar update-deps compile doc | $(HIDE_EDOC_WARN) | $(SUCCINCT)
+	@if [ "$(ONLINE)" == yes ]; then \
+		rebar update-deps compile doc | $(HIDE_EDOC_WARN) | \
+			$(SUCCINCT); else \
+		rebar compile doc | $(HIDE_EDOC_WARN) | $(SUCCINCT); fi
 
 clean: 		online
 	@if [ "$(ONLINE)" == yes ]; \
@@ -83,7 +94,7 @@ online:
 			else (echo "Working offline"); fi
 
 #
-# Development rules
+# Development rules start
 #
 
 push:		push-nosh push-libs push-superl
