@@ -34,10 +34,21 @@
 %% do much yet.</em>
 %%
 %% <ul>
+%% <li> {@section Installation} </li>
 %% <li> {@section Bourne Shell Emulator} </li>
 %% <li> {@section Erl Shell Alternative} </li>
 %% <li> {@section NoSQL File System} </li>
 %% </ul>
+%%
+%% == Installation ==
+%%
+%% Presently, `nosh' runs as a Makefile target.  The simplest way to get
+%% started with `nosh' is to change to the nosh project directory in a
+%% terminal session and type `make run'.
+%%
+%% Users of the Eclipse IDE may integrate `nosh' shell with their 
+%% workflow by installing the Wicked Shell plugin from the Eclipse
+%% Marketplace.
 %%
 %% == Bourne Shell Emulator ==
 %%

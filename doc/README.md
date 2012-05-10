@@ -11,9 +11,11 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
+* <font color="red">wicked shell message re: separators/delimiters
+</font>
 * <font color="red">
 
-get working under wicked shell </font>
+makefile alias </font>
 * <font color="red">reformat shell exit message
 </font>
 * <font color="red">make good
@@ -77,6 +79,8 @@ domain consolidation </font>
 * <font color="red">Couch commands
 </font>
 * <font color="red">Add support for line continuation (currently throws error)
+</font>
+* <font color="red">integrate with wicked shell
 </font>
 
 

@@ -1,4 +1,6 @@
-@todo wicked shell message re: separators/delimiters
+@todo block new commands while waiting for old
+
+@todo wicked shell separators/delimiters
 @todo makefile alias
 
 @todo reformat shell exit message
