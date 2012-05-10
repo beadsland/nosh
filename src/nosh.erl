@@ -70,7 +70,7 @@
 -export([start/1]).
 
 % private exports
--export([loop/3,bang_run/2,command_run/2,hotswap_run/2]).
+-export([loop/3,command_run/2,hotswap_run/2]).
 
 %%
 %% API functions
