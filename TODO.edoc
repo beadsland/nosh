@@ -1,4 +1,4 @@
-@todo os:cmd alternative
+@todo nosh echo
 
 @todo make good
 @todo convert nosh:start/1 to nosh:run/1

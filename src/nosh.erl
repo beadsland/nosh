@@ -131,7 +131,7 @@ do_output(IO, Command, CmdPid, MsgTag, Output) ->
 do_line(IO, Line) ->
   case Line of
     [$! | BangCmd] ->
-      BangPid = spawn_link(nosh, bang_run, [?IO(self()), BangCmd]),
+      BangPid = spawn_link(nosh_bang, run, [?IO(self()), BangCmd]),
       ?MODULE:loop(IO, bang, BangPid);
     "hot\n"	->
       HotPid = spawn_link(nosh, hotswap_run, [?IO(self()), "hot\n"]),
@@ -188,16 +188,6 @@ command_return(IO, Command, Status) ->
     Else ->
       ?STDERR("~s: ~p~n", [Command, Else])
   end.
-
-% spawned as process.
-bang_run(IO, BangCmd) ->
-  Chop = string:strip(BangCmd, right, $\n),
-  Output = os:cmd(Chop),
-  if is_atom(Output)	-> exit(Output);
-       Output == []		-> exit(ok);
-       true				-> ?STDOUT("~s: ~s", [Chop, Output]),
-                           exit(ok)
-    end.
 
 % spawned as a process
 command_run(IO, Line) ->

@@ -11,15 +11,9 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">wicked shell separators/delimiters
-</font>
 * <font color="red">
 
-makefile alias </font>
-* <font color="red">os:cmd alternative
-</font>
-* <font color="red">reformat shell exit message
-</font>
+nosh echo </font>
 * <font color="red">make good
 </font>
 * <font color="red">convert nosh:start/1 to nosh:run/1
@@ -176,6 +170,7 @@ more details.
 
 <table width="100%" border="0" summary="list of modules">
 <tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/nosh.md" class="module">nosh</a></td></tr>
+<tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/nosh_bang.md" class="module">nosh_bang</a></td></tr>
 <tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/nosh_beam.md" class="module">nosh_beam</a></td></tr>
 <tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/nosh_context.md" class="module">nosh_context</a></td></tr>
 <tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/nosh_eval.md" class="module">nosh_eval</a></td></tr>
