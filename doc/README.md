@@ -13,7 +13,7 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">
 
-nosh echo </font>
+bang pattern spawns process? </font>
 * <font color="red">make good
 </font>
 * <font color="red">convert nosh:start/1 to nosh:run/1

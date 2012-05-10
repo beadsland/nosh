@@ -22,14 +22,15 @@
 %% -----------------------------------------------------------------------
 %% CDDL HEADER END
 
-%% @doc This is a preliminary draft of the command line evaluation module for `nosh'.
+%% @doc This is a preliminary draft of the command line evaluation module 
+%% for `nosh'.
 %%
 %% <b>Draft Notes:</b>
 %%
 %% In first position, parentheses (`(...)') group commands within for 
 %% execution in a subshell environment, as per command substitution rules.  
-%% A parentheses group appearing in second position, following a command, is
-%% treated as an Erlang function parameter List.  Parentheses groups
+%% A parentheses group appearing in second position, following a command, 
+%% is treated as an Erlang function parameter List.  Parentheses groups
 %% after second position are invalid, resulting in an evaluation error.
 %% @end
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
