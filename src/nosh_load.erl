@@ -81,8 +81,9 @@
 
 %% Locate command on PATH, load from file if newer than currently loaded.
 -type command() :: string() | atom().
--spec run(IO :: #std{}, Command :: command()) -> no_return().
-%%
+-spec run(IO :: #std{}, Command :: command()) -> 
+        {module, module()} | {error, any()}.
+%% @todo refactor as a no_return with all output on stdout/stderr
 %% @todo get PATH from environment
 run(IO, Command) when is_atom(Command) -> run(IO, atom_to_list(Command));
 run(IO, Command) ->

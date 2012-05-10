@@ -49,9 +49,9 @@
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
 %% @copyright 2012 Beads D. Land-Trujillo
 
-%% @version 0.1.12
+%% @version 0.1.13
 -module(nosh).
--version("0.1.12").
+-version("0.1.13").
 
 %%
 %% Include files
@@ -130,7 +130,7 @@ do_line(IO, Line) ->
   if IO#std.echo -> ?STDOUT(Line); true -> false end,
   case Line of
     "stop\n" -> exit(ok);
-    [$! | BangCmd] ->
+    [$! | BangCmd]  ->
       BangPid = spawn_link(nosh_bang, run, [?IO(self()), BangCmd]),
       ?MODULE:loop(IO, bang, BangPid);
     "hot\n"	->
@@ -141,10 +141,27 @@ do_line(IO, Line) ->
       GoodPid = spawn_link(superl, start, []),
       ?MODULE:loop(IO, good, GoodPid);
     _Line ->
-      NewPid = spawn_link(nosh, command_run, [?IO(self()), Line]),
-      NewCom = string:tokens(Line, "\n"),
-      ?MODULE:loop(IO, NewCom, NewPid)
+      case re:run(Line, "\ ", [{capture, none}]) of
+        match   -> do_parse(IO, Line);
+        nomatch -> do_run(IO, Line)
+      end
   end.
+
+% Pass unargumented command to load. (Temporary hack.)
+do_run(IO, Line) ->
+  ?DEBUG("Hack run attempt: ~s", [Line]),
+  Command = string:strip(Line, right, $\n),
+  case nosh_load:run(IO, Command) of
+    {module, Module}    -> CmdPid = spawn_link(Module, run, [?IO(self())]),
+                           ?MODULE:loop(IO, Command, CmdPid);
+    _Else               -> do_parse(IO, Line)
+  end.
+
+% Parse command line.
+do_parse(IO, Line) ->
+  Command = string:strip(Line, right, $\n),
+  ParsePid = spawn_link(nosh, command_run, [?IO(self()), Line]),
+  ?MODULE:loop(IO, Command, ParsePid).
 
 % Handle termination of processes.
 do_exit(IO, Command, CmdPid, ExitPid, Reason) ->

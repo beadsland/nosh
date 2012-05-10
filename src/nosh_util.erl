@@ -154,8 +154,8 @@ can_read(Filename) ->
                 read_write  -> true;
                 _Else       -> false
             end;
-        {error, What}   ->
-            {error, {What, Filename}}
+        {error, enoent} -> false;
+        {error, What}   -> {error, {What, Filename}}
     end.
 
 %% @doc Get last date and time file last modified.
