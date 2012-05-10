@@ -62,21 +62,12 @@ message from `noterm`.  This is currently produced by typing a period
 ##Function Index##
 
 
-<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#bang_run-2">bang_run/2</a></td><td></td></tr><tr><td valign="top"><a href="#command_run-2">command_run/2</a></td><td></td></tr><tr><td valign="top"><a href="#hotswap_run-2">hotswap_run/2</a></td><td></td></tr><tr><td valign="top"><a href="#start-1">start/1</a></td><td>Start nosh, receiving standard I/O from noterm.</td></tr></table>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#command_run-2">command_run/2</a></td><td></td></tr><tr><td valign="top"><a href="#hotswap_run-2">hotswap_run/2</a></td><td></td></tr><tr><td valign="top"><a href="#start-1">start/1</a></td><td>Start nosh, receiving standard I/O from noterm.</td></tr></table>
 
 
 <a name="functions"></a>
 
 ##Function Details##
-
-<a name="bang_run-2"></a>
-
-###bang_run/2##
-
-
-
-
-`bang_run(IO, BangCmd) -> any()`
 
 <a name="command_run-2"></a>
 

@@ -51,7 +51,7 @@
 %%
 
 %% @doc Run an OS command in `nosh' context.
-run(IO, Command) -> run(IO, Command, 50000).
+run(IO, Command) -> run(IO, Command, 1000 * 60 * 5).
 
 %%
 %% Local Functions
