@@ -1,8 +1,7 @@
-@todo block new commands while waiting for old
-
 @todo wicked shell separators/delimiters
 @todo makefile alias
 
+@todo os:cmd alternative
 @todo reformat shell exit message
 @todo make good
 @todo convert nosh:start/1 to nosh:run/1

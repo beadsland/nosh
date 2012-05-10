@@ -109,7 +109,7 @@ loop(IO, Cmd, CmdPid) ->
       do_line(IO, Line);
     {MsgTag, CmdPid, Payload} 					->
       do_output(IO, Cmd, CmdPid, MsgTag, Payload);
-    Noise when CmdPid /= self() 				->
+    Noise when CmdPid == self() 				->
       do_noise(IO, Cmd, CmdPid, Noise)
   end.
 

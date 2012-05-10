@@ -11,7 +11,10 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">wicked shell message re: separators/delimiters
+* <font color="red">
+
+block new commands while waiting for old </font>
+* <font color="red">wicked shell separators/delimiters
 </font>
 * <font color="red">
 
@@ -93,10 +96,22 @@ domain consolidation </font>
   Erlang module functions, `nosh` affords both the ease of a UNIX shell 
 and the power of an Erlang interpreter. 
 
-_<strong>NOTICE:</strong> Code is still in rudimentary form. Doesn't  do much yet._  * [Bourne Shell Emulator](http://github.com/beadsland/nosh/blob/master/doc/README.md#Bourne_Shell_Emulator)
+_<strong>NOTICE:</strong> Code is still in rudimentary form. Doesn't  do much yet._  * [Installation](http://github.com/beadsland/nosh/blob/master/doc/README.md#Installation)
+ * [Bourne Shell Emulator](http://github.com/beadsland/nosh/blob/master/doc/README.md#Bourne_Shell_Emulator)
  * [Erl Shell Alternative](http://github.com/beadsland/nosh/blob/master/doc/README.md#Erl_Shell_Alternative)
  * [NoSQL File System](http://github.com/beadsland/nosh/blob/master/doc/README.md#NoSQL_File_System)
   
+
+###<a name="Installation">Installation</a>##
+ 
+
+Presently, `nosh` runs as a Makefile target.  The simplest way to get
+  started with `nosh` is to change to the nosh project directory in a
+  terminal session and type `make run`. 
+
+Users of the Eclipse IDE may integrate `nosh` shell with their 
+workflow by installing the Wicked Shell plugin from the Eclipse 
+Marketplace. 
 
 ###<a name="Bourne_Shell_Emulator">Bourne Shell Emulator</a>##
  
