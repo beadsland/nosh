@@ -41,12 +41,17 @@ else
 endif
 
 ONLINE	=	`$(PING) www.google.com 2>&1 >/dev/null; \
-			if [ "$$?" -eq "0" ]; then (echo yes); else (echo no); fi`
+			if [ "$$?" -eq "0" ]; then (echo yes); \
+			else (echo no); fi`
 TTY	=	`tty`
 
 
 HIDE_EDOC_WARN	=	grep -v "cannot handle URI.*edoc-info"
-SUCCINCT	=	grep -v "Entering directory" | grep -v "Leaving directory"
+SUCCINCT	=	grep -v "Entering directory" \
+				| grep -v "Leaving directory"
+HIDE_TEST_WARN	=	grep -v "edoc: warning: file.*test.erl' belongs"
+CROWBAR		=	rebar _cmds_ | $(HIDE_EDOC_WARN) | $(SUCCINCT) \
+				| $(HIDE_TEST_WARN)
 
 #
 # Execution rules start
@@ -75,13 +80,12 @@ good:	compile
 doc:	compile
 	
 compile:
-	@rebar compile doc | $(HIDE_EDOC_WARN) | $(SUCCINCT)
+	@$(CROWBAR:_cmds_=compile doc)
 
 current:	push-libs
 	@if [ "$(ONLINE)" == yes ]; then \
-		rebar update-deps compile doc | $(HIDE_EDOC_WARN) | \
-			$(SUCCINCT); else \
-		rebar compile doc | $(HIDE_EDOC_WARN) | $(SUCCINCT); fi
+		$(CROWBAR:_cmds_=update-deps compile doc); else \
+		$(CROWBAR:_cmds_=compile doc); fi
 
 clean: 		online
 	@if [ "$(ONLINE)" == yes ]; \
