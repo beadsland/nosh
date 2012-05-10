@@ -11,14 +11,13 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">
-
-block new commands while waiting for old </font>
 * <font color="red">wicked shell separators/delimiters
 </font>
 * <font color="red">
 
 makefile alias </font>
+* <font color="red">os:cmd alternative
+</font>
 * <font color="red">reformat shell exit message
 </font>
 * <font color="red">make good

@@ -105,11 +105,19 @@ send_debug(Format, What) ->
 -spec format_erlerr(What :: any()) -> string().
 format_erlerr(What) ->
     case What of
-        {Atom, Data} when is_atom(Atom) ->
+        {{Atom, Data}, Trace} when is_atom(Atom), is_list(Trace)    ->
+            Format = "~p ~p~nReason: ~p~nTrace: ~p~n",
+            NewWhat = [Atom, self(), Data, Trace],
+            io_lib:format(Format, NewWhat);
+        {Atom, [Head | Tail]} when is_atom(Atom), is_tuple(Head)    ->
+            Format = "~p ~p~nTrace: ~p~n",
+            NewWhat = [Atom, self(), [Head | Tail]],
+            io_lib:format(Format, NewWhat);
+        {Atom, Data} when is_atom(Atom)                             ->
             io_lib:format("~p: ~s", [Atom, format_erlerr(Data)]);
-        List when is_list(List) ->
+        List when is_list(List)                                     ->
             io_lib:format("~s", [List]);
-        _Else                   ->
+        _Else                                                       ->
             io_lib:format("~p", [What])
     end.
 

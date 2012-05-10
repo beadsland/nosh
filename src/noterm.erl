@@ -133,15 +133,8 @@ do_noise(IO, Noise) ->
   ?MODULE:msg_loop(IO).
 
 grace(Message, Reason) ->
-  case Reason of
-    {{Exception, ExcReason}, Trace} 	->
-      Format = "~s: ~p ~p~nReason: ~p~nTrace: ~p~n",
-      io:format(standard_error, Format,
-            [Message, Exception, self(), ExcReason, Trace]);
-    Else						->
-      io:format(standard_error, "~s: ~p ~p~n",
-            [Message, Else, self()])
-  end.
+  io:format(standard_error, "~s: ~s",
+            [Message, nosh_util:format_erlerr(Reason)]).
 
 strip_escapes(Subject) ->
   {ok, MP} = re:compile("\e\[[\d,\s]+[A-Z]"),
