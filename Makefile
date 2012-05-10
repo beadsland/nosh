@@ -112,13 +112,17 @@ push-nosh:	online
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
 			then (git push origin master); fi
 
-push-libs:	push-bin
+push-libs:	push-bin push-erl
 
 
 push-bin:	online
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
 			then (cd ../nosh_bin; git push origin master); fi
-			
+
+push-erl:	online
+	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
+			then (cd ../nosh_erl; git push origin master); fi
+
 push-superl:	online
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
 			then (cd ../superl; git push origin master); fi
