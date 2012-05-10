@@ -50,7 +50,7 @@
 %% Exported functions
 %%
 
--export([start/0]).
+-export([start/0,start_wecho/0]).
 
 % Private Exports
 -export([key_start/1]).
@@ -63,22 +63,30 @@
 %% @doc Start terminal, launching message loop and keyboard listening
 %% process.
 %% @end
-start() ->
+start() -> start(false).
+
+%% @doc Start terminal, with nosh echo flag set.
+%% This is a stopgap measure pending proper terminal emulation.
+
+start_wecho() -> io:format("Shell echo flag enabled.\n"), start(true).
+
+%%
+%% Local functions
+%%
+
+start(Echo) ->
   process_flag(trap_exit, true),
   io:format("Starting Noterm ~s terminal emulator on ~p ~p~n",
         [?VERSION(?MODULE), node(), self()]),
 
   KeyPid = spawn_link(?MODULE, key_start, [self()]),
 
-  try spawn_link(nosh, start, [self()]) of
-    NoshPid 			-> msg_loop(?IO(KeyPid, NoshPid, NoshPid))
+  try spawn_link(nosh, start, [?IO(self(), self(), self(), Echo)]) of
+    NoshPid             -> msg_loop(?IO(KeyPid, NoshPid, NoshPid))
   catch
-    {Message, Reason}	-> grace(Message, Reason), init:stop()
+    {Message, Reason}   -> grace(Message, Reason), init:stop()
   end.
 
-%%
-%% Local functions
-%%
 
 %%@private Export to allow for hotswap.
 msg_loop(IO) ->
@@ -98,7 +106,7 @@ msg_loop(IO) ->
 do_noshout(IO, MsgTag, Output) ->
   case MsgTag of
     stdout	-> io:format("~s", [Output]);
-    erlout	-> io:format("~p: error: ~p~n", [nosh, Output]);
+    erlout	-> io:format("~p: data: ~p~n", [nosh, Output]);
     erlerr	-> Erlerr = nosh_util:format_erlerr(Output),
            io:format(standard_error, "** ~s~n", [Erlerr]);
     stderr	-> io:format(standard_error, "** ~s", [Output]);
@@ -133,7 +141,7 @@ do_noise(IO, Noise) ->
   ?MODULE:msg_loop(IO).
 
 grace(Message, Reason) ->
-  io:format(standard_error, "~s: ~s",
+  io:format(standard_error, "~s: ~s~n",
             [Message, nosh_util:format_erlerr(Reason)]).
 
 strip_escapes(Subject) ->

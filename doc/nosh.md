@@ -94,7 +94,7 @@ message from `noterm`.  This is currently produced by typing a period
 
 
 
-`start(Pid) -> any()`
+`start(IO) -> any()`
 
 
 

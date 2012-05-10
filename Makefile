@@ -53,6 +53,10 @@ HIDE_TEST_WARN	=	grep -v "edoc: warning: file.*test.erl' belongs"
 CROWBAR		=	rebar _cmds_ | $(HIDE_EDOC_WARN) | $(SUCCINCT) \
 				| $(HIDE_TEST_WARN)
 
+SUPERL	=	-pa deps/superl/ebin -s superl 
+NOTERM	=	erl -noshell $(SUPERL) -pa ebin -s noterm
+
+
 #
 # Execution rules start
 #
@@ -62,7 +66,8 @@ all:		push-nosh current nosh
 run:		compile nosh
 
 nosh:	nodump tabs
-	@erl -noshell -pa deps/superl/ebin -s superl -pa ebin -s noterm
+	@if [ "$(TTY)" == "not a tty" ]; then ($(NOTERM) start_wecho); \
+					 else ($(NOTERM)); fi
 
 nodump:
 	@if [ -e erl_crash.dump ]; then (rm erl_crash.dump); fi
@@ -75,7 +80,7 @@ tabs:
 #
 
 good:	compile
-	@erl -noshell -pa deps/superl/ebin -s superl -s init stop
+	@erl -noshell $(SUPERL) -s init stop
 
 doc:	compile
 	

@@ -35,7 +35,7 @@ Translates standard I/O to Erlang messaging. _Full terminal emulation has yet to
 
 
 <table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#start-0">start/0</a></td><td>Start terminal, launching message loop and keyboard listening
-process.</td></tr></table>
+process.</td></tr><tr><td valign="top"><a href="#start_wecho-0">start_wecho/0</a></td><td>Start terminal, with nosh echo flag set.</td></tr></table>
 
 
 <a name="functions"></a>
@@ -54,4 +54,16 @@ process.</td></tr></table>
 
 
 Start terminal, launching message loop and keyboard listening
-process.
+process.<a name="start_wecho-0"></a>
+
+###start_wecho/0##
+
+
+
+
+`start_wecho() -> any()`
+
+
+
+Start terminal, with nosh echo flag set.
+This is a stopgap measure pending proper terminal emulation.

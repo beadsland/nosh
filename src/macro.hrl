@@ -27,7 +27,9 @@
     proplists:get_value(Attribute, Module:module_info(attributes))).
 -define(VERSION(Module), ?ATTRIB(Module, version)).
 
--record(std, {in :: pid(), out :: pid(), err :: pid()}).
+-record(std, {in = self() :: pid(), out = self() :: pid(),
+              err = self() :: pid(), echo = false :: boolean()}).
+-define(IO(In, Out, Err, Echo), #std{in=In, out=Out, err=Err, echo=Echo}).
 -define(IO(In, Out, Err), #std{in=In, out=Out, err=Err}).
 -define(IO(Pid), #std{in=Pid, out=Pid, err=Pid}).
 

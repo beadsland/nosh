@@ -78,7 +78,6 @@
 
 %% @doc Start nosh, receiving standard I/O from noterm.
 
-start(Pid) when is_pid(Pid) -> start(?IO(Pid, Pid, Pid));
 start(IO) ->
   error_logger:tty(false),
   process_flag(trap_exit, true),
@@ -129,6 +128,7 @@ do_output(IO, Command, CmdPid, MsgTag, Output) ->
 %% @todo refactor `hot' and `good' as library commands
 %% @todo refactor bang commands as direct invocations
 do_line(IO, Line) ->
+  if IO#std.echo -> ?STDOUT(Line); true -> false end,
   case Line of
     [$! | BangCmd] ->
       BangPid = spawn_link(nosh_bang, run, [?IO(self()), BangCmd]),
