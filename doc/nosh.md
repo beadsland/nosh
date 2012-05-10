@@ -13,7 +13,7 @@ The `nosh` process module, which handles messaging with a paired
 
 Copyright (c) 2012 Beads D. Land-Trujillo
 
-__Version:__ 0.1.10
+__Version:__ 0.1.12
 
 __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).<a name="description"></a>
 
@@ -62,7 +62,7 @@ message from `noterm`.  This is currently produced by typing a period
 ##Function Index##
 
 
-<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#command_run-2">command_run/2</a></td><td></td></tr><tr><td valign="top"><a href="#hotswap_run-2">hotswap_run/2</a></td><td></td></tr><tr><td valign="top"><a href="#start-1">start/1</a></td><td>Start nosh, receiving standard I/O from noterm.</td></tr></table>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#command_run-2">command_run/2</a></td><td></td></tr><tr><td valign="top"><a href="#hotswap_run-2">hotswap_run/2</a></td><td></td></tr><tr><td valign="top"><a href="#run-1">run/1</a></td><td>Start nosh, receiving standard I/O from noterm.</td></tr></table>
 
 
 <a name="functions"></a>
@@ -87,14 +87,14 @@ message from `noterm`.  This is currently produced by typing a period
 
 `hotswap_run(IO, Line) -> any()`
 
-<a name="start-1"></a>
+<a name="run-1"></a>
 
-###start/1##
-
-
+###run/1##
 
 
-`start(IO) -> any()`
+
+
+`run(IO) -> any()`
 
 
 

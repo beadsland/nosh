@@ -36,14 +36,15 @@
 %% TODO: incorporate full terminfo/ncurses support
 %% TODO: notermd - telent/ssh access
 
-%% @version 0.1.4
+%% @version 0.1.5
 -module(noterm).
--version("0.1.4").
+-version("0.1.5").
 
 %%
 %% Include files
 %%
 
+%-define(debug, true).
 -include("macro.hrl").
 
 %%
@@ -75,13 +76,14 @@ start_wecho() -> io:format("Shell echo flag enabled.\n"), start(true).
 %%
 
 start(Echo) ->
+  error_logger:tty(false),
   process_flag(trap_exit, true),
   io:format("Starting Noterm ~s terminal emulator on ~p ~p~n",
         [?VERSION(?MODULE), node(), self()]),
 
   KeyPid = spawn_link(?MODULE, key_start, [self()]),
 
-  try spawn_link(nosh, start, [?IO(self(), self(), self(), Echo)]) of
+  try spawn_link(nosh, run, [?IO(self(), self(), self(), Echo)]) of
     NoshPid             -> msg_loop(?IO(KeyPid, NoshPid, NoshPid))
   catch
     {Message, Reason}   -> grace(Message, Reason), init:stop()
@@ -100,7 +102,7 @@ msg_loop(IO) ->
     {MsgTag, Stderr, Line}
       when Stderr == IO#std.err	-> do_noshout(IO, MsgTag, Line);
     Noise						-> do_noise(IO, Noise)
-    end.
+  end.
 
 % Handle nosh process messages.
 do_noshout(IO, MsgTag, Output) ->
@@ -108,7 +110,7 @@ do_noshout(IO, MsgTag, Output) ->
     stdout	-> io:format("~s", [Output]);
     erlout	-> io:format("~p: data: ~p~n", [nosh, Output]);
     erlerr	-> Erlerr = nosh_util:format_erlerr(Output),
-           io:format(standard_error, "** ~s~n", [Erlerr]);
+               io:format(standard_error, "** ~s~n", [Erlerr]);
     stderr	-> io:format(standard_error, "** ~s", [Output]);
     debug	-> io:format(standard_error, "-- ~s", [Output])
   end,
@@ -119,7 +121,8 @@ do_keyin(IO, MsgTag, Line) ->
   Clean = strip_escapes(Line),
   case MsgTag of
     stdout  -> ?STDOUT(Clean);
-    stderr	-> io:format(standard_error, "** ~s", [Line])
+    stderr	-> io:format(standard_error, "** ~s", [Line]);
+    debug   -> io:format(standard_error, "-- ~s", [Line])
   end,
   ?MODULE:msg_loop(IO).
 
@@ -127,12 +130,12 @@ do_keyin(IO, MsgTag, Line) ->
 do_exit(IO, ExitPid, Reason) ->
   case ExitPid of
     Stdin when Stdin == IO#std.in		->
-      grace("Stopping on keyboard exit", Reason), exit(normal);
+      ?DEBUG("Stopping shell on keyboard exit", [Reason]),
+      ?STDOUT("stop\n"),
+      ?MODULE:msg_loop(IO);
     Stdout when Stdout == IO#std.out	->
-      grace("Stopping on shell exit", Reason), init:stop();
-    _Other								->
-      Message = io_lib:format("Stopping on ~p exit", [ExitPid]),
-      grace(Message, Reason), exit(normal)
+      grace("Stopping terminal on shell exit", Reason),
+      init:stop()
   end.
 
 % Handle message queue noise.
@@ -175,13 +178,12 @@ key_receive(IO) ->
     {purging, _Pid, _Mod}		-> true; % chase your tail
     {'EXIT', Stdin, Reason}
       when Stdin == IO#std.in	-> io:format("~p exit: ~p~n",
-                         [?MODULE, Reason]);
+                                             [?MODULE, Reason]);
     Noise						-> ?STDERR("noise: ~p ~p~n",
-                         [Noise, self()])
+                                           [Noise, self()])
   after
     1 -> false
   end.
 
 key_stop(Reason) ->
-  ?DEBUG("Stopping: ~p ~p~n", [Reason, self()]),
-    exit(Reason).
+  ?DEBUG("Stopping keyboard: ~p~n", [Reason]), exit(Reason).

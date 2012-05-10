@@ -54,8 +54,8 @@ CROWBAR		=	rebar _cmds_ | $(HIDE_EDOC_WARN) | $(SUCCINCT) \
 				| $(HIDE_TEST_WARN)
 
 SUPERL	=	-pa deps/superl/ebin -s superl 
+ERLSTOP	=	-s init stop
 NOTERM	=	erl -noshell $(SUPERL) -pa ebin -s noterm
-
 
 #
 # Execution rules start
@@ -80,7 +80,7 @@ tabs:
 #
 
 good:	compile
-	@erl -noshell $(SUPERL) -s init stop
+	@erl -noshell $(SUPERL) $(ERLSTOP)
 
 doc:	compile
 	

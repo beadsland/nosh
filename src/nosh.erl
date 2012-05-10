@@ -49,15 +49,15 @@
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
 %% @copyright 2012 Beads D. Land-Trujillo
 
-%% @version 0.1.11
+%% @version 0.1.12
 -module(nosh).
--version("0.1.11").
+-version("0.1.12").
 
 %%
 %% Include files
 %%
 
-%-define(debug, true).
+-define(debug, true).
 -include("macro.hrl").
 
 % This will eventually draw from ENV...
@@ -67,7 +67,7 @@
 %% Exported functions
 %%
 
--export([start/1]).
+-export([run/1]).
 
 % private exports
 -export([loop/3,command_run/2,hotswap_run/2]).
@@ -78,8 +78,7 @@
 
 %% @doc Start nosh, receiving standard I/O from noterm.
 
-start(IO) ->
-  error_logger:tty(false),
+run(IO) ->
   process_flag(trap_exit, true),
   ?INIT_DEBUG,
   ?STDOUT("Starting Nosh ~s nosql shell ~p~n", [?VERSION(?MODULE),
@@ -130,6 +129,7 @@ do_output(IO, Command, CmdPid, MsgTag, Output) ->
 do_line(IO, Line) ->
   if IO#std.echo -> ?STDOUT(Line); true -> false end,
   case Line of
+    "stop\n" -> exit(ok);
     [$! | BangCmd] ->
       BangPid = spawn_link(nosh_bang, run, [?IO(self()), BangCmd]),
       ?MODULE:loop(IO, bang, BangPid);
@@ -149,8 +149,8 @@ do_line(IO, Line) ->
 % Handle termination of processes.
 do_exit(IO, Command, CmdPid, ExitPid, Reason) ->
   if ExitPid == IO#std.in ->
-       ?DEBUG("Stopping on terminal exit: ~p ~p~n", [Reason, self()]),
-       init:stop();
+       ?DEBUG("Stopping shell on terminal exit: ~p~n", [Reason]),
+       exit(ok);
      ExitPid == CmdPid	->
        command_return(IO, Command, Reason),
        ?PROMPT,
@@ -160,7 +160,7 @@ do_exit(IO, Command, CmdPid, ExitPid, Reason) ->
        ?MODULE:loop(IO, Command, CmdPid);
      true 				->
        ?STDERR("Exit ~p: ~p ~p~n", [ExitPid, Reason, self()]),
-       init:stop()
+       exit({exit, {ExitPid, Reason}})
   end.
 
 % Handle noise on message queue.
