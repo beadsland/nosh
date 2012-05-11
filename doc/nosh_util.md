@@ -47,12 +47,60 @@ __<font color="red">To do</font>__
 
 
 <pre>filename() = string()</pre>
+
+
+
+###<a name="type-folder">folder()</a>##
+
+
+
+<pre>folder() = nonempty_string()</pre>
+
+
+
+###<a name="type-parallel_result">parallel_result()</a>##
+
+
+
+<pre>parallel_result() = {false, <a href="#type-path_string">path_string()</a>} | {true, <a href="#type-path_string">path_string()</a>} | {true, <a href="#type-path_string">path_string()</a>, <a href="#type-project">project()</a>}</pre>
+
+
+
+###<a name="type-path">path()</a>##
+
+
+
+<pre>path() = <a href="#type-path_string">path_string()</a> | <a href="#type-path_list">path_list()</a></pre>
+
+
+
+###<a name="type-path_list">path_list()</a>##
+
+
+
+<pre>path_list() = {folders, [<a href="#type-folder">folder()</a>]}</pre>
+
+
+
+###<a name="type-path_string">path_string()</a>##
+
+
+
+<pre>path_string() = nonempty_string()</pre>
+
+
+
+###<a name="type-project">project()</a>##
+
+
+
+<pre>project() = atom()</pre>
 <a name="index"></a>
 
 ##Function Index##
 
 
-<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#can_read-1">can_read/1</a></td><td>Test if file or directory is readable.</td></tr><tr><td valign="top"><a href="#can_write-1">can_write/1</a></td><td>Test if file or directory is writeable.</td></tr><tr><td valign="top"><a href="#last_modified-1">last_modified/1</a></td><td>Get last date and time file last modified.</td></tr></table>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#can_read-1">can_read/1</a></td><td>Test if file or directory is readable.</td></tr><tr><td valign="top"><a href="#can_write-1">can_write/1</a></td><td>Test if file or directory is writeable.</td></tr><tr><td valign="top"><a href="#find_parallel_folder-3">find_parallel_folder/3</a></td><td>Walk absolute directory path, finding where parallel would occur.</td></tr><tr><td valign="top"><a href="#last_modified-1">last_modified/1</a></td><td>Get last date and time file last modified.</td></tr></table>
 
 
 <a name="functions"></a>
@@ -85,7 +133,20 @@ Test if file or directory is readable.<a name="can_write-1"></a>
 
 
 
-Test if file or directory is writeable.<a name="last_modified-1"></a>
+Test if file or directory is writeable.<a name="find_parallel_folder-3"></a>
+
+###find_parallel_folder/3##
+
+
+
+
+<pre>find_parallel_folder(OldFlder::<a href="#type-folder">folder()</a>, NewFolder::<a href="#type-folder">folder()</a>, OldPath::<a href="#type-path">path()</a>) -> <a href="#type-parallel_result">parallel_result()</a></pre>
+<br></br>
+
+
+
+
+Walk absolute directory path, finding where parallel would occur.<a name="last_modified-1"></a>
 
 ###last_modified/1##
 
