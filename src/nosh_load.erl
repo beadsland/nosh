@@ -359,9 +359,9 @@ do_compile(_SrcDir, Cmd, _Project, BinDir, ModuleName, Binary) ->
 %%%
 
 % Find candidate src directory parallel to ebin.
-parallel_src(BinDir, Cmd) ->
+ parallel_src(BinDir, Cmd) ->
   Split = re:split(BinDir, "/", [{return, list}]),
-  case ebin_to_src(Split) of
+  case find_parallel_folder("ebin", "src", Split) of
     {true, SrcPath, Proj}	-> parallel_src(BinDir, Cmd, SrcPath, Proj);
     _Else					-> nosrc
   end.
@@ -375,16 +375,16 @@ parallel_src(_BinDir, Command, SrcDir, Project) ->
   end.
 
 % Walk absolute directory path, finding where parallel would occur.
-ebin_to_src([Head | []]) ->
-  if Head == "ebin" -> {true, "src"}; true -> {false, Head} end;
-ebin_to_src([Head | Tail]) ->
-  case ebin_to_src(Tail) of
-    {true, SrcDir, Project}	->
-      {true, Head ++ "/" ++ SrcDir, Project};
-    {true, SrcDir}			->
-      {true, Head ++ "/" ++ SrcDir, list_to_atom(Head)};
-    {false, BinDir}			->
-      if Head == "ebin" 	-> {true, "src/" ++ BinDir};
-         true 			-> {false, Head ++ "/" ++ BinDir}
-      end
+find_parallel_folder(OldFldr, NewFldr, [Head | []]) ->
+  if Head == OldFldr -> {true, NewFldr}; true -> {false, Head} end;
+find_parallel_folder(OldFldr, NewFldr, [Head | Tail]) ->
+  case find_parallel_folder(OldFldr, NewFldr, Tail) of
+    {true, NewDir, Project}                 ->
+      {true, lists:append([Head, "/", NewDir]), Project};
+    {true, NewDir}                          ->
+      {true, lists:append([Head, "/", NewDir]), list_to_atom(Head)};
+    {flase, OldDir} when Head == OldFldr    ->
+      {true, lists:append([NewFldr, "/", OldDir])};
+    {false, OldDir}                         ->
+      {false, lists:append([Head, "/", OldDir])}
   end.

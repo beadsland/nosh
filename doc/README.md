@@ -11,6 +11,10 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
+* <font color="red">refactor ebin_to_src to find deps and apps
+</font>
+* <font color="red">safe deps hotswapping
+</font>
 * <font color="red">convention for cross-project macros
 </font>
 * <font color="red">fully doc pose
