@@ -1,8 +1,15 @@
-@todo fully doc pose
+
 @todo superl as first subproject load
-@todo update superl doc
+
+@todo recruitment interviews
+
+@todo fully doc pose
+@todo make good pose
 @todo hot as second subproject load
 @todo nosh_erl doc
+
+@todo github standard .gitignore (nosh_nosql)
+@todo integrate nosql project
 
 @todo pose loop behaviour
 @todo refactor noterm to own project

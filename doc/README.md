@@ -11,21 +11,26 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">safe deps hotswapping
-</font>
-* <font color="red">convention for cross-project macros
-</font>
+* <font color="red">
+
+superl as first subproject load </font>
+* <font color="red">
+
+recruitment interviews </font>
 * <font color="red">fully doc pose
 </font>
-* <font color="red">superl as first subproject load
-</font>
-* <font color="red">update superl doc
+* <font color="red">make good pose
 </font>
 * <font color="red">hot as second subproject load
 </font>
 * <font color="red">
 
 nosh_erl doc </font>
+* <font color="red">github standard .gitignore (nosh_nosql)
+</font>
+* <font color="red">
+
+integrate nosql project </font>
 * <font color="red">pose loop behaviour
 </font>
 * <font color="red">refactor noterm to own project
@@ -93,11 +98,11 @@ domain consolidation </font>
 ###<a name="Introduction">Introduction</a>##
  
 
-`nosh` is a Bourne shell emulator, Erl shell alternative, and noSQL file
-  system,  implemented in Erlang.  Providing an intuitive commandline
-  interface for compiling and loading Erlang modules, and for executing
-  Erlang module functions, `nosh` affords both the ease of a UNIX shell 
-and the power of an Erlang interpreter. 
+`nosh` is a Bourne shell emulator, Erl shell alternative, and noSQL
+  file system,  implemented in Erlang.  Providing an intuitive
+  commandline interface for compiling and loading Erlang modules, and for
+  executing Erlang module functions, `nosh` affords both the ease of a 
+UNIX shell and the power of an Erlang interpreter. 
 
 _<strong>NOTICE:</strong> Code is still in rudimentary form. Doesn't  do much yet._  * [Installation](#Installation)
  * [Bourne Shell Emulator](#Bourne_Shell_Emulator)
@@ -112,9 +117,8 @@ Presently, `nosh` runs as a Makefile target.  The simplest way to get
   started with `nosh` is to change to the nosh project directory in a
   terminal session and type `make run`. 
 
-Users of the Eclipse IDE may integrate `nosh` shell with their 
-workflow by installing the Wicked Shell plugin from the Eclipse 
-Marketplace. 
+Users of the Eclipse IDE may integrate `nosh` shell with their
+  workflow by installing the Wicked Shell plugin [`http://www.wickedshell.net/`](http://www.wickedshell.net/) from the Eclipse Marketplace. 
 
 ###<a name="Bourne_Shell_Emulator">Bourne Shell Emulator</a>##
  

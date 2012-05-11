@@ -24,11 +24,11 @@
 
 %% @doc == Introduction ==
 %%
-%% `nosh' is a Bourne shell emulator, Erl shell alternative, and noSQL file
-%% system,  implemented in Erlang.  Providing an intuitive commandline
-%% interface for compiling and loading Erlang modules, and for executing
-%% Erlang module functions, `nosh' affords both the ease of a UNIX shell
-%% and the power of an Erlang interpreter.
+%% `nosh' is a Bourne shell emulator, Erl shell alternative, and noSQL 
+%% file system,  implemented in Erlang.  Providing an intuitive 
+%% commandline interface for compiling and loading Erlang modules, and for 
+%% executing Erlang module functions, `nosh' affords both the ease of a 
+%% UNIX shell and the power of an Erlang interpreter.
 %%
 %% <em><strong>NOTICE:</strong> Code is still in rudimentary form. Doesn't
 %% do much yet.</em>
@@ -47,8 +47,8 @@
 %% terminal session and type `make run'.
 %%
 %% Users of the Eclipse IDE may integrate `nosh' shell with their 
-%% workflow by installing the Wicked Shell plugin from the Eclipse
-%% Marketplace.
+%% workflow by installing the Wicked Shell plugin 
+%% [http://www.wickedshell.net/] from the Eclipse Marketplace.
 %%
 %% == Bourne Shell Emulator ==
 %%
