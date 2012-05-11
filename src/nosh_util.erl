@@ -43,7 +43,7 @@
 %%
 
 % File Properties
--export([can_read/1, can_write/1, last_modified/1]).
+-export([can_read/1, can_write/1, last_modified/1, find_parallel_folder/3]).
 
 %%
 %% API Functions
@@ -98,6 +98,34 @@ last_modified(Filename) ->
         {error, enoent} -> {ok, nofile};
         {error, What}   -> {error, {What, Filename}}
     end.
+
+%% @doc Walk absolute directory path, finding where parallel would occur.
+-type folder() :: nonempty_string().
+-type path_string() :: nonempty_string().
+-type path_list() :: {folders, [folder()]}.
+-type path() :: path_string() | path_list().
+-type project() :: atom().
+-type parallel_result() :: {false, path_string()} | {true, path_string()}
+                           | {true, path_string(), project()}.
+-spec find_parallel_folder(OldFlder :: folder(), NewFolder :: folder(),
+                           OldPath :: path()) -> parallel_result().
+%
+find_parallel_folder(OldFldr, NewFldr, OldDir) when is_list(OldDir) ->
+  Split = re:split(OldDir, "/", [{return, list}]),
+  find_parallel_folder(OldFldr, NewFldr, {folders, Split});
+find_parallel_folder(OldFldr, NewFldr, {folders, [Head | []]}) ->
+  if Head == OldFldr -> {true, NewFldr}; true -> {false, Head} end;
+find_parallel_folder(OldFldr, NewFldr, {folders, [Head | Tail]}) ->
+  case find_parallel_folder(OldFldr, NewFldr, Tail) of
+    {true, NewDir, Project}                 ->
+      {true, lists:append([Head, "/", NewDir]), Project};
+    {true, NewDir}                          ->
+      {true, lists:append([Head, "/", NewDir]), list_to_atom(Head)};
+    {false, OldDir} when Head == OldFldr    ->
+      {true, lists:append([NewFldr, "/", OldDir])};
+    {false, OldDir}                         ->
+      {false, lists:append([Head, "/", OldDir])}
+  end.
 
 %%
 %% Local Functions

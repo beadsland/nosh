@@ -1,4 +1,3 @@
-@todo bang make doc hangs?
 @todo refactor ebin_to_src to find deps and apps
 @todo safe deps hotswapping
 @todo convention for cross-project macros

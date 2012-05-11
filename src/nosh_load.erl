@@ -360,8 +360,7 @@ do_compile(_SrcDir, Cmd, _Project, BinDir, ModuleName, Binary) ->
 
 % Find candidate src directory parallel to ebin.
  parallel_src(BinDir, Cmd) ->
-  Split = re:split(BinDir, "/", [{return, list}]),
-  case find_parallel_folder("ebin", "src", Split) of
+  case nosh_util:find_parallel_folder("ebin", "src", BinDir) of
     {true, SrcPath, Proj}	-> parallel_src(BinDir, Cmd, SrcPath, Proj);
     _Else					-> nosrc
   end.
@@ -374,17 +373,3 @@ parallel_src(_BinDir, Command, SrcDir, Project) ->
     false 	-> nosrc
   end.
 
-% Walk absolute directory path, finding where parallel would occur.
-find_parallel_folder(OldFldr, NewFldr, [Head | []]) ->
-  if Head == OldFldr -> {true, NewFldr}; true -> {false, Head} end;
-find_parallel_folder(OldFldr, NewFldr, [Head | Tail]) ->
-  case find_parallel_folder(OldFldr, NewFldr, Tail) of
-    {true, NewDir, Project}                 ->
-      {true, lists:append([Head, "/", NewDir]), Project};
-    {true, NewDir}                          ->
-      {true, lists:append([Head, "/", NewDir]), list_to_atom(Head)};
-    {flase, OldDir} when Head == OldFldr    ->
-      {true, lists:append([NewFldr, "/", OldDir])};
-    {false, OldDir}                         ->
-      {false, lists:append([Head, "/", OldDir])}
-  end.
