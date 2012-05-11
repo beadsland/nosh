@@ -2,6 +2,7 @@
 .settings
 doc
 !doc/*.md
+!doc/*.edoc
 ebin
 erl_crash.dump
 deps
