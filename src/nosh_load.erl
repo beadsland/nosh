@@ -334,8 +334,14 @@ do_compile(SrcDir, Cmd, Project, BinDir)  ->
 
 % Compile to a binary in memory.
 do_compile(SrcDir, Cmd, Project, BinDir, true) ->
+  case get_otp_includes(BinDir) of
+    {error, What}   -> {error, {includes, What}};
+    InclList        -> do_compile(SrcDir, Cmd, Project, BinDir, InclList)
+  end;
+do_compile(SrcDir, Cmd, Project, BinDir, InclList) ->
+  ?DEBUG("InclList = ~p~n", [InclList]),
   Options = [verbose, warnings_as_errors, return_errors, binary,
-            {d, package, Project}, {outdir, BinDir}, {i, SrcDir}],
+            {d, package, Project}, {outdir, BinDir}] ++ InclList,
   Filename = ?FILENAME(SrcDir, Cmd, ".erl"),
   case compile:file(Filename, Options) of
     error						->
@@ -355,14 +361,36 @@ do_compile(_SrcDir, Cmd, _Project, BinDir, ModuleName, Binary) ->
   end.
 
 %%%
+% Get OTP standard include paths
+%%%
+
+get_otp_includes(BinDir) ->
+  case nosh_util:find_parallel_folder("ebin", "_temp_", BinDir) of
+    {true, TempDir, _Project}   ->
+      get_otp_includes(TempDir, ["src", "include", "deps", "apps"]);
+    {false, BinDir}             ->
+      {error, not_otp}
+  end.
+
+get_otp_includes(_TempDir, []) -> [];
+get_otp_includes(TempDir, [Head | Tail]) ->
+  Include = re:replace(TempDir, "_temp_.*$", Head, [{return, list}]),
+  case nosh_util:can_read(Include) of
+    true            -> [{i, Include} | get_otp_includes(TempDir, Tail)];
+    false           -> get_otp_includes(TempDir, Tail);
+    {error, What}   -> {error, {file, What}}
+  end.
+
+%%%
 % Find parallel source directory
 %%%
 
 % Find candidate src directory parallel to ebin.
  parallel_src(BinDir, Cmd) ->
+  ?DEBUG("Seeking parallel src\n"),
   case nosh_util:find_parallel_folder("ebin", "src", BinDir) of
     {true, SrcPath, Proj}	-> parallel_src(BinDir, Cmd, SrcPath, Proj);
-    _Else					-> nosrc
+    _Else					-> ?DEBUG("Didn't find parallel src\n"), nosrc
   end.
 
 % Confirm it's readable and return result.
@@ -372,4 +400,3 @@ parallel_src(_BinDir, Command, SrcDir, Project) ->
     true 	-> {ok, SrcDir, Project};
     false 	-> nosrc
   end.
-

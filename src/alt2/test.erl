@@ -1,7 +1,7 @@
 -module(test).
 
 -define(debug, true).
--include("../pose/include/interface.hrl").
+-include("pose/include/interface.hrl").
 
 -export([start/0]).
 

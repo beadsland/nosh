@@ -1,6 +1,3 @@
-@todo refactor ebin_to_src to find deps and apps
-@todo safe deps hotswapping
-@todo convention for cross-project macros
 @todo fully doc pose
 @todo superl as first subproject load
 @todo update superl doc

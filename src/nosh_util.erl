@@ -36,6 +36,9 @@
 
 -include_lib("kernel/include/file.hrl").
 
+%-define(debug, true).
+-include("pose/include/interface.hrl").
+
 -include("macro.hrl").
 
 %%
@@ -116,15 +119,17 @@ find_parallel_folder(OldFldr, NewFldr, OldDir) when is_list(OldDir) ->
 find_parallel_folder(OldFldr, NewFldr, {folders, [Head | []]}) ->
   if Head == OldFldr -> {true, NewFldr}; true -> {false, Head} end;
 find_parallel_folder(OldFldr, NewFldr, {folders, [Head | Tail]}) ->
-  case find_parallel_folder(OldFldr, NewFldr, Tail) of
-    {true, NewDir, Project}                 ->
-      {true, lists:append([Head, "/", NewDir]), Project};
-    {true, NewDir}                          ->
-      {true, lists:append([Head, "/", NewDir]), list_to_atom(Head)};
+  ?DEBUG("~s(~p, ~p, {folders, [~p | Tail]})~n",
+         [?MODULE, OldFldr, NewFldr, Head]),
+  case find_parallel_folder(OldFldr, NewFldr, {folders, Tail}) of
     {false, OldDir} when Head == OldFldr    ->
       {true, lists:append([NewFldr, "/", OldDir])};
     {false, OldDir}                         ->
-      {false, lists:append([Head, "/", OldDir])}
+      {false, lists:append([Head, "/", OldDir])};
+    {true, NewDir}                          ->
+      {true, lists:append([Head, "/", NewDir]), list_to_atom(Head)};
+    {true, NewDir, Project}                 ->
+      {true, lists:append([Head, "/", NewDir]), Project}
   end.
 
 %%
