@@ -1,10 +1,10 @@
 %% CDDL HEADER START
 %% -----------------------------------------------------------------------
-%% The contents of this file are subject to the Common Development and 
-%% Distribution License, Version 1.0 (the "License"); you may not use 
-%% this file except in compliance with the License.  You should have 
-%% received a copy of the Common Development and Distribution License 
-%% along with this software.  If not, it can be retrieved online at 
+%% The contents of this file are subject to the Common Development and
+%% Distribution License, Version 1.0 (the "License"); you may not use
+%% this file except in compliance with the License.  You should have
+%% received a copy of the Common Development and Distribution License
+%% along with this software.  If not, it can be retrieved online at
 %% http://www.opensource.org/licenses/CDDL-1.0
 %%
 %% Software distributed under the License is distributed on an "AS IS"
@@ -32,7 +32,7 @@
 %% Include files
 %%
 
--include("macro.hrl").
+-include("pose/include/interface.hrl").
 
 %%
 %% Exported Functions
@@ -49,7 +49,7 @@
 -type binary_detail_error() :: beam_lib_error() | {missing_chunk, attribute()}.
 -type version() :: term().
 -type package() :: term().
--spec get_binary_detail(Module :: module(), Binary ::  binary()) -> 
+-spec get_binary_detail(Module :: module(), Binary ::  binary()) ->
           {ok, version(), package()} | {error, binary_detail_error()}.
 %
 get_binary_detail(Module, Binary) ->
@@ -61,7 +61,7 @@ get_binary_detail(Module, Binary) ->
 %% @doc Read binary file into memory.
 -type posix() :: atom().
 -type file_error_reason() :: posix() | badarg | terminated | system_limit.
--type slurp_error() :: {read, file_error_reason()} | beam_lib_error() 
+-type slurp_error() :: {read, file_error_reason()} | beam_lib_error()
                         | no_module.
 -type filename() :: file:filename().
 -spec slurp_binary(Filename :: filename()) -> {ok, module(), binary()}
@@ -82,7 +82,7 @@ slurp_binary(Filename) ->
 %%%
 
 % Get package attribute of binary
-get_binary_detail(Module, Binary, Version) ->       
+get_binary_detail(Module, Binary, Version) ->
     case read_beam_attribute(Binary, package) of
         {error, What}   -> {error, {read_beam, What}};
         {ok, Package}   -> {ok, Version, Package};
@@ -106,9 +106,9 @@ get_binary_detail(Module, _Binary, Version, noattr) ->
 % Extract meta information about binary.
 slurp_binary(NewFile, Binary) ->
     case beam_lib:info(Binary) of
-        {error, beam_lib, Reason}   -> 
+        {error, beam_lib, Reason}   ->
             {error, {beam_lib, Reason}};
-        InfoList                    -> 
+        InfoList                    ->
             slurp_binary(NewFile, Binary, InfoList)
     end.
 
@@ -121,7 +121,7 @@ slurp_binary(_NewFile, Binary, Info) ->
 
 %%%
 % Read beam attribute.
-%%% 
+%%%
 
 %% @doc Retrieve attributes chunk.
 read_beam_attribute(Binary, Attribute) ->

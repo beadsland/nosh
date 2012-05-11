@@ -11,13 +11,14 @@
 %%
 %% Include files
 %%
+
 -define(debug, true).
--include("macro.hrl").
+-include("../deps/pose/include/interface.hrl").
 
 %%
 %% Exported Functions
 %%
--export([start/0]). 
+-export([start/0]).
 
 %%
 %% API Functions

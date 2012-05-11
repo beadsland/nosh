@@ -11,9 +11,22 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">convert nosh:start/1 to nosh:run/1
+* <font color="red">convention for cross-project macros
 </font>
-* <font color="red">nosh_erl project (hot, good, bang)
+* <font color="red">fully doc pose
+</font>
+* <font color="red">superl as first subproject load
+</font>
+* <font color="red">update superl doc
+</font>
+* <font color="red">hot as second subproject load
+</font>
+* <font color="red">
+
+nosh_erl doc </font>
+* <font color="red">pose loop behaviour
+</font>
+* <font color="red">refactor noterm to own project
 </font>
 * <font color="red">
 

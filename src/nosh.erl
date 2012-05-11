@@ -1,5 +1,3 @@
-%% -*- erlang -*-
-
 %% CDDL HEADER START
 %% -----------------------------------------------------------------------
 %% The contents of this file are subject to the Common Development and
@@ -58,6 +56,8 @@
 %%
 
 -define(debug, true).
+-include("pose/include/interface.hrl").
+
 -include("macro.hrl").
 
 % This will eventually draw from ENV...
@@ -80,6 +80,7 @@
 
 run(IO) ->
   process_flag(trap_exit, true),
+  ?INIT_POSE,
   ?INIT_DEBUG,
   ?STDOUT("Starting Nosh ~s nosql shell ~p~n", [?VERSION(?MODULE),
                           self()]),
@@ -115,8 +116,7 @@ loop(IO, Cmd, CmdPid) ->
 do_output(IO, Command, CmdPid, MsgTag, Output) ->
   case MsgTag of
     erlout	-> ?STDOUT("~s: ~p~n", [Command, Output]);
-    erlerr	-> Erlerr = nosh_util:format_erlerr(Output),
-               ?STDERR("~s: ~s~n", [Command, Erlerr]);
+    erlerr	-> ?STDERR("~s: ~s~n", [Command, ?FORMAT_ERLERR(Output)]);
     stdout	-> ?STDOUT(Output);
     stderr 	-> ?STDERR(Output);
     debug 	-> IO#std.err ! {debug, self(), Output}

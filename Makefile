@@ -112,8 +112,11 @@ push-nosh:	online
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
 			then (git push origin master); fi
 
-push-libs:	push-bin push-erl
+push-libs:	push-pose push-bin push-erl
 
+push-pose:	online
+	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
+			then (cd ../pose; git push origin master); fi
 
 push-bin:	online
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \

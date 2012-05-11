@@ -64,7 +64,10 @@
 %%
 
 %-define(debug, true).
+-include("pose/include/interface.hrl").
+
 -include("macro.hrl").
+
 
 -define(FILENAME(Path, Command, Extn), Path ++ "/" ++ Command ++ Extn).
 -define(FILENAME(Path, Command), ?FILENAME(Path, Command, "")).
@@ -81,7 +84,7 @@
 
 %% Locate command on PATH, load from file if newer than currently loaded.
 -type command() :: string() | atom().
--spec run(IO :: #std{}, Command :: command()) -> 
+-spec run(IO :: #std{}, Command :: command()) ->
         {module, module()} | {error, any()}.
 %% @todo refactor as a no_return with all output on stdout/stderr
 %% @todo get PATH from environment
@@ -332,7 +335,7 @@ do_compile(SrcDir, Cmd, Project, BinDir)  ->
 % Compile to a binary in memory.
 do_compile(SrcDir, Cmd, Project, BinDir, true) ->
   Options = [verbose, warnings_as_errors, return_errors, binary,
-         {d, package, Project}, {outdir, BinDir}, {i, SrcDir}],
+            {d, package, Project}, {outdir, BinDir}, {i, SrcDir}],
   Filename = ?FILENAME(SrcDir, Cmd, ".erl"),
   case compile:file(Filename, Options) of
     error						->

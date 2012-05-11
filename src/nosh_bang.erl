@@ -34,7 +34,7 @@
 %% Include files
 %%
 
--include("macro.hrl").
+-include("pose/include/interface.hrl").
 
 %%
 %% Exported Functions

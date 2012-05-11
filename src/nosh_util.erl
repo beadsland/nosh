@@ -42,10 +42,6 @@
 %% Exported Functions
 %%
 
-% Standard I/O
--export([send_stderr/2, send_stderr/3, send_stdout/2, send_stdout/3,
-         send_debug/2, format_erlerr/1]).
-
 % File Properties
 -export([can_read/1, can_write/1, last_modified/1]).
 
@@ -53,73 +49,6 @@
 %% API Functions
 %%
 
-%%%
-% Standard I/O functions
-%%%
-
-%% @doc Smart STDOUT/2 macro function.
--type format() :: io:format().
--spec send_stdout(IO :: #std{}, Format :: format(), What :: list()) -> ok.
-%
-send_stdout(IO, Format, What) ->
-  send_stdout(IO, io_lib:format(Format, What)),
-  ok.
-
-%% @doc Smart STDOUT/1 macro function.
--type output() :: {atom(), any()} | string().
--spec send_stdout(IO :: #std{}, What :: output()) -> ok.
-%
-send_stdout(IO, What) ->
-  if is_tuple(What);
-     is_atom(What)  -> IO#std.out ! {erlout, self(), What};
-     is_list(What)  -> IO#std.out ! {stdout, self(), What};
-     true           -> ?STDOUT("~p", [What])
-  end,
-  ok.
-
-%% @doc Smart STDERR/2 macro function.
--spec send_stderr(IO :: #std{}, Format:: format(), What :: list()) -> ok.
-send_stderr(IO, Format, What) ->
-  send_stderr(IO, io_lib:format(Format, What)),
-  ok.
-
-%% @doc Smart STDERR/1 macro function.
--spec send_stderr(IO :: #std{}, What :: output()) -> ok.
-send_stderr(IO, What) ->
-  if is_tuple(What);
-     is_atom(What)  -> IO#std.out ! {erlerr, self(), What};
-     is_list(What)  -> IO#std.out ! {stderr, self(), What};
-     true           -> ?STDERR("~p", [What])
-  end,
-  ok.
-
-%% @doc Smart DEBUG/2 macro function.
-%% Retrieves debug pid from process dictionary.  (Set by macro.)
-%% @end
--spec send_debug(Format :: format(), What :: list()) -> ok.
-send_debug(Format, What) ->
-  get(debug) ! {debug, self(), io_lib:format(Format, What)},
-  ok.
-
-%% @doc Smartly format erlerr messages.
--spec format_erlerr(What :: any()) -> string().
-format_erlerr(What) ->
-    case What of
-        {{Atom, Data}, Trace} when is_atom(Atom), is_list(Trace)    ->
-            Format = "~p ~p~nReason: ~p~nTrace: ~p~n",
-            NewWhat = [Atom, self(), Data, Trace],
-            io_lib:format(Format, NewWhat);
-        {Atom, [Head | Tail]} when is_atom(Atom), is_tuple(Head)    ->
-            Format = "~p ~p~nTrace: ~p~n",
-            NewWhat = [Atom, self(), [Head | Tail]],
-            io_lib:format(Format, NewWhat);
-        {Atom, Data} when is_atom(Atom)                             ->
-            io_lib:format("~p: ~s", [Atom, format_erlerr(Data)]);
-        List when is_list(List)                                     ->
-            io_lib:format("~s", [List]);
-        _Else                                                       ->
-            io_lib:format("~p", [What])
-    end.
 
 %%%
 % File property functions

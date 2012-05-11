@@ -45,6 +45,8 @@
 %%
 
 %-define(debug, true).
+-include("pose/include/interface.hrl").
+
 -include("macro.hrl").
 
 %%
@@ -109,7 +111,7 @@ do_noshout(IO, MsgTag, Output) ->
   case MsgTag of
     stdout	-> io:format("~s", [Output]);
     erlout	-> io:format("~p: data: ~p~n", [nosh, Output]);
-    erlerr	-> Erlerr = nosh_util:format_erlerr(Output),
+    erlerr	-> Erlerr = ?FORMAT_ERLERR(Output),
                io:format(standard_error, "** ~s~n", [Erlerr]);
     stderr	-> io:format(standard_error, "** ~s", [Output]);
     debug	-> io:format(standard_error, "-- ~s", [Output])
@@ -144,8 +146,7 @@ do_noise(IO, Noise) ->
   ?MODULE:msg_loop(IO).
 
 grace(Message, Reason) ->
-  io:format(standard_error, "~s: ~s~n",
-            [Message, nosh_util:format_erlerr(Reason)]).
+  io:format(standard_error, "~s: ~s~n", [Message, ?FORMAT_ERLERR(Reason)]).
 
 strip_escapes(Subject) ->
   {ok, MP} = re:compile("\e\[[\d,\s]+[A-Z]"),

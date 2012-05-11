@@ -260,7 +260,7 @@
 %%
 
 -define(debug, true).
--include("macro.hrl").
+-include("pose/include/interface.hrl").
 
 -define(QUOTE_CHARS, "\\\\\"\'\`\n").
 -define(GROUP_CHARS, "\;\(\)\&\|").

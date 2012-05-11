@@ -45,7 +45,7 @@
 %%
 
 -define(debug, true).
--include("macro.hrl").
+-include("pose/include/interface.hrl").
 
 %%
 %% Exported Functions

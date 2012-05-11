@@ -27,23 +27,3 @@
     proplists:get_value(Attribute, Module:module_info(attributes))).
 -define(VERSION(Module), ?ATTRIB(Module, version)).
 
--record(std, {in = self() :: pid(), out = self() :: pid(),
-              err = self() :: pid(), echo = false :: boolean()}).
--define(IO(In, Out, Err, Echo), #std{in=In, out=Out, err=Err, echo=Echo}).
--define(IO(In, Out, Err), #std{in=In, out=Out, err=Err}).
--define(IO(Pid), #std{in=Pid, out=Pid, err=Pid}).
-
--import(nosh_util).  % May be used by packaged modules.
--define(STDERR(Format, What), stderr, nosh_util:send_stderr(IO, Format, What)).
--define(STDERR(What), stderr, nosh_util:send_stderr(IO, What)).
--define(STDOUT(Format, What), stdout, nosh_util:send_stdout(IO, Format, What)).
--define(STDOUT(What), stdout, nosh_util:send_stdout(IO, What)).
-
-% Debug is special case of Stderr
--define(INIT_DEBUG, put(debug, IO#std.err)).
--ifdef(debug).
--define(DEBUG(Format, What), debug, nosh_util:send_debug(Format, What)).
--else.
--define(DEBUG(Format, What), debug, put(devnull, {Format, What})).
--endif.
--define(DEBUG(String), ?DEBUG("~s", [String])).

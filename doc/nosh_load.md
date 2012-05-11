@@ -79,7 +79,7 @@ source before the `PATH` is exhausted.
 
 
 
-<pre>run(IO::#std{}, Command::<a href="#type-command">command()</a>) -> no_return()</pre>
+<pre>run(IO::#std{}, Command::<a href="#type-command">command()</a>) -> {module, module()} | {error, any()}</pre>
 <br></br>
 
 
@@ -87,6 +87,7 @@ source before the `PATH` is exhausted.
 
 __<font color="red">To do</font>__
 <br></br>
+* <font color="red">refactor as a no_return with all output on stdout/stderr</font>
 * <font color="red">get PATH from environment</font>
 <a name="test-1"></a>
 
