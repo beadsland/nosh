@@ -11,16 +11,42 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
+* <font color="red">superl: fix blockquoted code in docs
+</font>
 * <font color="red">
 
-superl as first subproject load </font>
+pose: fix blockquoted code in docs </font>
+* <font color="red">
+
+doc nested deps in rebar.config </font>
+* <font color="red">fully doc pose
+</font>
+* <font color="red">fix stdio's include directive
+</font>
+* <font color="red">merge INIT_POSE and INIT_DEBUG
+</font>
+* <font color="red">add process_flag to INIT_POSE
+</font>
+* <font color="red">
+
+make good pose </font>
+* <font color="red">superl command in nosh
+</font>
+* <font color="red">integrate superl/pose with nosh
+</font>
+* <font color="red">
+
+superl package directive </font>
+* <font color="red">good alias command
+</font>
+* <font color="red">standard pose_cmd behaviour
+</font>
+* <font color="red">
+
+revise nosh docs re nosh_exec behaviour </font>
 * <font color="red">
 
 recruitment interviews </font>
-* <font color="red">fully doc pose
-</font>
-* <font color="red">make good pose
-</font>
 * <font color="red">hot as second subproject load
 </font>
 * <font color="red">
@@ -38,6 +64,11 @@ integrate nosql project </font>
 * <font color="red">
 
 does term pass params to shell? </font>
+* <font color="red">refactor bang to nosh_erl project
+</font>
+* <font color="red">
+
+bang stderr pipe </font>
 * <font color="red">
 
 domain consolidation </font>

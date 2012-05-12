@@ -82,8 +82,7 @@ run(IO) ->
   process_flag(trap_exit, true),
   ?INIT_POSE,
   ?INIT_DEBUG,
-  ?STDOUT("Starting Nosh ~s nosql shell ~p~n", [?VERSION(?MODULE),
-                          self()]),
+  ?STDOUT("Starting Nosh ~s nosql shell ~p~n", [?VERSION(?MODULE), self()]),
   ?DEBUG("Using rev. ~s command line parser~n", [?VERSION(nosh_parse)]),
   ?DEBUG("Using rev. ~s module loader~n", [?VERSION(nosh_load)]),
 
@@ -100,7 +99,7 @@ run(IO) ->
 loop(IO, Cmd, CmdPid) ->
   receive
     {purging, _Pid, _Mod} 						-> % chase your tail
-            ?MODULE:loop(IO, Cmd, CmdPid);
+      ?MODULE:loop(IO, Cmd, CmdPid);
     {'EXIT', ExitPid, Reason}					->
       do_exit(IO, Cmd, CmdPid, ExitPid, Reason);
     {stdout, Stdin, Line} when CmdPid == self(),

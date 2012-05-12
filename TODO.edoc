@@ -1,10 +1,24 @@
+@todo superl: fix blockquoted code in docs
+@todo pose: fix blockquoted code in docs
 
-@todo superl as first subproject load
+@todo doc nested deps in rebar.config
+
+@todo fully doc pose
+@todo fix stdio's include directive
+@todo merge INIT_POSE and INIT_DEBUG
+@todo add process_flag to INIT_POSE
+@todo make good pose
+
+@todo superl command in nosh
+@todo integrate superl/pose with nosh
+@todo superl package directive
+
+@todo good alias command
+@todo standard pose_cmd behaviour
+@todo revise nosh docs re nosh_exec behaviour
 
 @todo recruitment interviews
 
-@todo fully doc pose
-@todo make good pose
 @todo hot as second subproject load
 @todo nosh_erl doc
 
@@ -14,6 +28,9 @@
 @todo pose loop behaviour
 @todo refactor noterm to own project
 @todo does term pass params to shell?
+
+@todo refactor bang to nosh_erl project
+@todo bang stderr pipe
 
 @todo domain consolidation
 
