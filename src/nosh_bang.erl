@@ -58,6 +58,7 @@ run(IO, Command) -> run(IO, Command, 1000 * 60 * 5).
 %%
 
 run(IO, Command, Timeout) ->
+  ?INIT_POSE,
   Opts = [stderr_to_stdout, exit_status, {line, 500}],
   Port = erlang:open_port({spawn, Command}, Opts),
   if is_port(Port)  -> loop(IO, Port, Timeout);
@@ -72,6 +73,7 @@ loop(IO, Port, Timeout) ->
                                        ?MODULE:loop(IO, Port, Timeout);
     {Port, {exit_status, 0}}        -> exit(ok);
     {Port, {exit_status, Status}}   -> exit({status, Status});
+    {'EXIT', Port, Reason}          -> exit({bang, Reason});
     Noise                           -> ?STDERR("noise: ~p ~p~n",
                                                [Noise, self()]),
                                        ?MODULE:loop(IO, Port, Timeout)

@@ -79,9 +79,7 @@
 %% @doc Start nosh, receiving standard I/O from noterm.
 
 run(IO) ->
-  process_flag(trap_exit, true),
   ?INIT_POSE,
-  ?INIT_DEBUG,
   ?STDOUT("Starting Nosh ~s nosql shell ~p~n", [?VERSION(?MODULE), self()]),
   ?DEBUG("Using rev. ~s command line parser~n", [?VERSION(nosh_parse)]),
   ?DEBUG("Using rev. ~s module loader~n", [?VERSION(nosh_load)]),

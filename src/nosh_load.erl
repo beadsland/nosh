@@ -90,7 +90,7 @@
 %% @todo get PATH from environment
 run(IO, Command) when is_atom(Command) -> run(IO, atom_to_list(Command));
 run(IO, Command) ->
-  ?INIT_DEBUG,
+  ?INIT_POSE,
   Path = [filename:absname("ebin")],
   run(IO, Command, Path).
 

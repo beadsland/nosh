@@ -79,7 +79,8 @@ start_wecho() -> io:format("Shell echo flag enabled.\n"), start(true).
 
 start(Echo) ->
   error_logger:tty(false),
-  process_flag(trap_exit, true),
+  IO = ?IO(self()),     % hack pending proper pose functions
+  ?INIT_POSE,
   io:format("Starting Noterm ~s terminal emulator on ~p ~p~n",
         [?VERSION(?MODULE), node(), self()]),
 
@@ -159,7 +160,7 @@ strip_escapes(Subject) ->
 %%@private Export to allow for spawn.
 key_start(Pid) ->
   IO = ?IO(Pid),
-  ?INIT_DEBUG,
+  ?INIT_POSE,
   ?DEBUG("Listening to keyboard ~p~n", [self()]),
   key_loop(IO).
 

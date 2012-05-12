@@ -12,14 +12,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 __<font color="red">To do</font>__
 <br></br>
 
-* <font color="red">superl: fix blockquoted code in docs
-</font>
-* <font color="red">pose: fix blockquoted code in docs
-</font>
-* <font color="red">fix stdio's include directive
-</font>
-* <font color="red">fully doc pose
-</font>
 * <font color="red">merge INIT_POSE and INIT_DEBUG
 </font>
 * <font color="red">add process_flag to INIT_POSE
@@ -49,6 +41,10 @@ __<font color="red">To do</font>__
 * <font color="red">pose loop behaviour
 </font>
 * <font color="red">refactor noterm to own project
+</font>
+* <font color="red">make noterm pose-compliant
+</font>
+* <font color="red">pose integration with error_logger
 </font>
 * <font color="red">does term pass params to shell?
 </font>

@@ -299,7 +299,7 @@
       {ok, context_list()} | {error, parse_error()}.
 %%
 parse(IO, Subject) ->
-  ?INIT_DEBUG,
+  ?INIT_POSE,
   Pattern = io_lib:format("([~s~s~s])",
               [?QUOTE_CHARS, ?GROUP_CHARS, ?SPACE_CHARS]),
   {ok, MP} = re:compile(Pattern),

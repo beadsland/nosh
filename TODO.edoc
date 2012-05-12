@@ -1,9 +1,3 @@
-@todo superl: fix blockquoted code in docs
-@todo pose: fix blockquoted code in docs
-@todo fix stdio's include directive
-@todo fully doc pose
-@todo merge INIT_POSE and INIT_DEBUG
-@todo add process_flag to INIT_POSE
 @todo make good pose
 @todo superl command in nosh
 @todo integrate superl/pose with nosh
@@ -17,6 +11,8 @@
 @todo integrate nosql project
 @todo pose loop behaviour
 @todo refactor noterm to own project
+@todo make noterm pose-compliant
+@todo pose integration with error_logger
 @todo does term pass params to shell?
 @todo refactor bang to nosh_erl project
 @todo bang stderr pipe
