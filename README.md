@@ -12,10 +12,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 __<font color="red">To do</font>__
 <br></br>
 
-* <font color="red">merge INIT_POSE and INIT_DEBUG
-</font>
-* <font color="red">add process_flag to INIT_POSE
-</font>
 * <font color="red">make good pose
 </font>
 * <font color="red">superl command in nosh

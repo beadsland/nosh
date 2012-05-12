@@ -48,7 +48,9 @@
 %%
 %% Users of the Eclipse IDE may integrate `nosh' shell with their 
 %% workflow by installing the Wicked Shell plugin 
-%% [http://www.wickedshell.net/] from the Eclipse Marketplace.
+%% [http://www.wickedshell.net/] from the Eclipse Marketplace.  Simply
+%% run `bash' or `sh' under Wicked Shell, and then execute `make run'
+%% from there.
 %%
 %% == Bourne Shell Emulator ==
 %%

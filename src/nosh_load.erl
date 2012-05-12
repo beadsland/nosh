@@ -68,7 +68,6 @@
 
 -include("macro.hrl").
 
-
 -define(FILENAME(Path, Command, Extn), Path ++ "/" ++ Command ++ Extn).
 -define(FILENAME(Path, Command), ?FILENAME(Path, Command, "")).
 
@@ -91,7 +90,7 @@
 run(IO, Command) when is_atom(Command) -> run(IO, atom_to_list(Command));
 run(IO, Command) ->
   ?INIT_POSE,
-  Path = [filename:absname("ebin")],
+  Path = [filename:absname("ebin"), filename:absname("deps/superl/ebin")],
   run(IO, Command, Path).
 
 %% Test that we can throw appropriate warnings in various scenarios.
@@ -142,11 +141,11 @@ run(IO, Command, Dir, slurp) ->
 run(IO, Command, Dir, OrigModule, Binary) ->
   case run_load(Command, Dir, OrigModule, Binary) of
     {ok, Module, diff_path}	-> ?STDERR({Module, "namespace collision"}),
-                   {module, Module};
+                               {module, Module};
     {ok, Module, flat_pkg} 	-> ?STDERR({Module, "flat package unsafe"}),
-                   {module, Module};
+                               {module, Module};
     {ok, Module}			-> ?DEBUG("got module: ~p~n", [Module]),
-                   {module, Module};
+                               {module, Module};
     {error, What}			-> {error, What}
   end.
 
