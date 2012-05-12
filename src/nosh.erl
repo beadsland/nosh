@@ -147,7 +147,8 @@ do_run(IO, Line) ->
   case nosh_load:run(IO, Command) of
     {module, Module}    -> CmdPid = spawn_link(Module, run, [?IO(self())]),
                            ?MODULE:loop(IO, Command, CmdPid);
-    _Else               -> do_parse(IO, Line)
+    Else                -> ?DEBUG("hack: ~p~n", [Else]),
+                           do_parse(IO, Line)
   end.
 
 % Parse command line.

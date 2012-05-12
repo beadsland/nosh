@@ -63,7 +63,7 @@
 %% Include files
 %%
 
-%-define(debug, true).
+-define(debug, true).
 -include("pose/include/interface.hrl").
 
 -include("macro.hrl").
@@ -121,8 +121,10 @@ run(IO, Command, [Head | Tail]) ->
     {info, nobin}           -> run(IO, Command, Tail);
     {info, Info}            -> ?DEBUG("l: ~p~n", [Info]),
                                run(IO, Command, Head, slurp);
-    {ok, _Filename}			-> run(IO, Command, Head, slurp);
-    {ok, Module, Binary}	-> run(IO, Command, Head, Module, Binary);
+    {ok, Filename}			-> ?DEBUG("l: ~s~n", [Filename]),
+                               run(IO, Command, Head, slurp);
+    {ok, Module, Binary}	-> ?DEBUG("l: ~p~n", [Module]),
+                               run(IO, Command, Head, Module, Binary);
     {error, What}			-> ?STDERR({load, What}),
                                {error, {load, What}}
   end.
@@ -197,9 +199,9 @@ ensure_loaded(Module, BinFile, Bin, BinVsn, Pkg, MemFile) ->
   if BinFile == MemFile, BinVsn == MemVsn	->
        {ok, Module};
      BinFile /= MemFile					  	->
-      ensure_loaded(Module, BinFile, Bin, BinVsn, Pkg, MemFile, diff_path);
+       ensure_loaded(Module, BinFile, Bin, BinVsn, Pkg, MemFile, diff_path);
      BinVsn /= MemVsn						->
-      ensure_loaded(Module, BinFile, Bin, BinVsn, Pkg, MemFile, diff_vsn)
+       ensure_loaded(Module, BinFile, Bin, BinVsn, Pkg, MemFile, diff_vsn)
   end.
 
 % Load the new module version.
@@ -211,9 +213,9 @@ ensure_loaded(Module, BinFile, Bin, _BinVsn, Pkg, _MemFile, Why) ->
     {module, Module}	->
       case Why of
         not_loaded	-> if Pkg == '' -> {ok, Module, flat_pkg};
-                  true		-> {ok, Module} end;
+                          true		-> {ok, Module} end;
         diff_vsn	-> if Pkg == '' -> {ok, Module, flat_pkg};
-                  true		-> {ok, Module} end;
+                          true		-> {ok, Module} end;
         diff_path	-> {ok, Module, diff_path}
       end
   end.
@@ -318,7 +320,7 @@ ensure_compiled(Cmd, BinDir, Force, SrcDir, Proj, SrcMod) ->
 % Compare modification dates and compile if source is newer.
 ensure_compiled(Cmd, BinDir, Force, SrcDir, Proj, SrcMod, BinMod) ->
   if SrcMod > BinMod; Force	-> do_compile(SrcDir, Cmd, Proj, BinDir);
-     true						-> {ok, ?FILENAME(BinDir, Cmd, ".beam")}
+     true				    -> {ok, ?FILENAME(BinDir, Cmd, ".beam")}
   end.
 
 % Make sure we've got a directory to write to.
@@ -364,7 +366,8 @@ do_compile(_SrcDir, Cmd, _Project, BinDir, ModuleName, Binary) ->
 get_otp_includes(BinDir) ->
   case nosh_util:find_parallel_folder("ebin", "_temp_", BinDir) of
     {true, TempDir, _Project}   ->
-      get_otp_includes(TempDir, ["src", "include", "deps", "apps"]);
+      get_otp_includes(TempDir, ["deps", "apps"]) ++
+        get_otp_includes("deps", ["deps"]);
     {false, BinDir}             ->
       {error, not_otp}
   end.

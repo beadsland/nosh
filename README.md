@@ -12,15 +12,9 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 __<font color="red">To do</font>__
 <br></br>
 
-* <font color="red">make good pose
+* <font color="red">superl package pattern
 </font>
-* <font color="red">superl command in nosh
-</font>
-* <font color="red">integrate superl/pose with nosh
-</font>
-* <font color="red">superl package directive
-</font>
-* <font color="red">good alias command
+* <font color="red">single-entry versions?
 </font>
 * <font color="red">standard pose_cmd behaviour
 </font>
@@ -127,7 +121,9 @@ Presently, `nosh` runs as a Makefile target.  The simplest way to get
   terminal session and type `make run`.
 
 Users of the Eclipse IDE may integrate `nosh` shell with their
-  workflow by installing the Wicked Shell plugin[`http://www.wickedshell.net/`](http://www.wickedshell.net/) from the Eclipse Marketplace.
+  workflow by installing the Wicked Shell plugin[`http://www.wickedshell.net/`](http://www.wickedshell.net/) from the Eclipse Marketplace.  Simply
+  run `bash` or `sh` under Wicked Shell, and then execute `make run`
+from there.
 
 ###<a name="Bourne_Shell_Emulator">Bourne Shell Emulator</a>##
 
