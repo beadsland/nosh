@@ -102,10 +102,8 @@ test(IO) ->
 
   {module, Mod1} = run(IO, "test", [?FILENAME(Root, "ebin/alt")]),
   Mod1:start(),
-
   {module, Mod2} = run(IO, "test", [?FILENAME(Root, "ebin/alt2")]),
   Mod2:start(),
-
   {module, Mod3} = run(IO, "test", [?FILENAME(Root, "ebin")]),
   Mod3:start(),
   test:start(),

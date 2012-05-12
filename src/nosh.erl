@@ -133,10 +133,6 @@ do_line(IO, Line) ->
     "hot\n"	->
       HotPid = spawn_link(nosh, hotswap_run, [?IO(self()), "hot\n"]),
       ?MODULE:loop(IO, hot, HotPid);
-    "good\n" ->
-      code:add_path("deps/superl/ebin"),
-      GoodPid = spawn_link(superl, start, []),
-      ?MODULE:loop(IO, good, GoodPid);
     _Line ->
       case re:run(Line, "\ ", [{capture, none}]) of
         match   -> do_parse(IO, Line);
