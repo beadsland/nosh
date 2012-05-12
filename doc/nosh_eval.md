@@ -1,13 +1,12 @@
 
 
 #Module nosh_eval#
+
 * [Description](#description)
 
 
 This is a preliminary draft of the command line evaluation module
 for `nosh`.
-
-
 
 Copyright (c) 2012 Beads D. Land-Trujillo
 
@@ -17,6 +16,7 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
+
 * <font color="red"> Tilde expansion</font>
 * <font color="red"> Reserved words</font>
 * <font color="red"> $ - Parameter expansion</font>
@@ -29,9 +29,13 @@ __<font color="red">To do</font>__
 <a name="description"></a>
 
 ##Description##
- 
 
-__Draft Notes:__ In first position, parentheses (`(...)`) group commands within for
+
+
+
+__Draft Notes:__
+
+In first position, parentheses (`(...)`) group commands within for
 execution in a subshell environment, as per command substitution rules.
 A parentheses group appearing in second position, following a command,
 is treated as an Erlang function parameter List.  Parentheses groups

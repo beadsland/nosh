@@ -1,6 +1,7 @@
 
 
 #Module nosh#
+
 * [Description](#description)
 * [Function Index](#index)
 * [Function Details](#functions)
@@ -9,8 +10,6 @@
 The `nosh` process module, which handles messaging with a paired
 `noterm` process.
 
-
-
 Copyright (c) 2012 Beads D. Land-Trujillo
 
 __Version:__ 0.1.13
@@ -18,7 +17,9 @@ __Version:__ 0.1.13
 __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).<a name="description"></a>
 
 ##Description##
- Commands:
+
+
+Commands:
 
 
 
@@ -48,14 +49,20 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 <dd>end-of-file (exit nosh application)</dd>
 
 
- 
 
-__Draft Notes__ 
+
+
+
+__Draft Notes__
+
+
 
 % A `nosh` process is launched by first starting [`noterm`](noterm.md), which
 handles keyboard input, sending this to the `nosh` process as messages,
 and presenting output and errors to the user as they are received in
-message form from the `nosh` process. The `nosh` process continues to run until it receives an end-of-file
+message form from the `nosh` process.
+
+The `nosh` process continues to run until it receives an end-of-file
 message from `noterm`.  This is currently produced by typing a period
 (`.`) by itself on a line, followed by a `<newline>`.<a name="index"></a>
 
@@ -74,15 +81,11 @@ message from `noterm`.  This is currently produced by typing a period
 ###command_run/2##
 
 
-
-
 `command_run(IO, Line) -> any()`
 
 <a name="hotswap_run-2"></a>
 
 ###hotswap_run/2##
-
-
 
 
 `hotswap_run(IO, Line) -> any()`
@@ -92,10 +95,6 @@ message from `noterm`.  This is currently produced by typing a period
 ###run/1##
 
 
-
-
 `run(IO) -> any()`
-
-
 
 Start nosh, receiving standard I/O from noterm.

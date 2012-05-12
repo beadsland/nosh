@@ -1,6 +1,7 @@
 
 
 #Module nosh_util#
+
 * [Description](#description)
 * [Data Types](#types)
 * [Function Index](#index)
@@ -9,14 +10,13 @@
 
 Utility function library.
 
-
-
 Copyright (c) 2012 Beads D. Land-Trujillo
 
 __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).
 
 __<font color="red">To do</font>__
 <br></br>
+
 * <font color="red">spec API functions</font>
 
 <a name="types"></a>
@@ -112,12 +112,8 @@ __<font color="red">To do</font>__
 ###can_read/1##
 
 
-
-
 <pre>can_read(Filename::<a href="#type-filename">filename()</a>) -> boolean() | <a href="#type-file_error">file_error()</a></pre>
 <br></br>
-
-
 
 
 Test if file or directory is readable.<a name="can_write-1"></a>
@@ -125,12 +121,8 @@ Test if file or directory is readable.<a name="can_write-1"></a>
 ###can_write/1##
 
 
-
-
 <pre>can_write(Filename::<a href="#type-filename">filename()</a>) -> boolean() | <a href="#type-file_error">file_error()</a></pre>
 <br></br>
-
-
 
 
 Test if file or directory is writeable.<a name="find_parallel_folder-3"></a>
@@ -138,12 +130,8 @@ Test if file or directory is writeable.<a name="find_parallel_folder-3"></a>
 ###find_parallel_folder/3##
 
 
-
-
 <pre>find_parallel_folder(OldFlder::<a href="#type-folder">folder()</a>, NewFolder::<a href="#type-folder">folder()</a>, OldPath::<a href="#type-path">path()</a>) -> <a href="#type-parallel_result">parallel_result()</a></pre>
 <br></br>
-
-
 
 
 Walk absolute directory path, finding where parallel would occur.<a name="last_modified-1"></a>
@@ -151,12 +139,8 @@ Walk absolute directory path, finding where parallel would occur.<a name="last_m
 ###last_modified/1##
 
 
-
-
 <pre>last_modified(Filename::<a href="#type-filename">filename()</a>) -> {ok, <a href="#type-date_time">date_time()</a>} | <a href="#type-file_error">file_error()</a></pre>
 <br></br>
-
-
 
 
 Get last date and time file last modified.

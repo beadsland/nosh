@@ -1,8 +1,5 @@
-@todo edown: fix unordered lists
-@todo nosh: readme TOC
 @todo superl: fix blockquoted code in docs
 @todo pose: fix blockquoted code in docs
-@todo doc nested deps in rebar.config
 @todo fix stdio's include directive
 @todo fully doc pose
 @todo merge INIT_POSE and INIT_DEBUG

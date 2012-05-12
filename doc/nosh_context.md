@@ -1,6 +1,7 @@
 
 
 #Module nosh_context#
+
 * [Description](#description)
 * [Data Types](#types)
 * [Function Index](#index)
@@ -8,8 +9,6 @@
 
 
 Submodule of [`nosh_parse`](nosh_parse.md).
-
-
 
 Copyright (c) 2012 Beads D. Land-Trujillo
 
@@ -19,6 +18,7 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
+
 * <font color="red"> [...] Lists</font>
 * <font color="red"> [`...`] Lists command substituion</font>
 * <font color="red"> (...) second position parameter Lists</font>
@@ -28,7 +28,9 @@ __<font color="red">To do</font>__
 <a name="description"></a>
 
 ##Description##
- _May be refactored back into nosh_parse at a later date._
+
+
+_May be refactored back into nosh_parse at a later date._
 <a name="types"></a>
 
 ##Data Types##
@@ -122,12 +124,8 @@ __<font color="red">To do</font>__
 ###close_context/3##
 
 
-
-
 <pre>close_context(QType::<a href="#type-context_type">context_type()</a>, Stack::<a href="#type-context_stack">context_stack()</a>, List::<a href="#type-symbol_list">symbol_list()</a>) -> <a href="#type-context_result">context_result()</a></pre>
 <br></br>
-
-
 
 
 Wind up context block.<a name="parse_context-3"></a>
@@ -135,12 +133,8 @@ Wind up context block.<a name="parse_context-3"></a>
 ###parse_context/3##
 
 
-
-
 <pre>parse_context(QType::<a href="#type-context_type">context_type()</a>, Stack::<a href="#type-context_stack">context_stack()</a>, List::<a href="#type-symbol_list">symbol_list()</a>) -> <a href="#type-parse_result">parse_result()</a></pre>
 <br></br>
-
-
 
 
 Unwind context and group stream.

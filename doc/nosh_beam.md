@@ -1,6 +1,7 @@
 
 
 #Module nosh_beam#
+
 * [Description](#description)
 * [Data Types](#types)
 * [Function Index](#index)
@@ -8,8 +9,6 @@
 
 
 Beam binary utility functions used by [`nosh_load`](nosh_load.md).
-
-
 
 Copyright (c) 2012 Beads D. Land-Trujillo
 
@@ -107,12 +106,8 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 ###get_binary_detail/2##
 
 
-
-
 <pre>get_binary_detail(Module::module(), Binary::binary()) -> {ok, <a href="#type-version">version()</a>, <a href="#type-package">package()</a>} | {error, <a href="#type-binary_detail_error">binary_detail_error()</a>}</pre>
 <br></br>
-
-
 
 
 Get version and package of binary<a name="slurp_binary-1"></a>
@@ -120,12 +115,8 @@ Get version and package of binary<a name="slurp_binary-1"></a>
 ###slurp_binary/1##
 
 
-
-
 <pre>slurp_binary(Filename::<a href="#type-filename">filename()</a>) -> {ok, module(), binary()} | {error, <a href="#type-slurp_error">slurp_error()</a>}</pre>
 <br></br>
-
-
 
 
 Read binary file into memory.

@@ -1,14 +1,13 @@
 
 
 #Module noterm#
+
 * [Description](#description)
 * [Function Index](#index)
 * [Function Details](#functions)
 
 
 Terminal emulator for `nosh`.
-
-
 
 Copyright (c) 2012 Beads D. Land-Trujillo
 
@@ -18,6 +17,7 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
+
 * <font color="red"> io:get_char (see code in jungerl)</font>
 * <font color="red"> escript and parameters (make it run like any other shell command)</font>
 * <font color="red"> make fully redistributable (Win/cygwin/*NIX)</font>
@@ -29,7 +29,9 @@ __<font color="red">To do</font>__
 
 
  
-Translates standard I/O to Erlang messaging. _Full terminal emulation has yet to be implemented._<a name="index"></a>
+Translates standard I/O to Erlang messaging.
+
+_Full terminal emulation has yet to be implemented._<a name="index"></a>
 
 ##Function Index##
 
@@ -47,11 +49,7 @@ process.</td></tr><tr><td valign="top"><a href="#start_wecho-0">start_wecho/0</a
 ###start/0##
 
 
-
-
 `start() -> any()`
-
-
 
 Start terminal, launching message loop and keyboard listening
 process.<a name="start_wecho-0"></a>
@@ -59,11 +57,7 @@ process.<a name="start_wecho-0"></a>
 ###start_wecho/0##
 
 
-
-
 `start_wecho() -> any()`
-
-
 
 Start terminal, with nosh echo flag set.
 This is a stopgap measure pending proper terminal emulation.

@@ -1,10 +1,9 @@
 
 
 #Module test#
+
 * [Function Index](#index)
 * [Function Details](#functions)
-
-
 
 
 <a name="index"></a>
@@ -22,8 +21,6 @@
 <a name="start-0"></a>
 
 ###start/0##
-
-
 
 
 `start() -> any()`

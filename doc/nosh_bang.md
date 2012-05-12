@@ -1,14 +1,13 @@
 
 
 #Module nosh_bang#
+
 * [Description](#description)
 * [Function Index](#index)
 * [Function Details](#functions)
 
 
 Run underlying OS subshell command as a `nosh` command.
-
-
 
 Copyright (c) 2012 Beads D. Land-Trujillo
 
@@ -31,8 +30,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 ###loop/3##
 
 
-
-
 `loop(IO, Port, Timeout) -> any()`
 
 <a name="run-2"></a>
@@ -40,10 +37,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 ###run/2##
 
 
-
-
 `run(IO, Command) -> any()`
-
-
 
 Run an OS command in `nosh` context.
