@@ -40,3 +40,8 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 `run(IO, Command) -> any()`
 
 Run an OS command in `nosh` context.
+
+__<font color="red">To do</font>__
+<br></br>
+
+* <font color="red">spec this</font>

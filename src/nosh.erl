@@ -70,7 +70,7 @@
 -export([run/1]).
 
 % private exports
--export([loop/3,command_run/2,hotswap_run/2]).
+-export([loop/3,command_run/2]).
 
 %%
 %% API functions
@@ -130,9 +130,6 @@ do_line(IO, Line) ->
     [$! | BangCmd]  ->
       BangPid = spawn_link(nosh_bang, run, [?IO(self()), BangCmd]),
       ?MODULE:loop(IO, bang, BangPid);
-    "hot\n"	->
-      HotPid = spawn_link(nosh, hotswap_run, [?IO(self()), "hot\n"]),
-      ?MODULE:loop(IO, hot, HotPid);
     _Line ->
       case re:run(Line, "\ ", [{capture, none}]) of
         match   -> do_parse(IO, Line);
@@ -204,33 +201,3 @@ command_return(IO, Command, Status) ->
 command_run(IO, Line) ->
   Parse = nosh_parse:parse(IO, Line),
   exit(Parse).
-
-%%%%
-% Development hotswapping.  This should be refactored as a command.
-%%%%
-hotswap_run(IO, _Line) ->
-  ?INIT_POSE,
-  ?STDOUT("Hotswapping nosh modules\n"),
-  hotswap(IO, noterm),
-  hotswap(IO, nosh),
-  hotswap_nosh(IO, code:all_loaded()),
-  exit(ok).
-
-hotswap_nosh(_IO, []) -> ok;
-hotswap_nosh(IO, [{Module, _Path} | Tail]) ->
-  {ok, MP} = re:compile("^nosh_"),
-  case re:run(atom_to_list(Module), MP, [{capture, none}]) of
-    match	-> ?DEBUG("see ~p~n", [Module]),
-               hotswap(IO, Module);
-    nomatch	-> true
-  end,
-  hotswap_nosh(IO, Tail).
-
-% @todo refactor this given new pose_code implementation
-hotswap(IO, Module) ->
-  try
-    pose_code:load(Module)
-  catch
-    {Error, Detail}	->
-        ?STDERR("~p: ~p~nDetail: ~p~n", [Module, Error, Detail])
-  end.

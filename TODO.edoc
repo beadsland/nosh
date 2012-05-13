@@ -1,5 +1,6 @@
-@todo superl not exiting
 @todo migrate hot to pose??
+@todo pose_code:load_command
+@todo pose_code:load_project
 @todo update pose docs
 @todo make good pose
 @todo superl short module name
