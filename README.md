@@ -12,9 +12,11 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 __<font color="red">To do</font>__
 <br></br>
 
-* <font color="red">make needs find packaged superl (no dueling recompiles)
+* <font color="red">pose_code:load
 </font>
 * <font color="red">good alias needs to recompile superl
+</font>
+* <font color="red">make needs find packaged superl (no dueling recompiles)
 </font>
 * <font color="red">update pose docs
 </font>
@@ -212,6 +214,7 @@ _Not yet implemented:_`nosh` will provide an NFS-style interface
 <tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/nosh_eval.md" class="module">nosh_eval</a></td></tr>
 <tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/nosh_exec.md" class="module">nosh_exec</a></td></tr>
 <tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/nosh_parse.md" class="module">nosh_parse</a></td></tr>
+<tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/nosh_test.md" class="module">nosh_test</a></td></tr>
 <tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/noterm.md" class="module">noterm</a></td></tr>
 <tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/test.md" class="module">test</a></td></tr></table>
 

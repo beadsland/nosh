@@ -70,7 +70,11 @@ test(IO) ->
 %%
 
 test(IO, Command, Filename) ->
-  case pose_code:run(IO, Command, [Filename]) of
-    {module, Module} -> Module:start();
-    {error, What}    -> ?STDERR({test, What})
+  case pose_code:load(Command, [Filename]) of
+    {module, Module, diff_path} -> ?STDERR({Module, "namespace collision"}),
+                                   Module:start();
+    {module, Module, flat_pkg}  -> ?STDERR({Module, "flat package unsafe"}),
+                                   Module:start();
+    {module, Module}            -> Module:start();
+    {error, What}               -> ?STDERR({test, What})
   end.
