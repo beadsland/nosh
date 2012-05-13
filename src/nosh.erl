@@ -82,9 +82,9 @@ run(IO) ->
   ?INIT_POSE,
   ?STDOUT("Starting Nosh ~s nosql shell ~p~n", [?VERSION(?MODULE), self()]),
   ?DEBUG("Using rev. ~s command line parser~n", [?VERSION(nosh_parse)]),
-  ?DEBUG("Using rev. ~s module loader~n", [?VERSION(nosh_load)]),
+  ?DEBUG("Using rev. ~s module loader~n", [?VERSION(pose_code)]),
 
-  nosh_load:test(IO),
+  pose_code:test(IO),
 
   ?PROMPT,
   ?MODULE:loop(IO, ?MODULE, self()).
@@ -144,7 +144,7 @@ do_line(IO, Line) ->
 do_run(IO, Line) ->
   ?DEBUG("Hack run attempt: ~s", [Line]),
   Command = string:strip(Line, right, $\n),
-  case nosh_load:run(IO, Command) of
+  case pose_code:run(IO, Command) of
     {module, Module}    -> CmdPid = spawn_link(Module, run, [?IO(self())]),
                            ?MODULE:loop(IO, Command, CmdPid);
     Else                -> ?DEBUG("hack: ~p~n", [Else]),
@@ -225,10 +225,10 @@ hotswap_nosh(IO, [{Module, _Path} | Tail]) ->
   end,
   hotswap_nosh(IO, Tail).
 
-% @todo refactor this given new nosh_load implementation
+% @todo refactor this given new pose_code implementation
 hotswap(IO, Module) ->
   try
-    nosh_load:run(IO, Module)
+    pose_code:run(IO, Module)
   catch
     {Error, Detail}	->
         ?STDERR("~p: ~p~nDetail: ~p~n", [Module, Error, Detail])
