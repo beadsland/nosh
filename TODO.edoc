@@ -1,6 +1,7 @@
-@todo superl find interface as package
 @todo good alias needs to recompile superl
-@todo superl package pattern
+@todo superl short module name
+@todo todo shortlist
+@todo packaged import checker
 @todo single-entry versions?
 @todo standard pose_cmd behaviour
 @todo revise nosh docs re nosh_exec behaviour
