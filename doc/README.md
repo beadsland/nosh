@@ -12,23 +12,17 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 __<font color="red">To do</font>__
 <br></br>
 
-* <font color="red">get_otp_package function (tail recurse)
-</font>
-* <font color="red">graceful test failures
-</font>
-* <font color="red">eliminate "project" param to ensure_compiled/do_compile
-</font>
-* <font color="red">recompile as deps rooted package
+* <font color="red">superl recompile as deps rooted?
 </font>
 * <font color="red">superl needs play well
+</font>
+* <font color="red">good alias needs to recompile superl
 </font>
 * <font color="red">update pose docs
 </font>
 * <font color="red">make good pose
 </font>
 * <font color="red">migrate hot to pose??
-</font>
-* <font color="red">good alias needs to recompile superl
 </font>
 * <font color="red">superl short module name
 </font>

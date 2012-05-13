@@ -53,7 +53,7 @@ HIDE_TEST_WARN	=	grep -v "edoc: warning: file.*test.erl' belongs"
 CROWBAR		=	rebar _cmds_ | $(HIDE_EDOC_WARN) | $(SUCCINCT) \
 				| $(HIDE_TEST_WARN)
 
-SUPERL	=	-pa deps/superl/ebin -pa deps -s superl 
+SUPERL	=	-pa deps/superl/ebin -s superl 
 ERLSTOP	=	-s init stop
 NOTERM	=	erl -noshell $(SUPERL) -pa ebin -s noterm
 
@@ -85,6 +85,7 @@ good:	compile
 doc:	compile
 	
 compile:
+	@rm deps/superl/ebin/superl.*
 	@$(CROWBAR:_cmds_=compile doc)
 
 current:	push-libs
