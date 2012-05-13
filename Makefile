@@ -61,7 +61,7 @@ NOTERM	=	erl -noshell $(SUPERL) -pa ebin -s noterm
 # Execution rules start
 #
 
-all:		push-nosh current nosh
+all:		current push-nosh nosh
 
 run:		compile nosh
 
