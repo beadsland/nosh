@@ -12,7 +12,7 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 __<font color="red">To do</font>__
 <br></br>
 
-* <font color="red">make needs find packaged superl (no dueling recompiles)
+* <font color="red">superl not exiting
 </font>
 * <font color="red">migrate hot to pose??
 </font>
@@ -37,6 +37,10 @@ __<font color="red">To do</font>__
 * <font color="red">hot as second subproject load
 </font>
 * <font color="red">nosh_erl doc
+</font>
+* <font color="red">refactor bang
+</font>
+* <font color="red">bang stderr via temp file
 </font>
 * <font color="red">github standard .gitignore (nosh_nosql)
 </font>

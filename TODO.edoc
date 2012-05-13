@@ -1,3 +1,4 @@
+@todo superl not exiting
 @todo migrate hot to pose??
 @todo update pose docs
 @todo make good pose
@@ -10,6 +11,8 @@
 @todo recruitment interviews
 @todo hot as second subproject load
 @todo nosh_erl doc
+@todo refactor bang
+@todo bang stderr via temp file
 @todo github standard .gitignore (nosh_nosql)
 @todo integrate nosql project
 @todo pose loop behaviour

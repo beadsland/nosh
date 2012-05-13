@@ -51,12 +51,14 @@
 %%
 
 %% @doc Run an OS command in `nosh' context.
+%% @todo spec this
 run(IO, Command) -> run(IO, Command, 1000 * 60 * 5).
 
 %%
 %% Local Functions
 %%
 
+%% @todo write stderr to file and tail same
 run(IO, Command, Timeout) ->
   ?INIT_POSE,
   Opts = [stderr_to_stdout, exit_status, {line, 500}],
