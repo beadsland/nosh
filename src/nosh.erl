@@ -144,7 +144,7 @@ do_line(IO, Line) ->
 do_run(IO, Line) ->
   ?DEBUG("Hack run attempt: ~s", [Line]),
   Command = string:strip(Line, right, $\n),
-  case pose_code:load(IO, Command) of
+  case pose_code:load(Command) of
     {module, Module}    -> CmdPid = spawn_link(Module, run, [?IO(self())]),
                            ?MODULE:loop(IO, Command, CmdPid);
     {error, Else}       -> ?STDERR("hack: ~s~n", [?FORMAT_ERLERR(Else)]),
