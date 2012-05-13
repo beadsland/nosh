@@ -228,7 +228,7 @@ hotswap_nosh(IO, [{Module, _Path} | Tail]) ->
 % @todo refactor this given new pose_code implementation
 hotswap(IO, Module) ->
   try
-    pose_code:load(IO, Module)
+    pose_code:load(Module)
   catch
     {Error, Detail}	->
         ?STDERR("~p: ~p~nDetail: ~p~n", [Module, Error, Detail])
