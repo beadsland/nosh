@@ -143,10 +143,10 @@ do_run(IO, Line) ->
   Command = string:strip(Line, right, $\n),
   case pose_code:load(Command) of
     {module, Module, diff_path} ->
-        ?STDERR("~s: namespace collision~n", Command),
+        ?STDERR("~s: namespace collision~n", [Command]),
         do_run(IO, Command, Module);
     {module, Module, flat_pkg}  ->
-        ?STDERR("~s: flat package unsafe~n", Command),
+        ?STDERR("~s: flat package unsafe~n", [Command]),
         do_run(IO, Command, Module);
     {module, Module}            ->
         do_run(IO, Command, Module);
