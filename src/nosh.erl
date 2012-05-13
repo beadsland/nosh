@@ -147,7 +147,7 @@ do_run(IO, Line) ->
   case pose_code:load(IO, Command) of
     {module, Module}    -> CmdPid = spawn_link(Module, run, [?IO(self())]),
                            ?MODULE:loop(IO, Command, CmdPid);
-    Else                -> ?STDERR("hack: ~s~n", [?ERLERR_FORMAT(Else)]),
+    Else                -> ?STDERR("hack: ~s~n", [?FORMAT_ERLERR(Else)]),
                            do_parse(IO, Line)
   end.
 
