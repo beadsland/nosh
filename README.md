@@ -12,7 +12,19 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 __<font color="red">To do</font>__
 <br></br>
 
-* <font color="red">migrate compile to pose??
+* <font color="red">get_otp_package function (tail recurse)
+</font>
+* <font color="red">graceful test failures
+</font>
+* <font color="red">eliminate "project" param to ensure_compiled/do_compile
+</font>
+* <font color="red">recompile as deps rooted package
+</font>
+* <font color="red">superl needs play well
+</font>
+* <font color="red">update pose docs
+</font>
+* <font color="red">make good pose
 </font>
 * <font color="red">migrate hot to pose??
 </font>
@@ -206,7 +218,6 @@ _Not yet implemented:_`nosh` will provide an NFS-style interface
 <tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/nosh_eval.md" class="module">nosh_eval</a></td></tr>
 <tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/nosh_exec.md" class="module">nosh_exec</a></td></tr>
 <tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/nosh_parse.md" class="module">nosh_parse</a></td></tr>
-<tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/nosh_util.md" class="module">nosh_util</a></td></tr>
 <tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/noterm.md" class="module">noterm</a></td></tr>
 <tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/test.md" class="module">test</a></td></tr></table>
 

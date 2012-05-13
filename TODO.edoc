@@ -1,4 +1,9 @@
-@todo migrate compile to pose??
+@todo graceful test failures
+@todo eliminate "project" param to ensure_compiled/do_compile
+@todo recompile as deps rooted package
+@todo superl needs play well
+@todo update pose docs
+@todo make good pose
 @todo migrate hot to pose??
 @todo good alias needs to recompile superl
 @todo superl short module name
