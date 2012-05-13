@@ -1,3 +1,4 @@
+@todo make needs find packaged superl (no dueling recompiles)
 @todo good alias needs to recompile superl
 @todo update pose docs
 @todo make good pose
@@ -9,7 +10,8 @@
 @todo single-entry versions?
 @todo standard pose_cmd behaviour
 @todo revise nosh docs re nosh_exec behaviour
-@todo recruitment interviews@todo hot as second subproject load
+@todo recruitment interviews
+@todo hot as second subproject load
 @todo nosh_erl doc
 @todo github standard .gitignore (nosh_nosql)
 @todo integrate nosql project

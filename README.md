@@ -12,9 +12,7 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 __<font color="red">To do</font>__
 <br></br>
 
-* <font color="red">superl recompile as deps rooted?
-</font>
-* <font color="red">superl needs play well
+* <font color="red">make needs find packaged superl (no dueling recompiles)
 </font>
 * <font color="red">good alias needs to recompile superl
 </font>
@@ -38,7 +36,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">revise nosh docs re nosh_exec behaviour
 </font>
-* <font color="red">recruitment interviews@todo hot as second subproject load
+* <font color="red">recruitment interviews
+</font>
+* <font color="red">hot as second subproject load
 </font>
 * <font color="red">nosh_erl doc
 </font>
