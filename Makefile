@@ -107,7 +107,7 @@ online:
 # Development rules start
 #
 
-push:		push-nosh push-libs push-superl
+push:		push-libs push-superl push-nosh
 
 push-nosh:	online
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
