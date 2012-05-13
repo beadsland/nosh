@@ -142,11 +142,23 @@ do_run(IO, Line) ->
   ?DEBUG("Hack run attempt: ~s", [Line]),
   Command = string:strip(Line, right, $\n),
   case pose_code:load(Command) of
-    {module, Module}    -> CmdPid = spawn_link(Module, run, [?IO(self())]),
-                           ?MODULE:loop(IO, Command, CmdPid);
-    {error, Else}       -> ?STDERR("hack: ~s~n", [?FORMAT_ERLERR(Else)]),
-                           do_parse(IO, Line)
+    {module, Module, diff_path} ->
+        ?STDERR("~p: namespace collision~n", Command),
+        do_run(IO, Command, Module);
+    {module, Module, flat_pkg}  ->
+        ?STDERR("~p: flat package unsafe~n", Command),
+        do_run(IO, Command, Module);
+    {module, Module}            ->
+        do_run(IO, Command, Module);
+    {error, Else}               ->
+        ?STDERR("hack: ~s~n", [?FORMAT_ERLERR(Else)]),
+        do_parse(IO, Line)
   end.
+
+% Run command and loop on it's output.
+do_run(IO, Command, Module) ->
+  CmdPid = spawn_link(Module, run, [?IO(self())]),
+  ?MODULE:loop(IO, Command, CmdPid).
 
 % Parse command line.
 do_parse(IO, Line) ->

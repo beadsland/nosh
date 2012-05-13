@@ -69,7 +69,7 @@ message from `noterm`.  This is currently produced by typing a period
 ##Function Index##
 
 
-<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#command_run-2">command_run/2</a></td><td></td></tr><tr><td valign="top"><a href="#hotswap_run-2">hotswap_run/2</a></td><td></td></tr><tr><td valign="top"><a href="#run-1">run/1</a></td><td>Start nosh, receiving standard I/O from noterm.</td></tr></table>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#command_run-2">command_run/2</a></td><td></td></tr><tr><td valign="top"><a href="#run-1">run/1</a></td><td>Start nosh, receiving standard I/O from noterm.</td></tr></table>
 
 
 <a name="functions"></a>
@@ -82,13 +82,6 @@ message from `noterm`.  This is currently produced by typing a period
 
 
 `command_run(IO, Line) -> any()`
-
-<a name="hotswap_run-2"></a>
-
-###hotswap_run/2##
-
-
-`hotswap_run(IO, Line) -> any()`
 
 <a name="run-1"></a>
 

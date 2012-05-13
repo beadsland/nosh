@@ -12,9 +12,11 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 __<font color="red">To do</font>__
 <br></br>
 
-* <font color="red">superl not exiting
-</font>
 * <font color="red">migrate hot to pose??
+</font>
+* <font color="red">pose_code:load_command
+</font>
+* <font color="red">pose_code:load_project
 </font>
 * <font color="red">update pose docs
 </font>
