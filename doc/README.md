@@ -12,8 +12,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 __<font color="red">To do</font>__
 <br></br>
 
-* <font color="red">good alias needs to recompile superl
-</font>
 * <font color="red">make needs find packaged superl (no dueling recompiles)
 </font>
 * <font color="red">migrate hot to pose??
@@ -23,8 +21,6 @@ __<font color="red">To do</font>__
 * <font color="red">make good pose
 </font>
 * <font color="red">superl short module name
-</font>
-* <font color="red">nosh Makefile push pattern
 </font>
 * <font color="red">todo shortlist
 </font>

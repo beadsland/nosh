@@ -1,10 +1,7 @@
-@todo good alias needs to recompile superl
-@todo make needs find packaged superl (no dueling recompiles)
 @todo migrate hot to pose??
 @todo update pose docs
 @todo make good pose
 @todo superl short module name
-@todo nosh Makefile push pattern
 @todo todo shortlist
 @todo packaged import checker
 @todo single-entry versions?
