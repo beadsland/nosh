@@ -209,6 +209,7 @@ command_run(IO, Line) ->
 % Development hotswapping.  This should be refactored as a command.
 %%%%
 hotswap_run(IO, _Line) ->
+  ?INIT_POSE,
   ?STDOUT("Hotswapping nosh modules\n"),
   hotswap(IO, noterm),
   hotswap(IO, nosh),

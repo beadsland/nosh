@@ -12,13 +12,15 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 __<font color="red">To do</font>__
 <br></br>
 
+* <font color="red">fix hot
+</font>
 * <font color="red">good alias needs to recompile superl
 </font>
 * <font color="red">make needs find packaged superl (no dueling recompiles)
 </font>
-* <font color="red">update pose docs
-</font>
 * <font color="red">migrate hot to pose??
+</font>
+* <font color="red">update pose docs
 </font>
 * <font color="red">make good pose
 </font>
