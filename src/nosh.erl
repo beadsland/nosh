@@ -84,7 +84,7 @@ run(IO) ->
   ?DEBUG("Using rev. ~s command line parser~n", [?VERSION(nosh_parse)]),
   ?DEBUG("Using rev. ~s module loader~n", [?VERSION(pose_code)]),
 
-  pose_code:test(IO),
+  nosh_test:test(IO),
 
   ?PROMPT,
   ?MODULE:loop(IO, ?MODULE, self()).
