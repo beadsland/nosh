@@ -139,7 +139,7 @@ do_run(IO, Line) ->
   ?DEBUG("Hack run attempt: ~s", [Line]),
   Command = string:strip(Line, right, $\n),
   case pose:spawn(?IO(self()), Command) of
-    {error, Reason} -> ?DEBUG(?FORMAT_ERLERR({hack, Reason})),
+    {error, Reason} -> ?DEBUG("~s~n", ?FORMAT_ERLERR({hack, Reason})),
                        do_parse(IO, Line);
     CmdPid          -> ?MODULE:loop(IO, Command, CmdPid)
   end.
