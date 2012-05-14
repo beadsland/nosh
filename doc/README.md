@@ -12,15 +12,19 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 __<font color="red">To do</font>__
 <br></br>
 
-* <font color="red">refactor start to pose.erl
+* <font color="red">debug try/catch [format:run/3]
 </font>
-* <font color="red">pose:exec_run/3
+* <font color="red">pose:exec/3
+</font>
+* <font color="red">pose ?EXEC
+</font>
+* <font color="red">superl good alias
 </font>
 * <font color="red">pose_spawn_run/3
 </font>
-* <font color="red">pose ?EXEC_RUN
+* <font color="red">pose ?SPAWN
 </font>
-* <font color="red">pose ?SPAWN_RUN
+* <font color="red">nosh hack run
 </font>
 * <font color="red">pose doc
 </font>

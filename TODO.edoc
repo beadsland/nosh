@@ -1,10 +1,7 @@
-make @todo refactor start to pose.erl
-@todo pose:exec_run/3
-@todo pose ?EXEC_RUN
-@todo superl good alias
 @todo pose_spawn_run/3
-@todo pose ?SPAWN_RUN
+@todo pose ?SPAWN
 @todo nosh hack run
+@todo pose doc
 @todo pose good
 @todo flat warn every time
 @todo pose ensure_submodules
