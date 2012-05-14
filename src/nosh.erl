@@ -83,9 +83,6 @@ run(IO) ->
   ?STDOUT("Starting Nosh ~s nosql shell ~p~n", [?VERSION(?MODULE), self()]),
   ?DEBUG("Using rev. ~s command line parser~n", [?VERSION(nosh_parse)]),
   ?DEBUG("Using rev. ~s module loader~n", [?VERSION(pose_code)]),
-
-  nosh_test:test(IO),
-
   ?PROMPT,
   ?MODULE:loop(IO, ?MODULE, self()).
 
