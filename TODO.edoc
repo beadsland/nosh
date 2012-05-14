@@ -1,8 +1,15 @@
-@todo migrate hot to pose??
+make @todo refactor start to pose.erl
+@todo pose:exec_run/3
+@todo pose ?EXEC_RUN
+@todo superl good alias
+@todo pose_spawn_run/3
+@todo pose ?SPAWN_RUN
+@todo nosh hack run
+@todo pose good
+@todo flat warn every time
+@todo pose ensure_submodules
 @todo pose_code:load_command
 @todo pose_code:load_project
-@todo update pose docs
-@todo make good pose
 @todo superl short module name
 @todo todo shortlist
 @todo packaged import checker

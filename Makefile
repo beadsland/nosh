@@ -53,7 +53,7 @@ HIDE_TEST_WARN	=	grep -v "edoc: warning: file.*test.erl' belongs"
 CROWBAR		=	rebar _cmds_ | $(HIDE_EDOC_WARN) | $(SUCCINCT) \
 				| $(HIDE_TEST_WARN)
 
-SUPERL	=	-pa deps/pose/ebin -s pose_code start superl 
+SUPERL	=	-pa deps/pose/ebin -s pose start superl
 ERLSTOP	=	-s init stop
 NOTERM	=	erl -noshell $(SUPERL) -pa ebin -s noterm
 

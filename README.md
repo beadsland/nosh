@@ -12,15 +12,27 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 __<font color="red">To do</font>__
 <br></br>
 
-* <font color="red">migrate hot to pose??
+* <font color="red">refactor start to pose.erl
+</font>
+* <font color="red">pose:exec_run/3
+</font>
+* <font color="red">pose_spawn_run/3
+</font>
+* <font color="red">pose ?EXEC_RUN
+</font>
+* <font color="red">pose ?SPAWN_RUN
+</font>
+* <font color="red">pose doc
+</font>
+* <font color="red">pose good
+</font>
+* <font color="red">flat warn every time
+</font>
+* <font color="red">pose ensure_submodules
 </font>
 * <font color="red">pose_code:load_command
 </font>
 * <font color="red">pose_code:load_project
-</font>
-* <font color="red">update pose docs
-</font>
-* <font color="red">make good pose
 </font>
 * <font color="red">superl short module name
 </font>
