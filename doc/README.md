@@ -119,11 +119,8 @@ __<font color="red">To do</font>__
 * <font color="red">integrate with wicked shell</font>
 
 
-###<a name="Introduction">Introduction</a>##
-
-
-`nosh` is a Bourne shell emulator, Erl shell alternative, and noSQL
-  file system,  implemented in Erlang.  Providing an intuitive
+`nosh` is a Bourne shell emulator, Erl shell alternative, and
+  noSQL file system,  implemented in Erlang.  Providing an intuitive
   commandline interface for compiling and loading Erlang modules, and for
   executing Erlang module functions, `nosh` affords both the ease of a
 UNIX shell and the power of an Erlang interpreter.
