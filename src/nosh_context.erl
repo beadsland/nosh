@@ -57,7 +57,6 @@
 %% API Functions
 %%
 
-%% @doc Wind up context block.
 -type context_type() :: nosh_parse:context_type().
 -type context_desc() :: nosh_parse:context_desc().
 -type context_stack() :: [context_desc()].
@@ -67,7 +66,7 @@
 -type context_result() :: {context_list(), context_stack()}.
 -spec close_context(QType :: context_type(), Stack :: context_stack(),
                     List :: symbol_list()) -> context_result().
-%
+%% @doc Wind up context block.
 close_context(QType, Stack, List) ->
   ?DEBUG("close_context(~p, ~p, ~p)~n", [QType, Stack, List]),
   {Tail, _ReturnStack} = nosh_parse:parse({context, QType}, Stack, List),
@@ -83,12 +82,11 @@ close_context(QType, Stack, List) ->
   end,
   {[Context | lists:delete(Close, L2)], Stack}.
 
-%% @doc Unwind context and group stream.
 -type close_result() :: {close_context, context_stack(), symbol_list()}.
 -type parse_result() :: context_result() | close_result().
 -spec parse_context(QType :: context_type(), Stack :: context_stack(),
                     List :: symbol_list()) -> parse_result().
-%
+%% @doc Unwind context and group stream.
 parse_context(escp, Stack, List) -> parse_context_escp(Stack, List);
 parse_context(dbcp, Stack, List) -> parse_context_dbcp(Stack, List);
 parse_context(QT, Stack, [Symbol | Tail]) ->

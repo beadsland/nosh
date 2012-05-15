@@ -278,12 +278,6 @@
 %% API functions
 %%
 
-%% @doc Parse command line string and return a list of nested contexts,
-%% or else `failed' on a caught syntax exception.
-%%
-%% Handle thrown errors for unmatched quoting, grouping, and term context
-%% symbols.
-%% @end
 -type term_type() :: word | list | plst | tupl | epid | bstr.
 -type quote_type() :: line | back | doub | sing | escp | dbcp.
 -type group_type() :: pren | semi | ifok | ambi | ifnz | pipe.
@@ -297,7 +291,12 @@
 -type parse_error() :: {parse_error_type(), string()}.
 -spec parse(IO :: #std{}, Subject :: nonempty_string()) ->
       {ok, context_list()} | {error, parse_error()}.
+%% @doc Parse command line string and return a list of nested contexts,
+%% or else `failed' on a caught syntax exception.
 %%
+%% Handle thrown errors for unmatched quoting, grouping, and term context
+%% symbols.
+%% @end
 parse(IO, Subject) ->
   ?INIT_POSE,
   Pattern = io_lib:format("([~s~s~s])",

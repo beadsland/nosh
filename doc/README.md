@@ -12,31 +12,19 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 __<font color="red">To do</font>__
 <br></br>
 
-* <font color="red">debug try/catch [format:run/3]
+* <font color="red">doc nosh_erl
 </font>
-* <font color="red">pose:exec/3
-</font>
-* <font color="red">pose ?EXEC
-</font>
-* <font color="red">superl good alias
-</font>
-* <font color="red">pose_spawn_run/3
-</font>
-* <font color="red">pose ?SPAWN
-</font>
-* <font color="red">nosh hack run
-</font>
-* <font color="red">pose doc
-</font>
-* <font color="red">pose good
-</font>
-* <font color="red">flat warn every time
+* <font color="red">doc nosh_bin
 </font>
 * <font color="red">pose ensure_submodules
 </font>
 * <font color="red">pose_code:load_command
 </font>
 * <font color="red">pose_code:load_project
+</font>
+* <font color="red">rewrite hot using above
+</font>
+* <font color="red">update nosh doc re commands
 </font>
 * <font color="red">superl short module name
 </font>
@@ -49,8 +37,6 @@ __<font color="red">To do</font>__
 * <font color="red">standard pose_cmd behaviour
 </font>
 * <font color="red">revise nosh docs re nosh_exec behaviour
-</font>
-* <font color="red">recruitment interviews
 </font>
 * <font color="red">hot as second subproject load
 </font>
@@ -230,7 +216,5 @@ _Not yet implemented:_`nosh` will provide an NFS-style interface
 <tr><td><a href="nosh_eval.md" class="module">nosh_eval</a></td></tr>
 <tr><td><a href="nosh_exec.md" class="module">nosh_exec</a></td></tr>
 <tr><td><a href="nosh_parse.md" class="module">nosh_parse</a></td></tr>
-<tr><td><a href="nosh_test.md" class="module">nosh_test</a></td></tr>
-<tr><td><a href="noterm.md" class="module">noterm</a></td></tr>
-<tr><td><a href="test.md" class="module">test</a></td></tr></table>
+<tr><td><a href="noterm.md" class="module">noterm</a></td></tr></table>
 

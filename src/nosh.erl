@@ -77,7 +77,6 @@
 %%
 
 %% @doc Start nosh, receiving standard I/O from noterm.
-
 run(IO) ->
   ?INIT_POSE,
   ?STDOUT("Starting Nosh ~s nosql shell ~p~n", [?VERSION(?MODULE), self()]),

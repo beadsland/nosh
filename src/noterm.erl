@@ -69,8 +69,9 @@
 start() -> start(false).
 
 %% @doc Start terminal, with nosh echo flag set.
+%%
 %% This is a stopgap measure pending proper terminal emulation.
-
+%% @end
 start_wecho() -> io:format("Shell echo flag enabled.\n"), start(true).
 
 %%

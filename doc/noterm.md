@@ -59,5 +59,8 @@ process.<a name="start_wecho-0"></a>
 
 `start_wecho() -> any()`
 
+
+
 Start terminal, with nosh echo flag set.
+
 This is a stopgap measure pending proper terminal emulation.
