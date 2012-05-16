@@ -3,18 +3,14 @@
 @todo superl short module name
 @todo todo shortlist
 @todo packaged import checker
-@todo nosh_erl doc
 @todo refactor bang
 @todo bang stderr via temp file
 @todo github standard .gitignore (nosh_nosql)
 @todo integrate nosql project
-@todo pose loop behaviour
 @todo refactor noterm to own project
 @todo make noterm pose-compliant
 @todo pose integration with error_logger
-@todo does term pass params to shell?
-@todo refactor bang to nosh_erl project
-@todo bang stderr pipe
+@todo make nosh pose-compliant
 @todo domain consolidation
 @todo nosh_parse tokens
 @todo nosh_eval

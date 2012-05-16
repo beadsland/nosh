@@ -22,16 +22,6 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">packaged import checker
 </font>
-* <font color="red">single-entry versions?
-</font>
-* <font color="red">standard pose_cmd behaviour
-</font>
-* <font color="red">revise nosh docs re nosh_exec behaviour
-</font>
-* <font color="red">hot as second subproject load
-</font>
-* <font color="red">nosh_erl doc
-</font>
 * <font color="red">refactor bang
 </font>
 * <font color="red">bang stderr via temp file
@@ -40,19 +30,13 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">integrate nosql project
 </font>
-* <font color="red">pose loop behaviour
-</font>
 * <font color="red">refactor noterm to own project
 </font>
 * <font color="red">make noterm pose-compliant
 </font>
 * <font color="red">pose integration with error_logger
 </font>
-* <font color="red">does term pass params to shell?
-</font>
-* <font color="red">refactor bang to nosh_erl project
-</font>
-* <font color="red">bang stderr pipe
+* <font color="red">make nosh pose-compliant
 </font>
 * <font color="red">domain consolidation
 </font>
