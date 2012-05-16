@@ -27,11 +27,21 @@
 %%
 %% Commands:
 %% <dl>
-%% <dt>`hot'</dt><dd>hotswap nosh modules</dd>
+%% <dt>`hot'</dt><dd>hotswap nosh project modules</dd>
 %% <dt>`good'</dt><dd>check for superly good nosh code</dd>
 %% <dt>`!<i>command</i></dt><dd>pass <i>command</i> to native shell</dd>
 %% <dt>`.'</dt><dd>end-of-file (exit nosh application)</dd>
 %% </dl>
+%%
+%% Additionally, `nosh' will include commands from the following
+%% subprojects:
+%% <ul>
+%% <li> <a href="http://github.com/beadsland/nosh_bin">Bourne shell
+%%      builtins command set</a> (nosh_bin) </li>
+%% <li> <a href="http://github.com/beadsland/nosh_erl">Erl shell
+%%      alternative command set</a> (nosh_erl) </li>
+%% <li> NoSQL file system command set (nosh_nosql) </li>
+%% </ul>
 %%
 %% <b>Draft Notes</b>
 %%

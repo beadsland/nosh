@@ -27,7 +27,7 @@ Commands:
 
 
 
-<dd>hotswap nosh modules</dd>
+<dd>hotswap nosh project modules</dd>
 
 
 
@@ -48,6 +48,20 @@ Commands:
 
 <dd>end-of-file (exit nosh application)</dd>
 
+
+
+
+Additionally, `nosh` will include commands from the following
+subprojects:
+
+
+* [Bourne shell
+builtins command set](http://github.com/beadsland/nosh_bin) (nosh_bin)
+
+* [Erl shell
+alternative command set](http://github.com/beadsland/nosh_erl) (nosh_erl)
+
+* NoSQL file system command set (nosh_nosql)
 
 
 

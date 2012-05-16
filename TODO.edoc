@@ -1,17 +1,8 @@
-@todo doc nosh_erl
-@todo doc nosh_bin
-@todo pose ensure_submodules
-@todo pose_code:load_command
-@todo pose_code:load_project
-@todo rewrite hot using above
-@todo update nosh doc re commands
+@todo nosh using load_command
+@todo hot using load_command
 @todo superl short module name
 @todo todo shortlist
 @todo packaged import checker
-@todo single-entry versions?
-@todo standard pose_cmd behaviour
-@todo revise nosh docs re nosh_exec behaviour
-@todo hot as second subproject load
 @todo nosh_erl doc
 @todo refactor bang
 @todo bang stderr via temp file

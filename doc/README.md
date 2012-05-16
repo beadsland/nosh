@@ -12,19 +12,9 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 __<font color="red">To do</font>__
 <br></br>
 
-* <font color="red">doc nosh_erl
+* <font color="red">nosh using load_command
 </font>
-* <font color="red">doc nosh_bin
-</font>
-* <font color="red">pose ensure_submodules
-</font>
-* <font color="red">pose_code:load_command
-</font>
-* <font color="red">pose_code:load_project
-</font>
-* <font color="red">rewrite hot using above
-</font>
-* <font color="red">update nosh doc re commands
+* <font color="red">hot using load_command
 </font>
 * <font color="red">superl short module name
 </font>
