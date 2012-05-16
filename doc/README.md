@@ -16,10 +16,6 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">hot using load_command
 </font>
-* <font color="red">superl short module name
-</font>
-* <font color="red">todo shortlist
-</font>
 * <font color="red">packaged import checker
 </font>
 * <font color="red">refactor bang
@@ -30,67 +26,8 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">integrate nosql project
 </font>
-* <font color="red">refactor noterm to own project
+* <font color="red">...plus 30 more (see TODO.edoc)
 </font>
-* <font color="red">make noterm pose-compliant
-</font>
-* <font color="red">pose integration with error_logger
-</font>
-* <font color="red">make nosh pose-compliant
-</font>
-* <font color="red">domain consolidation
-</font>
-* <font color="red">nosh_parse tokens
-</font>
-* <font color="red">nosh_eval
-</font>
-* <font color="red">nosh_exec
-</font>
-* <font color="red">echo command
-</font>
-* <font color="red">nosh_erl project
-</font>
-* <font color="red">refactor hot command
-</font>
-* <font color="red">nosh_erl module
-</font>
-* <font color="red">$PATH search
-</font>
-* <font color="red">doc update:  first character, lower case:  atom; upper case:  variable
-</font>
-* <font color="red">nosh_parse: tokenizing
-</font>
-* <font color="red">implement nosh_exec
-</font>
-* <font color="red">implement nosh_eval to convert nosh_parse output to nosh_exec input
-</font>
-* <font color="red">finish up nosh_parse
-</font>
-* <font color="red">nosh as application
-</font>
-* <font color="red">standardize nosh_exec behaviour
-</font>
-* <font color="red">nosh as nosh_command
-</font>
-* <font color="red">Buffered I/O (pending get_char working in noterm)
-</font>
-* <font color="red">File System:  pwd / cd
-</font>
-* <font color="red">File System:  *NIX / cygwin / Win32
-</font>
-* <font color="red">File System:  NoSQL
-</font>
-* <font color="red">Env
-</font>
-* <font color="red">Sh commands
-</font>
-* <font color="red">Erl commands
-</font>
-* <font color="red">Couch commands
-</font>
-* <font color="red">Add support for line continuation (currently throws error)
-</font>
-* <font color="red">integrate with wicked shell</font>
 
 
 `nosh` is a Bourne shell emulator, Erl shell alternative, and

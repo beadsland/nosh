@@ -1,7 +1,7 @@
-% Headers don't work in overview.edoc file, so we include everything from 
+% Headers don't work in overview.edoc file, so we include everything from
 % a header file.
 %
-% This has the added advantage that Eclipse knows how to syntax-check 
+% This has the added advantage that Eclipse knows how to syntax-check
 % .hrl files...
 
 @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
@@ -9,4 +9,4 @@
 @version 0.1.0
 @title Welcome to nosh
 @headerfile "../src/overview.hrl"
-@docfile "TODO.edoc"
+@docfile "doc/TODO_head.edoc"

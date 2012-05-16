@@ -1,0 +1,8 @@
+@todo nosh using load_command
+@todo hot using load_command
+@todo packaged import checker
+@todo refactor bang
+@todo bang stderr via temp file
+@todo github standard .gitignore (nosh_nosql)
+@todo integrate nosql project
+@todo ...plus 30 more (see TODO.edoc)
