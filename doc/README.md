@@ -12,9 +12,9 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 __<font color="red">To do</font>__
 <br></br>
 
-* <font color="red">nosh using load_command
+* <font color="red">start/1 using load_command
 </font>
-* <font color="red">hot using load_command
+* <font color="red">concise load_warn
 </font>
 * <font color="red">packaged import checker
 </font>

@@ -1,5 +1,5 @@
-@todo nosh using load_command
-@todo hot using load_command
+@todo start/1 using load_command
+@todo concise load_warn
 @todo packaged import checker
 @todo refactor bang
 @todo bang stderr via temp file
