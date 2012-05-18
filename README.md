@@ -12,10 +12,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 __<font color="red">To do</font>__
 <br></br>
 
-* <font color="red">start/1 using load_command
-</font>
-* <font color="red">concise load_warn
-</font>
 * <font color="red">packaged import checker
 </font>
 * <font color="red">refactor bang
@@ -26,7 +22,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">integrate nosql project
 </font>
-* <font color="red">...plus 30 more (see TODO.edoc)
+* <font color="red">refactor noterm to own project
+</font>
+* <font color="red">make noterm pose-compliant
+</font>
+* <font color="red">...plus 28 more (see TODO.edoc)
 </font>
 
 

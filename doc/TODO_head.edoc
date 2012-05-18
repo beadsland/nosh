@@ -1,8 +1,8 @@
-@todo start/1 using load_command
-@todo concise load_warn
 @todo packaged import checker
 @todo refactor bang
 @todo bang stderr via temp file
 @todo github standard .gitignore (nosh_nosql)
 @todo integrate nosql project
-@todo ...plus 30 more (see TODO.edoc)
+@todo refactor noterm to own project
+@todo make noterm pose-compliant
+@todo ...plus 28 more (see TODO.edoc)

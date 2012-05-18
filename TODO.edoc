@@ -1,11 +1,10 @@
-@todo start/1 using load_command
-@todo concise load_warn
-@todo packaged import checker
+@todo good pose
 @todo refactor bang
 @todo bang stderr via temp file
 @todo github standard .gitignore (nosh_nosql)
 @todo integrate nosql project
 @todo refactor noterm to own project
+@todo refactor safe sensibly
 @todo make noterm pose-compliant
 @todo pose integration with error_logger
 @todo make nosh pose-compliant

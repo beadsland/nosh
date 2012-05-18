@@ -53,9 +53,10 @@ HIDE_TEST_WARN	=	grep -v "edoc: warning: file.*test.erl' belongs"
 CROWBAR		=	rebar _cmds_ | $(HIDE_EDOC_WARN) | $(SUCCINCT) \
 				| $(HIDE_TEST_WARN)
 
-SUPERL	=	-pa deps/pose/ebin -s pose start superl
+POSURE	=	-s pose start posure
+SUPERL	=	-pa deps/pose/ebin -s pose start superl $(POSURE)
 ERLSTOP	=	-s init stop
-NOTERM	=	erl -noshell $(SUPERL) -pa ebin -s noterm
+NOTERM	=	erl -noshell -i deps $(SUPERL) -pa ebin -s noterm
 
 TODO_MORE	=	`wc -l TODO.edoc | awk '{print $$1 - 7}'`
 
