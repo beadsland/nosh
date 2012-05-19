@@ -1,8 +1,8 @@
-@todo refactor bang
-@todo bang stderr via temp file
-@todo github standard .gitignore (nosh_nosql)
-@todo integrate nosql project
-@todo refactor noterm to own project
-@todo make noterm pose-compliant
-@todo refactor safe sensibly
-@todo ...plus 28 more (see TODO.edoc)
+@todo nosh should atomize words
+@todo put env as part of init pose
+@todo pose_command behaviour (use bang as model)
+@todo behaviour to posure
+@todo behaviour to superl
+@todo behaviour to nosh_erl
+@todo behaviour to nosh_bin
+@todo ...plus 36 more (see TODO.edoc)

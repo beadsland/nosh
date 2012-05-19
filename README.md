@@ -12,21 +12,21 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 __<font color="red">To do</font>__
 <br></br>
 
-* <font color="red">refactor bang
+* <font color="red">nosh should atomize words
 </font>
-* <font color="red">bang stderr via temp file
+* <font color="red">put env as part of init pose
 </font>
-* <font color="red">github standard .gitignore (nosh_nosql)
+* <font color="red">pose_command behaviour (use bang as model)
 </font>
-* <font color="red">integrate nosql project
+* <font color="red">behaviour to posure
 </font>
-* <font color="red">refactor noterm to own project
+* <font color="red">behaviour to superl
 </font>
-* <font color="red">make noterm pose-compliant
+* <font color="red">behaviour to nosh_erl
 </font>
-* <font color="red">refactor safe sensibly
+* <font color="red">behaviour to nosh_bin
 </font>
-* <font color="red">...plus 28 more (see TODO.edoc)
+* <font color="red">...plus 36 more (see TODO.edoc)
 </font>
 
 

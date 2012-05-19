@@ -1,4 +1,12 @@
-@todo refactor bang
+@todo nosh should atomize words
+@todo put env as part of init pose
+@todo pose_command behaviour (use bang as model)
+@todo behaviour to posure
+@todo behaviour to superl
+@todo behaviour to nosh_erl
+@todo behaviour to nosh_bin
+@todo do bang if hack fails
+@todo bang not error on not found
 @todo bang stderr via temp file
 @todo github standard .gitignore (nosh_nosql)
 @todo integrate nosql project
