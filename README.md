@@ -12,8 +12,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 __<font color="red">To do</font>__
 <br></br>
 
-* <font color="red">packaged import checker
-</font>
 * <font color="red">refactor bang
 </font>
 * <font color="red">bang stderr via temp file
@@ -25,6 +23,8 @@ __<font color="red">To do</font>__
 * <font color="red">refactor noterm to own project
 </font>
 * <font color="red">make noterm pose-compliant
+</font>
+* <font color="red">refactor safe sensibly
 </font>
 * <font color="red">...plus 28 more (see TODO.edoc)
 </font>

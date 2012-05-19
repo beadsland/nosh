@@ -1,8 +1,8 @@
-@todo packaged import checker
 @todo refactor bang
 @todo bang stderr via temp file
 @todo github standard .gitignore (nosh_nosql)
 @todo integrate nosql project
 @todo refactor noterm to own project
 @todo make noterm pose-compliant
+@todo refactor safe sensibly
 @todo ...plus 28 more (see TODO.edoc)

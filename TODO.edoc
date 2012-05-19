@@ -1,11 +1,10 @@
-@todo good pose
 @todo refactor bang
 @todo bang stderr via temp file
 @todo github standard .gitignore (nosh_nosql)
 @todo integrate nosql project
 @todo refactor noterm to own project
-@todo refactor safe sensibly
 @todo make noterm pose-compliant
+@todo refactor safe sensibly
 @todo pose integration with error_logger
 @todo make nosh pose-compliant
 @todo domain consolidation
