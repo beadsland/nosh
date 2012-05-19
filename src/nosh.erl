@@ -134,8 +134,7 @@ do_line(IO, Line) ->
   case Line of
     "stop\n" -> exit(ok);
     [$! | BangCmd]  ->
-      BangPid = spawn_link(nosh_bang, run, [?IO(self()), BangCmd]),
-      ?MODULE:loop(IO, bang, BangPid);
+      do_run(IO, "bang " ++ BangCmd);
     _Line ->
       case re:run(Line, "\ ", [{capture, none}]) of
         match   -> do_parse(IO, Line);
@@ -146,8 +145,8 @@ do_line(IO, Line) ->
 % Pass unargumented command to load. (Temporary hack.)
 do_run(IO, Line) ->
   ?DEBUG("Hack run attempt: ~s", [Line]),
-  Command = string:strip(Line, right, $\n),
-  case pose:spawn(?IO(self()), Command) of
+  [Command | Words] = string:tokens(Line, " \n"),
+  case pose:spawn(?IO(self()), Command, Words) of
     {error, Reason} -> ?DEBUG("~s~n", ?FORMAT_ERLERR({hack, Reason})),
                        do_parse(IO, Line);
     CmdPid          -> ?MODULE:loop(IO, Command, CmdPid)
