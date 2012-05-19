@@ -1,7 +1,7 @@
-@todo nosh should atomize words
-@todo put env as part of init pose
-@todo pose_command behaviour (use bang as model)
+@todo pose_command behaviour
 @todo behaviour to posure
+@todo refactor INIT_POSE to behaviour
+@todo refactor stdio to behaviour
 @todo behaviour to superl
 @todo behaviour to nosh_erl
 @todo behaviour to nosh_bin

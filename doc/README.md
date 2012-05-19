@@ -12,13 +12,13 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 __<font color="red">To do</font>__
 <br></br>
 
-* <font color="red">nosh should atomize words
-</font>
-* <font color="red">put env as part of init pose
-</font>
-* <font color="red">pose_command behaviour (use bang as model)
+* <font color="red">pose_command behaviour
 </font>
 * <font color="red">behaviour to posure
+</font>
+* <font color="red">refactor INIT_POSE to behaviour
+</font>
+* <font color="red">refactor stdio to behaviour
 </font>
 * <font color="red">behaviour to superl
 </font>
