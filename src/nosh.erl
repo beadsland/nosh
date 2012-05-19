@@ -145,7 +145,7 @@ do_line(IO, Line) ->
 % Pass unargumented command to load. (Temporary hack.)
 do_run(IO, Line) ->
   ?DEBUG("Hack run attempt: ~s", [Line]),
-  [Command | Words] = string:tokens(Line, " \n"),
+  [Command | Words] = [list_to_atom(X) || X <- string:tokens(Line, " \n")],
   case pose:spawn(?IO(self()), Command, Words) of
     {error, Reason} -> ?DEBUG("~s~n", ?FORMAT_ERLERR({hack, Reason})),
                        do_parse(IO, Line);
