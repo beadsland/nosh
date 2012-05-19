@@ -96,6 +96,8 @@ current:	push-libs todo
 		$(CROWBAR:_cmds_=compile doc); fi
 
 clean: 		online
+	@rm doc/*.md
+	@rm doc/*.html
 	@if [ "$(ONLINE)" == yes ]; \
 		then (rm -rf deps; rebar clean get-deps | $(SUCCINCT)); \
 		else (rebar clean | $(SUCCINCT)); fi
