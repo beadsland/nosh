@@ -88,6 +88,7 @@
 
 %% @doc Start nosh, receiving standard I/O from noterm.
 run(IO) ->
+  ENV = ?ENV,
   ?INIT_POSE,
   ?STDOUT("Starting Nosh ~s nosql shell ~p~n", [?VERSION(?MODULE), self()]),
   ?DEBUG("Using rev. ~s command line parser~n", [?VERSION(nosh_parse)]),
