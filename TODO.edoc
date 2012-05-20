@@ -1,10 +1,12 @@
-@todo pose_command behaviour
-@todo behaviour to posure
-@todo refactor INIT_POSE to behaviour
-@todo refactor stdio to behaviour
+@todo posure:run/3 test under nosh
+@todo doesn't exit under erl shell???
 @todo behaviour to superl
+@todo confirm posure working
 @todo behaviour to nosh_erl
 @todo behaviour to nosh_bin
+@todo nosh hack using gen_command:run/3
+@todo refactor INIT_POSE to behaviour
+@todo refactor stdio to behaviour
 @todo do bang if hack fails
 @todo bang not error on not found
 @todo bang stderr via temp file
