@@ -12,12 +12,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 __<font color="red">To do</font>__
 <br></br>
 
-* <font color="red">behaviour to superl
-</font>
-* <font color="red">behaviour to good
-</font>
-* <font color="red">behaviour to nosh_erl
-</font>
 * <font color="red">behaviour to nosh_bin
 </font>
 * <font color="red">behaviour to pose
@@ -26,7 +20,13 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">refactor stdio to behaviour
 </font>
-* <font color="red">...plus 36 more (see TODO.edoc)
+* <font color="red">do bang if hack fails
+</font>
+* <font color="red">bang not error on not found
+</font>
+* <font color="red">bang find cygwin
+</font>
+* <font color="red">...plus 33 more (see TODO.edoc)
 </font>
 
 

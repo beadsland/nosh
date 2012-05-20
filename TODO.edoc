@@ -1,13 +1,10 @@
-@todo behaviour to superl
-@todo behaviour to good
-@todo behaviour to nosh_erl
 @todo behaviour to nosh_bin
 @todo behaviour to pose
 @todo refactor INIT_POSE to behaviour
 @todo refactor stdio to behaviour
 @todo do bang if hack fails
 @todo bang not error on not found
-@todo bang stderr via temp file
+@todo bang find cygwin
 @todo github standard .gitignore (nosh_nosql)
 @todo integrate nosql project
 @todo refactor noterm to own project
