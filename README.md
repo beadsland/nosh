@@ -12,9 +12,11 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 __<font color="red">To do</font>__
 <br></br>
 
-* <font color="red">posure:run/3 test under nosh
+* <font color="red">posure terminates on stdout
 </font>
 * <font color="red">doesn't exit under erl shell???
+</font>
+* <font color="red">pose:start calling run/3
 </font>
 * <font color="red">behaviour to superl
 </font>
@@ -23,8 +25,6 @@ __<font color="red">To do</font>__
 * <font color="red">behaviour to nosh_erl
 </font>
 * <font color="red">behaviour to nosh_bin
-</font>
-* <font color="red">nosh hack using gen_command:run/3
 </font>
 * <font color="red">...plus 38 more (see TODO.edoc)
 </font>
