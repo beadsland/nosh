@@ -1,11 +1,6 @@
-@todo hot case_clause error
-@todo hack notfound badarg
-@todo posure doesn't exit under erl shell???
-@todo fix good
-@todo pose:start calling run/3
+@todo run file...
 @todo behaviour to superl
 @todo behaviour to good
-@todo confirm posure working
 @todo behaviour to nosh_erl
 @todo behaviour to nosh_bin
 @todo behaviour to pose
