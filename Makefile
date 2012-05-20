@@ -66,6 +66,7 @@ TODO_MORE	=	`wc -l TODO.edoc | awk '{print $$1 - 7}'`
 
 all:		current push-nosh nosh
 
+.PHONY:		run
 run:		compile nosh
 
 nosh:	nodump tabs
