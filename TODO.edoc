@@ -1,3 +1,5 @@
+@todo hot case_clause error
+@todo hack notfound badarg
 @todo posure doesn't exit under erl shell???
 @todo fix good
 @todo pose:start calling run/3
