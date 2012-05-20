@@ -148,7 +148,7 @@ do_run(IO, Line) ->
   ?DEBUG("Hack run attempt: ~s", [Line]),
   [Command | Words] = [list_to_atom(X) || X <- string:tokens(Line, " \n")],
   case pose:spawn(?IO(self()), Command, Words) of
-    {error, Reason} -> ?DEBUG("~s~n", ?FORMAT_ERLERR({hack, Reason})),
+    {error, Reason} -> ?DEBUG("~s~n", [?FORMAT_ERLERR({hack, Reason})]),
                        do_parse(IO, Line);
     CmdPid          -> ?MODULE:loop(IO, Command, CmdPid)
   end.
