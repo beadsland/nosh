@@ -143,15 +143,19 @@ do_line(IO, Line) ->
       end
   end.
 
-% Pass unargumented command to load. (Temporary hack.)
+% Pass command to load. (We're bypassing parse here.)
 do_run(IO, Line) ->
   ?DEBUG("Hack run attempt: ~s", [Line]),
   [Command | Words] = [list_to_atom(X) || X <- string:tokens(Line, " \n")],
-  case pose:spawn(?IO(self()), Command, Words) of
-    {error, Reason} -> ?DEBUG("~s~n", [?FORMAT_ERLERR({hack, Reason})]),
-                       do_parse(IO, Line);
-    CmdPid          -> ?MODULE:loop(IO, Command, CmdPid)
-  end.
+  CmdPid = spawn_link(pose, exec, [?IO(self()), ?ARG(Command, Words)]),
+  ?DEBUG("Running ~p as ~p~n", [Command, CmdPid]),
+  ?MODULE:loop(IO, Command, CmdPid).
+
+%  case pose:spawn(?IO(self()), Command, Words) of
+%    {error, Reason} -> ?DEBUG("~s~n", [?FORMAT_ERLERR({hack, Reason})]),
+%                       do_parse(IO, Line);
+%    CmdPid          -> ?MODULE:loop(IO, Command, CmdPid)
+%  end.
 
 % Parse command line.
 do_parse(IO, Line) ->
@@ -165,6 +169,7 @@ do_exit(IO, Command, CmdPid, ExitPid, Reason) ->
        ?DEBUG("Stopping shell on terminal exit: ~p~n", [Reason]),
        exit(ok);
      ExitPid == CmdPid	->
+       ?DEBUG("Saw ~s exit: ~p~n", [Command, ExitPid]),
        command_return(IO, Command, Reason),
        ?PROMPT,
        ?MODULE:loop(IO, ?MODULE, self());

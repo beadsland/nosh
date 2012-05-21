@@ -12,21 +12,21 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 __<font color="red">To do</font>__
 <br></br>
 
-* <font color="red">behaviour to nosh_bin
+* <font color="red">revise nosh:do_run to not use pose:spawn
 </font>
-* <font color="red">behaviour to pose
+* <font color="red">refactor command_return to use ERLERR
 </font>
-* <font color="red">refactor INIT_POSE to behaviour
+* <font color="red">hot using load_command/2
 </font>
-* <font color="red">refactor stdio to behaviour
+* <font color="red">refactor do_run from pose and hot
 </font>
-* <font color="red">do bang if hack fails
+* <font color="red">doc gen_command
 </font>
-* <font color="red">bang not error on not found
+* <font color="red">make local: send_load_warnings
 </font>
-* <font color="red">bang find cygwin
+* <font color="red">refactor nosh as gen_command
 </font>
-* <font color="red">...plus 33 more (see TODO.edoc)
+* <font color="red">...plus 40 more (see TODO.edoc)
 </font>
 
 
