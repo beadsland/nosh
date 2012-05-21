@@ -57,9 +57,9 @@
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
 %% @copyright 2012 Beads D. Land-Trujillo
 
-%% @version 0.1.13
+%% @version 0.1.14
 -module(nosh).
--version("0.1.13").
+-version("0.1.14").
 
 %%
 %% Include files
@@ -73,23 +73,45 @@
 % This will eventually draw from ENV...
 -define(PROMPT, ?STDOUT("nosh> ")).
 
+-import(gen_command).
+
 %%
 %% Exported functions
 %%
 
--export([run/1]).
+-behaviour(gen_command).
+
+% API entry points
+-export([start/0, start/1, run/3]).
+
+% Hidden callbacks
+-export([do_run/2]).
 
 % private exports
 -export([loop/3,command_run/2]).
 
 %%
-%% API functions
+%% API Functions
 %%
 
-%% @doc Start nosh, receiving standard I/O from noterm.
-run(IO) ->
-  ENV = ?ENV,
-  ?INIT_POSE,
+-spec start() -> no_return().
+%% @equiv start([])
+start() -> start([]).
+
+-spec start(Param :: [atom()]) -> no_return().
+%% @doc Start as a blocking function.
+start(Param) -> gen_command:start(Param, ?MODULE).
+
+-spec run(IO :: #std{}, ARG :: #arg{}, ENV :: #env{}) -> no_return().
+%% doc Start as a `pose' command.
+run(IO, ARG, ENV) -> gen_command:run(IO, ARG, ENV, ?MODULE).
+
+%%
+%% Callback Functions
+%%
+
+%% @hidden Callback entry point for gen_command behaviour.
+do_run(IO, _ARG) ->
   ?STDOUT("Starting Nosh ~s nosql shell ~p~n", [?VERSION(?MODULE), self()]),
   ?DEBUG("Using rev. ~s command line parser~n", [?VERSION(nosh_parse)]),
   ?DEBUG("Using rev. ~s module loader~n", [?VERSION(pose_code)]),
@@ -135,16 +157,16 @@ do_line(IO, Line) ->
   case Line of
     "stop\n" -> exit(ok);
     [$! | BangCmd]  ->
-      do_run(IO, "bang " ++ BangCmd);
+      do_loadrun(IO, "bang " ++ BangCmd);
     _Line ->
       case re:run(Line, "\ ", [{capture, none}]) of
         match   -> do_parse(IO, Line);
-        nomatch -> do_run(IO, Line)
+        nomatch -> do_loadrun(IO, Line)
       end
   end.
 
 % Pass command to load. (We're bypassing parse here.)
-do_run(IO, Line) ->
+do_loadrun(IO, Line) ->
   ?DEBUG("Hack run attempt: ~s", [Line]),
   [Command | Words] = [list_to_atom(X) || X <- string:tokens(Line, " \n")],
   CmdPid = spawn_link(pose, exec, [?IO(self()), ?ARG(Command, Words)]),

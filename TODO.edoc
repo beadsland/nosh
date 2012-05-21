@@ -1,7 +1,11 @@
-@todo refactor noterm as gen_command
-@todo simplify noterm in Makefile
-@todo refactor noterm keyboard
 @todo refactor nosh as gen_command
+@todo refactor noterm exit/stop
+@todo refactor exec/do_run to behaviour
+@todo refactor noterm as gen_command
+@todo refactor nosh as packaged
+@todo refactor noterm keyboard
+@todo simplify noterm in Makefile
+@todo update noterm doc
 @todo refactor exec INIT_POSE
 @todo refactor INIT_POSE to behaviour
 @todo refactor stdio to behaviour

@@ -12,21 +12,21 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 __<font color="red">To do</font>__
 <br></br>
 
+* <font color="red">refactor nosh as gen_command
+</font>
+* <font color="red">refactor nosh as packaged
+</font>
+* <font color="red">refactor noterm keyboard
+</font>
 * <font color="red">refactor noterm as gen_command
 </font>
 * <font color="red">simplify noterm in Makefile
 </font>
-* <font color="red">refactor noterm keyboard
-</font>
-* <font color="red">refactor nosh as gen_command
+* <font color="red">update noterm doc
 </font>
 * <font color="red">refactor exec INIT_POSE
 </font>
-* <font color="red">refactor INIT_POSE to behaviour
-</font>
-* <font color="red">refactor stdio to behaviour
-</font>
-* <font color="red">...plus 37 more (see TODO.edoc)
+* <font color="red">...plus 39 more (see TODO.edoc)
 </font>
 
 
