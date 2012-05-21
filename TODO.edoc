@@ -1,15 +1,14 @@
-@todo hot using load_command/2
-@todo refactor do_run from pose and hot
-@todo doc gen_command
-@todo make local: send_load_warnings
-@todo refactor nosh as gen_command
 @todo refactor noterm as gen_command
+@todo simplify noterm in Makefile
+@todo refactor noterm keyboard
+@todo refactor nosh as gen_command
 @todo refactor exec INIT_POSE
 @todo refactor INIT_POSE to behaviour
 @todo refactor stdio to behaviour
 @todo do bang if hack fails
 @todo bang not error on not found
 @todo bang find cygwin
+@todo good link: load_command/2 to specify path
 @todo github standard .gitignore (nosh_nosql)
 @todo integrate nosql project
 @todo refactor noterm to own project

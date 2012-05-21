@@ -83,7 +83,7 @@ _The below discussion of Erlang Context describes functionalityyet to be impleme
 The Erlang Context is invoked with a left-wise conjunction,
 period (`.`), which causes all words and subcontexts within the current
 context to be interpreted according to Erlang syntax.  Erlang Context
-sequences may be enclosed arbitrarily within grouping contexts.
+sequences may be enclosed arbitrarily within grouping contexts.  
 For example:
 
 
@@ -108,8 +108,8 @@ non-zero exit code (either an Erlang `ok` atom or `{ok, ...}` tuple).
 
 
 
-Grouping is parsed for entire line prior to evaluation and execution,
-unlike Bourne standard.  Thus transactional integrity is preserved:
+Grouping is parsed for entire line prior to evaluation and execution,  
+unlike Bourne standard.  Thus transactional integrity is preserved:  
 command execution only occurs if entire command sequence parses
 correctly.
 
@@ -142,7 +142,7 @@ executing only on a non-zero status (any other Erlang return value).
 
 
 
-These [Bourne Context](#Bourne_Context) conjunctions are parsed right-wise.
+These [Bourne Context](#Bourne_Context) conjunctions are parsed right-wise.  
 That is, everything that follows the conjunction is returned as a
 subcontext in the last element of the enclosing context.
 
@@ -159,7 +159,7 @@ command line context.
 
 
 
-As per Bourne shell, pipes are marked by a single vertical bar (`|`)
+As per Bourne shell, pipes are marked by a single vertical bar (`|`)  
 conjunction.  Erlang processes may participate in pipe relationships if
 they implement the Nosh_exec Behaviour.  Otherwise, processes
 grouped by the single vertical bar will run, but each in an isolated
@@ -398,7 +398,7 @@ _Not yet implemented_.
 
 
 
-<pre>context() = nonempty_string() | {<a href="#type-context_desc">context_desc()</a>, <a href="#type-context_list">context_list()</a>}</pre>
+	context() = nonempty_string() | {<a href="#type-context_desc">context_desc()</a>, <a href="#type-context_list">context_list()</a>}
 
 
 
@@ -406,7 +406,7 @@ _Not yet implemented_.
 
 
 
-<pre>context_desc() = {context, <a href="#type-context_type">context_type()</a>}</pre>
+	context_desc() = {context, <a href="#type-context_type">context_type()</a>}
 
 
 
@@ -414,7 +414,7 @@ _Not yet implemented_.
 
 
 
-<pre>context_list() = [<a href="#type-context">context()</a>]</pre>
+	context_list() = [<a href="#type-context">context()</a>]
 
 
 
@@ -422,7 +422,7 @@ _Not yet implemented_.
 
 
 
-<pre>context_type() = <a href="#type-term_type">term_type()</a> | <a href="#type-quote_type">quote_type()</a> | <a href="#type-group_type">group_type()</a> | <a href="#type-exec_type">exec_type()</a></pre>
+	context_type() = <a href="#type-term_type">term_type()</a> | <a href="#type-quote_type">quote_type()</a> | <a href="#type-group_type">group_type()</a> | <a href="#type-exec_type">exec_type()</a>
 
 
 
@@ -430,7 +430,7 @@ _Not yet implemented_.
 
 
 
-<pre>exec_type() = brne | erln</pre>
+	exec_type() = brne | erln
 
 
 
@@ -438,7 +438,7 @@ _Not yet implemented_.
 
 
 
-<pre>group_type() = pren | semi | ifok | ambi | ifnz | pipe</pre>
+	group_type() = pren | semi | ifok | ambi | ifnz | pipe
 
 
 
@@ -446,7 +446,7 @@ _Not yet implemented_.
 
 
 
-<pre>parse_error() = {<a href="#type-parse_error_type">parse_error_type()</a>, string()}</pre>
+	parse_error() = {<a href="#type-parse_error_type">parse_error_type()</a>, string()}
 
 
 
@@ -454,7 +454,7 @@ _Not yet implemented_.
 
 
 
-<pre>parse_error_type() = quote | group</pre>
+	parse_error_type() = quote | group
 
 
 
@@ -462,7 +462,7 @@ _Not yet implemented_.
 
 
 
-<pre>quote_type() = line | back | doub | sing | escp | dbcp</pre>
+	quote_type() = line | back | doub | sing | escp | dbcp
 
 
 
@@ -470,14 +470,14 @@ _Not yet implemented_.
 
 
 
-<pre>term_type() = word | list | plst | tupl | epid | bstr</pre>
+	term_type() = word | list | plst | tupl | epid | bstr
 <a name="index"></a>
 
 ##Function Index##
 
 
 <table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#parse-2">parse/2</a></td><td>Parse command line string and return a list of nested contexts,
-or else <code>failed</code> on a caught syntax exception.</td></tr><tr><td valign="top"><a href="#parse-3">parse/3</a></td><td>Parse list of strings split on quoting and grouping characters,
+or else <code>failed</code> on a caught syntax exception.</td></tr><tr><td valign="top"><a href="#parse-3">parse/3</a></td><td>Parse list of strings split on quoting and grouping characters,  
 according to current Stack type.</td></tr></table>
 
 
@@ -490,7 +490,7 @@ according to current Stack type.</td></tr></table>
 ###parse/2##
 
 
-<pre>parse(IO::#std{}, Subject::nonempty_string()) -> {ok, <a href="#type-context_list">context_list()</a>} | {error, <a href="#type-parse_error">parse_error()</a>}</pre>
+	parse(IO::#std{}, Subject::nonempty_string()) -> {ok, <a href="#type-context_list">context_list()</a>} | {error, <a href="#type-parse_error">parse_error()</a>}
 <br></br>
 
 
@@ -509,7 +509,7 @@ symbols.<a name="parse-3"></a>
 
 
 
-Parse list of strings split on quoting and grouping characters,
+Parse list of strings split on quoting and grouping characters,  
 according to current Stack type.  Return tuple of context tree, context
 stack and unparsed tail OR tuple of 'close_context', context stack, and
 trailing context tree.

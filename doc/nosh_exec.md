@@ -39,7 +39,7 @@ _Now thinking these multiple `start` functions will be supecededby simpler `run`
 
 
 
-Module execution may be invoked in one of three modes:  implicit start,
+Module execution may be invoked in one of three modes:  implicit start,  
 explicit function or getoptions functions.
 
 
@@ -48,7 +48,7 @@ In _implicit start_ mode, the module name appears in first
 position (as a command) with or without parameters.  If without
 parameters, `nosh` will attempt to spawn a process running the module's
 `start/4` function, or else `start/3`, as specified by the Nosh_exec
-Behaviour, and failing that, will attempt to spawn on `start/0`,
+Behaviour, and failing that, will attempt to spawn on `start/0`,  
 reporting an error on failure.
 
 

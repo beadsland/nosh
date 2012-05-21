@@ -1,8 +1,8 @@
-@todo revise nosh:do_run to not use pose:spawn
-@todo refactor command_return to use ERLERR
-@todo hot using load_command/2
-@todo refactor do_run from pose and hot
-@todo doc gen_command
-@todo make local: send_load_warnings
+@todo refactor noterm as gen_command
+@todo simplify noterm in Makefile
+@todo refactor noterm keyboard
 @todo refactor nosh as gen_command
-@todo ...plus 40 more (see TODO.edoc)
+@todo refactor exec INIT_POSE
+@todo refactor INIT_POSE to behaviour
+@todo refactor stdio to behaviour
+@todo ...plus 37 more (see TODO.edoc)

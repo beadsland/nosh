@@ -56,7 +56,8 @@ CROWBAR		=	rebar _cmds_ | $(HIDE_EDOC_WARN) | $(SUCCINCT) \
 POSURE	=	-s pose start posure
 SUPERL	=	-pa deps/pose/ebin -s pose start superl $(POSURE)
 ERLSTOP	=	-s init stop
-NOTERM	=	erl -noshell -i deps $(SUPERL) -pa ebin -s noterm
+NOTERM	=	erl -noshell -i deps $(SUPERL) -pa ebin \
+					-pa deps/noterm/ebin -s noterm
 
 TODO_MORE	=	`wc -l TODO.edoc | awk '{print $$1 - 7}'`
 
@@ -123,7 +124,11 @@ push-nosh:	online
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
 			then (git push origin master); fi
 
-push-libs:	push-pose push-bin push-erl push-superl
+push-libs:	push-noterm push-pose push-bin push-erl push-superl
+
+push-noterm:	online
+	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
+			then (cd ../noterm; git push origin master); fi
 
 push-pose:	online
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \

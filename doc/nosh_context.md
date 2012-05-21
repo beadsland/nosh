@@ -42,7 +42,7 @@ _May be refactored back into nosh_parse at a later date._
 
 
 
-<pre>close_result() = {close_context, <a href="#type-context_stack">context_stack()</a>, <a href="#type-symbol_list">symbol_list()</a>}</pre>
+	close_result() = {close_context, <a href="#type-context_stack">context_stack()</a>, <a href="#type-symbol_list">symbol_list()</a>}
 
 
 
@@ -50,7 +50,7 @@ _May be refactored back into nosh_parse at a later date._
 
 
 
-<pre>context_desc() = <a href="nosh_parse.md#type-context_desc">nosh_parse:context_desc()</a></pre>
+	context_desc() = <a href="nosh_parse.md#type-context_desc">nosh_parse:context_desc()</a>
 
 
 
@@ -58,7 +58,7 @@ _May be refactored back into nosh_parse at a later date._
 
 
 
-<pre>context_list() = <a href="nosh_parse.md#type-context_list">nosh_parse:context_list()</a></pre>
+	context_list() = <a href="nosh_parse.md#type-context_list">nosh_parse:context_list()</a>
 
 
 
@@ -66,7 +66,7 @@ _May be refactored back into nosh_parse at a later date._
 
 
 
-<pre>context_result() = {<a href="#type-context_list">context_list()</a>, <a href="#type-context_stack">context_stack()</a>}</pre>
+	context_result() = {<a href="#type-context_list">context_list()</a>, <a href="#type-context_stack">context_stack()</a>}
 
 
 
@@ -74,7 +74,7 @@ _May be refactored back into nosh_parse at a later date._
 
 
 
-<pre>context_stack() = [<a href="#type-context_desc">context_desc()</a>]</pre>
+	context_stack() = [<a href="#type-context_desc">context_desc()</a>]
 
 
 
@@ -82,7 +82,7 @@ _May be refactored back into nosh_parse at a later date._
 
 
 
-<pre>context_type() = <a href="nosh_parse.md#type-context_type">nosh_parse:context_type()</a></pre>
+	context_type() = <a href="nosh_parse.md#type-context_type">nosh_parse:context_type()</a>
 
 
 
@@ -90,7 +90,7 @@ _May be refactored back into nosh_parse at a later date._
 
 
 
-<pre>parse_result() = <a href="#type-context_result">context_result()</a> | <a href="#type-close_result">close_result()</a></pre>
+	parse_result() = <a href="#type-context_result">context_result()</a> | <a href="#type-close_result">close_result()</a>
 
 
 
@@ -98,7 +98,7 @@ _May be refactored back into nosh_parse at a later date._
 
 
 
-<pre>symbol() = nonempty_string()</pre>
+	symbol() = nonempty_string()
 
 
 
@@ -106,7 +106,7 @@ _May be refactored back into nosh_parse at a later date._
 
 
 
-<pre>symbol_list() = [<a href="#type-symbol">symbol()</a>]</pre>
+	symbol_list() = [<a href="#type-symbol">symbol()</a>]
 <a name="index"></a>
 
 ##Function Index##
@@ -124,7 +124,7 @@ _May be refactored back into nosh_parse at a later date._
 ###close_context/3##
 
 
-<pre>close_context(QType::<a href="#type-context_type">context_type()</a>, Stack::<a href="#type-context_stack">context_stack()</a>, List::<a href="#type-symbol_list">symbol_list()</a>) -> <a href="#type-context_result">context_result()</a></pre>
+	close_context(QType::<a href="#type-context_type">context_type()</a>, Stack::<a href="#type-context_stack">context_stack()</a>, List::<a href="#type-symbol_list">symbol_list()</a>) -> <a href="#type-context_result">context_result()</a>
 <br></br>
 
 
@@ -133,7 +133,7 @@ Wind up context block.<a name="parse_context-3"></a>
 ###parse_context/3##
 
 
-<pre>parse_context(QType::<a href="#type-context_type">context_type()</a>, Stack::<a href="#type-context_stack">context_stack()</a>, List::<a href="#type-symbol_list">symbol_list()</a>) -> <a href="#type-parse_result">parse_result()</a></pre>
+	parse_context(QType::<a href="#type-context_type">context_type()</a>, Stack::<a href="#type-context_stack">context_stack()</a>, List::<a href="#type-symbol_list">symbol_list()</a>) -> <a href="#type-parse_result">parse_result()</a>
 <br></br>
 
 
