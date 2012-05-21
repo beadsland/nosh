@@ -1,4 +1,3 @@
-@todo refactor command_return to use ERLERR
 @todo hot using load_command/2
 @todo refactor do_run from pose and hot
 @todo doc gen_command
