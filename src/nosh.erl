@@ -58,7 +58,19 @@
 %% @copyright 2012 Beads D. Land-Trujillo
 
 %% @version 0.1.15
--module(nosh).
+
+-define(module, nosh).
+
+% BEGIN POSE PACKAGE PATTERN
+-ifndef(package).
+-module(?module).
+-package(default).
+-else.
+-module(?package.?module).
+-package(?package).
+-endif.
+% END POSE PACKAGE PATTERN
+
 -version("0.1.15").
 
 %%

@@ -1,7 +1,7 @@
-@todo eliminate selfpid from noterm loop
-@todo refactor nosh as gen_command
+@todo nosh as packaged
 @todo noterm Makefile dev nosh
 @todo refactor noterm exit/stop
+@todo refactor noterm to use keyin
 @todo refactor noterm as gen_command
 @todo refactor nosh as packaged
 @todo refactor noterm keyboard

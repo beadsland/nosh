@@ -252,7 +252,18 @@
 %% TODO: Line continuation
 
 %% @version 0.1.6
--module(nosh_parse).
+
+-define(module, nosh_parse).
+
+% BEGIN POSE PACKAGE PATTERN
+-ifndef(package).
+-module(?module).
+-package(default).
+-else.
+-module(?package.?module).
+-package(?package).
+-endif.
+% END POSE PACKAGE PATTERN
 -version("0.1.6").
 
 %%

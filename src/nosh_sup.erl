@@ -4,7 +4,17 @@
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
 %% @copyright 2012 Beads D. Land-Trujillo
 
--module(nosh_sup).
+-define(module, nosh_sup).
+
+% BEGIN POSE PACKAGE PATTERN
+-ifndef(package).
+-module(?module).
+-package(default).
+-else.
+-module(?package.?module).
+-package(?package).
+-endif.
+% END POSE PACKAGE PATTERN
 
 -behaviour(supervisor).
 

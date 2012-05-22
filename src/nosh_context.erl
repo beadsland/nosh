@@ -37,7 +37,19 @@
 %% TODO: `<<...>>' Bitstrings
 
 %% @version 0.1.5
--module(nosh_context).
+
+-define(module, nosh_context).
+
+% BEGIN POSE PACKAGE PATTERN
+-ifndef(package).
+-module(?module).
+-package(default).
+-else.
+-module(?package.?module).
+-package(?package).
+-endif.
+% END POSE PACKAGE PATTERN
+
 -version("0.1.5").
 
 %%
