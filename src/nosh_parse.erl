@@ -277,6 +277,10 @@
 -define(GROUP_CHARS, "\;\(\)\&\|").
 -define(SPACE_CHARS, "\ \t\n").
 
+-import(io_lib).
+-import(re).
+-import(lists).
+
 %%
 %% Exported functions
 %%

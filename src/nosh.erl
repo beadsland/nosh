@@ -82,6 +82,9 @@
 
 -include("macro.hrl").
 
+-import(string).
+-import(re).
+
 % This will eventually draw from ENV...
 -define(PROMPT, ?STDOUT("nosh> ")).
 
@@ -126,7 +129,7 @@ run(IO, ARG, ENV) -> gen_command:run(IO, ARG, ENV, ?MODULE).
 do_run(IO, _ARG) ->
   ?STDOUT("Starting Nosh ~s nosql shell ~p~n", [?VERSION(?MODULE), self()]),
   ?DEBUG("Using rev. ~s command line parser~n", [?VERSION(nosh_parse)]),
-  ?DEBUG("Using rev. ~s module loader~n", [?VERSION(pose_code)]),
+  ?DEBUG("Using rev. ~s module loader~n", [?VERSION(.pose_code)]),
   ?PROMPT,
   ?MODULE:loop(IO, ?MODULE, self()).
 

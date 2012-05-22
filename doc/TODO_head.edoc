@@ -1,8 +1,8 @@
-@todo nosh as packaged
-@todo noterm Makefile dev nosh
-@todo refactor noterm exit/stop
+@todo posure not recognizing nosh_context as command
+@todo nosh as packaged (make posure)
+@todo noterm Makefile -pa dev nosh
+@todo rewrite noterm keyboard
 @todo refactor noterm to use keyin
 @todo refactor noterm as gen_command
-@todo refactor nosh as packaged
-@todo refactor noterm keyboard
-@todo ...plus 42 more (see TODO.edoc)
+@todo refactor noterm exit/stop
+@todo ...plus 44 more (see TODO.edoc)

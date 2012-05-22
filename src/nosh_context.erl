@@ -59,6 +59,8 @@
 -define(debug, true).
 -include("pose/include/interface.hrl").
 
+-import(lists).
+
 %%
 %% Exported Functions
 %%

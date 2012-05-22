@@ -12,21 +12,21 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 __<font color="red">To do</font>__
 <br></br>
 
-* <font color="red">nosh as packaged
+* <font color="red">posure not recognizing nosh_context as command
 </font>
-* <font color="red">noterm Makefile dev nosh
+* <font color="red">nosh as packaged (make posure)
 </font>
-* <font color="red">refactor noterm exit/stop
+* <font color="red">noterm Makefile -pa dev nosh
+</font>
+* <font color="red">rewrite noterm keyboard
 </font>
 * <font color="red">refactor noterm to use keyin
 </font>
 * <font color="red">refactor noterm as gen_command
 </font>
-* <font color="red">refactor nosh as packaged
+* <font color="red">refactor noterm exit/stop
 </font>
-* <font color="red">refactor noterm keyboard
-</font>
-* <font color="red">...plus 42 more (see TODO.edoc)
+* <font color="red">...plus 44 more (see TODO.edoc)
 </font>
 
 

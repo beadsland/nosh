@@ -1,10 +1,10 @@
-@todo nosh as packaged
-@todo noterm Makefile dev nosh
-@todo refactor noterm exit/stop
+@todo nosh as packaged (make posure)
+@todo noterm Makefile -pa dev nosh
+@todo rewrite noterm keyboard
 @todo refactor noterm to use keyin
 @todo refactor noterm as gen_command
-@todo refactor nosh as packaged
-@todo refactor noterm keyboard
+@todo refactor noterm exit/stop
+@todo refactor noterm as packaged
 @todo simplify noterm in Makefile
 @todo update noterm doc
 @todo refactor exec INIT_POSE
@@ -12,6 +12,7 @@
 @todo refactor stdio to behaviour
 @todo do bang if hack fails
 @todo bang not error on not found
+@todo update nosh docs to reflect gen_command behaviour
 @todo bang find cygwin
 @todo good link: load_command/2 to specify path
 @todo github standard .gitignore (nosh_nosql)
