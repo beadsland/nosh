@@ -57,9 +57,9 @@
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
 %% @copyright 2012 Beads D. Land-Trujillo
 
-%% @version 0.1.14
+%% @version 0.1.15
 -module(nosh).
--version("0.1.14").
+-version("0.1.15").
 
 %%
 %% Include files
@@ -90,6 +90,8 @@
 % private exports
 -export([loop/3,command_run/2]).
 
+-export([run/1]).
+
 %%
 %% API Functions
 %%
@@ -117,6 +119,11 @@ do_run(IO, _ARG) ->
   ?DEBUG("Using rev. ~s module loader~n", [?VERSION(pose_code)]),
   ?PROMPT,
   ?MODULE:loop(IO, ?MODULE, self()).
+
+run(IO) ->
+  ENV = ?ENV,
+  ?INIT_POSE,
+  do_run(IO, ?ARG(nosh)).
 
 %%
 %% Local functions
