@@ -1,9 +1,8 @@
-@todo refactor exec/do_run to return pid
+@todo eliminate selfpid from noterm loop
 @todo refactor nosh as gen_command
 @todo noterm Makefile dev nosh
 @todo refactor noterm exit/stop
 @todo refactor noterm as gen_command
-@todo eliminate selfpid from noterm loop
 @todo refactor nosh as packaged
 @todo refactor noterm keyboard
 @todo simplify noterm in Makefile

@@ -12,8 +12,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 __<font color="red">To do</font>__
 <br></br>
 
-* <font color="red">refactor exec/do_run to return pid
-</font>
 * <font color="red">refactor nosh as gen_command
 </font>
 * <font color="red">noterm Makefile dev nosh
@@ -26,7 +24,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">refactor nosh as packaged
 </font>
-* <font color="red">...plus 43 more (see TODO.edoc)
+* <font color="red">refactor noterm keyboard
+</font>
+* <font color="red">...plus 42 more (see TODO.edoc)
 </font>
 
 
