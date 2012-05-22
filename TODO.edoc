@@ -1,4 +1,5 @@
-@todo nosh as packaged (make posure)
+@todo edown space before url link
+@todo edown fix spacing after code
 @todo noterm Makefile -pa dev nosh
 @todo rewrite noterm keyboard
 @todo refactor noterm to use keyin
@@ -7,6 +8,8 @@
 @todo refactor noterm as packaged
 @todo simplify noterm in Makefile
 @todo update noterm doc
+@todo have gen_command:start send eof to stdin
+@todo have nosh launch noterm to go interactive
 @todo refactor exec INIT_POSE
 @todo refactor INIT_POSE to behaviour
 @todo refactor stdio to behaviour
@@ -15,7 +18,6 @@
 @todo update nosh docs to reflect gen_command behaviour
 @todo bang find cygwin
 @todo good link: load_command/2 to specify path
-@todo github standard .gitignore (nosh_nosql)
 @todo integrate nosql project
 @todo refactor noterm to own project
 @todo make noterm pose-compliant

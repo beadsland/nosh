@@ -12,9 +12,9 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 __<font color="red">To do</font>__
 <br></br>
 
-* <font color="red">posure not recognizing nosh_context as command
+* <font color="red">edown space before url link
 </font>
-* <font color="red">nosh as packaged (make posure)
+* <font color="red">edown fix spacing after code
 </font>
 * <font color="red">noterm Makefile -pa dev nosh
 </font>
@@ -26,7 +26,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">refactor noterm exit/stop
 </font>
-* <font color="red">...plus 44 more (see TODO.edoc)
+* <font color="red">...plus 45 more (see TODO.edoc)
 </font>
 
 

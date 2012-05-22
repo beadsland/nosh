@@ -22,10 +22,10 @@
 %% -----------------------------------------------------------------------
 %% CDDL HEADER END
 
-%% @doc `nosh' is a Bourne shell emulator, Erl shell alternative, and 
-%% noSQL file system,  implemented in Erlang.  Providing an intuitive 
-%% commandline interface for compiling and loading Erlang modules, and for 
-%% executing Erlang module functions, `nosh' affords both the ease of a 
+%% @doc `nosh' is a Bourne shell emulator, Erl shell alternative, and
+%% noSQL file system,  implemented in Erlang.  Providing an intuitive
+%% commandline interface for compiling and loading Erlang modules, and for
+%% executing Erlang module functions, `nosh' affords both the ease of a
 %% UNIX shell and the power of an Erlang interpreter.
 %%
 %% <em><strong>NOTICE:</strong> Code is still in rudimentary form. Doesn't
@@ -44,8 +44,8 @@
 %% started with `nosh' is to change to the nosh project directory in a
 %% terminal session and type `make run'.
 %%
-%% Users of the Eclipse IDE may integrate `nosh' shell with their 
-%% workflow by installing the Wicked Shell plugin 
+%% Users of the Eclipse IDE may integrate `nosh' shell with their
+%% workflow by installing the Wicked Shell plugin
 %% [http://www.wickedshell.net/] from the Eclipse Marketplace.  Simply
 %% run `bash' or `sh' under Wicked Shell, and then execute `make run'
 %% from there.
