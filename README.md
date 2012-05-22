@@ -12,8 +12,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 __<font color="red">To do</font>__
 <br></br>
 
-* <font color="red">eliminate selfpid from noterm loop
-</font>
 * <font color="red">nosh as packaged
 </font>
 * <font color="red">noterm Makefile dev nosh
@@ -26,7 +24,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">refactor nosh as packaged
 </font>
-* <font color="red">...plus 43 more (see TODO.edoc)
+* <font color="red">refactor noterm keyboard
+</font>
+* <font color="red">...plus 42 more (see TODO.edoc)
 </font>
 
 
@@ -158,16 +158,4 @@ more details.
 
 
 <table width="100%" border="0" summary="list of packages"><tr><td><a href="http://github.com/beadsland/nosh/blob/master/alt/package-summary.md" class="package">alt</a></td></tr><tr><td><a href="http://github.com/beadsland/nosh/blob/master/alt2/package-summary.md" class="package">alt2</a></td></tr></table>
-
-
-
-##Modules##
-
-
-<table width="100%" border="0" summary="list of modules">
-<tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/nosh.md" class="module">nosh</a></td></tr>
-<tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/nosh_context.md" class="module">nosh_context</a></td></tr>
-<tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/nosh_eval.md" class="module">nosh_eval</a></td></tr>
-<tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/nosh_exec.md" class="module">nosh_exec</a></td></tr>
-<tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/nosh_parse.md" class="module">nosh_parse</a></td></tr></table>
 
