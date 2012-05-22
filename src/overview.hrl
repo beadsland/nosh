@@ -71,7 +71,7 @@
 %%
 %% `nosh' will provide a UNIX-style command line for Erlang, as a
 %% human-thinkable alternative to the Erl shell
-%% ([http://www.erlang.org/doc/man/erl.html]).
+%% [http://www.erlang.org/doc/man/erl.html].
 %%
 %% The Erlang syntax, while perfectly appropriate for functional
 %% programming, can prove frustrating in the imperative paradigm of a
@@ -93,7 +93,7 @@
 %% === Erlang Context ===
 %%
 %% <i>Not yet implemented:</i>  Erlang style syntax can be used on the
-%% `nosh' command line as per the Erl shell.  See {link nosh_parse} for
+%% `nosh' command line as per the Erl shell.  See {@link nosh_parse} for
 %% more details.
 %%
 %% == NoSQL File System ==

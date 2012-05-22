@@ -66,7 +66,8 @@ Presently, `nosh` runs as a Makefile target.  The simplest way to get
   
 
 Users of the Eclipse IDE may integrate `nosh` shell with their
-  workflow by installing the Wicked Shell plugin[`http://www.wickedshell.net/`](http://www.wickedshell.net/) from the Eclipse Marketplace.  Simply
+  workflow by installing the Wicked Shell plugin
+  [`http://www.wickedshell.net/`](http://www.wickedshell.net/) from the Eclipse Marketplace.  Simply
   run `bash` or `sh` under Wicked Shell, and then execute `make run`  
 from there.
  
@@ -107,7 +108,7 @@ project.
 
 `nosh` will provide a UNIX-style command line for Erlang, as a
   human-thinkable alternative to the Erl shell
-  ([`http://www.erlang.org/doc/man/erl.html`](http://www.erlang.org/doc/man/erl.html)).
+  [`http://www.erlang.org/doc/man/erl.html`](http://www.erlang.org/doc/man/erl.html).
  
   
 
@@ -142,7 +143,8 @@ _Not yet implemented:_  All functions available through the Erl
  
   
 
-_Not yet implemented:_  Erlang style syntax can be used on the`nosh` command line as per the Erl shell.  See {link nosh_parse} for
+_Not yet implemented:_  Erlang style syntax can be used on the
+  `nosh` command line as per the Erl shell.  See {link nosh_parse} for
 more details.
  
   
