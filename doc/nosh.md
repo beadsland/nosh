@@ -1,7 +1,6 @@
 
 
 #Module ?module#
-
 * [Description](#description)
 * [Function Index](#index)
 * [Function Details](#functions)
@@ -22,7 +21,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 
 Commands:
-
 
 
 
@@ -56,7 +54,6 @@ Commands:
 
 Additionally, `nosh` will include commands from the following
 subprojects:
-
 
 * [Bourne shell
 builtins command set](http://github.com/beadsland/nosh_bin) (nosh_bin)

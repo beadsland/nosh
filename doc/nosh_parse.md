@@ -1,7 +1,6 @@
 
 
 #Module ?module#
-
 * [Description](#description)
 * [Data Types](#types)
 * [Function Index](#index)
@@ -16,8 +15,7 @@ __Version:__ 0.1.6
 
 __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).
 
-__References__
-* See [Shell
+__References__* See [Shell
 Basics](http://sayle.net/book/basics.htm) for overview of functionality.  (to be implemented)
 * See [Shell Command Language](http://goo.gl/edyre)
 for detailed specification. (to be implemented)
@@ -25,7 +23,6 @@ for detailed specification. (to be implemented)
 
 __<font color="red">To do</font>__
 <br></br>
-
 * <font color="red"> Tokenizing</font>
 * <font color="red"> refactor documentation to eval/exec/etc.</font>
 * <font color="red"> Erlang Stack</font>
@@ -43,7 +40,6 @@ Execution, Grouping, Quoting, Substitution and Term contexts.
 
 
 _Not all parsing rules described below have been implemented._
-
 
 
 * [Execution Contexts](#Execution_Contexts)
@@ -83,7 +79,7 @@ _The below discussion of Erlang Context describes functionalityyet to be impleme
 The Erlang Context is invoked with a left-wise conjunction,
 period (`.`), which causes all words and subcontexts within the current
 context to be interpreted according to Erlang syntax.  Erlang Context
-sequences may be enclosed arbitrarily within grouping contexts.  
+sequences may be enclosed arbitrarily within grouping contexts.
 For example:
 
 
@@ -108,8 +104,8 @@ non-zero exit code (either an Erlang `ok` atom or `{ok, ...}` tuple).
 
 
 
-Grouping is parsed for entire line prior to evaluation and execution,  
-unlike Bourne standard.  Thus transactional integrity is preserved:  
+Grouping is parsed for entire line prior to evaluation and execution,
+unlike Bourne standard.  Thus transactional integrity is preserved:
 command execution only occurs if entire command sequence parses
 correctly.
 
@@ -142,7 +138,7 @@ executing only on a non-zero status (any other Erlang return value).
 
 
 
-These [Bourne Context](#Bourne_Context) conjunctions are parsed right-wise.  
+These [Bourne Context](#Bourne_Context) conjunctions are parsed right-wise.
 That is, everything that follows the conjunction is returned as a
 subcontext in the last element of the enclosing context.
 
@@ -159,7 +155,7 @@ command line context.
 
 
 
-As per Bourne shell, pipes are marked by a single vertical bar (`|`)  
+As per Bourne shell, pipes are marked by a single vertical bar (`|`)
 conjunction.  Erlang processes may participate in pipe relationships if
 they implement the Nosh_exec Behaviour.  Otherwise, processes
 grouped by the single vertical bar will run, but each in an isolated
@@ -477,7 +473,7 @@ _Not yet implemented_.
 
 
 <table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#parse-2">parse/2</a></td><td>Parse command line string and return a list of nested contexts,
-or else <code>failed</code> on a caught syntax exception.</td></tr><tr><td valign="top"><a href="#parse-3">parse/3</a></td><td>Parse list of strings split on quoting and grouping characters,  
+or else <code>failed</code> on a caught syntax exception.</td></tr><tr><td valign="top"><a href="#parse-3">parse/3</a></td><td>Parse list of strings split on quoting and grouping characters,
 according to current Stack type.</td></tr></table>
 
 
@@ -509,7 +505,7 @@ symbols.<a name="parse-3"></a>
 
 
 
-Parse list of strings split on quoting and grouping characters,  
+Parse list of strings split on quoting and grouping characters,
 according to current Stack type.  Return tuple of context tree, context
 stack and unparsed tail OR tuple of 'close_context', context stack, and
 trailing context tree.
@@ -518,5 +514,4 @@ Throw exception for unmatched quoting or grouping character.
 
 __<font color="red">To do</font>__
 <br></br>
-
 * <font color="red">spec this function</font>

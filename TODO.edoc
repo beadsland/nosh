@@ -1,12 +1,10 @@
-@todo edown space before url link
-@todo edown fix spacing after code
 @todo noterm Makefile -pa dev nosh
 @todo rewrite noterm keyboard
 @todo refactor noterm to use keyin
 @todo refactor noterm as gen_command
 @todo refactor noterm exit/stop
 @todo refactor noterm as packaged
-@todo simplify noterm in Makefile
+@todo simplify noterm in nosh Makefile
 @todo update noterm doc
 @todo have gen_command:start send eof to stdin
 @todo have nosh launch noterm to go interactive
