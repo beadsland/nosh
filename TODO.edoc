@@ -1,14 +1,12 @@
-@todo notfound in quotes?
-@todo stdio - erlout/erlerr stdout/stderr
-@todo stdio - printable_list test
-@todo refactor gen_command:load_command pattern
-@todo refactor console as gen_command
-@todo get rid of grace/2
+@todo noterm - refactor gen_command:load_command pattern
+@todo noterm - refactor console as gen_command
+@todo noterm - get rid of grace/2
 @todo refactor noterm as packaged
 @todo simplify noterm Makefile
 @todo update noterm doc
 @todo have gen_command:start send eof to stdin
 @todo have nosh launch noterm to go interactive
+@todo confirm why we need an exec rather than run/3
 @todo refactor exec INIT_POSE
 @todo refactor INIT_POSE to behaviour
 @todo refactor stdio to behaviour

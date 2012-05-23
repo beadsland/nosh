@@ -1,8 +1,8 @@
-@todo nosh STDERR not getting **
-@todo notfound in quotes?
-@todo refactor gen_command:load_command pattern
-@todo refactor console as gen_command
-@todo get rid of grace/2
+@todo noterm - refactor gen_command:load_command pattern
+@todo noterm - refactor console as gen_command
+@todo noterm - get rid of grace/2
 @todo refactor noterm as packaged
 @todo simplify noterm Makefile
-@todo ...plus 44 more (see TODO.edoc)
+@todo update noterm doc
+@todo have gen_command:start send eof to stdin
+@todo ...plus 43 more (see TODO.edoc)

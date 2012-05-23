@@ -11,21 +11,21 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">nosh STDERR not getting **
+* <font color="red">noterm - refactor gen_command:load_command pattern
 </font>
-* <font color="red">notfound in quotes?
+* <font color="red">noterm - refactor console as gen_command
 </font>
-* <font color="red">refactor gen_command:load_command pattern
-</font>
-* <font color="red">refactor console as gen_command
-</font>
-* <font color="red">get rid of grace/2
+* <font color="red">noterm - get rid of grace/2
 </font>
 * <font color="red">refactor noterm as packaged
 </font>
 * <font color="red">simplify noterm Makefile
 </font>
-* <font color="red">...plus 44 more (see TODO.edoc)
+* <font color="red">update noterm doc
+</font>
+* <font color="red">have gen_command:start send eof to stdin
+</font>
+* <font color="red">...plus 43 more (see TODO.edoc)
 </font>
 
 
