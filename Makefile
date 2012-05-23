@@ -53,11 +53,12 @@ HIDE_TEST_WARN	=	grep -v "edoc: warning: file.*test.erl' belongs"
 CROWBAR		=	rebar _cmds_ | $(HIDE_EDOC_WARN) | $(SUCCINCT) \
 				| $(HIDE_TEST_WARN)
 
+POSE	=	-pa deps/pose/ebin
+ERL	=	erl -noshell -i deps $(POSE)
 POSURE	=	-s pose start posure
-SUPERL	=	-pa deps/pose/ebin -s pose start superl $(POSURE)
-ERLSTOP	=	-s init stop
-NOTERM	=	erl -noshell -i deps $(SUPERL) -pa ebin \
-					-pa deps/noterm/ebin -s noterm
+SUPERL	=	-s pose start superl
+NOTERM	=	-s pose start noterm
+ERLSTOP = 	-s init stop
 
 TODO_MORE	=	`wc -l TODO.edoc | awk '{print $$1 - 7}'`
 
@@ -71,8 +72,9 @@ all:		current push-nosh nosh
 run:		compile nosh
 
 nosh:	nodump tabs
-	@if [ "$(TTY)" == "not a tty" ]; then ($(NOTERM) start_wecho); \
-					 else ($(NOTERM)); fi
+	@if [ "$(TTY)" == "not a tty" ]; \
+		then ($(ERL) $(SUPERL) $(POSURE) $(NOTERM) echo $(ERLSTOP)); \
+		else ($(ERL) $(SUPERL) $(POSURE) $(NOTERM) $(ERLSTOP)); fi
 
 nodump:
 	@if [ -e erl_crash.dump ]; then (rm erl_crash.dump); fi
@@ -85,7 +87,7 @@ tabs:
 #
 
 good:	compile
-	@erl -noshell $(SUPERL) $(ERLSTOP)
+	@$(ERL) $(SUPERL) $(POSURE) $(ERLSTOP)
 
 doc:	compile
 	

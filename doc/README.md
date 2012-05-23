@@ -11,21 +11,21 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">noterm Makefile -pa dev nosh
+* <font color="red">notfound in quotes?
 </font>
-* <font color="red">rewrite noterm keyboard
+* <font color="red">refactor gen_command:load_command pattern
 </font>
-* <font color="red">refactor noterm to use keyin
+* <font color="red">refactor console as gen_command
 </font>
-* <font color="red">refactor noterm as gen_command
-</font>
-* <font color="red">refactor noterm exit/stop
+* <font color="red">get rid of grace/2
 </font>
 * <font color="red">refactor noterm as packaged
 </font>
-* <font color="red">simplify noterm in Makefile
+* <font color="red">simplify noterm Makefile
 </font>
-* <font color="red">...plus 43 more (see TODO.edoc)
+* <font color="red">update noterm doc
+</font>
+* <font color="red">...plus 42 more (see TODO.edoc)
 </font>
 
 

@@ -1,8 +1,8 @@
-@todo noterm Makefile -pa dev nosh
-@todo rewrite noterm keyboard
-@todo refactor noterm to use keyin
-@todo refactor noterm as gen_command
-@todo refactor noterm exit/stop
+@todo notfound in quotes?
+@todo refactor gen_command:load_command pattern
+@todo refactor console as gen_command
+@todo get rid of grace/2
 @todo refactor noterm as packaged
-@todo simplify noterm in Makefile
-@todo ...plus 43 more (see TODO.edoc)
+@todo simplify noterm Makefile
+@todo update noterm doc
+@todo ...plus 42 more (see TODO.edoc)
