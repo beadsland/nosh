@@ -1,4 +1,6 @@
 @todo notfound in quotes?
+@todo stdio - erlout/erlerr stdout/stderr
+@todo stdio - printable_list test
 @todo refactor gen_command:load_command pattern
 @todo refactor console as gen_command
 @todo get rid of grace/2
@@ -10,6 +12,7 @@
 @todo refactor exec INIT_POSE
 @todo refactor INIT_POSE to behaviour
 @todo refactor stdio to behaviour
+@todo refactor pose as packaged (boot_pose.erl)
 @todo do bang if hack fails
 @todo bang not error on not found
 @todo update nosh docs to reflect gen_command behaviour

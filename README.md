@@ -11,6 +11,8 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
+* <font color="red">nosh STDERR not getting **
+</font>
 * <font color="red">notfound in quotes?
 </font>
 * <font color="red">refactor gen_command:load_command pattern
@@ -23,9 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">simplify noterm Makefile
 </font>
-* <font color="red">update noterm doc
-</font>
-* <font color="red">...plus 42 more (see TODO.edoc)
+* <font color="red">...plus 44 more (see TODO.edoc)
 </font>
 
 

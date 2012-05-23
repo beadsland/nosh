@@ -181,6 +181,7 @@ do_line(IO, Line) ->
   end.
 
 % Pass command to load. (We're bypassing parse here.)
+%% @todo this should be run, not exec (why are we using exec??)
 do_loadrun(IO, Line) ->
   ?DEBUG("Hack run attempt: ~s", [Line]),
   [Command | Words] = [list_to_atom(X) || X <- string:tokens(Line, " \n")],
@@ -223,7 +224,7 @@ command_return(IO, Command, Status) ->
     normal          -> ?DEBUG("~s: ~p~n", [Command, Status]);
     ok              -> ?DEBUG("~s: ~p~n", [Command, Status]);
     {ok, Result}    -> ?STDOUT("~s: ok: ~p~n", [Command, Result]);
-    Else            -> ?STDERR("~s: ~p~n", [Command, ?FORMAT_ERLERR(Else)])
+    Else            -> ?STDERR("~s: ~s~n", [Command, ?FORMAT_ERLERR(Else)])
   end.
 
 % spawned as a process
