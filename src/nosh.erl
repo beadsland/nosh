@@ -188,12 +188,6 @@ do_loadrun(IO, Line) ->
   ?DEBUG("Running ~p as ~p~n", [Command, CmdPid]),
   ?MODULE:loop(IO, Command, CmdPid).
 
-%  case pose:spawn(?IO(self()), Command, Words) of
-%    {error, Reason} -> ?DEBUG("~s~n", [?FORMAT_ERLERR({hack, Reason})]),
-%                       do_parse(IO, Line);
-%    CmdPid          -> ?MODULE:loop(IO, Command, CmdPid)
-%  end.
-
 % Parse command line.
 do_parse(IO, Line) ->
   Command = string:strip(Line, right, $\n),
