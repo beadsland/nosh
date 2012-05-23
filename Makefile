@@ -68,16 +68,12 @@ TODO_MORE	=	`wc -l TODO.edoc | awk '{print $$1 - 7}'`
 
 all:		current push-nosh nosh
 
-.PHONY:		run
 run:		compile nosh
 
-nosh:	nodump tabs
+nosh:	tabs
 	@if [ "$(TTY)" == "not a tty" ]; \
 		then ($(ERL) $(SUPERL) $(POSURE) $(NOTERM) echo $(ERLSTOP)); \
 		else ($(ERL) $(SUPERL) $(POSURE) $(NOTERM) $(ERLSTOP)); fi
-
-nodump:
-	@if [ -e erl_crash.dump ]; then (rm erl_crash.dump); fi
 
 tabs:
 	@if [ "$(TTY)" != "not a tty" ]; then (tabs -1 >/dev/null); fi
@@ -92,7 +88,7 @@ good:	compile
 doc:	compile
 	
 compile:	todo
-	@rm -f doc/edoc-info
+	@rm -f doc/edoc-info *.dump
 	@$(CROWBAR:_cmds_=compile doc)
 
 current:	push-libs todo
