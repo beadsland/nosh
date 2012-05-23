@@ -92,6 +92,7 @@ good:	compile
 doc:	compile
 	
 compile:	todo
+	@rm -f doc/edoc-info
 	@$(CROWBAR:_cmds_=compile doc)
 
 current:	push-libs todo

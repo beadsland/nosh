@@ -153,9 +153,3 @@ more details.
 _Not yet implemented:_`nosh` will provide an NFS-style interface
   to CouchDB databases and views.
  
-
-##Packages##
-
-
-<table width="100%" border="0" summary="list of packages"><tr><td><a href="alt/package-summary.md" class="package">alt</a></td></tr><tr><td><a href="alt2/package-summary.md" class="package">alt2</a></td></tr></table>
-
