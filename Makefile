@@ -45,17 +45,19 @@ ONLINE	=	`$(PING) www.google.com 2>&1 >/dev/null; \
 			else (echo no); fi`
 TTY	=	`tty`
 
-
+WRAP		=	fmt -80 -t
 SUCCINCT	=	grep -v "Entering directory" \
 				| grep -v "Leaving directory"
-CROWBAR		=	rebar _cmds_ | $(SUCCINCT)
+CROWBAR		=	rebar _cmds_ | $(SUCCINCT) 2>&1 | $(WRAP)
+
 
 POSE	=	-pa deps/pose/ebin
 ERL	=	erl -noshell -i deps $(POSE)
 POSURE	=	-s pose start posure
 SUPERL	=	-s pose start superl
-NOTERM	=	-s pose start noterm
+NOTERM	=	$(SUPERL) $(POSURE) -s pose start noterm
 ERLSTOP = 	-s init stop
+
 
 TODO_MORE	=	`wc -l TODO.edoc | awk '{print $$1 - 7}'`
 
@@ -69,8 +71,9 @@ run:		compile nosh
 
 nosh:	tabs
 	@if [ "$(TTY)" == "not a tty" ]; \
-		then ($(ERL) $(SUPERL) $(POSURE) $(NOTERM) echo $(ERLSTOP)); \
-		else ($(ERL) $(SUPERL) $(POSURE) $(NOTERM) $(ERLSTOP)); fi
+		then ($(ERL) $(NOTERM) echo $(ERLSTOP)); \
+		else ($(ERL) $(NOTERM) $(ERLSTOP)); \
+	fi 2>&1 | $(WRAP)
 
 tabs:
 	@if [ "$(TTY)" != "not a tty" ]; then (tabs -1 >/dev/null); fi
