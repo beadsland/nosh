@@ -11,21 +11,21 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
+* <font color="red">don't remove edoc-info warnings
+</font>
+* <font color="red">use new edoc
+</font>
+* <font color="red">edoc respect pose package pattern
+</font>
+* <font color="red">notty line wrap
+</font>
+* <font color="red">loops as private, not hidden (also in doc of pattern)
+</font>
+* <font color="red">rebar handle sub-dependencies with soft links
+</font>
 * <font color="red">noterm - refactor gen_command:load_command pattern
 </font>
-* <font color="red">noterm - refactor console as gen_command
-</font>
-* <font color="red">noterm - get rid of grace/2
-</font>
-* <font color="red">refactor noterm as packaged
-</font>
-* <font color="red">simplify noterm Makefile
-</font>
-* <font color="red">update noterm doc
-</font>
-* <font color="red">have gen_command:start send eof to stdin
-</font>
-* <font color="red">...plus 43 more (see TODO.edoc)
+* <font color="red">...plus 49 more (see TODO.edoc)
 </font>
 
 
