@@ -45,7 +45,7 @@ ONLINE	=	`$(PING) www.google.com 2>&1 >/dev/null; \
 			else (echo no); fi`
 TTY	=	`tty`
 
-WRAP		=	fmt -80 -t
+WRAP		=	cat
 SUCCINCT	=	grep -v "Entering directory" \
 				| grep -v "Leaving directory"
 CROWBAR		=	rebar _cmds_ | $(SUCCINCT) 2>&1 | $(WRAP)

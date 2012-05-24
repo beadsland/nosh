@@ -1,4 +1,4 @@
-@todo notty line wrap
+@todo wrap while still writing to stdout
 @todo posure / superl printing strings as lists
 @todo edoc respect pose package pattern
 @todo loops as private, not hidden (also in doc of pattern)

@@ -11,7 +11,7 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">notty line wrap
+* <font color="red">wrap while still writing to stdout
 </font>
 * <font color="red">posure / superl printing strings as lists
 </font>

@@ -1,4 +1,4 @@
-@todo posure / superl printing strings as lists
+@todo wrap while still writing to stdout
 @todo edoc respect pose package pattern
 @todo loops as private, not hidden (also in doc of pattern)
 @todo rebar handle sub-dependencies with soft links
