@@ -13,8 +13,6 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">wrap while still writing to stdout
 </font>
-* <font color="red">posure / superl printing strings as lists
-</font>
 * <font color="red">edoc respect pose package pattern
 </font>
 * <font color="red">loops as private, not hidden (also in doc of pattern)
@@ -25,7 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">noterm - refactor console as gen_command
 </font>
-* <font color="red">...plus 48 more (see TODO.edoc)
+* <font color="red">noterm - get rid of grace/2
+</font>
+* <font color="red">...plus 47 more (see TODO.edoc)
 </font>
 
 

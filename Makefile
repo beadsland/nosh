@@ -45,10 +45,10 @@ ONLINE	=	`$(PING) www.google.com 2>&1 >/dev/null; \
 			else (echo no); fi`
 TTY	=	`tty`
 
-WRAP		=	cat
+FOLD		=	sed -nu ':p;s/\([^\n]\{80\}\)\([^\n]\)/\1\n \2/;tp;p'
 SUCCINCT	=	grep -v "Entering directory" \
 				| grep -v "Leaving directory"
-CROWBAR		=	rebar _cmds_ | $(SUCCINCT) 2>&1 | $(WRAP)
+CROWBAR		=	rebar _cmds_ | $(SUCCINCT) 2>&1 | $(FOLD)
 
 
 POSE	=	-pa deps/pose/ebin
@@ -73,7 +73,7 @@ nosh:	tabs
 	@if [ "$(TTY)" == "not a tty" ]; \
 		then ($(ERL) $(NOTERM) echo $(ERLSTOP)); \
 		else ($(ERL) $(NOTERM) $(ERLSTOP)); \
-	fi 2>&1 | $(WRAP)
+	fi 2>&1 | $(FOLD)
 
 tabs:
 	@if [ "$(TTY)" != "not a tty" ]; then (tabs -1 >/dev/null); fi
