@@ -1,8 +1,8 @@
-@todo edoc respect pose package pattern
 @todo notty line wrap
+@todo posure / superl printing strings as lists
+@todo edoc respect pose package pattern
 @todo loops as private, not hidden (also in doc of pattern)
 @todo rebar handle sub-dependencies with soft links
 @todo noterm - refactor gen_command:load_command pattern
 @todo noterm - refactor console as gen_command
-@todo noterm - get rid of grace/2
-@todo ...plus 47 more (see TODO.edoc)
+@todo ...plus 48 more (see TODO.edoc)

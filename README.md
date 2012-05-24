@@ -11,13 +11,11 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">don't remove edoc-info warnings
+* <font color="red">notty line wrap
 </font>
-* <font color="red">use new edoc
+* <font color="red">posure / superl printing strings as lists
 </font>
 * <font color="red">edoc respect pose package pattern
-</font>
-* <font color="red">notty line wrap
 </font>
 * <font color="red">loops as private, not hidden (also in doc of pattern)
 </font>
@@ -25,7 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">noterm - refactor gen_command:load_command pattern
 </font>
-* <font color="red">...plus 49 more (see TODO.edoc)
+* <font color="red">noterm - refactor console as gen_command
+</font>
+* <font color="red">...plus 48 more (see TODO.edoc)
 </font>
 
 
