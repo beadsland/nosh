@@ -1,7 +1,6 @@
-@todo don't remove edoc-info warnings
-@todo use new edoc
-@todo edoc respect pose package pattern
 @todo notty line wrap
+@todo posure / superl printing strings as lists
+@todo edoc respect pose package pattern
 @todo loops as private, not hidden (also in doc of pattern)
 @todo rebar handle sub-dependencies with soft links
 @todo noterm - refactor gen_command:load_command pattern
