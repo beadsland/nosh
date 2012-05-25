@@ -1,4 +1,3 @@
-@todo fix ?ARGV(1) to work when no data
 @todo sed-based fold w/ timeout
 @todo reduce noise to debug level
 @todo edoc respect pose package pattern

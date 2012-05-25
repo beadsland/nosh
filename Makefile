@@ -45,7 +45,8 @@ ONLINE	=	`$(PING) www.google.com 2>&1 >/dev/null; \
 			else (echo no); fi`
 TTY	=	`tty`
 
-FOLD		=	sed -nu ':p;s/\([^\n]\{80\}\)\([^\n]\)/\1\n \2/;tp;p'
+FOLD	=	./folderl
+FOLDOLD	=	sed -nu ':p;s/\([^\n]\{80\}\)\([^\n]\)/\1\n \2/;tp;p'
 SUCCINCT	=	grep -v "Entering directory" \
 				| grep -v "Leaving directory"
 CROWBAR		=	rebar _cmds_ | $(SUCCINCT) 2>&1 | $(FOLD)

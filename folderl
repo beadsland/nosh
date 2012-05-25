@@ -1,0 +1,28 @@
+#!/usr/bin/env escript
+%% -*- erlang -*-
+%%!
+
+main(_Param) ->
+  loop(80, "", 0).
+
+loop(Cols, String, Chars) when Chars == Cols ->
+  {ok, MP} = re:compile("^(.*[\\ \\,])([^\\ \\,]*)\$"),
+  case re:run(String, MP, [{capture, [1,2], list}]) of
+    nomatch                 -> String, loop(Cols, "", 0);
+    {match, [Above, Below]} -> io:format("~s~n", [Above]),
+                               NewString = lists:append(["   ", Below]),
+                               loop(Cols, NewString, length(NewString))
+  end;
+
+loop(Cols, String, Chars) ->
+  case io:get_chars("", 1) of
+    ok              -> io:format(String),
+                       loop(Cols, "", Chars);
+    eof             -> io:format(String),
+                       true;
+    {error, Reason} -> io:format("error: ~p~n", [Reason]);
+    "\n"            -> io:format("~s~n", [String]),
+                       loop(Cols, "", 0);
+    Char            -> NewString = lists:append([String, Char]),
+                       loop(Cols, NewString, Chars + 1)
+  end.
