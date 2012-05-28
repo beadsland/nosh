@@ -1,5 +1,9 @@
 @todo folderl output even w/o newline
 @todo folderl format erlang terms
+@todo folderl as pose pattern
+@todo folderl good
+@todo folderl refactor to noterm
+@todo folderl entry as escript?
 @todo reduce noise to debug level
 @todo edoc respect pose package pattern
 @todo loops as private, not hidden (also in doc of pattern)

@@ -15,17 +15,17 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">folderl format erlang terms
 </font>
+* <font color="red">folderl as pose pattern
+</font>
+* <font color="red">folderl good
+</font>
+* <font color="red">folderl refactor
+</font>
 * <font color="red">reduce noise to debug level
 </font>
 * <font color="red">edoc respect pose package pattern
 </font>
-* <font color="red">loops as private, not hidden (also in doc of pattern)
-</font>
-* <font color="red">rebar handle sub-dependencies with soft links
-</font>
-* <font color="red">noterm - refactor gen_command:load_command pattern
-</font>
-* <font color="red">...plus 49 more (see TODO.edoc)
+* <font color="red">...plus 52 more (see TODO.edoc)
 </font>
 
 
@@ -153,3 +153,10 @@ more details.
 _Not yet implemented:_`nosh` will provide an NFS-style interface
   to CouchDB databases and views.
  
+
+##Modules##
+
+
+<table width="100%" border="0" summary="list of modules">
+<tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/folderl.md" class="module">folderl</a></td></tr></table>
+

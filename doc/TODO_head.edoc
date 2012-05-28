@@ -1,8 +1,8 @@
 @todo folderl output even w/o newline
 @todo folderl format erlang terms
+@todo folderl as pose pattern
+@todo folderl good
+@todo folderl refactor
 @todo reduce noise to debug level
 @todo edoc respect pose package pattern
-@todo loops as private, not hidden (also in doc of pattern)
-@todo rebar handle sub-dependencies with soft links
-@todo noterm - refactor gen_command:load_command pattern
-@todo ...plus 49 more (see TODO.edoc)
+@todo ...plus 52 more (see TODO.edoc)
