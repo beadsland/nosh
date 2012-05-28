@@ -13,13 +13,13 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">folderl output even w/o newline
 </font>
-* <font color="red">folderl format erlang terms
+* <font color="red">folderl bootstrap
 </font>
-* <font color="red">folderl as pose pattern
+* <font color="red">folderl format erlang terms
 </font>
 * <font color="red">folderl good
 </font>
-* <font color="red">folderl refactor
+* <font color="red">folderl refactor to noterm
 </font>
 * <font color="red">reduce noise to debug level
 </font>
@@ -153,10 +153,3 @@ more details.
 _Not yet implemented:_`nosh` will provide an NFS-style interface
   to CouchDB databases and views.
  
-
-##Modules##
-
-
-<table width="100%" border="0" summary="list of modules">
-<tr><td><a href="folderl.md" class="module">folderl</a></td></tr></table>
-

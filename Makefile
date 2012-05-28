@@ -45,8 +45,8 @@ ONLINE	=	`$(PING) www.google.com 2>&1 >/dev/null; \
 			else (echo no); fi`
 TTY	=	`tty`
 
-FOLD	=	$(ERL) -s pose start folderl
-FOLDOLD	=	sed -nu ':p;s/\([^\n]\{80\}\)\([^\n]\)/\1\n \2/;tp;p'
+FOLDNEW	=	$(ERL) -s pose start folderl $(STOP)
+FOLD	=	sed -nu ':p;s/\([^\n]\{80\}\)\([^\n]\)/\1\n \2/;tp;p'
 SUCCINCT	=	grep -v "Entering directory" \
 				| grep -v "Leaving directory"
 CROWBAR		=	rebar _cmds_ | $(SUCCINCT) 2>&1 | $(FOLD)
@@ -57,7 +57,7 @@ ERL	=	erl -noshell -i deps $(POSE)
 POSURE	=	-s pose start posure
 SUPERL	=	-s pose start superl
 NOTERM	=	$(SUPERL) $(POSURE) -s pose start noterm
-ERLSTOP = 	-s init stop
+STOP 	= 	-s init stop
 
 
 TODO_MORE	=	`wc -l TODO.edoc | awk '{print $$1 - 7}'`
@@ -72,8 +72,8 @@ run:		compile nosh
 
 nosh:	tabs
 	@if [ "$(TTY)" == "not a tty" ]; \
-		then ($(ERL) $(NOTERM) echo $(ERLSTOP)); \
-		else ($(ERL) $(NOTERM) $(ERLSTOP)); \
+		then ($(ERL) $(NOTERM) echo $(STOP)); \
+		else ($(ERL) $(NOTERM) $(STOP)); \
 	fi 2>&1 | $(FOLD)
 
 tabs:
@@ -84,7 +84,7 @@ tabs:
 #
 
 good:	compile
-	@$(ERL) $(SUPERL) $(POSURE) $(ERLSTOP)
+	@$(ERL) $(SUPERL) $(POSURE) $(STOP)
 
 doc:	compile
 	

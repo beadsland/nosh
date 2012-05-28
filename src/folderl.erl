@@ -51,6 +51,11 @@
 -define(debug, true).
 -include("pose/include/interface.hrl").
 
+-import(io).
+-import(re).
+-import(lists).
+-import(gen_command).
+
 %%
 %% Exported functions
 %%
@@ -105,7 +110,8 @@ loop(IO, Cols, String, Count) when Count == Cols ->
                                ?MODULE:loop(IO, Cols, "", 0);
     {match, [Above, Below]} -> io:format("~s~n", [Above]),
                                NewString = lists:append("   ", Below),
-                               ?MODULE:loop(IO, Cols, NewString, length(NewString))
+                               ?MODULE:loop(IO, Cols, NewString,
+                                            length(NewString))
   end;
 
 % Absent max columns, keep reading characters until stream dries up.
