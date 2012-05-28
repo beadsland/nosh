@@ -2,27 +2,49 @@
 %% -*- erlang -*-
 %%!
 
-main(_Param) ->
-  loop(80, "", 0).
+-include("deps/pose/include/interface.hrl").
 
-loop(Cols, String, Chars) when Chars == Cols ->
+-export([do_run/2]).
+
+main(Param) ->
+  gen_command:start(Param, ?MODULE).
+
+do_run(IO, _ARG) ->
+  Command = charin,
+  case gen_command:load_command(IO, Command) of
+    {module, Module}    ->
+      CharPid = spawn_link(Module, run, [?IO(self()), ?ARG(charin), ?ENV]),
+      loop(?IO(CharPid), 80, "", 0);
+    {error, What}       ->
+      exit({Command, What})
+  end.
+
+loop(IO, Cols, String, Count) when Count == Cols ->
   {ok, MP} = re:compile("^(.*[\\ \\,])([^\\ \\,]*)\$"),
   case re:run(String, MP, [{capture, [1,2], list}]) of
-    nomatch                 -> String, loop(Cols, "", 0);
+    nomatch                 -> io:format("~s~n", [String]),
+                               loop(IO, Cols, "", 0);
     {match, [Above, Below]} -> io:format("~s~n", [Above]),
-                               NewString = lists:append(["   ", Below]),
-                               loop(Cols, NewString, length(NewString))
+                               NewString = lists:append("   ", Below),
+                               loop(IO, Cols, NewString, length(NewString))
   end;
 
-loop(Cols, String, Chars) ->
-  case io:get_chars("", 1) of
-    ok              -> io:format(String),
-                       loop(Cols, "", Chars);
-    eof             -> io:format(String),
-                       true;
-    {error, Reason} -> io:format("error: ~p~n", [Reason]);
-    "\n"            -> io:format("~s~n", [String]),
-                       loop(Cols, "", 0);
-    Char            -> NewString = lists:append([String, Char]),
-                       loop(Cols, NewString, Chars + 1)
+loop(IO, Cols, String, Count) ->
+  receive
+    {purging, _Pid, _Mod}                               ->
+      loop(IO, Cols, String, Count);
+    {'EXIT', Stdin, Reason} when Stdin == IO#std.in     ->
+      exit(Reason);
+    {stdout, Stdout, "\n"} when Stdout == IO#std.out    ->
+      io:format("~s~n", [String]),
+      loop(IO, Cols, "", 0);
+    {stdout, Stdout, Count} when Stdout == IO#std.out   ->
+      loop(IO, Cols, lists:append(String, Count), Count + 1);
+    {stderr, Stderr, What} when Stderr == IO#std.err    ->
+      io:format(standard_error, "~s", What);
+    Noise                                               ->
+      ?STDERR("noise: ~p ~p~n", [Noise, self()])
+  after
+    100 -> io:format("~s", [String]),
+           loop(IO, Cols, "", Count)
   end.

@@ -11,7 +11,9 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">sed-based fold w/ timeout
+* <font color="red">folderl output even w/o newline
+</font>
+* <font color="red">folderl format erlang terms
 </font>
 * <font color="red">reduce noise to debug level
 </font>
@@ -23,9 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">noterm - refactor gen_command:load_command pattern
 </font>
-* <font color="red">noterm - refactor console as gen_command
-</font>
-* <font color="red">...plus 48 more (see TODO.edoc)
+* <font color="red">...plus 49 more (see TODO.edoc)
 </font>
 
 

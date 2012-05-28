@@ -1,4 +1,5 @@
-@todo sed-based fold w/ timeout
+@todo folderl output even w/o newline
+@todo folderl format erlang terms
 @todo reduce noise to debug level
 @todo edoc respect pose package pattern
 @todo loops as private, not hidden (also in doc of pattern)
