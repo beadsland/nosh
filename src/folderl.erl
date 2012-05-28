@@ -93,10 +93,12 @@ run(IO, ARG, ENV) -> gen_command:run(IO, ARG, ENV, ?MODULE).
 
 %% @hidden Callback entry point for gen_command behaviour.
 do_run(IO, _ARG) ->
+  ?DEBUG("Running folderl ~p~n", [self()]),
   Command = charin,
   case gen_command:load_command(IO, Command) of
     {module, Module}    ->
-      CharPid = spawn_link(Module, run, [?IO(self()), ?ARG(charin), ?ENV]),
+      CharPid = spawn_link(Module, run, [?IO(self()), ?ARG(Command), ?ENV]),
+      ?DEBUG("Spawned charin ~p~n", [CharPid]),
       ?MODULE:loop(?IO(CharPid), 80, "", 0);
     {error, What}       ->
       exit({Command, What})
@@ -116,20 +118,27 @@ loop(IO, Cols, String, Count) when Count == Cols ->
 
 % Absent max columns, keep reading characters until stream dries up.
 loop(IO, Cols, String, Count) ->
+  ?DEBUG("loop with ~s~n", [String]),
+  SelfPid = self(),
   receive
     {purging, _Pid, _Mod}                               ->
       ?MODULE:loop(IO, Cols, String, Count);
     {'EXIT', Stdin, Reason} when Stdin == IO#std.in     ->
-      exit(Reason);
+      exit({charin, Reason});
     {stdout, Stdout, "\n"} when Stdout == IO#std.out    ->
       io:format("~s~n", [String]),
       ?MODULE:loop(IO, Cols, "", 0);
-    {stdout, Stdout, Count} when Stdout == IO#std.out   ->
-      ?MODULE:loop(IO, Cols, lists:append(String, Count), Count + 1);
+    {stdout, Stdout, Char} when Stdout == IO#std.out   ->
+      ?MODULE:loop(IO, Cols, lists:append(String, Char), Count + 1);
     {stderr, Stderr, What} when Stderr == IO#std.err    ->
-      io:format(standard_error, "~s", What);
+      io:format(standard_error, "** ~s", [What]),
+      ?MODULE:loop(IO, Cols, String, Count);
+    {debug, SelfPid, What}                              ->
+      io:format(standard_error, "-- ~s", [What]),
+      ?MODULE:loop(IO, Cols, String, Count);
     Noise                                               ->
-      ?STDERR("noise: ~p ~p~n", [Noise, self()])
+      io:format(standard_error, "noise: ~p ~p~n", [Noise, self()]),
+      ?MODULE:loop(IO, Cols, String, Count)
   after
     100 -> io:format("~s", [String]),
            ?MODULE:loop(IO, Cols, "", Count)

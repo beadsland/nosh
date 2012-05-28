@@ -1,8 +1,8 @@
 @todo folderl output even w/o newline
+@todo folderl refactor to noterm
 @todo folderl bootstrap
 @todo folderl format erlang terms
 @todo folderl good
-@todo folderl refactor to noterm
 @todo reduce noise to debug level
 @todo edoc respect pose package pattern
 @todo ...plus 52 more (see TODO.edoc)

@@ -66,6 +66,9 @@ TODO_MORE	=	`wc -l TODO.edoc | awk '{print $$1 - 7}'`
 # Execution rules start
 #
 
+test:		compile
+	echo This is a line of text. | $(FOLDNEW)
+
 all:		current push-nosh nosh
 
 run:		compile nosh
