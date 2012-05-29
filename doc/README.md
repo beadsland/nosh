@@ -11,10 +11,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">folderl output even w/o newline
-</font>
-* <font color="red">folderl refactor to noterm
-</font>
 * <font color="red">folderl bootstrap
 </font>
 * <font color="red">folderl format erlang terms
@@ -25,7 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">edoc respect pose package pattern
 </font>
-* <font color="red">...plus 52 more (see TODO.edoc)
+* <font color="red">loops as private, not hidden (also in doc of pattern)
+</font>
+* <font color="red">rebar handle sub-dependencies with soft links
+</font>
+* <font color="red">...plus 50 more (see TODO.edoc)
 </font>
 
 

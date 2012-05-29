@@ -45,21 +45,27 @@ ONLINE	=	`$(PING) www.google.com 2>&1 >/dev/null; \
 			else (echo no); fi`
 TTY	=	`tty`
 
-FOLDNEW	=	$(ERL) -s pose start folderl $(STOP)
-FOLD	=	sed -nu ':p;s/\([^\n]\{80\}\)\([^\n]\)/\1\n \2/;tp;p'
 SUCCINCT	=	grep -v "Entering directory" \
 				| grep -v "Leaving directory"
 CROWBAR		=	rebar _cmds_ | $(SUCCINCT) 2>&1 | $(FOLD)
 
+TODO_MORE	=	`wc -l TODO.edoc | awk '{print $$1 - 7}'`
 
 POSE	=	-pa deps/pose/ebin
 ERL	=	erl -noshell -i deps $(POSE)
 POSURE	=	-s pose start posure
 SUPERL	=	-s pose start superl
+FOLDERL	=	-s pose start folderl
 NOTERM	=	$(SUPERL) $(POSURE) -s pose start noterm
 STOP 	= 	-s init stop
 
-TODO_MORE	=	`wc -l TODO.edoc | awk '{print $$1 - 7}'`
+ORAGAMI	=	echo Using folderl | $(ERL) $(FOLDERL) $(STOP); echo $$?
+
+ifeq ($(shell $(ORAGAMI)),0)
+	FOLD	= $(ERL) $(FOLDERL) $(STOP)
+else
+	FOLD	= sed -nu ':p;s/\([^\n]\{80\}\)\([^\n]\)/\1\n \2/;tp;p'
+endif
 
 #
 # Execution rules start
@@ -69,11 +75,15 @@ all:		current push-nosh nosh
 
 run:		compile nosh
 
+fold:
+	@echo Using folderl | $(ERL) -s pose start folderl $(STOP)
+
 nosh:	tabs
 	@if [ "$(TTY)" == "not a tty" ]; \
 		then ($(ERL) $(NOTERM) echo $(STOP)); \
 		else ($(ERL) $(NOTERM) $(STOP)); \
 	fi 2>&1 | $(FOLD)
+	@echo $(FOLDER)
 
 tabs:
 	@if [ "$(TTY)" != "not a tty" ]; then (tabs -1 >/dev/null); fi
