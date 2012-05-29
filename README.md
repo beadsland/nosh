@@ -11,7 +11,11 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">normal exit on bang?
+* <font color="red">folderl run
+</font>
+* <font color="red">bang listen for stdin eof/pipe
+</font>
+* <font color="red">normal exit on run??
 </font>
 * <font color="red">edoc respect pose package pattern
 </font>
@@ -21,11 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">noterm - refactor gen_command:load_command pattern
 </font>
-* <font color="red">noterm - refactor console as gen_command
-</font>
-* <font color="red">noterm - get rid of grace/2
-</font>
-* <font color="red">...plus 47 more (see TODO.edoc)
+* <font color="red">...plus 49 more (see TODO.edoc)
 </font>
 
 
