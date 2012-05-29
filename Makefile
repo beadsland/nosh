@@ -59,9 +59,10 @@ FOLDERL	=	-s pose start folderl
 NOTERM	=	$(SUPERL) $(POSURE) -s pose start noterm
 STOP 	= 	-s init stop
 
-ORAGAMI	=	echo Using folderl | $(ERL) $(FOLDERL) $(STOP); echo $$?
+ORAGAMI	=	$(shell echo folderl | $(ERL) $(FOLDERL) $(STOP) \
+					| grep '^folderl$$')
 
-ifeq ($(shell $(ORAGAMI)),0)
+ifeq ($(ORAGAMI),folderl)
 	FOLD	= $(ERL) $(FOLDERL) $(STOP)
 else
 	FOLD	= sed -nu ':p;s/\([^\n]\{80\}\)\([^\n]\)/\1\n \2/;tp;p'
@@ -75,15 +76,14 @@ all:		current push-nosh nosh
 
 run:		compile nosh
 
-fold:
-	@echo Using folderl | $(ERL) -s pose start folderl $(STOP)
+fold:	
+	echo $(ORAGAMI) | $(FOLD)
 
 nosh:	tabs
 	@if [ "$(TTY)" == "not a tty" ]; \
 		then ($(ERL) $(NOTERM) echo $(STOP)); \
 		else ($(ERL) $(NOTERM) $(STOP)); \
 	fi 2>&1 | $(FOLD)
-	@echo $(FOLDER)
 
 tabs:
 	@if [ "$(TTY)" != "not a tty" ]; then (tabs -1 >/dev/null); fi
