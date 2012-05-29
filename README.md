@@ -11,6 +11,8 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
+* <font color="red">normal exit on bang?
+</font>
 * <font color="red">edoc respect pose package pattern
 </font>
 * <font color="red">loops as private, not hidden (also in doc of pattern)
@@ -23,9 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">noterm - get rid of grace/2
 </font>
-* <font color="red">refactor noterm as packaged
-</font>
-* <font color="red">...plus 46 more (see TODO.edoc)
+* <font color="red">...plus 47 more (see TODO.edoc)
 </font>
 
 

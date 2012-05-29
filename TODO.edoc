@@ -1,3 +1,5 @@
+@todo folderl run
+@todo normal exit on run??
 @todo edoc respect pose package pattern
 @todo loops as private, not hidden (also in doc of pattern)
 @todo rebar handle sub-dependencies with soft links

@@ -186,6 +186,7 @@ do_loadrun(IO, Line) ->
   ?DEBUG("Hack run attempt: ~s", [Line]),
   [Command | Words] = [list_to_atom(X) || X <- string:tokens(Line, " \n")],
   CmdPid = spawn_link(pose, exec, [?IO(self()), ?ARG(Command, Words)]),
+  CmdPid ! {stdin, self(), eof},
   ?DEBUG("Running ~p as ~p~n", [Command, CmdPid]),
   ?MODULE:loop(IO, Command, CmdPid).
 
