@@ -76,9 +76,6 @@ all:		current push-nosh nosh
 
 run:		compile nosh
 
-fold:	
-	echo $(ORAGAMI) | $(FOLD)
-
 nosh:	tabs
 	@if [ "$(TTY)" == "not a tty" ]; \
 		then ($(ERL) $(NOTERM) echo $(STOP)); \

@@ -129,7 +129,7 @@ run(IO, ARG, ENV) -> gen_command:run(IO, ARG, ENV, ?MODULE).
 do_run(IO, _ARG) ->
   ?STDOUT("Starting Nosh ~s nosql shell ~p~n", [?VERSION(?MODULE), self()]),
   ?DEBUG("Using rev. ~s command line parser~n", [?VERSION(nosh_parse)]),
-  ?DEBUG("Using rev. ~s module loader~n", [?VERSION(.pose_code)]),
+  ?DEBUG("Using rev. ~s code loader~n", [?VERSION(.pose_code)]),
   ?PROMPT,
   ?MODULE:loop(IO, ?MODULE, self()).
 
@@ -215,7 +215,7 @@ do_exit(IO, Command, CmdPid, ExitPid, Reason) ->
 
 % Handle noise on message queue.
 do_noise(IO, Command, CmdPid, Noise) ->
-  ?STDERR("noise: ~p ~p~n", [Noise, self()]),
+  ?DEBUG("noise: ~p ~p~n", [Noise, self()]),
   ?MODULE:loop(IO, Command, CmdPid).
 
 %% Handle exit message from command process.
