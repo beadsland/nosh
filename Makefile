@@ -47,12 +47,19 @@ TTY	=	`tty`
 
 SUCCINCT	=	grep -v "Entering directory" \
 				| grep -v "Leaving directory"
-CROWBAR		=	rebar _cmds_ | $(SUCCINCT) 2>&1 | $(FOLD)
+dCROWBAR	=	rebar _cmds_ | $(SUCCINCT) 2>&1 | $(FOLD)
+CROWBAR		=	rebar _cmds_
 
 TODO_MORE	=	`wc -l TODO.edoc | awk '{print $$1 - 7}'`
 
-POSE	=	-pa deps/pose/ebin
-ERL	=	erl -noshell -i deps $(POSE)
+ifeq ($(DEV),yes)
+	POSE	=	-pa dev/pose/ebin
+	ERL	=	erl -noshell -i dev $(POSE)
+else
+	POSE	=	-pa deps/pose/ebin
+	ERL	=	erl -noshell -i deps $(POSE)
+endif
+
 POSURE	=	-s pose start posure
 SUPERL	=	-s pose start superl
 FOLDERL	=	-s pose start folderl
@@ -96,7 +103,9 @@ doc:	compile
 	
 compile:	todo
 	@rm -f *.dump doc/*.md doc/*.html
-	@$(CROWBAR:_cmds_=compile doc)
+	@if [ "$(DEV)" == yes ]; \
+		then REBAR_DEPS=dev; export REBAR_DEPS; fi; \
+		$(CROWBAR:_cmds_=compile doc)
 
 current:	push-libs todo
 	@if [ "$(ONLINE)" == yes ]; then \
