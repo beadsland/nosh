@@ -47,8 +47,7 @@ TTY	=	`tty`
 
 SUCCINCT	=	grep -v "Entering directory" \
 				| grep -v "Leaving directory"
-dCROWBAR	=	rebar _cmds_ | $(SUCCINCT) 2>&1 | $(FOLD)
-CROWBAR		=	rebar _cmds_
+CROWBAR	=	rebar _cmds_ | $(SUCCINCT) 2>&1 | $(FOLD)
 
 TODO_MORE	=	`wc -l TODO.edoc | awk '{print $$1 - 7}'`
 

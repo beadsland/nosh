@@ -11,21 +11,21 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">loops as private, not hidden (also in doc of pattern)
+* <font color="red">skip doc for workspace clears nosh doc
 </font>
-* <font color="red">rebar handle sub-dependencies with soft links
+* <font color="red">simplify push
 </font>
-* <font color="red">refactor gen_command:load_command pattern
+* <font color="red">pose path based on deps
 </font>
-* <font color="red">noterm - refactor console as gen_command
+* <font color="red">rebar.config.script - noterm debug notice
 </font>
-* <font color="red">noterm - get rid of grace/2
+* <font color="red">erl_opts deps w/out ../..
 </font>
-* <font color="red">refactor noterm as packaged
+* <font color="red">escript folderl
 </font>
-* <font color="red">simplify noterm Makefile
+* <font color="red">-*-Erlang-*- in license line 1
 </font>
-* <font color="red">...plus 45 more (see TODO.edoc)
+* <font color="red">...plus 53 more (see TODO.edoc)
 </font>
 
 

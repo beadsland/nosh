@@ -6,3 +6,4 @@ doc
 ebin
 erl_crash.dump
 deps
+/dev
