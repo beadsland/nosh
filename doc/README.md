@@ -11,21 +11,21 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">folderl run
-</font>
-* <font color="red">bang listen for stdin eof/pipe
-</font>
-* <font color="red">normal exit on run??
-</font>
-* <font color="red">edoc respect pose package pattern
-</font>
 * <font color="red">loops as private, not hidden (also in doc of pattern)
 </font>
 * <font color="red">rebar handle sub-dependencies with soft links
 </font>
-* <font color="red">noterm - refactor gen_command:load_command pattern
+* <font color="red">refactor gen_command:load_command pattern
 </font>
-* <font color="red">...plus 49 more (see TODO.edoc)
+* <font color="red">noterm - refactor console as gen_command
+</font>
+* <font color="red">noterm - get rid of grace/2
+</font>
+* <font color="red">refactor noterm as packaged
+</font>
+* <font color="red">simplify noterm Makefile
+</font>
+* <font color="red">...plus 45 more (see TODO.edoc)
 </font>
 
 
@@ -153,3 +153,14 @@ more details.
 _Not yet implemented:_`nosh` will provide an NFS-style interface
   to CouchDB databases and views.
  
+
+##Modules##
+
+
+<table width="100%" border="0" summary="list of modules">
+<tr><td><a href="nosh.md" class="module">nosh</a></td></tr>
+<tr><td><a href="nosh_context.md" class="module">nosh_context</a></td></tr>
+<tr><td><a href="nosh_eval.md" class="module">nosh_eval</a></td></tr>
+<tr><td><a href="nosh_exec.md" class="module">nosh_exec</a></td></tr>
+<tr><td><a href="nosh_parse.md" class="module">nosh_parse</a></td></tr></table>
+

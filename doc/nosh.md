@@ -1,7 +1,8 @@
 
 
-#Module ?module#
+#Module nosh#
 * [Description](#description)
+* [Data Types](#types)
 * [Function Index](#index)
 * [Function Details](#functions)
 
@@ -78,7 +79,20 @@ message form from the `nosh` process.
 
 The `nosh` process continues to run until it receives an end-of-file
 message from `noterm`.  This is currently produced by typing a period
-(`.`) by itself on a line, followed by a `<newline>`.<a name="index"></a>
+(`.`) by itself on a line, followed by a `<newline>`.
+<a name="types"></a>
+
+##Data Types##
+
+
+
+
+###<a name="type-env_prop">env_prop()</a>##
+
+
+
+	env_prop() = atom() | {atom(), string()}
+<a name="index"></a>
 
 ##Function Index##
 
@@ -102,7 +116,7 @@ message from `noterm`.  This is currently produced by typing a period
 ###run/3##
 
 
-	run(IO::#std{}, ARG::#arg{}, ENV::#env{}) -&gt; no_return()
+	run(IO::#std{in = pid(), out = pid(), err = pid(), echo = boolean()}, ARG::#arg{cmd = atom(), v = list()}, ENV::#env{plist = [<a href="#type-env_prop">env_prop()</a>]}) -> no_return()
 <br></br>
 
 
