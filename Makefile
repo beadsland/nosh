@@ -74,6 +74,8 @@ else
 	FOLD	= sed -nu ':p;s/\([^\n]\{80\}\)\([^\n]\)/\1\n \2/;tp;p'
 endif
 
+PUSHFOR	= for file in dev/*; do sh -c "cd $$file; git push origin master"; done
+
 #
 # Execution rules start
 #
@@ -135,26 +137,8 @@ push:		push-libs push-superl push-nosh
 
 push-nosh:	online
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
-			then (git push origin master); fi
+		then (git push origin master); fi
 
-push-libs:	push-noterm push-pose push-bin push-erl push-superl
-
-push-noterm:	online
+push-libs:	online
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
-			then (cd ../noterm; git push origin master); fi
-
-push-pose:	online
-	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
-			then (cd ../pose; git push origin master); fi
-
-push-bin:	online
-	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
-			then (cd ../nosh_bin; git push origin master); fi
-
-push-erl:	online
-	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
-			then (cd ../nosh_erl; git push origin master); fi
-
-push-superl:	online
-	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
-			then (cd ../superl; git push origin master); fi
+		then (bash -c '$(PUSHFOR)'); fi
