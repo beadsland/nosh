@@ -99,7 +99,7 @@
 % API entry points
 -export([start/0, start/1, run/3]).
 
-% Hidden callbacks
+% Private callbacks
 -export([do_run/2]).
 
 % private exports
@@ -125,7 +125,7 @@ run(IO, ARG, ENV) -> gen_command:run(IO, ARG, ENV, ?MODULE).
 %% Callback Functions
 %%
 
-%% @hidden Callback entry point for gen_command behaviour.
+%% @private Callback entry point for gen_command behaviour.
 do_run(IO, _ARG) ->
   ?STDOUT("Starting Nosh ~s nosql shell ~p~n", [?VERSION(?MODULE), self()]),
   ?DEBUG("Using rev. ~s command line parser~n", [?VERSION(nosh_parse)]),
