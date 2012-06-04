@@ -53,7 +53,7 @@ TODO_MORE	=	`wc -l TODO.edoc | awk '{print $$1 - 7}'`
 
 ifeq ($(DEV),yes)
 	POSE	=	-pa dev/pose/ebin
-	ERL	=	erl -noshell -i dev -dev yes $(POSE)
+	ERL	=	erl -noshell -i dev -deps dev $(POSE)
 else
 	POSE	=	-pa deps/pose/ebin
 	ERL	=	erl -noshell -i deps $(POSE)
