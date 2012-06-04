@@ -1,12 +1,13 @@
-@todo simplify push
-@todo pose path based on deps
+@todo confirm safe_format giving trace
+@todo pose path based on deps unless -dev yes
+@todo find folderl on new dev based path
+@todo make option -deps dev not -dev yes
+@todo confirm still work w/o dev
 @todo rebar.config.script - noterm debug notice
 @todo erl_opts deps w/out ../..
 @todo escript folderl
 @todo -*-Erlang-*- in license line 1
 @todo escript nosh
-@todo deps/bin as nosh_bin
-@todo deps/erl as nosh_erl
 @todo refactor gen_command:load_command pattern
 @todo noterm - refactor console as gen_command
 @todo noterm - get rid of grace/2

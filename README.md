@@ -11,11 +11,13 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">skip doc for workspace clears nosh doc
+* <font color="red">pose path based on deps unless -dev yes
 </font>
-* <font color="red">simplify push
+* <font color="red">find folderl on new dev based path
 </font>
-* <font color="red">pose path based on deps
+* <font color="red">make option -deps dev not -dev yes
+</font>
+* <font color="red">confirm still work w/o dev
 </font>
 * <font color="red">rebar.config.script - noterm debug notice
 </font>
@@ -23,9 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">escript folderl
 </font>
-* <font color="red">-*-Erlang-*- in license line 1
-</font>
-* <font color="red">...plus 53 more (see TODO.edoc)
+* <font color="red">...plus 52 more (see TODO.edoc)
 </font>
 
 

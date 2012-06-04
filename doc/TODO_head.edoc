@@ -1,8 +1,8 @@
-@todo skip doc for workspace clears nosh doc
-@todo simplify push
-@todo pose path based on deps
+@todo pose path based on deps unless -dev yes
+@todo find folderl on new dev based path
+@todo make option -deps dev not -dev yes
+@todo confirm still work w/o dev
 @todo rebar.config.script - noterm debug notice
 @todo erl_opts deps w/out ../..
 @todo escript folderl
-@todo -*-Erlang-*- in license line 1
-@todo ...plus 53 more (see TODO.edoc)
+@todo ...plus 52 more (see TODO.edoc)
