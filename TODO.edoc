@@ -1,6 +1,3 @@
-@todo confirm safe_format giving trace
-@todo pose path based on deps unless -dev yes
-@todo find folderl on new dev based path
 @todo make option -deps dev not -dev yes
 @todo confirm still work w/o dev
 @todo rebar.config.script - noterm debug notice

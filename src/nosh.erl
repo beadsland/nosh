@@ -146,7 +146,7 @@ loop(IO, Cmd, CmdPid) ->
       do_exit(IO, Cmd, CmdPid, ExitPid, Reason);
     {stdout, Stdin, Line} when CmdPid == self(),
                             Stdin == IO#std.in  ->
-      do_line(IO, Line);
+      do_line(IO, Cmd, CmdPid, Line);
     {MsgTag, CmdPid, Payload} 					->
       do_output(IO, Cmd, CmdPid, MsgTag, Payload);
     Noise when CmdPid == self() 				->
@@ -167,28 +167,35 @@ do_output(IO, Command, CmdPid, MsgTag, Output) ->
 %% Handle next command line to execute.
 %% @todo refactor `hot' and `good' as library commands
 %% @todo refactor bang commands as direct invocations
-do_line(IO, Line) ->
+do_line(IO, Cmd, CmdPid, Line) ->
   if IO#std.echo -> ?STDOUT(Line); true -> false end,
   case Line of
     "stop\n" -> exit(ok);
     [$! | BangCmd]  ->
-      do_loadrun(IO, "bang " ++ BangCmd);
+      do_loadrun(IO, Cmd, CmdPid, "bang " ++ BangCmd);
     _Line ->
       case re:run(Line, "\ ", [{capture, none}]) of
         match   -> do_parse(IO, Line);
-        nomatch -> do_loadrun(IO, Line)
+        nomatch -> do_loadrun(IO, Cmd, CmdPid, Line)
       end
   end.
 
 % Pass command to load. (We're bypassing parse here.)
 %% @todo this should be run, not exec (why are we using exec??)
-do_loadrun(IO, Line) ->
+do_loadrun(IO, Cmd, CmdPid, Line) ->
   ?DEBUG("Hack run attempt: ~s", [Line]),
-  [Command | Words] = [list_to_atom(X) || X <- string:tokens(Line, " \n")],
-  CmdPid = spawn_link(pose, exec, [?IO(self()), ?ARG(Command, Words)]),
-  CmdPid ! {stdin, self(), eof},
-  ?DEBUG("Running ~p as ~p~n", [Command, CmdPid]),
-  ?MODULE:loop(IO, Command, CmdPid).
+  case [list_to_atom(X) || X <- string:tokens(Line, " \n")] of
+    [RunCmd | Words]   ->
+      RunPid = spawn_link(pose, exec, [?IO(self()), ?ARG(RunCmd, Words)]),
+      RunPid ! {stdin, self(), eof},
+      ?DEBUG("Running ~p as ~p~n", [RunCmd, RunPid]),
+      ?MODULE:loop(IO, RunCmd, RunPid);
+    _Else               ->
+      ?DEBUG("Nothing to do\n"),
+      ?PROMPT,
+      ?MODULE:loop(IO, Cmd, CmdPid)
+  end.
+
 
 % Parse command line.
 do_parse(IO, Line) ->

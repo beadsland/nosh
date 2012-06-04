@@ -11,6 +11,8 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
+* <font color="red">badmatch on left arrow
+</font>
 * <font color="red">pose path based on deps unless -dev yes
 </font>
 * <font color="red">find folderl on new dev based path
@@ -23,9 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">erl_opts deps w/out ../..
 </font>
-* <font color="red">escript folderl
-</font>
-* <font color="red">...plus 52 more (see TODO.edoc)
+* <font color="red">...plus 53 more (see TODO.edoc)
 </font>
 
 
