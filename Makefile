@@ -65,7 +65,7 @@ FOLDERL	=	-s pose start folderl
 NOTERM	=	$(SUPERL) $(POSURE) -s pose start noterm
 STOP 	= 	-s init stop
 
-ORAGAMI	=	$(shell echo folderl | $(ERL) $(FOLDERL) $(STOP) \
+ORAGAMI	=	$(shell echo folderl | $(ERL) $(FOLDERL) $(STOP) 2>&1 \
 					| grep '^folderl$$')
 
 ifeq ($(ORAGAMI),folderl)
@@ -133,7 +133,7 @@ todo:
 # Development rules start
 #
 
-push:		push-libs push-superl push-nosh
+push:		push-libs push-nosh
 
 push-nosh:	online
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \

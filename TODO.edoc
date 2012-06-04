@@ -1,5 +1,3 @@
-@todo confirm still work w/o dev
-@todo rebar.config.script - noterm debug notice
 @todo erl_opts deps w/out ../..
 @todo escript folderl
 @todo -*-Erlang-*- in license line 1

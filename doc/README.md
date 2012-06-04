@@ -11,11 +11,7 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">make option -deps dev not -dev yes
-</font>
 * <font color="red">confirm still work w/o dev
-</font>
-* <font color="red">rebar.config.script - noterm debug notice
 </font>
 * <font color="red">erl_opts deps w/out ../..
 </font>
@@ -25,7 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">escript nosh
 </font>
-* <font color="red">...plus 50 more (see TODO.edoc)
+* <font color="red">refactor gen_command:load_command pattern
+</font>
+* <font color="red">noterm - refactor console as gen_command
+</font>
+* <font color="red">...plus 48 more (see TODO.edoc)
 </font>
 
 
