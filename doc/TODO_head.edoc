@@ -1,8 +1,8 @@
-@todo confirm still work w/o dev
 @todo erl_opts deps w/out ../..
 @todo escript folderl
 @todo -*-Erlang-*- in license line 1
 @todo escript nosh
 @todo refactor gen_command:load_command pattern
 @todo noterm - refactor console as gen_command
-@todo ...plus 48 more (see TODO.edoc)
+@todo noterm - get rid of grace/2
+@todo ...plus 47 more (see TODO.edoc)

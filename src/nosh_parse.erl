@@ -271,7 +271,7 @@
 %%
 
 -define(debug, true).
--include("pose/include/interface.hrl").
+-include_lib("pose/include/interface.hrl").
 
 -define(QUOTE_CHARS, "\\\\\"\'\`\n").
 -define(GROUP_CHARS, "\;\(\)\&\|").

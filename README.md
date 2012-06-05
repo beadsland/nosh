@@ -11,8 +11,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">confirm still work w/o dev
-</font>
 * <font color="red">erl_opts deps w/out ../..
 </font>
 * <font color="red">escript folderl
@@ -25,7 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">noterm - refactor console as gen_command
 </font>
-* <font color="red">...plus 48 more (see TODO.edoc)
+* <font color="red">noterm - get rid of grace/2
+</font>
+* <font color="red">...plus 47 more (see TODO.edoc)
 </font>
 
 

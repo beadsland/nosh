@@ -1,4 +1,3 @@
-@todo erl_opts deps w/out ../..
 @todo escript folderl
 @todo -*-Erlang-*- in license line 1
 @todo escript nosh
