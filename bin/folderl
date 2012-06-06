@@ -1,0 +1,6 @@
+#!/usr/bin/env escript
+%% -*- erlang -*-
+%%! -i dev -pa dev/pose/ebin
+main(_) ->
+    process_flag(trap_exit, true),
+    pose:start([folderl]).

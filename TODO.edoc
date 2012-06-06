@@ -1,6 +1,11 @@
-@todo escript folderl
+@todo suppress "Running Erlang"
+@todo suppress "Starting pose"
+@todo folderl path agnostic
+@todo folderl deps
+@todo confirm need -i at all
 @todo -*-Erlang-*- in license line 1
 @todo escript nosh
+@todo nosh uparrow history
 @todo refactor gen_command:load_command pattern
 @todo noterm - refactor console as gen_command
 @todo noterm - get rid of grace/2
