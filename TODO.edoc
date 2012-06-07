@@ -1,3 +1,4 @@
+@todo pose bootstrap reload pose
 @todo suppress "Running Erlang"
 @todo suppress "Starting pose"
 @todo folderl path agnostic
