@@ -65,11 +65,11 @@ FOLDERL	=	-s pose start folderl
 NOTERM	=	$(SUPERL) $(POSURE) -s pose start noterm
 STOP 	= 	-s init stop
 
-ORAGAMI	=	$(shell echo folderl | $(ERL) $(FOLDERL) $(STOP) 2>&1 \
+ORAGAMI	=	$(shell echo folderl | bin/pose folderl 2>&1 \
 					| grep '^folderl$$')
 
 ifeq ($(ORAGAMI),folderl)
-	FOLD	= $(ERL) $(FOLDERL) $(STOP)
+	FOLD	= bin/pose folderl
 else
 	FOLD	= sed -nu ':p;s/\([^\n]\{80\}\)\([^\n]\)/\1\n \2/;tp;p'
 endif

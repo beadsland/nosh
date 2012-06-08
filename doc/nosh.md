@@ -14,7 +14,7 @@ Copyright (c) 2012 Beads D. Land-Trujillo
 
 __Version:__ 0.1.15
 
-__Behaviours:__ [`gen_command`](gen_command.md).
+__Behaviours:__ [`gen_command`](d:/workspace/nosh/dev/pose/doc/gen_command.md).
 
 __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).<a name="description"></a>
 
