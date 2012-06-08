@@ -4,6 +4,8 @@
 main(Param) ->
     process_flag(trap_exit, true),
 
+    if Param == [] -> io:format("No command\n"), halt(1); true -> false end,
+
     % application directories
     BinDir = filename:absname(filename:dirname(escript:script_name())),
     AppDir = filename:absname_join(BinDir, ".."),
