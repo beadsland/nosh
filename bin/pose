@@ -1,8 +1,12 @@
 #!/usr/bin/env escript
 %% -*- erlang -*-
-%%! -i dev -pa dev/pose/ebin -deps dev
+%%! -deps dev
 main(Param) ->
     process_flag(trap_exit, true),
+    BinDir = filename:absname(filename:dirname(escript:script_name())),
+    file:set_cwd(lists:append(BinDir, "/..")),
+    DepsDir = filename:absname_join(BinDir, "../dev"),
+    code:add_pathz(lists:append(DepsDir, "/pose/ebin")),
     main(Param, [gen_command, pose]).
 
 main(Param, []) -> pose:start(Param);
