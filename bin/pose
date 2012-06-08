@@ -4,19 +4,14 @@
 main(Param) ->
     process_flag(trap_exit, true),
 
+    % application directories
     BinDir = filename:absname(filename:dirname(escript:script_name())),
-    file:set_cwd(filename:absname_join(BinDir, "..")),
-    DepsDir = filename:absname_join(BinDir, "../dev"),
-    PoseEbinDir = filename:join(DepsDir, "pose/ebin"),
-    code:add_pathz(PoseEbinDir),
+    AppDir = filename:absname_join(BinDir, ".."),
+    DepsDir = filename:absname_join(AppDir, "dev"),
 
-    PoseSrcDir = filename:join(DepsDir, "pose/src"),
-    WildCard = filelib:wildcard("*.erl", PoseSrcDir),
-    {ok, MP} = re:compile("\\.erl\$"),
-    Opts = [{return, list}],
-    Modules = [re:replace(X, MP, "", Opts) || X <- WildCard],
-    compile(DepsDir, Modules),
-
+    % get situated
+    file:set_cwd(AppDir),
+    compile_pose(DepsDir),
     main(Param, [gen_command, pose]).
 
 main(Param, []) -> pose:start(Param);
@@ -24,19 +19,29 @@ main(Param, [Head | Tail]) ->
     pose_command:load_command(Head),
     main(Param, Tail).
 
-compile(_DepsDir, []) -> true;
-compile(DepsDir, [Head | Tail]) ->
+compile_pose(DepsDir) ->
     PoseEbinDir = filename:join(DepsDir, "pose/ebin"),
+    PoseSrcDir = filename:join(DepsDir, "pose/src"),
+
+    code:add_pathz(PoseEbinDir),
+
+    WildCard = filelib:wildcard("*.erl", PoseSrcDir),
+    {ok, MP} = re:compile("\\.erl\$"),
+    Opts = [{return, list}],
+    Modules = [re:replace(X, MP, "", Opts) || X <- WildCard],
+    compile_app(DepsDir, PoseEbinDir, PoseSrcDir, Modules).
+
+compile_app(_DepsDir, _PoseEbinDir, _PoseSrcDir, []) -> true;
+compile_app(DepsDir, PoseEbinDir, PoseSrcDir, [Head | Tail]) ->
     PoseEbinFile = lists:append(Head, ".beam"),
     case filelib:is_file(filename:join(PoseEbinDir, PoseEbinFile)) of
-        false -> compile(DepsDir, Head, PoseEbinDir);
+        false -> compile(DepsDir, PoseEbinDir, PoseSrcDir, Head);
         true  -> false
     end,
-    compile(DepsDir, Tail).
+    compile_app(DepsDir, PoseEbinDir, PoseSrcDir, Tail).
 
-compile(DepsDir, Module, PoseEbinDir) ->
-    PoseSrcDir = filename:join(DepsDir, "pose/src"),
-    PoseSrcFile = lists:append(atom_to_list(Module), ".erl"),
+compile(DepsDir, PoseEbinDir, PoseSrcDir, ModuleName) ->
+    PoseSrcFile = lists:append(ModuleName, ".erl"),
 
     Options = [verbose, warnings_as_errors, return_errors,
                {outdir, PoseEbinDir}, {i, DepsDir}],
