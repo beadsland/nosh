@@ -48,7 +48,7 @@ compile(DepsDir, PoseEbinDir, PoseSrcDir, ModuleName) ->
     case compile:file(Filename, Options) of
         {ok, Module, Binary} ->
             code:load_binary(Module, Filename, Binary);
-        Else                ->
+        _Else                ->
             io:format("Failed to compile ~s~n", [ModuleName]),
             exit(bootstrap_failed)
     end.
