@@ -42,7 +42,13 @@ compile_app(DepsDir, PoseEbinDir, PoseSrcDir, [Head | Tail]) ->
 
 compile(DepsDir, PoseEbinDir, PoseSrcDir, ModuleName) ->
     PoseSrcFile = lists:append(ModuleName, ".erl"),
-
-    Options = [verbose, warnings_as_errors, return_errors,
+    Filename = filename:join(PoseSrcDir, PoseSrcFile),
+    Options = [verbose, warnings_as_errors, return_errors, binary,
                {outdir, PoseEbinDir}, {i, DepsDir}],
-    compile:file(filename:join(PoseSrcDir, PoseSrcFile), Options).
+    case compile:file(Filename, Options) of
+        {ok, Module, Binary} ->
+            code:load_binary(Module, Filename, Binary);
+        Else                ->
+            io:format("Failed to compile ~s~n", [ModuleName]),
+            exit(bootstrap_failed)
+    end.
