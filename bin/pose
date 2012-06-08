@@ -14,7 +14,7 @@ main(Param) ->
     % get situated
     file:set_cwd(AppDir),
     compile_pose(DepsDir),
-    main(Param, [gen_command, pose]).
+    main([list_to_atom(X) || X <- Param], [gen_command, pose]).
 
 main(Param, []) -> pose:start(Param);
 main(Param, [Head | Tail]) ->
