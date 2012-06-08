@@ -1,4 +1,3 @@
-@todo bin/pose compile pose_command
 @todo bin/pose deps
 @todo bin/pose for nosh, good, superl
 @todo confirm need -i at all
