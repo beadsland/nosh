@@ -3,4 +3,9 @@
 %%! -i dev -pa dev/pose/ebin -deps dev
 main(Param) ->
     process_flag(trap_exit, true),
-    pose:start(Param).
+    main(Param, [gen_command, pose]).
+
+main(Param, []) -> pose:start(Param);
+main(Param, [Head | Tail]) ->
+    pose_command:load_command(Head),
+    main(Param, Tail).
