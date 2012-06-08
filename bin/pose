@@ -9,7 +9,10 @@ main(Param) ->
     % application directories
     BinDir = filename:absname(filename:dirname(escript:script_name())),
     AppDir = filename:absname_join(BinDir, ".."),
-    DepsDir = filename:absname_join(AppDir, "dev"),
+    case init:get_argument(deps) of
+        undefined       -> DepsDir = filename:absname_join(AppDir, "deps");
+        {ok, [[Deps]]}  -> DepsDir = filename:absname_join(AppDir, Deps)
+    end,
 
     % get situated
     file:set_cwd(AppDir),
