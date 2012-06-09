@@ -44,8 +44,8 @@ main(Param, AppDir) ->
     if Param == [] -> io:format("No command\n"), halt(1); true -> false end,
 
     case init:get_argument(deps) of
-        undefined       -> DepsDir = filename:absname_join(AppDir, "deps");
-        {ok, [[Deps]]}  -> DepsDir = filename:absname_join(AppDir, Deps)
+        {ok, [[Deps]]}  -> DepsDir = filename:absname_join(AppDir, Deps);
+        _Else           -> DepsDir = filename:absname_join(AppDir, "deps")
     end,
     file:set_cwd(AppDir),
     compile_pose(DepsDir),
@@ -94,6 +94,6 @@ compile(DepsDir, PoseEbinDir, PoseSrcDir, ModuleName) ->
         {ok, Module, Binary} ->
             code:load_binary(Module, Filename, Binary);
         _Else                ->
-            io:format("Failed to compile ~s~n", [ModuleName]),
-            exit(bootstrap_failed)
+            io:format("** ~s: compile failed~n", [ModuleName]),
+            halt()
     end.

@@ -1,6 +1,5 @@
 #!/usr/bin/env escript
 %% -*- erlang -*-
-%%! -deps dev
 
 main(Param) ->
     BinDir = filename:absname(filename:dirname(escript:script_name())),
@@ -11,12 +10,12 @@ main(Param) ->
     Filename = filename:join(SrcDir, "bootstrap.erl"),
     Options = [verbose, warnings_as_errors, return_errors, binary,
                {outdir, EbinDir}],
+
     case compile:file(Filename, Options) of
         {ok, Module, Binary} ->
-            code:load_binary(Module, Filename, Binary);
+            code:load_binary(Module, Filename, Binary),
+            bootstrap:main(Param, AppDir);
         _Else                ->
-            io:format("Failed to bootstrap\n"),
-            exit(bootstrap_failed)
-    end,
+            io:format("** bootstrap: compile failed\n")
+    end.
 
-    bootstrap:main(Param, AppDir).
