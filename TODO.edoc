@@ -1,5 +1,4 @@
-@todo -*-Erlang-*- in license line 1
-@todo simplified makefile
+@todo pass -deps via rebar (no .script)
 @todo nosh uparrow history
 @todo refactor gen_command:load_command pattern
 @todo noterm - refactor console as gen_command

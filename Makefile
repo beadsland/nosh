@@ -28,28 +28,15 @@
 
 SHELL	= 	/bin/sh
 
+#
+# Figure out if development or production
+#
+
 ifeq ($(COMPUTERNAME),GOVMESH-BOOK)
 	DEV		=	yes
 else
 	DEV		=	no
 endif
-
-ifeq ($(shell which ping),/cygdrive/c/Windows/system32/ping)
-	PING	=	ping -n 1
-else
-	PING	=	ping -c1
-endif
-
-ONLINE	=	`$(PING) www.google.com 2>&1 >/dev/null; \
-			if [ "$$?" -eq "0" ]; then (echo yes); \
-			else (echo no); fi`
-TTY	=	`tty`
-
-SUCCINCT	=	grep -v "Entering directory" \
-				| grep -v "Leaving directory"
-CROWBAR	=	rebar _cmds_ | $(SUCCINCT) 2>&1 | $(FOLD)
-
-TODO_MORE	=	`wc -l TODO.edoc | awk '{print $$1 - 7}'`
 
 ifeq ($(DEV),yes)
 	POSE	=	bin/dose
@@ -59,19 +46,42 @@ else
 	ERL	=	erl -noshell -i deps $(POSE)
 endif
 
-POSURE	=	-s pose start posure
-SUPERL	=	-s pose start superl
-FOLDERL	=	-s pose start folderl
-NOTERM	=	$(SUPERL) $(POSURE) -s pose start noterm
-STOP 	= 	-s init stop
+#
+# Figure out if online or offline
+#
 
-ORAGAMI	=	$(shell echo folderl | $(POSE) folderl 2>&1 | grep '^folderl$$')
+ifeq ($(shell which ping),/cygdrive/c/Windows/system32/ping)
+	PING	=	ping -n 1
+else
+	PING	=	ping -c1
+endif
+
+ONLINE	= `$(PING) www.google.com 2>&1 >/dev/null; \
+		if [ "$$?" -eq "0" ]; then (echo yes); \
+		else (echo no); fi`
+
+#
+# Confirm we can use folderl, otherwise default to sed 
+#
+
+ORAGAMI	= $(shell echo folderl | $(POSE) folderl 2>&1 | grep '^folderl$$')
 
 ifeq ($(ORAGAMI),folderl)
 	FOLD	= $(POSE) folderl
 else
 	FOLD	= sed -nu ':p;s/\([^\n]\{80\}\)\([^\n]\)/\1\n \2/;tp;p'
 endif
+
+#
+# Macros for commands invoked by rules
+#
+
+TTY	=	`tty`
+
+SUCCINCT =	grep -v "Entering directory" | grep -v "Leaving directory"
+CROWBAR	=	rebar _cmds_ | $(SUCCINCT) 2>&1 | $(FOLD)
+
+TODO_MORE =	`wc -l TODO.edoc | awk '{print $$1 - 7}'`
 
 PUSHFOR	= for file in dev/*; do sh -c "cd $$file; git push origin master"; done
 
@@ -100,18 +110,23 @@ good:
 	@$(POSE) superl
 	@$(POSE) posure
 
-doc:	compile
+doc:		todo
+	@if [ "$(DEV)" == yes ]; \
+		then REBAR_DEPS=dev; export REBAR_DEPS; fi; \
+		$(CROWBAR:_cmds_=doc)
 	
-compile:	todo
-	@rm -f *.dump doc/*.md doc/*.html
+compile:	todo neat
 	@if [ "$(DEV)" == yes ]; \
 		then REBAR_DEPS=dev; export REBAR_DEPS; fi; \
 		$(CROWBAR:_cmds_=compile doc)
 
-current:	push-libs todo
+current:	push-libs todo neat
 	@if [ "$(ONLINE)" == yes ]; then \
 		$(CROWBAR:_cmds_=update-deps compile doc); else \
 		$(CROWBAR:_cmds_=compile doc); fi
+
+neat:
+	@rm -f *.dump doc/*.md doc/*.html
 
 clean: 		online
 	@if [ "$(ONLINE)" == yes ]; \
