@@ -1,4 +1,4 @@
-%% CDDL HEADER START
+%% CDDL HEADER START    -*-Erlang-*-
 %% -----------------------------------------------------------------------
 %% The contents of this file are subject to the Common Development and
 %% Distribution License, Version 1.0 (the "License"); you may not use
