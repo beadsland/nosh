@@ -41,6 +41,7 @@ endif
 ifeq ($(DEV),yes)
 	POSE	=	bin/dose
 	ERL	=	erl -noshell -i dev -deps dev $(POSE)
+	DEPS	=	ERL_FLAGS="-deps dev"
 else
 	POSE	=	bin/pose
 	ERL	=	erl -noshell -i deps $(POSE)
@@ -79,7 +80,7 @@ endif
 TTY	=	`tty`
 
 SUCCINCT =	grep -v "Entering directory" | grep -v "Leaving directory"
-CROWBAR	=	rebar _cmds_ | $(SUCCINCT) 2>&1 | $(FOLD)
+CROWBAR	=	$(DEPS) rebar _cmds_ | $(SUCCINCT) 2>&1 | $(FOLD)
 
 TODO_MORE =	`wc -l TODO.edoc | awk '{print $$1 - 7}'`
 
@@ -111,14 +112,10 @@ good:
 	@$(POSE) posure
 
 doc:		todo
-	@if [ "$(DEV)" == yes ]; \
-		then REBAR_DEPS=dev; export REBAR_DEPS; fi; \
-		$(CROWBAR:_cmds_=doc)
+	@$(CROWBAR:_cmds_=doc)
 	
 compile:	todo neat
-	@if [ "$(DEV)" == yes ]; \
-		then REBAR_DEPS=dev; export REBAR_DEPS; fi; \
-		$(CROWBAR:_cmds_=compile doc)
+	@$(CROWBAR:_cmds_=compile doc)
 
 current:	push-libs todo neat
 	@if [ "$(ONLINE)" == yes ]; then \

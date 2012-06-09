@@ -11,11 +11,11 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">nosh alias
+* <font color="red">pass -deps via rebar (no .script)
 </font>
-* <font color="red">-*-Erlang-*- in license line 1
+* <font color="red">make -prod flag
 </font>
-* <font color="red">simplified makefile
+* <font color="red">erlang memory leak
 </font>
 * <font color="red">nosh uparrow history
 </font>

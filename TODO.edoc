@@ -1,7 +1,5 @@
-@todo pass -deps via rebar (no .script)
 @todo make -prod flag
 @todo erlang memory leak
-@todo nosh uparrow history
 @todo refactor gen_command:load_command pattern
 @todo noterm - refactor console as gen_command
 @todo noterm - get rid of grace/2
