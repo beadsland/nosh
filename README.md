@@ -11,21 +11,21 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">suppress "Starting pose"
-</font>
-* <font color="red">folderl path agnostic
-</font>
-* <font color="red">folderl deps
-</font>
-* <font color="red">confirm need -i at all
+* <font color="red">nosh alias
 </font>
 * <font color="red">-*-Erlang-*- in license line 1
 </font>
-* <font color="red">escript nosh
+* <font color="red">simplified makefile
 </font>
 * <font color="red">nosh uparrow history
 </font>
-* <font color="red">...plus 50 more (see TODO.edoc)
+* <font color="red">refactor gen_command:load_command pattern
+</font>
+* <font color="red">noterm - refactor console as gen_command
+</font>
+* <font color="red">noterm - get rid of grace/2
+</font>
+* <font color="red">...plus 47 more (see TODO.edoc)
 </font>
 
 
@@ -158,6 +158,7 @@ _Not yet implemented:_`nosh` will provide an NFS-style interface
 
 
 <table width="100%" border="0" summary="list of modules">
+<tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/bootstrap.md" class="module">bootstrap</a></td></tr>
 <tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/nosh.md" class="module">nosh</a></td></tr>
 <tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/nosh_context.md" class="module">nosh_context</a></td></tr>
 <tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/nosh_eval.md" class="module">nosh_eval</a></td></tr>

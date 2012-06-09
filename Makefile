@@ -52,10 +52,10 @@ CROWBAR	=	rebar _cmds_ | $(SUCCINCT) 2>&1 | $(FOLD)
 TODO_MORE	=	`wc -l TODO.edoc | awk '{print $$1 - 7}'`
 
 ifeq ($(DEV),yes)
-	POSE	=	-pa dev/pose/ebin
+	POSE	=	bin/dose
 	ERL	=	erl -noshell -i dev -deps dev $(POSE)
 else
-	POSE	=	-pa deps/pose/ebin
+	POSE	=	bin/pose
 	ERL	=	erl -noshell -i deps $(POSE)
 endif
 
@@ -65,11 +65,10 @@ FOLDERL	=	-s pose start folderl
 NOTERM	=	$(SUPERL) $(POSURE) -s pose start noterm
 STOP 	= 	-s init stop
 
-ORAGAMI	=	$(shell echo folderl | bin/pose folderl 2>&1 \
-					| grep '^folderl$$')
+ORAGAMI	=	$(shell echo folderl | $(POSE) folderl 2>&1 | grep '^folderl$$')
 
 ifeq ($(ORAGAMI),folderl)
-	FOLD	= bin/pose folderl
+	FOLD	= $(POSE) folderl
 else
 	FOLD	= sed -nu ':p;s/\([^\n]\{80\}\)\([^\n]\)/\1\n \2/;tp;p'
 endif
@@ -80,14 +79,14 @@ PUSHFOR	= for file in dev/*; do sh -c "cd $$file; git push origin master"; done
 # Execution rules start
 #
 
-all:		current push-nosh nosh
+all:		current push-nosh run
 
-run:		compile nosh
+run:		compile good nosh
 
 nosh:	tabs
 	@if [ "$(TTY)" == "not a tty" ]; \
-		then ($(ERL) $(NOTERM) echo $(STOP)); \
-		else ($(ERL) $(NOTERM) $(STOP)); \
+		then ($(POSE) noterm echo); \
+		else ($(POSE) noterm); \
 	fi 2>&1 | $(FOLD)
 
 tabs:
@@ -97,8 +96,9 @@ tabs:
 # Build rules start
 #
 
-good:	compile
-	@$(ERL) $(SUPERL) $(POSURE) $(STOP)
+good:
+	@$(POSE) superl
+	@$(POSE) posure
 
 doc:	compile
 	

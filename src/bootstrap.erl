@@ -44,8 +44,8 @@ main(Param, AppDir) ->
     if Param == [] -> io:format("No command\n"), halt(1); true -> false end,
 
     case init:get_argument(deps) of
-        {ok, [[Deps]]}  -> DepsDir = filename:absname_join(AppDir, Deps);
-        _Else           -> DepsDir = filename:absname_join(AppDir, "deps")
+        {ok, [[Deps]]}  -> DepsDir = filename:join(AppDir, Deps);
+        _Else           -> DepsDir = filename:join(AppDir, "deps")
     end,
     file:set_cwd(AppDir),
     compile_pose(DepsDir),
@@ -90,6 +90,7 @@ compile(DepsDir, PoseEbinDir, PoseSrcDir, ModuleName) ->
     Filename = filename:join(PoseSrcDir, PoseSrcFile),
     Options = [verbose, warnings_as_errors, return_errors, binary,
                {outdir, PoseEbinDir}, {i, DepsDir}],
+    io:format("~p~n", [{Filename, Options}]),
     case compile:file(Filename, Options) of
         {ok, Module, Binary} ->
             code:load_binary(Module, Filename, Binary);

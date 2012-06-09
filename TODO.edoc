@@ -1,8 +1,5 @@
-@todo bin/pose deps
-@todo bin/pose for nosh, good, superl
-@todo confirm need -i at all
 @todo -*-Erlang-*- in license line 1
-@todo escript nosh
+@todo simplified makefile
 @todo nosh uparrow history
 @todo refactor gen_command:load_command pattern
 @todo noterm - refactor console as gen_command

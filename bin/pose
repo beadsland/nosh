@@ -2,10 +2,10 @@
 %% -*- erlang -*-
 
 main(Param) ->
-    BinDir = filename:absname(filename:dirname(escript:script_name())),
-    AppDir = filename:absname_join(BinDir, ".."),
-    EbinDir = filename:absname_join(AppDir, "ebin"),
-    SrcDir = filename:absname_join(AppDir, "src"),
+    BinDir = filename:dirname(escript:script_name()),
+    AppDir = filename:join(BinDir, ".."),
+    EbinDir = filename:join(AppDir, "ebin"),
+    SrcDir = filename:join(AppDir, "src"),
 
     Filename = filename:join(SrcDir, "bootstrap.erl"),
     Options = [verbose, warnings_as_errors, return_errors, binary,
