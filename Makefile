@@ -33,7 +33,7 @@ SHELL	= 	/bin/sh
 #
 
 ifeq ($(COMPUTERNAME),GOVMESH-BOOK)
-	DEV		=	yes
+	DEV		=	$(if $(PROD),no,yes)
 else
 	DEV		=	no
 endif

@@ -1,4 +1,3 @@
-@todo make -prod flag
 @todo erlang memory leak
 @todo refactor gen_command:load_command pattern
 @todo noterm - refactor console as gen_command
