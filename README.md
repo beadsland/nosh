@@ -11,13 +11,11 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">pass -deps via rebar (no .script)
+* <font color="red">faster charin
 </font>
-* <font color="red">make -prod flag
+* <font color="red">ps format
 </font>
 * <font color="red">erlang memory leak
-</font>
-* <font color="red">nosh uparrow history
 </font>
 * <font color="red">refactor gen_command:load_command pattern
 </font>
@@ -25,7 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">noterm - get rid of grace/2
 </font>
-* <font color="red">...plus 47 more (see TODO.edoc)
+* <font color="red">refactor noterm as packaged
+</font>
+* <font color="red">...plus 46 more (see TODO.edoc)
 </font>
 
 

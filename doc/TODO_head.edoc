@@ -1,8 +1,8 @@
-@todo pass -deps via rebar (no .script)
-@todo make -prod flag
+@todo faster charin
+@todo ps format
 @todo erlang memory leak
-@todo nosh uparrow history
 @todo refactor gen_command:load_command pattern
 @todo noterm - refactor console as gen_command
 @todo noterm - get rid of grace/2
-@todo ...plus 47 more (see TODO.edoc)
+@todo refactor noterm as packaged
+@todo ...plus 46 more (see TODO.edoc)
