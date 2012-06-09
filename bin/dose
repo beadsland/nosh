@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+ERL_AFLAGS="-deps dev"
+export ERL_AFLAGS
+DIR=`dirname ${BASH_SOURCE[0]}`
+$DIR/pose $@
