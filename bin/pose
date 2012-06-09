@@ -1,59 +1,22 @@
 #!/usr/bin/env escript
 %% -*- erlang -*-
 %%! -deps dev
+
 main(Param) ->
-    process_flag(trap_exit, true),
-
-    if Param == [] -> io:format("No command\n"), halt(1); true -> false end,
-
-    % application directories
     BinDir = filename:absname(filename:dirname(escript:script_name())),
     AppDir = filename:absname_join(BinDir, ".."),
-    case init:get_argument(deps) of
-        undefined       -> DepsDir = filename:absname_join(AppDir, "deps");
-        {ok, [[Deps]]}  -> DepsDir = filename:absname_join(AppDir, Deps)
-    end,
+    EbinDir = filename:absname_join(AppDir, "ebin"),
+    SrcDir = filename:absname_join(AppDir, "src"),
 
-    % get situated
-    file:set_cwd(AppDir),
-    compile_pose(DepsDir),
-    main([list_to_atom(X) || X <- Param], [gen_command, pose]).
-
-main(Param, []) -> pose:start(Param);
-main(Param, [Head | Tail]) ->
-    pose_command:load_command(Head),
-    main(Param, Tail).
-
-compile_pose(DepsDir) ->
-    PoseEbinDir = filename:join(DepsDir, "pose/ebin"),
-    PoseSrcDir = filename:join(DepsDir, "pose/src"),
-
-    code:add_pathz(PoseEbinDir),
-
-    WildCard = filelib:wildcard("*.erl", PoseSrcDir),
-    {ok, MP} = re:compile("\\.erl\$"),
-    Opts = [{return, list}],
-    Modules = [re:replace(X, MP, "", Opts) || X <- WildCard],
-    compile_app(DepsDir, PoseEbinDir, PoseSrcDir, Modules).
-
-compile_app(_DepsDir, _PoseEbinDir, _PoseSrcDir, []) -> true;
-compile_app(DepsDir, PoseEbinDir, PoseSrcDir, [Head | Tail]) ->
-    PoseEbinFile = lists:append(Head, ".beam"),
-    case filelib:is_file(filename:join(PoseEbinDir, PoseEbinFile)) of
-        false -> compile(DepsDir, PoseEbinDir, PoseSrcDir, Head);
-        true  -> false
-    end,
-    compile_app(DepsDir, PoseEbinDir, PoseSrcDir, Tail).
-
-compile(DepsDir, PoseEbinDir, PoseSrcDir, ModuleName) ->
-    PoseSrcFile = lists:append(ModuleName, ".erl"),
-    Filename = filename:join(PoseSrcDir, PoseSrcFile),
+    Filename = filename:join(SrcDir, "bootstrap.erl"),
     Options = [verbose, warnings_as_errors, return_errors, binary,
-               {outdir, PoseEbinDir}, {i, DepsDir}],
+               {outdir, EbinDir}],
     case compile:file(Filename, Options) of
         {ok, Module, Binary} ->
             code:load_binary(Module, Filename, Binary);
         _Else                ->
-            io:format("Failed to compile ~s~n", [ModuleName]),
+            io:format("Failed to bootstrap\n"),
             exit(bootstrap_failed)
-    end.
+    end,
+
+    bootstrap:main(Param, AppDir).
