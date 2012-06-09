@@ -90,7 +90,6 @@ compile(DepsDir, PoseEbinDir, PoseSrcDir, ModuleName) ->
     Filename = filename:join(PoseSrcDir, PoseSrcFile),
     Options = [verbose, warnings_as_errors, return_errors, binary,
                {outdir, PoseEbinDir}, {i, DepsDir}],
-    io:format("~p~n", [{Filename, Options}]),
     case compile:file(Filename, Options) of
         {ok, Module, Binary} ->
             code:load_binary(Module, Filename, Binary);
