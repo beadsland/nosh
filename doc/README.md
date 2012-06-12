@@ -11,21 +11,21 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">faster charin
+* <font color="red">noterm bootstrap edoc
 </font>
-* <font color="red">ps format
+* <font color="red">noterm bootstrap Makefile
 </font>
-* <font color="red">erlang memory leak
+* <font color="red">interlinked todos
 </font>
-* <font color="red">refactor gen_command:load_command pattern
+* <font color="red">move pose/dose to pose project (from noterm)
 </font>
-* <font color="red">noterm - refactor console as gen_command
+* <font color="red">move pose/dose to pose project (from nosh)
 </font>
-* <font color="red">noterm - get rid of grace/2
+* <font color="red">exit status superl
 </font>
-* <font color="red">refactor noterm as packaged
+* <font color="red">exit status posure
 </font>
-* <font color="red">...plus 46 more (see TODO.edoc)
+* <font color="red">...plus 57 more (see TODO.edoc)
 </font>
 
 

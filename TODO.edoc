@@ -1,6 +1,19 @@
-@todo faster charin
-@todo ps format
+@todo noterm dependency not avail
+@todo edoc via dev (nosh)
+@todo edoc via dev (noterm)
+@todo noterm bootstrap Makefile
+@todo interlinked todos
+@todo move pose/dose to pose project (from noterm)
+@todo move pose/dose to pose project (from nosh)
+@todo exit status superl
+@todo exit status posure
+@todo good folderl
+@todo ps: fold w/in column
+@todo ps: header/data tuples
+@todo ps command name
+@todo ps across nodes
 @todo erlang memory leak
+@todo catchup on email
 @todo refactor gen_command:load_command pattern
 @todo noterm - refactor console as gen_command
 @todo noterm - get rid of grace/2
