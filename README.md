@@ -11,21 +11,21 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">noterm bootstrap edoc
+* <font color="red">2do_go4 - basic functionality
 </font>
-* <font color="red">noterm bootstrap Makefile
+* <font color="red">2do_go4 - todo list
 </font>
-* <font color="red">interlinked todos
+* <font color="red">2do_go4 - integrate with nosh
 </font>
-* <font color="red">move pose/dose to pose project (from noterm)
+* <font color="red">2do_go4 - refactor/good
 </font>
-* <font color="red">move pose/dose to pose project (from nosh)
+* <font color="red">good confirm API functions first
 </font>
-* <font color="red">exit status superl
+* <font color="red">folderl exit stdin distinct from stdout
 </font>
-* <font color="red">exit status posure
+* <font color="red">edoc via dev (nosh)
 </font>
-* <font color="red">...plus 57 more (see TODO.edoc)
+* <font color="red">...plus 67 more (see TODO.edoc)
 </font>
 
 
