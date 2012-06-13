@@ -104,26 +104,35 @@ tabs:
 	@if [ "$(TTY)" != "not a tty" ]; then (tabs -1 >/dev/null); fi
 
 #
-# Build rules start
+# Build rules
 #
 
 good:
 	@$(POSE) superl
 	@$(POSE) posure
 
-doc:		todo
+doc:		neat
 	@$(CROWBAR:_cmds_=doc)
-	
-compile:	todo neat
-	@$(CROWBAR:_cmds_=compile doc)
+	@(head -7 TODO.edoc; \
+	if [ $(TODO_MORE) -gt 0 ]; \
+		then (echo "@todo ...plus $(TODO_MORE) more (see TODO.edoc)"); \
+		fi) > doc/TODO_head.edoc
+	@git commit TODO.edoc README.md doc/README.md -m "updated todo"
 
-current:	push-libs todo neat
-	@if [ "$(ONLINE)" == yes ]; then \
-		$(CROWBAR:_cmds_=update-deps compile doc); else \
-		$(CROWBAR:_cmds_=compile doc); fi
+compile:	neat
+	@$(CROWBAR:_cmds_=compile doc)
 
 neat:
 	@rm -f *.dump doc/*.md doc/*.html
+
+#
+# Deps rules
+#
+
+current:
+	@if [ "$(ONLINE)" == yes ]; then \
+		$(CROWBAR:_cmds_=update-deps compile doc); else \
+		$(CROWBAR:_cmds_=compile doc); fi
 
 clean: 		online
 	@if [ "$(ONLINE)" == yes ]; \
@@ -135,14 +144,8 @@ online:
 		then (echo "Working online"); \
 		else (echo "Working offline"); fi
 
-todo:
-	@(head -7 TODO.edoc; \
-	if [ $(TODO_MORE) -gt 0 ]; \
-		then (echo "@todo ...plus $(TODO_MORE) more (see TODO.edoc)"); \
-		fi) > doc/TODO_head.edoc
-
 #
-# Development rules start
+# Push rules
 #
 
 push:		push-libs push-nosh
