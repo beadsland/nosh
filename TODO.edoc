@@ -1,10 +1,18 @@
-@todo noterm dependency not avail
+@todo 2do_go4 - basic functionality
+@todo 2do_go4 - todo list
+@todo 2do_go4 - integrate with nosh
+@todo 2do_go4 - refactor/good
+@todo good confirm API functions first
+@todo folderl exit stdin distinct from stdout
 @todo edoc via dev (nosh)
-@todo edoc via dev (noterm)
+@todo see todo.edoc link
+@todo recursive todo update
 @todo noterm bootstrap Makefile
 @todo interlinked todos
+@todo move pose/dose to pose project (from 2do_go4)
 @todo move pose/dose to pose project (from noterm)
 @todo move pose/dose to pose project (from nosh)
+@todo debug broken get_until functionality
 @todo exit status superl
 @todo exit status posure
 @todo good folderl
