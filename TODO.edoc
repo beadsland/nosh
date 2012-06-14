@@ -1,7 +1,10 @@
 @todo rip CDs
 @todo legacy hardware backups
+@todo recode ps (lost when repository lost)
 @todo confirm folderl working
-@todo 2do_go4: escript for cygwin
+@todo escript for cygwin
+@todo 2do_go4: seed
+@todo 2do_go4: refresh makefile
 @todo 2do_go4: transclude stdin
 @todo 2do_go4: transcribe / output
 @todo 2do_go4: transclude resources by fragment
