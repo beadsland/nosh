@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 ERL_AFLAGS="-deps dev"
 export ERL_AFLAGS
 DIR=`dirname ${BASH_SOURCE[0]}`
