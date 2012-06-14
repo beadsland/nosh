@@ -1,4 +1,4 @@
-#!/usr/bin/env escript
+#!wescript
 %% -*- erlang -*-
 
 main(Param) ->

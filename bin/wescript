@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ $# = 0 ]; then echo "wescript: Missing filename"; exit; fi
+
+if [ `uname -o` != "Cygwin" ]; \
+    then escript $@;
+    else (
+        SCRIPT=$1 export SCRIPT
+        shift 1
+        escript `cygpath -wa $SCRIPT` $@
+        ); fi
