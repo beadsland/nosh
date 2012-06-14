@@ -1,0 +1,12 @@
+#!/usr/bin/bash
+
+# Run "bash.exe -l" from command.exe with administrator privs,
+# then run this script.
+
+curl http://download.sysinternals.com/files/Junction.zip > $TEMP/junction.zip
+unzip -f $TEMP/junction.zip -d $TEMP
+chmod +x $TEMP/junction.exe
+
+grep 'git://github.com/' rebar.config \
+        | awk -F\" '{print $2}' \
+        | awk -F/ '{print "$TEMP/junction dev/"$5" ../"$5}' | sh
