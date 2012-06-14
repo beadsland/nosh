@@ -37,7 +37,7 @@ ifeq ($(COMPUTERNAME),GOVMESH-BOOK)
 else
 	DEV		=	no
 endif
-
+	
 ifeq ($(DEV),yes)
 	POSE	=	bin/dose
 	ERL	=	erl -noshell -i dev -deps dev $(POSE)

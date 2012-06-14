@@ -1,0 +1,15 @@
+#!/bin/sh
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+AWK="\$0 !~ \"$DIR\""
+PATH=`echo $PATH | tr ':' '\n' | awk "$AWK" | paste -sd:`
+
+NANO=`command -v pico || command -v nano` export NANO
+if [ -z "${NANO:+1}" ]; then echo Small problem: no nano nor pico; exit; fi
+
+XTERM=`command -v mintty || command -v xterm` export XTERM
+if [ -z "${NANO:+1}" ]; then echo Small problem: no mintty or xterm; exit; fi
+
+TTY=`tty`
+if [ "$TTY" == "not a tty" ]; then $XTERM -e $NANO $@; else $NANO $@; fi
