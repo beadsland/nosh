@@ -67,10 +67,19 @@ To get started with `nosh`, confirm you have an Internet connection,
  
 
 
+It is recommended that the project `bin/` be prefixed to your `PATH`,
+  so that `nosh` can be run from any working directory.  Also included
+  in `bin/` is `nano` script that detects if you're running in Wicked
+  Shell (see below) and fires up an external shell to run either the
+  UNIX standard `pico` editor or GNU `nano` editor where available.
+  (`nano`/`pico` requires a tty to run).
+ 
+
+
 Users of the Eclipse IDE may integrate `nosh` shell with their
   workflow by installing the Wicked Shell plugin
 [`http://www.wickedshell.net/`](http://www.wickedshell.net/) from the Eclipse Marketplace.  Simply
-  run `bash` or `sh` under Wicked Shell, and then execute `make run`
+  run `bash` or `sh` under Wicked Shell, and then execute `nosh`
 from there.
  
 
