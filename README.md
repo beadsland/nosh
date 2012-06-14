@@ -11,8 +11,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">edoc README
-</font>
 * <font color="red">refresh 2do_go4 Makefile
 </font>
 * <font color="red">2do_go4 - basic functionality
@@ -25,7 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">good confirm API functions first
 </font>
-* <font color="red">...plus 69 more (see TODO.edoc)
+* <font color="red">folderl exit stdin distinct from stdout
+</font>
+* <font color="red">...plus 68 more (see TODO.edoc)
 </font>
 
 
