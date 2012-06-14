@@ -127,6 +127,11 @@ run(IO, ARG, ENV) -> gen_command:run(IO, ARG, ENV, ?MODULE).
 
 %% @private Callback entry point for gen_command behaviour.
 do_run(IO, _ARG) ->
+  receive
+    {stdin, Stdin, eof} when Stdin == IO#std.in ->
+    ?STDOUT("nosh: recursive invocation disabled\n"), exit(ok)
+  after 100 -> true
+  end,
   ?STDOUT("Starting Nosh ~s nosql shell ~p~n", [?VERSION(?MODULE), self()]),
   ?DEBUG("Using rev. ~s command line parser~n", [?VERSION(nosh_parse)]),
   ?DEBUG("Using rev. ~s code loader~n", [?VERSION(.pose_code)]),
