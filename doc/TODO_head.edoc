@@ -1,8 +1,8 @@
 @todo rip CD project
 @todo legacy hardware backups
-@todo escript for cygwin
 @todo 2do_go4: seed
 @todo 2do_go4: refresh makefile
 @todo 2do_go4: transclude stdin
 @todo 2do_go4: transcribe / output
-@todo ...plus 80 more (see TODO.edoc)
+@todo 2do_go4: transclude resources by fragment
+@todo ...plus 79 more (see TODO.edoc)
