@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 DEPS=`grep 'git://github.com/' rebar.config \
         | awk -F\" '{print $2}' | awk -F/ '{print $5}'`
