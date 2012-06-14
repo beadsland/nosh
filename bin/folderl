@@ -1,0 +1,7 @@
+#!/bin/sh
+
+ORAGAMI=`echo folderl | pose folderl 2>&1 | grep '^folderl$$'`
+
+if [ "$ORAGAMI" == "folderl" ];
+    then pose folderl;
+    else sed -nu ':p;s/\([^\n]\{80\}\)\([^\n]\)/\1\n \2/;tp;p'; fi

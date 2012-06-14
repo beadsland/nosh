@@ -1,0 +1,13 @@
+#!/bin/sh
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+if [ -d "$DIR/../dev" ]; \
+    then POSE=dose export POSE; \
+    else POSE=pose export POSE; fi
+
+TTY=`tty`
+
+if [ "$TTY" == "not a tty" ];
+    then pose noterm echo;
+    else (tabs -1 >/dev/null; pose noterm); fi

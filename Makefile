@@ -62,18 +62,6 @@ ONLINE	= `$(PING) www.google.com 2>&1 >/dev/null; \
 		else (echo no); fi`
 
 #
-# Confirm we can use folderl, otherwise default to sed 
-#
-
-ORAGAMI	= $(shell echo folderl | $(POSE) folderl 2>&1 | grep '^folderl$$')
-
-ifeq ($(ORAGAMI),folderl)
-	FOLD	= $(POSE) folderl
-else
-	FOLD	= sed -nu ':p;s/\([^\n]\{80\}\)\([^\n]\)/\1\n \2/;tp;p'
-endif
-
-#
 # Macros for commands invoked by rules
 #
 
@@ -81,27 +69,11 @@ TTY	=	`tty`
 
 SUCCINCT =	grep -v "Entering directory" | grep -v "Leaving directory"
 CROWBAR	=	$(DEPS) rebar _cmds_ | $(SUCCINCT) 2>&1 | $(FOLD)
+FOLD =		bin/folderl
 
 TODO_MORE =	`wc -l TODO.edoc | awk '{print $$1 - 7}'`
 
 PUSHFOR	= for file in dev/*; do sh -c "cd $$file; git push origin master"; done
-
-#
-# Execution rules start
-#
-
-all:		current push-nosh run
-
-run:		compile good nosh
-
-nosh:	tabs
-	@if [ "$(TTY)" == "not a tty" ]; \
-		then ($(POSE) noterm echo); \
-		else ($(POSE) noterm); \
-	fi 2>&1 | $(FOLD)
-
-tabs:
-	@if [ "$(TTY)" != "not a tty" ]; then (tabs -1 >/dev/null); fi
 
 #
 # Build rules
@@ -131,6 +103,8 @@ neat:
 #
 # Deps rules
 #
+
+install: 	clean current
 
 current:
 	@if [ "$(ONLINE)" == yes ]; then \

@@ -40,9 +40,13 @@
 %%
 %% == Installation ==
 %%
-%% Presently, `nosh' runs as a Makefile target.  The simplest way to get
-%% started with `nosh' is to change to the nosh project directory in a
-%% terminal session and type `make run'.
+%% To get started with `nosh', confirm you have an Internet connection,
+%% and then make the project and run the `nosh' wrapper script, as follows:
+%%
+%% <pre>
+%% make install
+%% bin/nosh
+%% </pre>
 %%
 %% Users of the Eclipse IDE may integrate `nosh' shell with their
 %% workflow by installing the Wicked Shell plugin

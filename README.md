@@ -15,8 +15,6 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">legacy hardware backups
 </font>
-* <font color="red">escript for cygwin
-</font>
 * <font color="red">2do_go4: seed
 </font>
 * <font color="red">2do_go4: refresh makefile
@@ -25,7 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">2do_go4: transcribe / output
 </font>
-* <font color="red">...plus 80 more (see TODO.edoc)
+* <font color="red">2do_go4: transclude resources by fragment
+</font>
+* <font color="red">...plus 79 more (see TODO.edoc)
 </font>
 
 
@@ -57,9 +57,13 @@ _<strong>NOTICE:</strong> Code is still in rudimentary form. Doesn't  do much ye
  
 
 
-Presently, `nosh` runs as a Makefile target.  The simplest way to get
-  started with `nosh` is to change to the nosh project directory in a
-  terminal session and type `make run`.
+To get started with `nosh`, confirm you have an Internet connection,
+  and then make the project and run the `nosh` wrapper script, as follows:
+ 
+	
+	  make install
+	  bin/nosh
+
  
 
 
