@@ -1,5 +1,6 @@
 @todo rip CD project
 @todo legacy hardware backups
+@todo use deps edoc
 @todo escript for cygwin
 @todo 2do_go4: seed
 @todo 2do_go4: refresh makefile
@@ -30,10 +31,9 @@
 @todo exit status superl
 @todo exit status posure
 @todo good folderl
-@todo ps: fold w/in column
-@todo ps: header/data tuples
 @todo ps command name
 @todo ps across nodes
+@todo ps make good
 @todo erlang memory leak
 @todo catchup on email
 @todo refactor gen_command:load_command pattern

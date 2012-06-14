@@ -111,14 +111,16 @@ good:
 	@$(POSE) superl
 	@$(POSE) posure
 
-doc:		neat
-	@$(CROWBAR:_cmds_=doc)
+todo:		doc
 	@(head -7 TODO.edoc; \
 	if [ $(TODO_MORE) -gt 0 ]; \
 		then (echo "@todo ...plus $(TODO_MORE) more (see TODO.edoc)"); \
 		fi) > doc/TODO_head.edoc
 	@git commit TODO.edoc README.md doc/README.md doc/TODO_head.edoc \
 		-m "updated todo"
+
+doc:		neat
+	@$(CROWBAR:_cmds_=doc)
 
 compile:	neat
 	@$(CROWBAR:_cmds_=compile doc)
