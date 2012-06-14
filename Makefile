@@ -104,8 +104,6 @@ neat:
 # Deps rules
 #
 
-install: 	clean current
-
 current:
 	@if [ "$(ONLINE)" == yes ]; then \
 		$(CROWBAR:_cmds_=update-deps compile doc); else \
@@ -114,6 +112,12 @@ current:
 clean: 		online
 	@if [ "$(ONLINE)" == yes ]; \
 		then (rm -rf deps; rebar clean get-deps | $(SUCCINCT)); \
+		else (rebar clean | $(SUCCINCT)); fi
+	
+install: 	online
+	@if [ "$(ONLINE)" == yes ]; \
+		then (rm -rf deps; rebar clean get-deps compile doc \
+						| $(SUCCINCT)); \
 		else (rebar clean | $(SUCCINCT)); fi
 	
 online:	
