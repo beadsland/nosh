@@ -2,7 +2,8 @@
 @todo rip CD project (pending materials)
 @todo legacy hardware backups (pending specs)
 @todo housekeeping (pending alarm install)
-@todo nosh command (direct) needs to do something
+@todo Makefile editor for eclipse
+@todo shell editor for eclipse
 @todo dev based on dev directory
 @todo 2do_go4: seed
 @todo 2do_go4: refresh makefile

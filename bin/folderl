@@ -1,6 +1,9 @@
 #!/bin/sh
 
-ORAGAMI=`echo folderl | pose folderl 2>&1 | grep '^folderl$$'`
+ORAGAMI=`echo folderl \
+  | pose folderl 2>&1 \
+  | grep -v "Running Erlang" \
+  | grep '^folderl$'` export ORAGAMI
 
 if [ "$ORAGAMI" == "folderl" ];
     then pose folderl;
