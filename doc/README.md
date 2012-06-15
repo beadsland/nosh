@@ -11,21 +11,21 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">rip CD project
+* <font color="red">install alarm (pending service)
 </font>
-* <font color="red">legacy hardware backups
+* <font color="red">rip CD project (pending materials)
 </font>
-* <font color="red">2do_go4: seed
+* <font color="red">legacy hardware backups (pending specs)
 </font>
-* <font color="red">2do_go4: refresh makefile
+* <font color="red">housekeeping (pending alarm install)
 </font>
-* <font color="red">2do_go4: transclude stdin
+* <font color="red">nano xterm alias
 </font>
-* <font color="red">2do_go4: transcribe / output
+* <font color="red">nosh command (direct) needs to do something
 </font>
-* <font color="red">2do_go4: transclude resources by fragment
+* <font color="red">dev based on dev directory
 </font>
-* <font color="red">...plus 79 more (see TODO.edoc)
+* <font color="red">...plus 84 more (see TODO.edoc)
 </font>
 
 
