@@ -73,6 +73,7 @@ CROWBAR	=	$(DEPS) $(REBAR) _cmds_ | $(SUCCINCT) 2>&1 | $(FOLD)
 FOLD =		bin/folderl
 
 TODO_MORE =	`wc -l TODO.edoc | awk '{print $$1 - 7}'`
+TODO_FILES =	TODO.edoc README.md doc/README.md doc/TODO_head.edoc
 
 PUSHFOR	= for file in dev/*; do sh -c "cd $$file; git push origin master"; done
 
@@ -85,13 +86,13 @@ good:
 	@$(POSE) posure
 
 todo:		doc
-	@git commit TODO.edoc README.md doc/README.md doc/TODO_head.edoc \
-		-m "updated todo"
+	@git add -f $(TODO_FILES)
+	@git commit $(TODO_FILES) -m "updated todo"
 
 doc:		neat
 	@$(CROWBAR:_cmds_=doc)
 	@(head -7 TODO.edoc; \
-	if [ $(TODO_MORE) -gt 0 ]; \
+		if [ $(TODO_MORE) -gt 0 ]; \
 		then (echo "@todo ...plus $(TODO_MORE) more (see TODO.edoc)"); \
 		fi) > doc/TODO_head.edoc
 
@@ -138,4 +139,4 @@ push-nosh:	online
 
 push-libs:	online
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
-		then (bash -c '$(PUSHFOR)'); fi
+		then (bash -c '"$(PUSHFOR)"'); fi
