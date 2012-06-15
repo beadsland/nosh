@@ -1,18 +1,36 @@
-@todo banking issue (pending reply)
-@todo get rebit to backup d: (pending reply)
-@todo update eclipse (pending contacting software sites 50%)
-@todo eclipse erlide perspective
-@todo eclipse - install cdt
-@todo eclipse - shelled
-@todo uninstall old java
-@todo install alarm (pending service)
-@todo rip CD project (pending materials)
-@todo legacy hardware backups (pending specs)
-@todo housekeeping (pending alarm install)
-@todo phone setup (pending battery charge)
-@todo itunes update (pending patience)
+@todo banking issue 						(pending reply)
+@todo get rebit to backup d: 				(pending reply)
+@todo update eclipse 			(pending contacting software sites 50%)
+@todo eclipse erlide perspective 			(pending update)
+@todo eclipse - install cdt 				(pending update)
+@todo eclipse - shelled 					(pending update)
+@todo cron make todo
+@todo cron make push
+@todo checkin Makefile rebar onboard				
+@todo install alarm 						(pending service)
+@todo dry cleaning
+@todo hair tie bag
+@todo bath rack
+@todo body wash
+@todo groceries
+@todo vacuum
+@todo laundry
+@todo pick up
+@todo clean bathroom
+@todo brooklyn duty
+@todo rip CD project 						(pending materials)
+@todo hard drive pricing
+@todo hard drive purchase					(pending research)
+@todo legacy hardware backups 				(pending purchase)
+@todo backup process for android
+@todo phone setup 							(pending battery charge)
+@todo itunes update 						(pending patience)
 @todo shell editor for eclipse
+@todo clear out backups of eclipse/workspace
+@todo auto-succinct superl
+@todo auto-succinct posure
 @todo dev based on dev directory
+@todo make install soft links to bin files
 @todo eclipse - pin web page
 @todo eclipse - refresh web page and/or javascript
 @todo 2do_go4: crontab master TODO list
