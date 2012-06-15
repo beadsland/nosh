@@ -1,0 +1,3 @@
+#!/bin/sh
+
+D:/workspace/rebar/rebar $@

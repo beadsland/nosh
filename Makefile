@@ -67,8 +67,9 @@ ONLINE	= `$(PING) www.google.com 2>&1 >/dev/null; \
 
 TTY	=	`tty`
 
+REBAR = 	`command -v rebar || echo bin/rebar`
 SUCCINCT =	grep -v "Entering directory" | grep -v "Leaving directory"
-CROWBAR	=	$(DEPS) rebar _cmds_ | $(SUCCINCT) 2>&1 | $(FOLD)
+CROWBAR	=	$(DEPS) $(REBAR) _cmds_ | $(SUCCINCT) 2>&1 | $(FOLD)
 FOLD =		bin/folderl
 
 TODO_MORE =	`wc -l TODO.edoc | awk '{print $$1 - 7}'`
