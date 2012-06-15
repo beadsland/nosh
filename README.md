@@ -11,8 +11,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">confirm cron not erroring out 
-</font>
 * <font color="red">cron works following sleep?
 </font>
 * <font color="red">reset cron schedule
@@ -25,7 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">8am - sheet spray (6th & 18th)
 </font>
-* <font color="red">...plus 132 more (see TODO.edoc)
+* <font color="red">new pillow
+</font>
+* <font color="red">...plus 131 more (see TODO.edoc)
 </font>
 
 
