@@ -11,9 +11,9 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">6:45 pm - laundry
-</font>
 * <font color="red">7 pm - muffins
+</font>
+* <font color="red">7:10 pm - laundry
 </font>
 * <font color="red">dishes
 </font>
@@ -25,7 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">brooklyn supplies
 </font>
-* <font color="red">...plus 141 more (see TODO.edoc)
+* <font color="red">...plus 143 more (see TODO.edoc)
 </font>
 
 
