@@ -13,7 +13,7 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">7 pm - muffins
 </font>
-* <font color="red">7:10 pm - laundry
+* <font color="red">7:25 pm - laundry
 </font>
 * <font color="red">dishes
 </font>
