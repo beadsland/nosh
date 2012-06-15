@@ -11,7 +11,13 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">get rebit to backup d:
+* <font color="red">cygwin crontab
+</font>
+* <font color="red">banking issue (pending reply)
+</font>
+* <font color="red">get rebit to backup d: (pending reply)
+</font>
+* <font color="red">repair skype
 </font>
 * <font color="red">update eclipse
 </font>
@@ -19,13 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">eclipse - install cdt
 </font>
-* <font color="red">eclipse - shelled
-</font>
-* <font color="red">uninstall old java
-</font>
-* <font color="red">install alarm (pending service)
-</font>
-* <font color="red">...plus 90 more (see TODO.edoc)
+* <font color="red">...plus 94 more (see TODO.edoc)
 </font>
 
 
