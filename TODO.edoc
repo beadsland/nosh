@@ -1,8 +1,6 @@
-@todo cygwin crontab
 @todo banking issue (pending reply)
 @todo get rebit to backup d: (pending reply)
-@todo repair skype
-@todo update eclipse
+@todo update eclipse (pending contacting software sites 50%)
 @todo eclipse erlide perspective
 @todo eclipse - install cdt
 @todo eclipse - shelled
@@ -15,6 +13,9 @@
 @todo itunes update (pending patience)
 @todo shell editor for eclipse
 @todo dev based on dev directory
+@todo eclipse - pin web page
+@todo eclipse - refresh web page and/or javascript
+@todo 2do_go4: crontab master TODO list
 @todo 2do_go4: seed
 @todo 2do_go4: refresh makefile
 @todo 2do_go4: transclude stdin
