@@ -1,12 +1,4 @@
-@todo banking issue 						(pending reply)
-@todo get rebit to backup d: 				(pending reply)
-@todo update eclipse 			(pending contacting software sites 50%)
-@todo eclipse erlide perspective 			(pending update)
-@todo eclipse - install cdt 				(pending update)
-@todo eclipse - shelled 					(pending update)
-@todo cron make todo
-@todo cron make push
-@todo checkin Makefile rebar onboard				
+@todo [work postponed today pending errands]
 @todo install alarm 						(pending service)
 @todo dry cleaning
 @todo hair tie bag
@@ -25,6 +17,15 @@
 @todo legacy hardware backups 				(pending purchase)
 @todo backup process for android
 @todo phone setup 							(pending battery charge)
+@todo banking issue 						(pending reply)
+@todo get rebit to backup d: 				(pending reply)
+@todo update eclipse 			(pending contacting software sites 50%)
+@todo eclipse erlide perspective 			(pending update)
+@todo eclipse - install cdt 				(pending update)
+@todo eclipse - shelled 					(pending update)
+@todo safe junction path
+@todo makefile push depend on get-deps/mkdev
+@todo makefile todo depend on compiled edoc
 @todo itunes update 						(pending patience)
 @todo shell editor for eclipse
 @todo clear out backups of eclipse/workspace

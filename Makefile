@@ -75,8 +75,9 @@ FOLD =		bin/folderl
 TODO_MORE =	`wc -l TODO.edoc | awk '{print $$1 - 7}'`
 TODO_FILES =	TODO.edoc README.md doc/README.md doc/TODO_head.edoc
 
-PUSHFOR	= for file in dev/*; do sh -c "cd $$file; git push origin master"; done
-
+PUSHGIT = 	git push origin master
+PUSHDO	=	echo "cd $$file; $(PUSHGIT)" | /bin/sh
+PUSHFOR =	for file in dev/*; do $(PUSHDO); done
 #
 # Build rules
 #
@@ -135,8 +136,8 @@ push:		push-libs push-nosh
 
 push-nosh:	online
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
-		then (git push origin master); fi
+		then $(PUSHGIT); fi
 
 push-libs:	online
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
-		then (bash -c '"$(PUSHFOR)"'); fi
+		then (echo '$(PUSHFOR)' | /bin/bash); fi
