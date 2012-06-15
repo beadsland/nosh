@@ -23,7 +23,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">eclipse - shelled 					(pending update)
 </font>
-* <font color="red">confirm cron working
+* <font color="red">cron make todo
 </font>
 * <font color="red">...plus 113 more (see TODO.edoc)
 </font>
