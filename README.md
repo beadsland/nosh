@@ -11,21 +11,21 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">dinner
+* <font color="red">6:20 pm - laundry
 </font>
-* <font color="red">6 pm - laundry
+* <font color="red">7 pm - muffins
 </font>
 * <font color="red">dishes
 </font>
 * <font color="red">clean bathroom
 </font>
-* <font color="red">muffins
-</font>
 * <font color="red">shopping
 </font>
 * <font color="red">brooklyn supplies
 </font>
-* <font color="red">...plus 141 more (see TODO.edoc)
+* <font color="red">brooklyn duty
+</font>
+* <font color="red">...plus 140 more (see TODO.edoc)
 </font>
 
 
