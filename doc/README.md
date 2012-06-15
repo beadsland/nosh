@@ -13,9 +13,7 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">dinner
 </font>
-* <font color="red">clothes
-</font>
-* <font color="red">laundry
+* <font color="red">6 pm - laundry
 </font>
 * <font color="red">dishes
 </font>
@@ -25,7 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">shopping
 </font>
-* <font color="red">...plus 142 more (see TODO.edoc)
+* <font color="red">brooklyn supplies
+</font>
+* <font color="red">...plus 141 more (see TODO.edoc)
 </font>
 
 
