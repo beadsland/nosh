@@ -11,21 +11,21 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">clean bathroom
+* <font color="red">clean floor
 </font>
-* <font color="red">shopping
+* <font color="red">new boots
 </font>
-* <font color="red">brooklyn supplies
+* <font color="red">boil eggs
 </font>
 * <font color="red">brooklyn duty
 </font>
-* <font color="red">refactor today's tasks
-</font>
-* <font color="red">cron works following restore?
+* <font color="red">new backpack
 </font>
 * <font color="red">cron works following sleep?
 </font>
-* <font color="red">...plus 137 more (see TODO.edoc)
+* <font color="red">reset cron schedule
+</font>
+* <font color="red">...plus 131 more (see TODO.edoc)
 </font>
 
 
