@@ -13,11 +13,9 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">clean floor
 </font>
-* <font color="red">new boots
+* <font color="red">brooklyn duty
 </font>
 * <font color="red">boil eggs
-</font>
-* <font color="red">brooklyn duty
 </font>
 * <font color="red">new backpack
 </font>
@@ -25,7 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">reset cron schedule
 </font>
-* <font color="red">...plus 131 more (see TODO.edoc)
+* <font color="red">[work postponed today pending errands]
+</font>
+* <font color="red">...plus 130 more (see TODO.edoc)
 </font>
 
 
