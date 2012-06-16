@@ -11,8 +11,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">dishes
-</font>
 * <font color="red">clean bathroom
 </font>
 * <font color="red">shopping
@@ -25,7 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">cron works following restore?
 </font>
-* <font color="red">...plus 138 more (see TODO.edoc)
+* <font color="red">cron works following sleep?
+</font>
+* <font color="red">...plus 137 more (see TODO.edoc)
 </font>
 
 
