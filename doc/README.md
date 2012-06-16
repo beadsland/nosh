@@ -11,13 +11,9 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">laundry fold
-</font>
 * <font color="red">dishes
 </font>
 * <font color="red">clean bathroom
-</font>
-* <font color="red">new litter
 </font>
 * <font color="red">shopping
 </font>
@@ -25,7 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">brooklyn duty
 </font>
-* <font color="red">...plus 141 more (see TODO.edoc)
+* <font color="red">refactor today's tasks
+</font>
+* <font color="red">cron works following restore?
+</font>
+* <font color="red">...plus 138 more (see TODO.edoc)
 </font>
 
 
