@@ -11,7 +11,9 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">new backpack
+* <font color="red">netbook back bag
+</font>
+* <font color="red">netbook skin sticker
 </font>
 * <font color="red">cron works following sleep?
 </font>
@@ -23,9 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">8am - dry cleaning
 </font>
-* <font color="red">8am - whole foods return / goat yogurt pint 
-</font>
-* <font color="red">...plus 130 more (see TODO.edoc)
+* <font color="red">...plus 131 more (see TODO.edoc)
 </font>
 
 
