@@ -13,8 +13,6 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">[work postponed today pending errands]
 </font>
-* <font color="red">shopping list
-</font>
 * <font color="red">8am - dry cleaning
 </font>
 * <font color="red">8am - whole foods return / goat yogurt pint 
@@ -25,7 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">bath rack, coat hook (18th or 23rd)
 </font>
-* <font color="red">...plus 129 more (see TODO.edoc)
+* <font color="red">clothes shopping
+</font>
+* <font color="red">...plus 128 more (see TODO.edoc)
 </font>
 
 
