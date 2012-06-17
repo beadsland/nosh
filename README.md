@@ -15,17 +15,17 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">7 pm - muffins
 </font>
-* <font color="red">wifi bridge
+* <font color="red">signal strength
+</font>
+* <font color="red">secure network
+</font>
+* <font color="red">add client to network
 </font>
 * <font color="red">dishes
 </font>
 * <font color="red">pickup
 </font>
-* <font color="red">kemptness
-</font>
-* <font color="red">storage
-</font>
-* <font color="red">...plus 129 more (see TODO.edoc)
+* <font color="red">...plus 131 more (see TODO.edoc)
 </font>
 
 
