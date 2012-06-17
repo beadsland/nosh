@@ -17,15 +17,15 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">signal strength
 </font>
+* <font color="red">dishes
+</font>
+* <font color="red">extension / mounting
+</font>
 * <font color="red">secure network
 </font>
 * <font color="red">add client to network
 </font>
-* <font color="red">dishes
-</font>
-* <font color="red">pickup
-</font>
-* <font color="red">...plus 131 more (see TODO.edoc)
+* <font color="red">...plus 133 more (see TODO.edoc)
 </font>
 
 
