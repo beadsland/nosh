@@ -13,7 +13,7 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!!++ work postponed pending errands !!++
 </font>
-* <font color="red">9:15 - dryer mat / blanket
+* <font color="red">9:30 - blanket
 </font>
 * <font color="red">10:30 am - mesh pouch (6th & 18th)
 </font>
@@ -25,7 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">7 o'clock - muffins
 </font>
-* <font color="red">...plus 132 more (see TODO.edoc)
+* <font color="red">...plus 133 more (see TODO.edoc)
 </font>
 
 
