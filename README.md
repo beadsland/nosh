@@ -11,21 +11,21 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">!!++ work postponed pending errands !!++\
-</font>
-* <font color="red">10 am - caddy return
-</font>
-* <font color="red">10:30 am - mesh pouch (6th & 18th)
-</font>
-* <font color="red">11 am - linen spray (Park & 23rd)
-</font>
-* <font color="red">11:30 am - 24/7 - apple store re ipod headphones (5th & 59th)
-</font>
-* <font color="red">tweet to action
+* <font color="red">!! priority non-project tasks !!
 </font>
 * <font color="red">7 pm - muffins
 </font>
-* <font color="red">...plus 134 more (see TODO.edoc)
+* <font color="red">repeated skype i/o errors				(pending reply)
+</font>
+* <font color="red">new itunes
+</font>
+* <font color="red">wifi bridge
+</font>
+* <font color="red">pickup
+</font>
+* <font color="red">kemptness
+</font>
+* <font color="red">...plus 129 more (see TODO.edoc)
 </font>
 
 
