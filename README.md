@@ -13,10 +13,6 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!!++ work postponed pending errands !!++\
 </font>
-* <font color="red">fold
-</font>
-* <font color="red">tweet to apple
-</font>
 * <font color="red">10 am - caddy return
 </font>
 * <font color="red">10:30 am - mesh pouch (6th & 18th)
@@ -25,7 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">11:30 am - 24/7 - apple store re ipod headphones (5th & 59th)
 </font>
-* <font color="red">...plus 136 more (see TODO.edoc)
+* <font color="red">tweet to action
+</font>
+* <font color="red">7 pm - muffins
+</font>
+* <font color="red">...plus 134 more (see TODO.edoc)
 </font>
 
 
