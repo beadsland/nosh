@@ -1,27 +1,33 @@
-@todo [work postponed today pending errands]
-@todo coat hook
-@todo clothes shopping
-@todo hand soap
-@todo peanut butter
-@todo apple store re ipod headphones
-@todo linen spray (Park & 23rd)
-@todo 7pm - muffins
-@todo vacuum
-@todo 7am - muffins
+@todo !!++ work postponed pending errands !!++
+@todo 9:30 - blanket
 @todo 10:30 am - mesh pouch (6th &amp; 18th)
-@todo health insurance
+@todo 11 am - caddy return
+@todo 11:30 am - linen spray (Park &amp; 23rd)
+@todo noon - 24/7 - apple store re ipod headphones (5th &amp; 59th)
+@todo 7 o'clock - muffins
+@todo !! priority non-project tasks !!
+@todo repeated skype i/o errors				(pending reply)
 @todo new itunes
-@todo Monday 1pm - install alarm 			(pending service)
+@todo wifi bridge
+@todo pickup
+@todo kemptness
+@todo storage
+@todo banking issue 						(pending reply)
+@todo get rebit to backup d: 				(pending support reply)
+@todo rebit version 5.1 download			(pending reply)
+@todo !!++ calendar for coming week !!++
+@todo 8:30 am - health insurance
+@todo vacuum
+@todo Mon 1pm - install alarm 			(pending service)
 @todo Mon 2:30 pm - brooklyn supplies
 @todo Mon 3 pm - brooklyn duty
-@todo meetup
+@todo Tue 6:30 pm - noumena
 @todo Wed 5 pm - dry cleaning
+@todo 23rd 2pm - noumena
 @todo 23rd-25th subway
 @todo 23rd - certification
-@todo wifi bridge
-@todo storage
-@todo [project work resumes following errands]
-@todo repeated skype i/o errors
+@todo meetup
+@todo ++ consulting obligations ++
 @todo rip CD project 						(pending materials)
 @todo hard drive pricing
 @todo hard drive purchase					(pending research)
@@ -30,8 +36,8 @@
 @todo phone setup 							(pending battery charge)
 @todo real vacuum
 @todo under fridge bins
-@todo banking issue 						(pending reply)
-@todo get rebit to backup d: 				(pending reply)
+@todo :: project work resumes ::
+@todo respect ampersand in make todo
 @todo update eclipse 			(pending contacting software sites 50%)
 @todo eclipse erlide perspective 			(pending update)
 @todo eclipse - install cdt 				(pending update)
@@ -39,7 +45,6 @@
 @todo safe junction path
 @todo makefile push depend on get-deps/mkdev
 @todo makefile todo depend on compiled edoc
-@todo itunes update 						(pending patience)
 @todo shell editor for eclipse
 @todo clear out backups of eclipse/workspace
 @todo auto-succinct superl
@@ -48,10 +53,10 @@
 @todo make install soft links to bin files
 @todo eclipse - pin web page
 @todo eclipse - refresh web page and/or javascript
-@todo 2do_go4: crontab master TODO list
 @todo 2do_go4: seed
 @todo 2do_go4: refresh makefile
 @todo 2do_go4: transclude stdin
+@todo 2do_go4: handle ampersands without complaint
 @todo 2do_go4: transcribe / output
 @todo 2do_go4: transclude resources by fragment
 @todo 2do_go4: ignore comment lines
