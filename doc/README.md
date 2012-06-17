@@ -15,8 +15,6 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">7 pm - muffins
 </font>
-* <font color="red">new itunes
-</font>
 * <font color="red">wifi bridge
 </font>
 * <font color="red">pickup
@@ -25,7 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">storage
 </font>
-* <font color="red">...plus 129 more (see TODO.edoc)
+* <font color="red">banking issue 						(pending reply)
+</font>
+* <font color="red">...plus 128 more (see TODO.edoc)
 </font>
 
 
