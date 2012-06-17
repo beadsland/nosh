@@ -13,17 +13,17 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!!++ work postponed pending errands !!++
 </font>
-* <font color="red">9:30 - blanket
+* <font color="red">10 am - caddy return
 </font>
 * <font color="red">10:30 am - mesh pouch (6th & 18th)
 </font>
-* <font color="red">11 am - caddy return
+* <font color="red">11 am - linen spray (Park & 23rd)
 </font>
-* <font color="red">11:30 am - linen spray (Park & 23rd)
+* <font color="red">11:30 am - 24/7 - apple store re ipod headphones (5th & 59th)
 </font>
-* <font color="red">noon - 24/7 - apple store re ipod headphones (5th & 59th)
+* <font color="red">7 pm - muffins
 </font>
-* <font color="red">7 o'clock - muffins
+* <font color="red">!! priority non-project tasks !!
 </font>
 * <font color="red">...plus 133 more (see TODO.edoc)
 </font>
