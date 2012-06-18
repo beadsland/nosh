@@ -13,10 +13,6 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!!++ project on hold pending errands !!++
 </font>
-* <font color="red">power cord
-</font>
-* <font color="red">suction cups
-</font>
 * <font color="red">pickup
 </font>
 * <font color="red">return excess hook
@@ -25,7 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">Mon 3 pm - brooklyn duty
 </font>
-* <font color="red">...plus 139 more (see TODO.edoc)
+* <font color="red">vacuum
+</font>
+* <font color="red">7 pm - muffins
+</font>
+* <font color="red">...plus 138 more (see TODO.edoc)
 </font>
 
 
