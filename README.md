@@ -23,9 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">8:30 am - health insurance
 </font>
-* <font color="red">9 am - return shelf / belt & umbrella hooks
+* <font color="red">9 am - return shelf
 </font>
-* <font color="red">...plus 140 more (see TODO.edoc)
+* <font color="red">...plus 141 more (see TODO.edoc)
 </font>
 
 
