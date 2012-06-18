@@ -21,9 +21,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">9 am - return shelf
 </font>
-* <font color="red">apple store re ipod headphones (5th & 59th)
-</font>
 * <font color="red">8:30 am - health insurance
+</font>
+* <font color="red">vacuum
 </font>
 * <font color="red">...plus 137 more (see TODO.edoc)
 </font>
