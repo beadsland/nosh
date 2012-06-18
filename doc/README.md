@@ -13,10 +13,6 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!! priority non-project tasks !!
 </font>
-* <font color="red">signal strength
-</font>
-* <font color="red">dishes
-</font>
 * <font color="red">extension / mounting
 </font>
 * <font color="red">secure network
@@ -24,6 +20,10 @@ __<font color="red">To do</font>__
 * <font color="red">add client to network
 </font>
 * <font color="red">reset timepiece
+</font>
+* <font color="red">pickup
+</font>
+* <font color="red">clean sill
 </font>
 * <font color="red">...plus 133 more (see TODO.edoc)
 </font>
