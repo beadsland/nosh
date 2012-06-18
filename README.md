@@ -13,8 +13,6 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!!++ project on hold pending errands !!++
 </font>
-* <font color="red">recycling
-</font>
 * <font color="red">drop off deposit
 </font>
 * <font color="red">9 am - return shelf
@@ -24,6 +22,8 @@ __<font color="red">To do</font>__
 * <font color="red">9 am - large glass jar
 </font>
 * <font color="red">7 am - lead anchors / caddy hook
+</font>
+* <font color="red">7 am - suction cups / power cord / plunger
 </font>
 * <font color="red">...plus 143 more (see TODO.edoc)
 </font>
