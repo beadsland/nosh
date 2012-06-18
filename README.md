@@ -15,17 +15,17 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">vacuum
 </font>
-* <font color="red">dishes
-</font>
-* <font color="red">water bottles
-</font>
-* <font color="red">9 am - return shelf
-</font>
 * <font color="red">9 am - belt & umbrella hooks
 </font>
 * <font color="red">9 am - large glass jar
 </font>
-* <font color="red">...plus 143 more (see TODO.edoc)
+* <font color="red">7 am - lead anchors / caddy hook
+</font>
+* <font color="red">7 am - suction cups / power cord / plunger
+</font>
+* <font color="red">bath mat
+</font>
+* <font color="red">...plus 140 more (see TODO.edoc)
 </font>
 
 
