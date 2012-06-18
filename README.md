@@ -13,8 +13,6 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!!++ project on hold pending errands !!++
 </font>
-* <font color="red">pickup
-</font>
 * <font color="red">return excess hook
 </font>
 * <font color="red">Mon 2:30 pm - brooklyn supplies
@@ -25,7 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">7 pm - muffins
 </font>
-* <font color="red">...plus 138 more (see TODO.edoc)
+* <font color="red">bog rolls
+</font>
+* <font color="red">...plus 137 more (see TODO.edoc)
 </font>
 
 
