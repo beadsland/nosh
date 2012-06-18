@@ -25,7 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">9 am - return shelf / belt & umbrella hooks
 </font>
-* <font color="red">...plus 138 more (see TODO.edoc)
+* <font color="red">...plus 140 more (see TODO.edoc)
 </font>
 
 
