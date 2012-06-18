@@ -13,19 +13,19 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!!++ project on hold pending errands !!++
 </font>
-* <font color="red">vacuum
+* <font color="red">power cord
 </font>
-* <font color="red">9 am - belt & umbrella hooks
+* <font color="red">suction cups
 </font>
-* <font color="red">9 am - large glass jar
+* <font color="red">pickup
 </font>
-* <font color="red">7 am - lead anchors / caddy hook
+* <font color="red">return excess hook
 </font>
-* <font color="red">7 am - suction cups / power cord / plunger
+* <font color="red">Mon 2:30 pm - brooklyn supplies
 </font>
-* <font color="red">bath mat
+* <font color="red">Mon 3 pm - brooklyn duty
 </font>
-* <font color="red">...plus 140 more (see TODO.edoc)
+* <font color="red">...plus 139 more (see TODO.edoc)
 </font>
 
 
