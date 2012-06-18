@@ -19,9 +19,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">7 am - suction cups / power cord / plunger
 </font>
-* <font color="red">9 am - return shelf
-</font>
 * <font color="red">8:30 am - health insurance
+</font>
+* <font color="red">9 am - return shelf
 </font>
 * <font color="red">vacuum
 </font>
