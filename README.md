@@ -11,21 +11,21 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">!! priority non-project tasks !!
+* <font color="red">!!++ project on hold pending errands !!++
 </font>
-* <font color="red">extension / mounting
+* <font color="red">7 am - muffins
 </font>
-* <font color="red">secure network
+* <font color="red">7 am - lead anchors / caddy hook
 </font>
-* <font color="red">add client to network
+* <font color="red">7 am - suction cups / power cord / plunger
 </font>
-* <font color="red">reset timepiece
+* <font color="red">9 am - return shelf
 </font>
-* <font color="red">pickup
+* <font color="red">apple store re ipod headphones (5th & 59th)
 </font>
-* <font color="red">clean sill
+* <font color="red">8:30 am - health insurance
 </font>
-* <font color="red">...plus 133 more (see TODO.edoc)
+* <font color="red">...plus 137 more (see TODO.edoc)
 </font>
 
 
