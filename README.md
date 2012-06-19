@@ -13,8 +13,6 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!!++ project on hold pending errands !!++
 </font>
-* <font color="red">zenith shower caddy (hd)
-</font>
 * <font color="red">robo vac
 </font>
 * <font color="red">bath mat
@@ -24,6 +22,8 @@ __<font color="red">To do</font>__
 * <font color="red">8:30 am - health insurance
 </font>
 * <font color="red">storage
+</font>
+* <font color="red">7 pm - muffins
 </font>
 * <font color="red">...plus 132 more (see TODO.edoc)
 </font>
