@@ -13,8 +13,6 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!!++ project on hold pending errands !!++
 </font>
-* <font color="red">dishes
-</font>
 * <font color="red">add client to network
 </font>
 * <font color="red">backup network config
@@ -25,7 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">!! priority non-project tasks !!
 </font>
-* <font color="red">...plus 136 more (see TODO.edoc)
+* <font color="red">banking issue 						(pending phone)
+</font>
+* <font color="red">...plus 135 more (see TODO.edoc)
 </font>
 
 
