@@ -11,21 +11,21 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">!!++ project on hold pending errands !!++
-</font>
-* <font color="red">robo vac
-</font>
-* <font color="red">dinner
+* <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
 * <font color="red">7 pm - muffins
 </font>
 * <font color="red">Tue 6:30 pm - noumena
 </font>
-* <font color="red">!! priority non-project tasks !!
-</font>
 * <font color="red">rebit version 5.1 download			(pending reply)
 </font>
-* <font color="red">...plus 130 more (see TODO.edoc)
+* <font color="red">get rebit to backup d: 				(pending support reply)
+</font>
+* <font color="red">repeated skype i/o errors				(pending reply)
+</font>
+* <font color="red">++ consulting obligations (refactor with 2do_go4) ++
+</font>
+* <font color="red">...plus 128 more (see TODO.edoc)
 </font>
 
 
