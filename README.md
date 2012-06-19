@@ -13,6 +13,8 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!!++ project on hold pending errands !!++
 </font>
+* <font color="red">shower audio
+</font>
 * <font color="red">shower caddy
 </font>
 * <font color="red">apple store re ipod headphones (soho?)
@@ -23,9 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">get rebit to backup d: 				(pending support reply)
 </font>
-* <font color="red">rebit version 5.1 download			(pending reply)
-</font>
-* <font color="red">...plus 133 more (see TODO.edoc)
+* <font color="red">...plus 134 more (see TODO.edoc)
 </font>
 
 
