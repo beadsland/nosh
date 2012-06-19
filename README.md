@@ -15,17 +15,17 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">robo vac
 </font>
-* <font color="red">bath mat
-</font>
-* <font color="red">pant hanger
-</font>
-* <font color="red">8:30 am - health insurance
-</font>
-* <font color="red">storage
+* <font color="red">dinner
 </font>
 * <font color="red">7 pm - muffins
 </font>
-* <font color="red">...plus 132 more (see TODO.edoc)
+* <font color="red">Tue 6:30 pm - noumena
+</font>
+* <font color="red">!! priority non-project tasks !!
+</font>
+* <font color="red">banking issue 						(pending phone)
+</font>
+* <font color="red">...plus 131 more (see TODO.edoc)
 </font>
 
 
