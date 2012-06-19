@@ -13,19 +13,19 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!!++ project on hold pending errands !!++
 </font>
-* <font color="red">robo vac
-</font>
-* <font color="red">aspirin
-</font>
-* <font color="red">bog rolls
+* <font color="red">dishes
 </font>
 * <font color="red">add client to network
 </font>
 * <font color="red">backup network config
 </font>
-* <font color="red">storage
+* <font color="red">bath caddy
 </font>
-* <font color="red">...plus 137 more (see TODO.edoc)
+* <font color="red">apple store re ipod headphones (soho?)
+</font>
+* <font color="red">!! priority non-project tasks !!
+</font>
+* <font color="red">...plus 136 more (see TODO.edoc)
 </font>
 
 
