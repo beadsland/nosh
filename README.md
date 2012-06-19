@@ -13,11 +13,11 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!!++ project on hold pending errands !!++
 </font>
-* <font color="red">return excess hook
-</font>
 * <font color="red">Mon 2:30 pm - brooklyn supplies
 </font>
 * <font color="red">Mon 3 pm - brooklyn duty
+</font>
+* <font color="red">return excess hook
 </font>
 * <font color="red">vacuum
 </font>
