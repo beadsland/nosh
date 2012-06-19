@@ -13,19 +13,19 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!!++ project on hold pending errands !!++
 </font>
-* <font color="red">Mon 2:30 pm - brooklyn supplies
-</font>
-* <font color="red">Mon 3 pm - brooklyn duty
-</font>
-* <font color="red">return excess hook
-</font>
-* <font color="red">vacuum
+* <font color="red">robo vac
 </font>
 * <font color="red">7 pm - muffins
 </font>
 * <font color="red">bog rolls
 </font>
-* <font color="red">...plus 137 more (see TODO.edoc)
+* <font color="red">add client to network
+</font>
+* <font color="red">backup network config
+</font>
+* <font color="red">aspirin
+</font>
+* <font color="red">...plus 136 more (see TODO.edoc)
 </font>
 
 
