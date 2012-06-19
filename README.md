@@ -15,7 +15,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">robo vac
 </font>
-* <font color="red">7 pm - muffins
+* <font color="red">aspirin
 </font>
 * <font color="red">bog rolls
 </font>
@@ -23,9 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">backup network config
 </font>
-* <font color="red">aspirin
+* <font color="red">storage
 </font>
-* <font color="red">...plus 136 more (see TODO.edoc)
+* <font color="red">...plus 137 more (see TODO.edoc)
 </font>
 
 
