@@ -13,19 +13,19 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!!++ project on hold pending errands !!++
 </font>
-* <font color="red">7 am - muffins
-</font>
-* <font color="red">9 am - apple store re ipod headphones (Green & Spring)
-</font>
-* <font color="red">9 am - return excess hook
-</font>
 * <font color="red">zenith shower caddy (hd)
 </font>
 * <font color="red">robo vac
 </font>
 * <font color="red">bath mat
 </font>
-* <font color="red">...plus 133 more (see TODO.edoc)
+* <font color="red">pant hanger
+</font>
+* <font color="red">8:30 am - health insurance
+</font>
+* <font color="red">storage
+</font>
+* <font color="red">...plus 132 more (see TODO.edoc)
 </font>
 
 
