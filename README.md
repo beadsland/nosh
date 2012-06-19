@@ -23,9 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">!! priority non-project tasks !!
 </font>
-* <font color="red">banking issue 						(pending phone)
+* <font color="red">rebit version 5.1 download			(pending reply)
 </font>
-* <font color="red">...plus 131 more (see TODO.edoc)
+* <font color="red">...plus 130 more (see TODO.edoc)
 </font>
 
 
