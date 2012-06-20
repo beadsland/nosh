@@ -13,6 +13,8 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">make fresh image of hard drive
 </font>
+* <font color="red">active boot
+</font>
 * <font color="red">uninstall Rebit 5			(pending fresh image verified)
 </font>
 * <font color="red">clean up after Rebit 5
@@ -23,9 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">delete Rebit registry entries
 </font>
-* <font color="red">install Rebit Pro
-</font>
-* <font color="red">...plus 140 more (see TODO.edoc)
+* <font color="red">...plus 145 more (see TODO.edoc)
 </font>
 
 
