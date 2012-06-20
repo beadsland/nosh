@@ -23,7 +23,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">robo vac
 </font>
-* <font color="red">venue for fem mtg
+* <font color="red">relaxation wash
 </font>
 * <font color="red">...plus 134 more (see TODO.edoc)
 </font>
