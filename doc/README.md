@@ -13,19 +13,19 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">venue for fem mtg
+* <font color="red">brush
+</font>
+* <font color="red">prep
 </font>
 * <font color="red">7 am - muffins
 </font>
 * <font color="red">8:30 am - health insurance
 </font>
+* <font color="red">noon - vacate
+</font>
 * <font color="red">robo vac
 </font>
-* <font color="red">Wed 3 pm - brooklyn duty
-</font>
-* <font color="red">Wed 5 pm - dry cleaning
-</font>
-* <font color="red">...plus 131 more (see TODO.edoc)
+* <font color="red">...plus 135 more (see TODO.edoc)
 </font>
 
 
