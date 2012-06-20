@@ -13,19 +13,19 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">relaxation wash
-</font>
-* <font color="red">10 am - best buy - electronic recycling
-</font>
-* <font color="red">8:30 am - health insurance
+* <font color="red">robo vac
 </font>
 * <font color="red">noon - vacate
 </font>
-* <font color="red">robo vac
+* <font color="red">relaxation wash
+</font>
+* <font color="red">8:30 am - health insurance
 </font>
 * <font color="red">rebit version 5.1 download			(pending reply)
 </font>
-* <font color="red">...plus 133 more (see TODO.edoc)
+* <font color="red">get rebit to backup d: 				(pending support reply)
+</font>
+* <font color="red">...plus 132 more (see TODO.edoc)
 </font>
 
 
