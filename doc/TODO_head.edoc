@@ -1,8 +1,8 @@
-@todo !! once 2do_go4 is operating, these will be refactored !!
-@todo reinstall Active Disk Image 64 bit
 @todo make fresh image of hard drive
-@todo uninstall Rebit 5
+@todo uninstall Rebit 5			(pending fresh image verified)
 @todo clean up after Rebit 5
 @todo quick format Rebit backup drive
 @todo set up restore point
-@todo ...plus 139 more (see TODO.edoc)
+@todo delete Rebit registry entries
+@todo install Rebit Pro
+@todo ...plus 138 more (see TODO.edoc)
