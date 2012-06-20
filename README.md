@@ -13,7 +13,9 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">8 am - bbb return
+* <font color="red">heat wave prep
+</font>
+* <font color="red">baskets
 </font>
 * <font color="red">relaxation wash
 </font>
@@ -23,9 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">noon - vacate
 </font>
-* <font color="red">robo vac
-</font>
-* <font color="red">...plus 134 more (see TODO.edoc)
+* <font color="red">...plus 135 more (see TODO.edoc)
 </font>
 
 
