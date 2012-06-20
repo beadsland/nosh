@@ -13,13 +13,13 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
+* <font color="red">manual backup d: drive
+</font>
 * <font color="red">7 am - muffins
 </font>
 * <font color="red">8:30 am - health insurance
 </font>
 * <font color="red">noon - vacate
-</font>
-* <font color="red">manual backup d: drive
 </font>
 * <font color="red">robo vac
 </font>
