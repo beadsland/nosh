@@ -13,11 +13,11 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">robo vac
-</font>
 * <font color="red">get rebit to backup d: 				(pending support reply)
 </font>
 * <font color="red">venue for fem mtg						(pending reply)
+</font>
+* <font color="red">new shower hooks
 </font>
 * <font color="red">8:30 am - health insurance
 </font>
@@ -25,7 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">Wed 8 pm - brooklyn duty
 </font>
-* <font color="red">...plus 129 more (see TODO.edoc)
+* <font color="red">...plus 130 more (see TODO.edoc)
 </font>
 
 
