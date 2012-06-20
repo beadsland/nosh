@@ -19,11 +19,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">venue for fem mtg						(pending reply)
 </font>
-* <font color="red">Wed 3 pm - brooklyn duty
+* <font color="red">8:30 am - health insurance
 </font>
 * <font color="red">Wed 5 pm - dry cleaning
 </font>
-* <font color="red">8:30 am - health insurance
+* <font color="red">Wed 8 pm - brooklyn duty
 </font>
 * <font color="red">...plus 129 more (see TODO.edoc)
 </font>
