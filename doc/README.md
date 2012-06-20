@@ -15,17 +15,17 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">robo vac
 </font>
-* <font color="red">relaxation wash
-</font>
-* <font color="red">8:30 am - health insurance
-</font>
-* <font color="red">rebit version 5.1 download			(pending reply)
-</font>
 * <font color="red">get rebit to backup d: 				(pending support reply)
 </font>
 * <font color="red">venue for fem mtg						(pending reply)
 </font>
-* <font color="red">...plus 131 more (see TODO.edoc)
+* <font color="red">Wed 3 pm - brooklyn duty
+</font>
+* <font color="red">Wed 5 pm - dry cleaning
+</font>
+* <font color="red">8:30 am - health insurance
+</font>
+* <font color="red">...plus 129 more (see TODO.edoc)
 </font>
 
 
