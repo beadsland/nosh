@@ -15,8 +15,6 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">robo vac
 </font>
-* <font color="red">noon - vacate
-</font>
 * <font color="red">relaxation wash
 </font>
 * <font color="red">8:30 am - health insurance
@@ -25,7 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">get rebit to backup d: 				(pending support reply)
 </font>
-* <font color="red">...plus 132 more (see TODO.edoc)
+* <font color="red">venue for fem mtg						(pending reply)
+</font>
+* <font color="red">...plus 131 more (see TODO.edoc)
 </font>
 
 
