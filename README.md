@@ -11,13 +11,9 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">!! once 2do_go4 is operating, these will be refactored !!
-</font>
-* <font color="red">reinstall Active Disk Image 64 bit
-</font>
 * <font color="red">make fresh image of hard drive
 </font>
-* <font color="red">uninstall Rebit 5
+* <font color="red">uninstall Rebit 5			(pending fresh image verified)
 </font>
 * <font color="red">clean up after Rebit 5
 </font>
@@ -25,7 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">set up restore point
 </font>
-* <font color="red">...plus 139 more (see TODO.edoc)
+* <font color="red">delete Rebit registry entries
+</font>
+* <font color="red">install Rebit Pro
+</font>
+* <font color="red">...plus 138 more (see TODO.edoc)
 </font>
 
 
