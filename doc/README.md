@@ -13,9 +13,9 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">manual backup d: drive
+* <font color="red">8 am - bbb return
 </font>
-* <font color="red">7 am - muffins
+* <font color="red">10 am - best buy - electronic recycling
 </font>
 * <font color="red">8:30 am - health insurance
 </font>
