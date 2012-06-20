@@ -13,19 +13,19 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">get rebit to backup d: 				(pending support reply)
+* <font color="red">reinstall Active Disk Image 64 bit
 </font>
-* <font color="red">venue for fem mtg						(pending reply)
+* <font color="red">make fresh image of hard drive
 </font>
-* <font color="red">new shower hooks
+* <font color="red">uninstall Rebit 5
 </font>
-* <font color="red">8:30 am - health insurance
+* <font color="red">clean up after Rebit 5
 </font>
-* <font color="red">Wed 5 pm - dry cleaning
+* <font color="red">quick format Rebit backup drive
 </font>
-* <font color="red">Wed 8 pm - brooklyn duty
+* <font color="red">set up restore point
 </font>
-* <font color="red">...plus 130 more (see TODO.edoc)
+* <font color="red">...plus 139 more (see TODO.edoc)
 </font>
 
 
