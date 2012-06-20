@@ -13,19 +13,19 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">7 pm - muffins
+* <font color="red">venue for fem mtg
 </font>
-* <font color="red">Tue 6:30 pm - noumena
+* <font color="red">7 am - muffins
 </font>
-* <font color="red">rebit version 5.1 download			(pending reply)
+* <font color="red">8:30 am - health insurance
 </font>
-* <font color="red">get rebit to backup d: 				(pending support reply)
+* <font color="red">robo vac
 </font>
-* <font color="red">repeated skype i/o errors				(pending reply)
+* <font color="red">Wed 3 pm - brooklyn duty
 </font>
-* <font color="red">++ consulting obligations (refactor with 2do_go4) ++
+* <font color="red">Wed 5 pm - dry cleaning
 </font>
-* <font color="red">...plus 128 more (see TODO.edoc)
+* <font color="red">...plus 131 more (see TODO.edoc)
 </font>
 
 
