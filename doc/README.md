@@ -15,6 +15,8 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">8 am - bbb return
 </font>
+* <font color="red">relaxation wash
+</font>
 * <font color="red">10 am - best buy - electronic recycling
 </font>
 * <font color="red">8:30 am - health insurance
@@ -22,8 +24,6 @@ __<font color="red">To do</font>__
 * <font color="red">noon - vacate
 </font>
 * <font color="red">robo vac
-</font>
-* <font color="red">relaxation wash
 </font>
 * <font color="red">...plus 134 more (see TODO.edoc)
 </font>
