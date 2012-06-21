@@ -21,9 +21,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">iogear install
+* <font color="red">robo vac
 </font>
-* <font color="red">iogear setup
+* <font color="red">egg boil
 </font>
 * <font color="red">...plus 145 more (see TODO.edoc)
 </font>
