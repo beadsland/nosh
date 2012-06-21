@@ -11,8 +11,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">delete Rebit registry entries
-</font>
 * <font color="red">install Rebit Pro
 </font>
 * <font color="red">image hard drive
@@ -25,7 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">...plus 142 more (see TODO.edoc)
+* <font color="red">20th subway
+</font>
+* <font color="red">...plus 141 more (see TODO.edoc)
 </font>
 
 
