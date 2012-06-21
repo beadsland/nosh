@@ -40,13 +40,13 @@ UNIX shell and the power of an Erlang interpreter.
 _<strong>NOTICE:</strong> Code is still in rudimentary form. Doesn't  do much yet._
  
 
-* [Installation](http://github.com/beadsland/nosh/blob/master/doc/README.md#Installation)
+* [Installation](#Installation)
 
-* [Bourne Shell Emulator](http://github.com/beadsland/nosh/blob/master/doc/README.md#Bourne_Shell_Emulator)
+* [Bourne Shell Emulator](#Bourne_Shell_Emulator)
 
-* [Erl Shell Alternative](http://github.com/beadsland/nosh/blob/master/doc/README.md#Erl_Shell_Alternative)
+* [Erl Shell Alternative](#Erl_Shell_Alternative)
 
-* [NoSQL File System](http://github.com/beadsland/nosh/blob/master/doc/README.md#NoSQL_File_System)
+* [NoSQL File System](#NoSQL_File_System)
 
 
  
@@ -93,7 +93,7 @@ from there.
  
 
 
-Currently all `nosh` does is [parse](http://github.com/beadsland/nosh/blob/master/doc/nosh_parse.md) a command line
+Currently all `nosh` does is [parse](nosh_parse.md) a command line
   and return a tree representing quoting and grouping relationships.
 _Execution functions are not yet implemented_.
  
@@ -134,7 +134,7 @@ cumbersome and non-intuitive.
   Erlang data types, and allowing Erlang Context to be embedded in
   commandlines as needed.  Within Bourne Context, Erlang modules are
   invoked like UNIX commands, and [compile and load
-  on-the-fly](http://github.com/beadsland/nosh/blob/master/doc/nosh_load.md), parameters being passed (and functions called) with
+  on-the-fly](nosh_load.md), parameters being passed (and functions called) with
 minimal typing.
  
 
@@ -155,7 +155,7 @@ _Not yet implemented:_  All functions available through the Erl
 
 
 _Not yet implemented:_  Erlang style syntax can be used on the
-`nosh` command line as per the Erl shell.  See [`nosh_parse`](http://github.com/beadsland/nosh/blob/master/doc/nosh_parse.md) for
+`nosh` command line as per the Erl shell.  See [`nosh_parse`](nosh_parse.md) for
 more details.
  
 
@@ -171,10 +171,10 @@ _Not yet implemented:_`nosh` will provide an NFS-style interface
 
 
 <table width="100%" border="0" summary="list of modules">
-<tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/bootstrap.md" class="module">bootstrap</a></td></tr>
-<tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/nosh.md" class="module">nosh</a></td></tr>
-<tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/nosh_context.md" class="module">nosh_context</a></td></tr>
-<tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/nosh_eval.md" class="module">nosh_eval</a></td></tr>
-<tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/nosh_exec.md" class="module">nosh_exec</a></td></tr>
-<tr><td><a href="http://github.com/beadsland/nosh/blob/master/doc/nosh_parse.md" class="module">nosh_parse</a></td></tr></table>
+<tr><td><a href="bootstrap.md" class="module">bootstrap</a></td></tr>
+<tr><td><a href="nosh.md" class="module">nosh</a></td></tr>
+<tr><td><a href="nosh_context.md" class="module">nosh_context</a></td></tr>
+<tr><td><a href="nosh_eval.md" class="module">nosh_eval</a></td></tr>
+<tr><td><a href="nosh_exec.md" class="module">nosh_exec</a></td></tr>
+<tr><td><a href="nosh_parse.md" class="module">nosh_parse</a></td></tr></table>
 
