@@ -25,7 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">delete Rebit registry entries
 </font>
-* <font color="red">...plus 146 more (see TODO.edoc)
+* <font color="red">...plus 148 more (see TODO.edoc)
 </font>
 
 
