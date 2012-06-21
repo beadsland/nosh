@@ -15,13 +15,13 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">rebit boot
 </font>
-* <font color="red">sd ramboost
-</font>
 * <font color="red">rebit move database files to own partition
 </font>
 * <font color="red">rebit cloud
 </font>
 * <font color="red">uninstall idrive
+</font>
+* <font color="red">icloud?
 </font>
 * <font color="red">crashplan
 </font>
