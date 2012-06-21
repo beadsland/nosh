@@ -13,19 +13,19 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">rebit initial backup
 </font>
-* <font color="red">rebit cloud
-</font>
 * <font color="red">rebit boot
-</font>
-* <font color="red">rebit move database files to own partition
-</font>
-* <font color="red">crashplan
 </font>
 * <font color="red">sd ramboost
 </font>
+* <font color="red">rebit move database files to own partition
+</font>
+* <font color="red">rebit cloud
+</font>
+* <font color="red">crashplan
+</font>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">...plus 142 more (see TODO.edoc)
+* <font color="red">...plus 144 more (see TODO.edoc)
 </font>
 
 
