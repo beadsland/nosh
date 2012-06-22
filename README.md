@@ -21,11 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">9 am - iogear return
+* <font color="red">my book live nas
 </font>
-* <font color="red">kemptness
+* <font color="red">desktop backup
 </font>
-* <font color="red">...plus 144 more (see TODO.edoc)
+* <font color="red">...plus 148 more (see TODO.edoc)
 </font>
 
 
