@@ -21,9 +21,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">breakfast
-</font>
 * <font color="red">9 am - iogear return
+</font>
+* <font color="red">kemptness
 </font>
 * <font color="red">...plus 144 more (see TODO.edoc)
 </font>
