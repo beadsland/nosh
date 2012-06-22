@@ -23,9 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">network usb research
 </font>
-* <font color="red">dinner
+* <font color="red">repeated skype i/o errors		(pending support escalation)
 </font>
-* <font color="red">...plus 145 more (see TODO.edoc)
+* <font color="red">...plus 143 more (see TODO.edoc)
 </font>
 
 
