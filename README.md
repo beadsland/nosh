@@ -23,9 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">desktop backup
 </font>
-* <font color="red">crashplan uninstall
+* <font color="red">live mesh uninstall
 </font>
-* <font color="red">...plus 149 more (see TODO.edoc)
+* <font color="red">...plus 150 more (see TODO.edoc)
 </font>
 
 
