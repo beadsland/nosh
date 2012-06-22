@@ -21,11 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">robo vac
+* <font color="red">network usb research
 </font>
-* <font color="red">egg boil
+* <font color="red">dinner
 </font>
-* <font color="red">...plus 146 more (see TODO.edoc)
+* <font color="red">...plus 145 more (see TODO.edoc)
 </font>
 
 
