@@ -21,11 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">desktop performance issues
-</font>
 * <font color="red">desktop backup
 </font>
-* <font color="red">...plus 151 more (see TODO.edoc)
+* <font color="red">live mesh uninstall
+</font>
+* <font color="red">...plus 152 more (see TODO.edoc)
 </font>
 
 
