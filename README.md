@@ -11,9 +11,9 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">rebit initial backup
+* <font color="red">rebit initial backup 			(46.4% completed)
 </font>
-* <font color="red">rebit boot
+* <font color="red">rebit boot				(pending inital backup)
 </font>
 * <font color="red">rebit move database files to own partition
 </font>
@@ -21,11 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">rebit reply
 </font>
-* <font color="red">robo vac
+* <font color="red">robo vac				(pending alone)
 </font>
-* <font color="red">desktop backup
+* <font color="red">wd desktop update			(pending access)
 </font>
-* <font color="red">...plus 154 more (see TODO.edoc)
+* <font color="red">...plus 160 more (see TODO.edoc)
 </font>
 
 
