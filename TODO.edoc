@@ -3,7 +3,6 @@
 @todo rebit move database files to own partition
 @todo rebit cloud
 @todo !! once 2do_go4 is operating, these will be refactored !!
-@todo desktop performance issues
 @todo desktop backup
 @todo live mesh uninstall
 @todo crashplan uninstall
@@ -22,6 +21,8 @@
 @todo repeated skype i/o errors		(pending support escalation)
 @todo venue for fem mtg			(pending reply)
 @todo ++ consulting obligations (refactor with 2do_go4) ++
+@todo sfc scannow on desktop (pending XP cd)
+@todo add/remove blank lines
 @todo crashplan laptop backup
 @todo crashplan restore test
 @todo crashplan restore training
