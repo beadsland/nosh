@@ -21,11 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">network usb research
+* <font color="red">tidy
 </font>
-* <font color="red">repeated skype i/o errors		(pending support escalation)
+* <font color="red">breakfast
 </font>
-* <font color="red">...plus 143 more (see TODO.edoc)
+* <font color="red">...plus 144 more (see TODO.edoc)
 </font>
 
 
