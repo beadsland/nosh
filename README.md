@@ -25,7 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">mybook secure			(pending diagnostics)
 </font>
-* <font color="red">...plus 162 more (see TODO.edoc)
+* <font color="red">...plus 160 more (see TODO.edoc)
 </font>
 
 
