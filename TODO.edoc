@@ -3,11 +3,10 @@
 @todo rebit move database files to own partition
 @todo rebit cloud
 @todo rebit reply 
-@todo mybook diagnostics
-@todo mybook secure
-@todo desktop backup			(pending access)
-@todo netbook backup			(started)	
-@todo mybook warranty 			(pending backups)
+@todo mybook diagnostics			(50% done)
+@todo mybook secure			(pending diagnostics)
+@todo desktop backup			(starting up)
+@todo netbook backup			(pending diagnostics)	
 @todo !! once 2do_go4 is operating, these will be refactored !!
 @todo breakfast
 @todo pickup
@@ -36,6 +35,7 @@
 @todo nas remote access - laptop
 @todo nas twonky
 @todo nas itunes
+@todo mybook warranty 			(pending backups)
 @todo crashplan laptop backup
 @todo crashplan restore test
 @todo crashplan restore training
