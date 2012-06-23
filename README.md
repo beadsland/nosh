@@ -21,11 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">rebit reply
 </font>
-* <font color="red">live mesh uninstall 			(revo)
+* <font color="red">live mesh purge 
 </font>
 * <font color="red">mybook diagnostics
 </font>
-* <font color="red">...plus 166 more (see TODO.edoc)
+* <font color="red">...plus 167 more (see TODO.edoc)
 </font>
 
 
