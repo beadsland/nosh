@@ -3,11 +3,9 @@
 @todo rebit move database files to own partition
 @todo rebit cloud
 @todo rebit reply
-@todo live mesh uninstall 			(revo)
+@todo live mesh purge 
 @todo mybook diagnostics
-@todo mybook settings
-@todo mybook security
-@todo mybook 2go
+@todo mybook secure
 @todo desktop backup			(pending access)
 @todo netbook backup			(started)	
 @todo mybook warranty 			(pending backups)
@@ -35,7 +33,10 @@
 @todo add/remove blank lines
 @todo android mybackup pro
 @todo airsync doubletwist
-@todo nas remote access
+@todo nas remote access - android
+@todo nas remote access - laptop
+@todo nas twonky
+@todo nas itunes
 @todo crashplan laptop backup
 @todo crashplan restore test
 @todo crashplan restore training
