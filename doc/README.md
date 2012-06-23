@@ -21,11 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">rebit reply
 </font>
-* <font color="red">wd desktop update			(pending access)
+* <font color="red">desktop backup			(pending access)
 </font>
-* <font color="red">wd laptop update			(running)
+* <font color="red">netbook backup			(started)	
 </font>
-* <font color="red">...plus 162 more (see TODO.edoc)
+* <font color="red">...plus 160 more (see TODO.edoc)
 </font>
 
 
