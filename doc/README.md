@@ -21,11 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">rebit reply
 </font>
-* <font color="red">desktop backup			(pending access)
+* <font color="red">mybook diagnostics
 </font>
-* <font color="red">netbook backup			(started)	
+* <font color="red">mybook settings
 </font>
-* <font color="red">...plus 160 more (see TODO.edoc)
+* <font color="red">...plus 163 more (see TODO.edoc)
 </font>
 
 
