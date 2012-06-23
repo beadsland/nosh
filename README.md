@@ -21,9 +21,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">rebit reply 
 </font>
-* <font color="red">mybook diagnostics
+* <font color="red">mybook diagnostics			(50% done)
 </font>
-* <font color="red">mybook secure
+* <font color="red">mybook secure			(pending diagnostics)
 </font>
 * <font color="red">...plus 166 more (see TODO.edoc)
 </font>
