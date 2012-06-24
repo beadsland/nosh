@@ -11,7 +11,7 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">rebit initial backup 			(229/320 gig completed)
+* <font color="red">rebit initial backup 			(238/320 gig completed)
 </font>
 * <font color="red">rebit boot				(pending inital backup)
 </font>
