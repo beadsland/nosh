@@ -3,6 +3,6 @@
 @todo rebit move database files to own partition
 @todo rebit cloud
 @todo rebit reply 
-@todo mybook diagnostics			(90% done)
-@todo mybook secure			(pending diagnostics)
-@todo ...plus 157 more (see TODO.edoc)
+@todo desktop backup			(started)
+@todo netbook backup			(C: done/D: started)	
+@todo ...plus 156 more (see TODO.edoc)

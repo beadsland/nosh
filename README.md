@@ -11,7 +11,7 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">rebit initial backup 			(216/320 gig completed)
+* <font color="red">rebit initial backup 			(225/320 gig completed)
 </font>
 * <font color="red">rebit boot				(pending inital backup)
 </font>
@@ -21,11 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">rebit reply 
 </font>
-* <font color="red">mybook diagnostics			(50% done)
+* <font color="red">mybook diagnostics			(90% done)
 </font>
 * <font color="red">mybook secure			(pending diagnostics)
 </font>
-* <font color="red">...plus 160 more (see TODO.edoc)
+* <font color="red">...plus 157 more (see TODO.edoc)
 </font>
 
 
