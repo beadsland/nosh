@@ -21,11 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">rebit reply 
 </font>
-* <font color="red">desktop retrieve test			(started)
-</font>
 * <font color="red">netbook backup			(C: done/D: started)	
 </font>
-* <font color="red">...plus 154 more (see TODO.edoc)
+* <font color="red">!! once 2do_go4 is operating, these will be refactored !!
+</font>
+* <font color="red">...plus 151 more (see TODO.edoc)
 </font>
 
 
