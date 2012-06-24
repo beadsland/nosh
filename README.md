@@ -21,7 +21,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">rebit reply 
 </font>
-* <font color="red">desktop backup			(started)
+* <font color="red">desktop retrieve test			(started)
 </font>
 * <font color="red">netbook backup			(C: done/D: started)	
 </font>
