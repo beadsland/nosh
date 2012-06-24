@@ -25,7 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">netbook backup			(C: done/D: started)	
 </font>
-* <font color="red">...plus 153 more (see TODO.edoc)
+* <font color="red">...plus 152 more (see TODO.edoc)
 </font>
 
 
