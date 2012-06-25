@@ -23,9 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">robo vac				(pending alone)
 </font>
-* <font color="red">dishes
+* <font color="red">dragtodisk screwing up context sensitive menus
 </font>
-* <font color="red">...plus 148 more (see TODO.edoc)
+* <font color="red">...plus 151 more (see TODO.edoc)
 </font>
 
 
