@@ -11,7 +11,7 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">rebit initial backup			(239 / 320 gb)
+* <font color="red">rebit initial backup			(240 / 320 gb)
 </font>
 * <font color="red">rebit boot				(pending inital backup)
 </font>
@@ -21,11 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">dragtodisk screwing up context sensitive menus
+* <font color="red">breakfast
 </font>
-* <font color="red">airsync doubletwist
+* <font color="red">skype crashing
 </font>
-* <font color="red">...plus 147 more (see TODO.edoc)
+* <font color="red">...plus 150 more (see TODO.edoc)
 </font>
 
 
