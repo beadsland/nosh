@@ -21,11 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">doubletwist podcasts
+* <font color="red">doubletwist podcasts			(pending 504 resolved)
 </font>
 * <font color="red">Mon 3 pm - brooklyn duty
 </font>
-* <font color="red">...plus 148 more (see TODO.edoc)
+* <font color="red">...plus 149 more (see TODO.edoc)
 </font>
 
 
