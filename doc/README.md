@@ -21,9 +21,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">c: out of space on laptop
+* <font color="red">move videos to d: drive
 </font>
-* <font color="red">doubletwist autosync
+* <font color="red">videos junction point
 </font>
 * <font color="red">...plus 152 more (see TODO.edoc)
 </font>
