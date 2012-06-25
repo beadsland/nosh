@@ -25,6 +25,8 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">airsync doubletwist
 </font>
+* <font color="red">...plus 147 more (see TODO.edoc)
+</font>
 
 
 `nosh` is a Bourne shell emulator, Erl shell alternative, and
