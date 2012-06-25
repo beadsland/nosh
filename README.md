@@ -11,7 +11,7 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">rebit initial backup			(240 / 320 gb)
+* <font color="red">rebit initial backup			(246 / 320 gb)
 </font>
 * <font color="red">rebit boot				(pending inital backup)
 </font>
@@ -21,11 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">doubletwist autosync
-</font>
 * <font color="red">doubletwist podcasts
 </font>
-* <font color="red">...plus 151 more (s@todo ...plus 150 more (see TODO.edoc)
+* <font color="red">Mon 3 pm - brooklyn duty
+</font>
+* <font color="red">...plus 148 more (see TODO.edoc)
 </font>
 
 
