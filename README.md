@@ -11,21 +11,21 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">rebit initial backup 			(238/320 gig completed)
-</font>
 * <font color="red">rebit boot				(pending inital backup)
 </font>
 * <font color="red">rebit move database files to own partition
 </font>
 * <font color="red">rebit cloud
 </font>
-* <font color="red">rebit reply 
-</font>
 * <font color="red">netbook backup			(C: done/D: started)	
 </font>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">...plus 149 more (see TODO.edoc)
+* <font color="red">dragtodisk screwing up context sensitive menus
+</font>
+* <font color="red">airsync doubletwist
+</font>
+* <font color="red">...plus 147 more (see TODO.edoc)
 </font>
 
 
