@@ -11,6 +11,8 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
+* <font color="red">rebit initial backup			(239 / 320 gb)
+</font>
 * <font color="red">rebit boot				(pending inital backup)
 </font>
 * <font color="red">rebit move database files to own partition
@@ -23,9 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">dragtodisk screwing up context sensitive menus
 </font>
-* <font color="red">airsync doubletwist
-</font>
-* <font color="red">...plus 147 more (see TODO.edoc)
+* <font color="red">...plus 148 more (see TODO.edoc)
 </font>
 
 
