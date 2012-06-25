@@ -21,11 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">robo vac				(pending alone)
+* <font color="red">c: out of space on laptop
 </font>
-* <font color="red">dragtodisk screwing up context sensitive menus
+* <font color="red">doubletwist autosync
 </font>
-* <font color="red">...plus 154 more (see TODO.edoc)
+* <font color="red">...plus 152 more (see TODO.edoc)
 </font>
 
 
