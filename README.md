@@ -19,13 +19,13 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">rebit cloud
 </font>
-* <font color="red">netbook backup			(C: done/D: started)	
-</font>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
 * <font color="red">dragtodisk screwing up context sensitive menus
 </font>
-* <font color="red">...plus 148 more (see TODO.edoc)
+* <font color="red">airsync doubletwist
+</font>
+* <font color="red">...plus 147 more (see TODO.edoc)
 </font>
 
 
