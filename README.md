@@ -21,11 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">move videos to d: drive
+* <font color="red">doubletwist autosync
 </font>
-* <font color="red">videos junction point
+* <font color="red">doubletwist podcasts
 </font>
-* <font color="red">...plus 152 more (see TODO.edoc)
+* <font color="red">...plus 151 more (see TODO.edoc)
 </font>
 
 
