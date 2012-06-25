@@ -23,7 +23,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">doubletwist podcasts			(pending 504 resolved)
 </font>
-* <font color="red">++ consulting obligations (refactor with 2do_go4) ++
+* <font color="red">nas remote access - android
 </font>
 * <font color="red">...plus 149 more (see TODO.edoc)
 </font>
