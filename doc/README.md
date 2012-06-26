@@ -15,17 +15,17 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">rebit cloud
 </font>
-* <font color="red">!! once 2do_go4 is operating, these will be refactored !!
-</font>
 * <font color="red">doubletwist podcasts			(pending 504 resolved)
 </font>
-* <font color="red">disk image verify
+* <font color="red">disk image verify			(~ 3 pm)
 </font>
 * <font color="red">disk image restore process
 </font>
-* <font color="red">disk image desktop
+* <font color="red">disk image desktop			(pending access)
 </font>
-* <font color="red">...plus 144 more (see TODO.edoc)
+* <font color="red">disk image schedules			(Wed a.m. / Sun p.m.)
+</font>
+* <font color="red">...plus 146 more (see TODO.edoc)
 </font>
 
 
