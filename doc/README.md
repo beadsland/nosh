@@ -11,10 +11,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">rebit initial backup			(247 / 320 gb)
-</font>
-* <font color="red">rebit boot				(pending inital backup)
-</font>
 * <font color="red">rebit move database files to own partition
 </font>
 * <font color="red">rebit cloud
@@ -25,7 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">android wd2go
 </font>
-* <font color="red">...plus 143 more (see TODO.edoc)
+* <font color="red">disk image netbook
+</font>
+* <font color="red">disk image verify
+</font>
+* <font color="red">...plus 142 more (see TODO.edoc)
 </font>
 
 
