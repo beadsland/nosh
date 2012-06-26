@@ -25,7 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">android wd2go
 </font>
-* <font color="red">...plus 149 more (see TODO.edoc)
+* <font color="red">...plus 144 more (see TODO.edoc)
 </font>
 
 
