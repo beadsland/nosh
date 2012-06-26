@@ -19,13 +19,13 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">doubletwist podcasts			(pending 504 resolved)
 </font>
-* <font color="red">android wd2go
-</font>
-* <font color="red">disk image netbook
-</font>
 * <font color="red">disk image verify
 </font>
-* <font color="red">...plus 142 more (see TODO.edoc)
+* <font color="red">disk image restore process
+</font>
+* <font color="red">disk image desktop
+</font>
+* <font color="red">...plus 141 more (see TODO.edoc)
 </font>
 
 
