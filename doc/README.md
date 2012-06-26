@@ -15,6 +15,8 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">rebit cloud
 </font>
+* <font color="red">rebit share
+</font>
 * <font color="red">doubletwist podcasts			(pending 504 resolved)
 </font>
 * <font color="red">firmware update
@@ -23,9 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">disk image verify			(~ 3 pm)
 </font>
-* <font color="red">disk image restore process
-</font>
-* <font color="red">...plus 148 more (see TODO.edoc)
+* <font color="red">...plus 149 more (see TODO.edoc)
 </font>
 
 
