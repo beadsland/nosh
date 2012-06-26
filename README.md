@@ -23,9 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">doubletwist podcasts			(pending 504 resolved)
 </font>
-* <font color="red">nas remote access - android
+* <font color="red">android wd2go
 </font>
-* <font color="red">...plus 150 more (see TODO.edoc)
+* <font color="red">...plus 149 more (see TODO.edoc)
 </font>
 
 
