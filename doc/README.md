@@ -13,19 +13,19 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">stepstruder mk6 assembly
 </font>
-* <font color="red">makerbot final assembly
+* <font color="red">makerbot body assembly
+</font>
+* <font color="red">makerbot firmware
+</font>
+* <font color="red">makerbot electronics
 </font>
 * <font color="red">laundry
 </font>
 * <font color="red">brooklyn duty
 </font>
-* <font color="red">confirm rebit
+* <font color="red">belt tensioining
 </font>
-* <font color="red">rebit cloud
-</font>
-* <font color="red">rebit share
-</font>
-* <font color="red">...plus 153 more (see TODO.edoc)
+* <font color="red">...plus 160 more (see TODO.edoc)
 </font>
 
 
