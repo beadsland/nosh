@@ -11,21 +11,21 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
+* <font color="red">stepstruder mk6 assembly
+</font>
+* <font color="red">makerbot final assembly
+</font>
+* <font color="red">laundry
+</font>
+* <font color="red">brooklyn duty
+</font>
 * <font color="red">confirm rebit
 </font>
 * <font color="red">rebit cloud
 </font>
 * <font color="red">rebit share
 </font>
-* <font color="red">doubletwist podcasts			(pending 504 resolved)
-</font>
-* <font color="red">firmware update
-</font>
-* <font color="red">disk image share
-</font>
-* <font color="red">disk image verify			(~ 3 pm)
-</font>
-* <font color="red">...plus 149 more (see TODO.edoc)
+* <font color="red">...plus 153 more (see TODO.edoc)
 </font>
 
 
