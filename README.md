@@ -11,7 +11,9 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">stepstruder mk6 assembly
+* <font color="red">brooklyn duty
+</font>
+* <font color="red">stepstruder mk6 assembly	(pending missing part)
 </font>
 * <font color="red">makerbot body assembly
 </font>
@@ -23,9 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">brooklyn duty
 </font>
-* <font color="red">belt tensioining
-</font>
-* <font color="red">...plus 160 more (see TODO.edoc)
+* <font color="red">...plus 161 more (see TODO.edoc)
 </font>
 
 
