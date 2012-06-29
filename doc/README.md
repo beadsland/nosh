@@ -17,15 +17,15 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">robovac
 </font>
-* <font color="red">dishes
-</font>
 * <font color="red">package
 </font>
 * <font color="red">pickup
 </font>
 * <font color="red">tape in remaining parts
 </font>
-* <font color="red">...plus 166 more (see TODO.edoc)
+* <font color="red">stepstruder mk6 assembly	(pending missing part)
+</font>
+* <font color="red">...plus 165 more (see TODO.edoc)
 </font>
 
 
