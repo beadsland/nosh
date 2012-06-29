@@ -13,6 +13,10 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">4:40 laundry
 </font>
+* <font color="red">cottage cheese
+</font>
+* <font color="red">7pm muffins
+</font>
 * <font color="red">brooklyn duty 		(pending temperature)
 </font>
 * <font color="red">pickup
@@ -21,11 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">stepstruder mk6 assembly	(pending missing part)
 </font>
-* <font color="red">makerbot body assembly
-</font>
-* <font color="red">makerbot firmware
-</font>
-* <font color="red">...plus 163 more (see TODO.edoc)
+* <font color="red">...plus 166 more (see TODO.edoc)
 </font>
 
 
