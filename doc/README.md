@@ -11,13 +11,13 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">straighten
-</font>
 * <font color="red">laundry
 </font>
 * <font color="red">robovac
 </font>
 * <font color="red">dishes
+</font>
+* <font color="red">package
 </font>
 * <font color="red">pickup
 </font>
