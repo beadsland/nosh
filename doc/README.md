@@ -11,7 +11,7 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">4:15 laundry
+* <font color="red">4:40 laundry
 </font>
 * <font color="red">brooklyn duty 		(pending temperature)
 </font>
