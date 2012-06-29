@@ -11,21 +11,21 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">4:40 laundry
-</font>
-* <font color="red">cottage cheese
-</font>
 * <font color="red">7pm muffins
 </font>
-* <font color="red">brooklyn duty 		(pending temperature)
+* <font color="red">9:30 pm cottage cheese
 </font>
-* <font color="red">pickup
+* <font color="red">brooklyn duty 		(pending temperature)
 </font>
 * <font color="red">tape in remaining parts
 </font>
 * <font color="red">stepstruder mk6 assembly	(pending missing part)
 </font>
-* <font color="red">...plus 166 more (see TODO.edoc)
+* <font color="red">makerbot body assembly
+</font>
+* <font color="red">makerbot firmware
+</font>
+* <font color="red">...plus 164 more (see TODO.edoc)
 </font>
 
 
