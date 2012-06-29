@@ -17,15 +17,15 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">brooklyn duty 		(pending temperature)
 </font>
-* <font color="red">tape in remaining parts
-</font>
 * <font color="red">stepstruder mk6 assembly	(pending missing part)
 </font>
 * <font color="red">makerbot body assembly
 </font>
 * <font color="red">makerbot firmware
 </font>
-* <font color="red">...plus 164 more (see TODO.edoc)
+* <font color="red">makerbot electronics
+</font>
+* <font color="red">...plus 163 more (see TODO.edoc)
 </font>
 
 
