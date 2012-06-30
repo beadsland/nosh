@@ -21,11 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">disk image schedules			(Wed a.m. / Sun)
 </font>
-* <font color="red">robo vac
+* <font color="red">red drive backup			(pending images)
 </font>
-* <font color="red">onsite meeting with client
+* <font color="red">mattress turn
 </font>
-* <font color="red">...plus 153 more (see TODO.edoc)
+* <font color="red">...plus 155 more (see TODO.edoc)
 </font>
 
 
