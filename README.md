@@ -17,15 +17,15 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">stepstruder mk6 assembly	(pending missing part)
 </font>
-* <font color="red">makerbot software		(pending extraction)
-</font>
-* <font color="red">makerbot firmware		(pending software)
+* <font color="red">makerbot firmware		(pending usb disconnect)
 </font>
 * <font color="red">makerbot electronics		(pending firmware)
 </font>
 * <font color="red">reclaim GB from Y/Z		(pending CPU cycles)
 </font>
-* <font color="red">...plus 159 more (see TODO.edoc)
+* <font color="red">Sat - certification
+</font>
+* <font color="red">...plus 158 more (see TODO.edoc)
 </font>
 
 
