@@ -11,6 +11,12 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
+* <font color="red">makerbot drivers
+</font>
+* <font color="red">makerbot firmware			(pending usb disconnect)
+</font>
+* <font color="red">makerbot electronics			(pending firmware)
+</font>
 * <font color="red">4pm - disk image rerun		(running)
 </font>
 * <font color="red">disk image restore process
@@ -18,12 +24,6 @@ __<font color="red">To do</font>__
 * <font color="red">laptop updates			(pending restore process)
 </font>
 * <font color="red">disk image desktop			(pending access)
-</font>
-* <font color="red">disk image schedules			(Wed a.m. / Sun)
-</font>
-* <font color="red">red drive backup			(pending images)
-</font>
-* <font color="red">mattress turn
 </font>
 * <font color="red">...plus 155 more (see TODO.edoc)
 </font>
