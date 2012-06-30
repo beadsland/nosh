@@ -21,11 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">makerbot electronics		(pending firmware)
 </font>
-* <font color="red">7 am - muffins
+* <font color="red">8am - mandarins
 </font>
-* <font color="red">groceries
+* <font color="red">boil eggs
 </font>
-* <font color="red">...plus 154 more (see TODO.edoc)
+* <font color="red">...plus 155 more (see TODO.edoc)
 </font>
 
 
