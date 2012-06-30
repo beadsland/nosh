@@ -11,8 +11,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">7pm muffins
-</font>
 * <font color="red">9:30 pm cottage cheese
 </font>
 * <font color="red">brooklyn duty 		(pending temperature)
@@ -25,7 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">makerbot electronics
 </font>
-* <font color="red">...plus 164 more (see TODO.edoc)
+* <font color="red">Sat - certification
+</font>
+* <font color="red">...plus 163 more (see TODO.edoc)
 </font>
 
 
