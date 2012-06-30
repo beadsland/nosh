@@ -23,9 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">makerbot electronics
 </font>
-* <font color="red">Sat - certification
+* <font color="red">reclaim GB from Y/Z
 </font>
-* <font color="red">...plus 163 more (see TODO.edoc)
+* <font color="red">...plus 164 more (see TODO.edoc)
 </font>
 
 
