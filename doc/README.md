@@ -13,7 +13,7 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">doubletwist podcasts			(pending 504 resolved)
 </font>
-* <font color="red">disk image rerun
+* <font color="red">disk image rerun			(running)
 </font>
 * <font color="red">disk image restore process
 </font>
