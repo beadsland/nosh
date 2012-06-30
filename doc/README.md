@@ -11,19 +11,19 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">rebit online			(pending support reply)
+* <font color="red">doubletwist podcasts			(pending 504 resolved)
 </font>
-* <font color="red">red drive backup		(running, pending rerun)
+* <font color="red">disk image rerun
 </font>
-* <font color="red">stepstruder mk6 assembly	(pending missing part)
+* <font color="red">disk image restore process
 </font>
-* <font color="red">makerbot firmware		(pending usb disconnect)
+* <font color="red">laptop updates			(pending restore process)
 </font>
-* <font color="red">makerbot electronics		(pending firmware)
+* <font color="red">disk image desktop			(pending access)
+</font>
+* <font color="red">disk image schedules			(Wed a.m. / Sun p.m.)
 </font>
 * <font color="red">8am - mandarins
-</font>
-* <font color="red">boil eggs
 </font>
 * <font color="red">...plus 156 more (see TODO.edoc)
 </font>
