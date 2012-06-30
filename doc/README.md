@@ -13,7 +13,7 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">doubletwist podcasts			(pending 504 resolved)
 </font>
-* <font color="red">disk image rerun			(running)
+* <font color="red">4pm - disk image rerun		(running)
 </font>
 * <font color="red">disk image restore process
 </font>
@@ -23,9 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">disk image schedules			(Wed a.m. / Sun)
 </font>
-* <font color="red">boil eggs
+* <font color="red">12:40 - boil eggs
 </font>
-* <font color="red">...plus 155 more (see TODO.edoc)
+* <font color="red">...plus 153 more (see TODO.edoc)
 </font>
 
 
