@@ -11,9 +11,9 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">makerbot drivers
+* <font color="red">arduino firmware
 </font>
-* <font color="red">makerbot firmware			(pending usb disconnect)
+* <font color="red">extruder board firmware
 </font>
 * <font color="red">makerbot electronics			(pending firmware)
 </font>
