@@ -11,8 +11,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">doubletwist podcasts			(pending 504 resolved)
-</font>
 * <font color="red">4pm - disk image rerun		(running)
 </font>
 * <font color="red">disk image restore process
@@ -23,9 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">disk image schedules			(Wed a.m. / Sun)
 </font>
-* <font color="red">12:40 - boil eggs
+* <font color="red">robo vac
 </font>
-* <font color="red">...plus 154 more (see TODO.edoc)
+* <font color="red">onsite meeting with client
+</font>
+* <font color="red">...plus 153 more (see TODO.edoc)
 </font>
 
 
