@@ -13,7 +13,7 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">rebit online			(pending support reply)
 </font>
-* <font color="red">red drive backup		(running)
+* <font color="red">red drive backup		(running, pending rerun)
 </font>
 * <font color="red">stepstruder mk6 assembly	(pending missing part)
 </font>
