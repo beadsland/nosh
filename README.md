@@ -21,11 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">makerbot electronics		(pending firmware)
 </font>
-* <font color="red">reclaim GB from Y/Z		(pending CPU cycles)
-</font>
 * <font color="red">7 am - muffins
 </font>
-* <font color="red">...plus 156 more (see TODO.edoc)
+* <font color="red">groceries
+</font>
+* <font color="red">...plus 155 more (see TODO.edoc)
 </font>
 
 
