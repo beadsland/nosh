@@ -19,13 +19,13 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">makerbot software		(pending extraction)
 </font>
-* <font color="red">makerbot firmware
+* <font color="red">makerbot firmware		(pending software)
 </font>
-* <font color="red">makerbot electronics
+* <font color="red">makerbot electronics		(pending firmware)
 </font>
-* <font color="red">reclaim GB from Y/Z
+* <font color="red">reclaim GB from Y/Z		(pending CPU cycles)
 </font>
-* <font color="red">...plus 164 more (see TODO.edoc)
+* <font color="red">...plus 160 more (see TODO.edoc)
 </font>
 
 
