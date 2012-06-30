@@ -1,5 +1,5 @@
-@todo makerbot drivers
-@todo makerbot firmware			(pending usb disconnect)
+@todo arduino firmware
+@todo extruder board firmware
 @todo makerbot electronics			(pending firmware)
 @todo 4pm - disk image rerun		(running)
 @todo disk image restore process
