@@ -21,11 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">disk image desktop			(pending access)
 </font>
-* <font color="red">disk image schedules			(Wed a.m. / Sun p.m.)
+* <font color="red">disk image schedules			(Wed a.m. / Sun)
 </font>
-* <font color="red">8am - mandarins
+* <font color="red">boil eggs
 </font>
-* <font color="red">...plus 156 more (see TODO.edoc)
+* <font color="red">...plus 155 more (see TODO.edoc)
 </font>
 
 
