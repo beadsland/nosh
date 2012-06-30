@@ -2,7 +2,7 @@
 @todo red drive backup		(running)
 @todo stepstruder mk6 assembly	(pending missing part)
 @todo makerbot software		(pending extraction)
-@todo makerbot firmware
-@todo makerbot electronics
-@todo reclaim GB from Y/Z
-@todo ...plus 164 more (see TODO.edoc)
+@todo makerbot firmware		(pending software)
+@todo makerbot electronics		(pending firmware)
+@todo reclaim GB from Y/Z		(pending CPU cycles)
+@todo ...plus 160 more (see TODO.edoc)

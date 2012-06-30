@@ -2,9 +2,9 @@
 @todo red drive backup		(running)
 @todo stepstruder mk6 assembly	(pending missing part)
 @todo makerbot software		(pending extraction)
-@todo makerbot firmware
-@todo makerbot electronics
-@todo reclaim GB from Y/Z
+@todo makerbot firmware		(pending software)
+@todo makerbot electronics		(pending firmware)
+@todo reclaim GB from Y/Z		(pending CPU cycles)
 @todo Sat - certification
 @todo Sat - payments
 @todo groceries
@@ -13,11 +13,7 @@
 @todo first 3d print
 @todo fine tuning
 @todo raftless printing
-@todo confirm rebit
-@todo rebit cloud
-@todo rebit share
 @todo doubletwist podcasts			(pending 504 resolved)
-@todo firmware update
 @todo disk image share
 @todo disk image verify			(~ 3 pm)
 @todo disk image restore process
