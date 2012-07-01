@@ -17,9 +17,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">new CDs				(pending access)
 </font>
-* <font color="red">straighten
+* <font color="red">robo vac				(pending space)
 </font>
-* <font color="red">robo vac
+* <font color="red">planting corn in a pot?
 </font>
 * <font color="red">dishes
 </font>
