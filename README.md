@@ -11,6 +11,10 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
+* <font color="red">dishes
+</font>
+* <font color="red">old replicatorG version
+</font>
 * <font color="red">4pm - disk image rerun		(running)
 </font>
 * <font color="red">disk image restore process
@@ -21,11 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">disk image schedules			(Wed a.m. / Sun)
 </font>
-* <font color="red">red drive backup			(pending images)
-</font>
-* <font color="red">robo vac
-</font>
-* <font color="red">...plus 155 more (see TODO.edoc)
+* <font color="red">...plus 157 more (see TODO.edoc)
 </font>
 
 
