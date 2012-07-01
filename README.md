@@ -13,9 +13,9 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">new CDs				(pending access)
 </font>
-* <font color="red">client processing
-</font>
 * <font color="red">wifi repeater outdoors
+</font>
+* <font color="red">trujnet to laptop
 </font>
 * <font color="red">red drive backup			(pending router)
 </font>
