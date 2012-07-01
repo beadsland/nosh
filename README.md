@@ -11,6 +11,8 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
+* <font color="red">repair .net framework
+</font>
 * <font color="red">windows updates laptop
 </font>
 * <font color="red">2:30 pm - disk image desktop			(running)
@@ -21,11 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">robo vac				(pending space)
 </font>
-* <font color="red">dishes
-</font>
 * <font color="red">onsite meeting with client
 </font>
-* <font color="red">...plus 154 more (see TODO.edoc)
+* <font color="red">...plus 155 more (see TODO.edoc)
 </font>
 
 
