@@ -17,15 +17,15 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">new CDs				(pending access)
 </font>
-* <font color="red">breakfast
-</font>
 * <font color="red">straighten
 </font>
 * <font color="red">robo vac
 </font>
 * <font color="red">dishes
 </font>
-* <font color="red">...plus 155 more (see TODO.edoc)
+* <font color="red">onsite meeting with client
+</font>
+* <font color="red">...plus 154 more (see TODO.edoc)
 </font>
 
 
