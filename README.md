@@ -11,21 +11,21 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">repair .net framework
+* <font color="red">5 pm - disk image desktop		(running)
 </font>
-* <font color="red">windows updates laptop
-</font>
-* <font color="red">2:30 pm - disk image desktop			(running)
+* <font color="red">move router			(pending disk image)
 </font>
 * <font color="red">red drive backup			(pending images)
 </font>
 * <font color="red">new CDs				(pending access)
 </font>
-* <font color="red">robo vac				(pending space)
+* <font color="red">wifi repeater
 </font>
 * <font color="red">onsite meeting with client
 </font>
-* <font color="red">...plus 155 more (see TODO.edoc)
+* <font color="red">7 pm - muffins
+</font>
+* <font color="red">...plus 153 more (see TODO.edoc)
 </font>
 
 
