@@ -11,9 +11,9 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">4pm - disk image rerun		(running)
+* <font color="red">4 am - disk image rerun		(running)
 </font>
-* <font color="red">disk image restore process
+* <font color="red">7 am - muffins
 </font>
 * <font color="red">laptop updates			(pending restore process)
 </font>

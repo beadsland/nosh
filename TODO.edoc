@@ -12,7 +12,6 @@
 @todo homemade CDs			(pending mp3tag)
 @todo audio tapes				(pending hardware setup)
 @todo rebit online				(pending support reply)
-@todo stepstruder mk6 assembly		(pending missing part)
 @todo !! once 2do_go4 is operating, these will be refactored !!
 @todo ++ consulting meetings (refactor with 2do_go4) ++
 @todo mount shower caddy
@@ -50,6 +49,7 @@
 @todo arduino firmware			(pending support reply)
 @todo extruder board firmware		(pending support reply)
 @todo makerbot electronics			(pending firmware)
+@todo stepstruder mk6 assembly		(pending missing part)
 @todo belt tensioining
 @todo testing makerbot
 @todo first 3d print
