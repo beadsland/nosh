@@ -11,9 +11,9 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">split CD...?
-</font>
 * <font color="red">new CDs				(pending access)
+</font>
+* <font color="red">wifi software
 </font>
 * <font color="red">wifi repeater
 </font>
