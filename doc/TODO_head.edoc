@@ -1,8 +1,8 @@
-@todo arduino firmware
-@todo extruder board firmware
-@todo makerbot electronics			(pending firmware)
 @todo 4pm - disk image rerun		(running)
 @todo disk image restore process
 @todo laptop updates			(pending restore process)
 @todo disk image desktop			(pending access)
+@todo disk image schedules			(Wed a.m. / Sun)
+@todo red drive backup			(pending images)
+@todo robo vac
 @todo ...plus 155 more (see TODO.edoc)

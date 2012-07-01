@@ -1,6 +1,3 @@
-@todo arduino firmware
-@todo extruder board firmware
-@todo makerbot electronics			(pending firmware)
 @todo 4pm - disk image rerun		(running)
 @todo disk image restore process
 @todo laptop updates			(pending restore process)
@@ -50,6 +47,9 @@
 @todo 5 July - storage payment
 @todo 7th - certification
 @todo :: project work resumes ::
+@todo arduino firmware			(pending support reply)
+@todo extruder board firmware		(pending support reply)
+@todo makerbot electronics			(pending firmware)
 @todo belt tensioining
 @todo testing makerbot
 @todo first 3d print
