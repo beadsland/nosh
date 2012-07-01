@@ -11,21 +11,21 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">laptop updates
-</font>
-* <font color="red">disk image desktop			(pending access)
-</font>
-* <font color="red">disk image schedules			(Wed a.m. / Sun)
+* <font color="red">2:30 pm - disk image desktop			(running)
 </font>
 * <font color="red">red drive backup			(pending images)
 </font>
 * <font color="red">new CDs				(pending access)
 </font>
-* <font color="red">robo vac
-</font>
 * <font color="red">breakfast
 </font>
-* <font color="red">...plus 156 more (see TODO.edoc)
+* <font color="red">straighten
+</font>
+* <font color="red">robo vac
+</font>
+* <font color="red">dishes
+</font>
+* <font color="red">...plus 155 more (see TODO.edoc)
 </font>
 
 
