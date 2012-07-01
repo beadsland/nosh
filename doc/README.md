@@ -13,19 +13,19 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">new CDs				(pending access)
 </font>
-* <font color="red">wifi repeater indoors
+* <font color="red">client processing
 </font>
 * <font color="red">wifi repeater outdoors
-</font>
-* <font color="red">wifi tools
-</font>
-* <font color="red">wifi antenna
 </font>
 * <font color="red">red drive backup			(pending router)
 </font>
 * <font color="red">onsite meeting with client
 </font>
-* <font color="red">...plus 156 more (see TODO.edoc)
+* <font color="red">7 pm - muffins
+</font>
+* <font color="red">obscure CDs			(pending new CDs)
+</font>
+* <font color="red">...plus 155 more (see TODO.edoc)
 </font>
 
 
