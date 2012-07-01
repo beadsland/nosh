@@ -11,6 +11,8 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
+* <font color="red">windows updates laptop
+</font>
 * <font color="red">2:30 pm - disk image desktop			(running)
 </font>
 * <font color="red">red drive backup			(pending images)
@@ -18,8 +20,6 @@ __<font color="red">To do</font>__
 * <font color="red">new CDs				(pending access)
 </font>
 * <font color="red">robo vac				(pending space)
-</font>
-* <font color="red">planting corn in a pot?
 </font>
 * <font color="red">dishes
 </font>
