@@ -13,17 +13,17 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">red drive backup			(in progress)		
 </font>
-* <font color="red">audio tapes				(first tape running)
+* <font color="red">audio tapes				(first tape need restart)
 </font>
 * <font color="red">robo vac				(pending space)	
-</font>
-* <font color="red">usb high gain		
 </font>
 * <font color="red">brooklyn sweep
 </font>
 * <font color="red">Mon 3 pm - brooklyn duty
 </font>
 * <font color="red">brooklyn invoice			(pending sweep)
+</font>
+* <font color="red">onsite meeting with client		(pending client avail)
 </font>
 * <font color="red">...plus 156 more (see TODO.edoc)
 </font>
