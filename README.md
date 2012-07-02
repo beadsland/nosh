@@ -15,9 +15,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">9am - wifi 12dbi antenna
 </font>
-* <font color="red">mp3tag
-</font>
-* <font color="red">homemade CDs			(pending mp3tag)
+* <font color="red">homemade CDs			(pending musicbrainz)
 </font>
 * <font color="red">audio tapes				(pending hardware setup)
 </font>
@@ -25,7 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">...plus 153 more (see TODO.edoc)
+* <font color="red">++ consulting meetings (refactor with 2do_go4) ++
+</font>
+* <font color="red">...plus 152 more (see TODO.edoc)
 </font>
 
 
