@@ -25,7 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">arduino firmware			(pending support reply)
 </font>
-* <font color="red">...plus 156 more (see TODO.edoc)
+* <font color="red">...plus 159 more (see TODO.edoc)
 </font>
 
 
