@@ -15,8 +15,6 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">9am - wifi 12dbi antenna
 </font>
-* <font color="red">homemade CDs			(6 cds to go)
-</font>
 * <font color="red">first CD case
 </font>
 * <font color="red">second CD case
@@ -25,7 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">audio tapes				(pending tape head cleaner)
 </font>
-* <font color="red">...plus 156 more (see TODO.edoc)
+* <font color="red">test phone extension
+</font>
+* <font color="red">...plus 155 more (see TODO.edoc)
 </font>
 
 
