@@ -11,21 +11,21 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">red drive backup	
+* <font color="red">red drive backup			(in progress)
 </font>
-* <font color="red">9am - wifi 12dbi antenna
+* <font color="red">first CD case			(pending access)
 </font>
-* <font color="red">first CD case
+* <font color="red">second CD case			(pending client review)
 </font>
-* <font color="red">second CD case
-</font>
-* <font color="red">tape head cleaner
+* <font color="red">tape head cleaner			(pending client locating)
 </font>
 * <font color="red">audio tapes				(pending tape head cleaner)
 </font>
-* <font color="red">test phone extension
+* <font color="red">rebit online				(pending support reply)
 </font>
-* <font color="red">...plus 155 more (see TODO.edoc)
+* <font color="red">arduino firmware			(pending support reply)
+</font>
+* <font color="red">...plus 156 more (see TODO.edoc)
 </font>
 
 
