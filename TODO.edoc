@@ -1,11 +1,19 @@
-@todo red drive backup	
-@todo 9am - wifi 12dbi antenna
-@todo first CD case
-@todo second CD case
-@todo tape head cleaner
+@todo red drive backup			(in progress)
+@todo first CD case			(pending access)
+@todo second CD case			(pending client review)
+@todo tape head cleaner			(pending client locating)
 @todo audio tapes				(pending tape head cleaner)
-@todo test phone extension
 @todo rebit online				(pending support reply)
+@todo arduino firmware			(pending support reply)
+@todo meetup
+@todo 7 am - muffins
+@todo onsite meeting with client
+@todo 9am - wifi 12dbi antenna
+@todo 7 pm - muffins
+@todo Mon 8:30 am - health insurance
+@todo robo vac				(pending space)
+@todo straighten
+@todo Mon 3 pm - brooklyn duty
 @todo !! once 2do_go4 is operating, these will be refactored !!
 @todo ++ consulting meetings (refactor with 2do_go4) ++
 @todo mount shower caddy
@@ -20,6 +28,7 @@
 @todo register mybook
 @todo clear desktops
 @todo ++ consulting obligations (refactor with 2do_go4) ++
+@todo test phone extension
 @todo thumb drive purchase		(pending all rips)
 @todo portable mac harddrive	(pending client meeting)
 @todo extract gmail
@@ -33,20 +42,12 @@
 @todo vpn server?
 @todo line up new work
 @todo !!++ calendar for coming week !!++
-@todo meetup
-@todo 7 am - muffins
-@todo onsite meeting with client
-@todo 7 pm - muffins
-@todo Mon 8:30 am - health insurance
-@todo robo vac				(pending space)
-@todo Mon 3 pm - brooklyn duty
 @todo Wed - confirm disk image
 @todo 5 July - storage payment
 @todo 7th - certification
 @todo Sun - confirm disk image
 @todo :: project work resumes ::
 @todo trujnet registration
-@todo arduino firmware			(pending support reply)
 @todo extruder board firmware		(pending support reply)
 @todo makerbot electronics			(pending firmware)
 @todo stepstruder mk6 assembly		(pending missing part)
