@@ -13,7 +13,7 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">red drive backup			(in progress)		
 </font>
-* <font color="red">audio tape software
+* <font color="red">audio tape software			(pending decision re upgrade)
 </font>
 * <font color="red">audio tapes				(pending software)
 </font>
