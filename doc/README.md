@@ -13,9 +13,9 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">red drive backup			(in progress)		
 </font>
-* <font color="red">second CD case			(in progress)
+* <font color="red">audio tape software
 </font>
-* <font color="red">audio tapes				(pending CDs)
+* <font color="red">audio tapes				(pending software)
 </font>
 * <font color="red">onsite meeting with client		(pending client avail)
 </font>
