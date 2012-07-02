@@ -21,11 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">audio tapes				(pending tape head cleaner)
 </font>
-* <font color="red">rebit online				(pending support reply)
+* <font color="red">onsite meeting with client		(pending client avail)
 </font>
-* <font color="red">arduino firmware			(pending support reply)
+* <font color="red">robo vac				(pending space)
 </font>
-* <font color="red">...plus 159 more (see TODO.edoc)
+* <font color="red">...plus 160 more (see TODO.edoc)
 </font>
 
 
