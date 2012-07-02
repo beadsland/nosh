@@ -21,11 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">second CD case
 </font>
-* <font color="red">audio tapes				(pending hardware setup)
+* <font color="red">tape head cleaner
 </font>
-* <font color="red">test phone extension
+* <font color="red">audio tapes				(pending tape head cleaner)
 </font>
-* <font color="red">...plus 155 more (see TODO.edoc)
+* <font color="red">...plus 156 more (see TODO.edoc)
 </font>
 
 
