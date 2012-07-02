@@ -15,7 +15,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">9am - wifi 12dbi antenna
 </font>
-* <font color="red">homemade CDs			(pending musicbrainz)
+* <font color="red">homemade CDs			(6 cds to go)
 </font>
 * <font color="red">audio tapes				(pending hardware setup)
 </font>
