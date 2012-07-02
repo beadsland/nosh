@@ -11,13 +11,11 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">mybook cannot delete file
-</font>
 * <font color="red">red drive backup	
 </font>
 * <font color="red">9am - wifi 12dbi antenna
 </font>
-* <font color="red">obscure CDs			(pending new CDs)
+* <font color="red">mp3tag
 </font>
 * <font color="red">homemade CDs			(pending mp3tag)
 </font>
@@ -25,7 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">rebit online				(pending support reply)
 </font>
-* <font color="red">...plus 154 more (see TODO.edoc)
+* <font color="red">!! once 2do_go4 is operating, these will be refactored !!
+</font>
+* <font color="red">...plus 153 more (see TODO.edoc)
 </font>
 
 
