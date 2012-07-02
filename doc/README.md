@@ -19,13 +19,13 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">audio tapes				(pending hardware setup)
 </font>
+* <font color="red">test phone extension
+</font>
 * <font color="red">rebit online				(pending support reply)
 </font>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">++ consulting meetings (refactor with 2do_go4) ++
-</font>
-* <font color="red">...plus 152 more (see TODO.edoc)
+* <font color="red">...plus 153 more (see TODO.edoc)
 </font>
 
 
