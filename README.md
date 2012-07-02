@@ -11,9 +11,7 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">red drive backup			(in progress)
-</font>
-* <font color="red">first CD case			(pending access)
+* <font color="red">red drive backup			(in progress)		
 </font>
 * <font color="red">second CD case			(pending client review)
 </font>
@@ -25,7 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">robo vac				(pending space)	
 </font>
-* <font color="red">...plus 159 more (see TODO.edoc)
+* <font color="red">usb high gain		
+</font>
+* <font color="red">...plus 157 more (see TODO.edoc)
 </font>
 
 
