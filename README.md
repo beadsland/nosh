@@ -23,9 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">onsite meeting with client		(pending client avail)
 </font>
-* <font color="red">robo vac				(pending space)
+* <font color="red">robo vac				(pending space)	
 </font>
-* <font color="red">...plus 160 more (see TODO.edoc)
+* <font color="red">...plus 159 more (see TODO.edoc)
 </font>
 
 
