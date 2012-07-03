@@ -11,21 +11,21 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">red drive backup			(in progress)		
+* <font color="red">red drive backup			(49 hrs to go)		
 </font>
 * <font color="red">audio tapes				(first tape need restart)
 </font>
+* <font color="red">return audio console
+</font>
 * <font color="red">robo vac				(pending space)	
 </font>
-* <font color="red">brooklyn sweep
+* <font color="red">vnc server
 </font>
-* <font color="red">Mon 3 pm - brooklyn duty
+* <font color="red">vnc client
 </font>
-* <font color="red">brooklyn invoice			(pending sweep)
+* <font color="red">usb high gain test	
 </font>
-* <font color="red">onsite meeting with client		(pending client avail)
-</font>
-* <font color="red">...plus 156 more (see TODO.edoc)
+* <font color="red">...plus 160 more (see TODO.edoc)
 </font>
 
 
