@@ -11,7 +11,7 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">audio tapes				(first tape running)
+* <font color="red">audio tapes				(first tape running / 8231)
 </font>
 * <font color="red">usb high gain test	
 </font>
