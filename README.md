@@ -11,8 +11,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">cutepdf reinstall
-</font>
 * <font color="red">zonealarm uninstall
 </font>
 * <font color="red">usb high gain test	
@@ -25,7 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">red drive backup			(stopped pending usb high gain)		
 </font>
-* <font color="red">...plus 169 more (see TODO.edoc)
+* <font color="red">bzeek reinstall w/o zonealarm		(pending usb high gain test)
+</font>
+* <font color="red">...plus 168 more (see TODO.edoc)
 </font>
 
 
