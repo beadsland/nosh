@@ -11,21 +11,21 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">idrive backup			(25 hrs to go)
-</font>
-* <font color="red">red drive backup			(running)		
-</font>
-* <font color="red">audio tapes				(first tape need restart)
-</font>
-* <font color="red">robo vac				(running)	
+* <font color="red">audio tapes				(first tape running)
 </font>
 * <font color="red">usb high gain test	
+</font>
+* <font color="red">idrive backup			(25 hrs to go)
+</font>
+* <font color="red">red drive backup			(stopped pending usb high gain)		
 </font>
 * <font color="red">solar power
 </font>
 * <font color="red">uninstall sugarsync
 </font>
-* <font color="red">...plus 158 more (see TODO.edoc)
+* <font color="red">dishes
+</font>
+* <font color="red">...plus 160 more (see TODO.edoc)
 </font>
 
 
