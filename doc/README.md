@@ -11,21 +11,21 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">usb high gain test	
+* <font color="red">dishes
+</font>
+* <font color="red">pickup
 </font>
 * <font color="red">idrive backup			(25 hrs to go)
 </font>
 * <font color="red">red drive backup			(stopped pending usb high gain)		
 </font>
-* <font color="red">dishes
+* <font color="red">add amped to trujnet
 </font>
-* <font color="red">pickup
+* <font color="red">usb high gain test	
 </font>
 * <font color="red">night night
 </font>
-* <font color="red">mp3 encoder
-</font>
-* <font color="red">...plus 161 more (see TODO.edoc)
+* <font color="red">...plus 162 more (see TODO.edoc)
 </font>
 
 
