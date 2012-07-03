@@ -23,9 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">dishes
 </font>
-* <font color="red">straighten
+* <font color="red">hp connection manager		(pending usb high gain test)
 </font>
-* <font color="red">...plus 168 more (see TODO.edoc)
+* <font color="red">...plus 167 more (see TODO.edoc)
 </font>
 
 
