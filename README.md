@@ -21,9 +21,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">mp3 encoder
 </font>
-* <font color="red">audio tapes				(pending mp3 encoder)
+* <font color="red">onsite meeting with client		(pending client avail)
 </font>
-* <font color="red">solar power
+* <font color="red">robo vac
 </font>
 * <font color="red">...plus 160 more (see TODO.edoc)
 </font>
