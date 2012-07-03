@@ -11,8 +11,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">pickup
-</font>
 * <font color="red">add amped to trujnet
 </font>
 * <font color="red">usb high gain test	
@@ -25,7 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">mp3 encoder
 </font>
-* <font color="red">...plus 161 more (see TODO.edoc)
+* <font color="red">audio tapes				(pending mp3 encoder)
+</font>
+* <font color="red">...plus 160 more (see TODO.edoc)
 </font>
 
 
