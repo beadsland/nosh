@@ -21,7 +21,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">red drive backup			(stopped pending usb high gain)		
 </font>
-* <font color="red">dishes
+* <font color="red">bzeek reinstall w/o zonealarm		(pending usb high gain test)
 </font>
 * <font color="red">hp connection manager		(pending usb high gain test)
 </font>
