@@ -21,9 +21,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">red drive backup			(stopped pending usb high gain)		
 </font>
-* <font color="red">straighten
-</font>
 * <font color="red">dishes
+</font>
+* <font color="red">straighten
 </font>
 * <font color="red">...plus 168 more (see TODO.edoc)
 </font>
