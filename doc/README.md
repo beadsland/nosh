@@ -25,7 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">audio tapes				(pending mp3 encoder)
 </font>
-* <font color="red">...plus 160 more (see TODO.edoc)
+* <font color="red">...plus 161 more (see TODO.edoc)
 </font>
 
 
