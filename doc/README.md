@@ -19,13 +19,13 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">red drive backup			(stopped pending usb high gain)		
 </font>
-* <font color="red">night night
-</font>
 * <font color="red">mp3 encoder
 </font>
 * <font color="red">audio tapes				(pending mp3 encoder)
 </font>
-* <font color="red">...plus 161 more (see TODO.edoc)
+* <font color="red">solar power
+</font>
+* <font color="red">...plus 160 more (see TODO.edoc)
 </font>
 
 
