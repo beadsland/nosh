@@ -19,13 +19,13 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">red drive backup			(stopped pending usb high gain)		
 </font>
-* <font color="red">mp3 encoder
+* <font color="red">straighten
 </font>
-* <font color="red">onsite meeting with client		(pending client avail)
+* <font color="red">dishes
 </font>
-* <font color="red">robo vac
+* <font color="red">hp connection manager
 </font>
-* <font color="red">...plus 160 more (see TODO.edoc)
+* <font color="red">...plus 164 more (see TODO.edoc)
 </font>
 
 
