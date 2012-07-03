@@ -11,21 +11,21 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">audio tapes				(first tape running / 8231)
-</font>
 * <font color="red">usb high gain test	
 </font>
 * <font color="red">idrive backup			(25 hrs to go)
 </font>
 * <font color="red">red drive backup			(stopped pending usb high gain)		
 </font>
-* <font color="red">solar power
-</font>
-* <font color="red">uninstall sugarsync
-</font>
 * <font color="red">dishes
 </font>
-* <font color="red">...plus 160 more (see TODO.edoc)
+* <font color="red">pickup
+</font>
+* <font color="red">night night
+</font>
+* <font color="red">mp3 encoder
+</font>
+* <font color="red">...plus 161 more (see TODO.edoc)
 </font>
 
 
