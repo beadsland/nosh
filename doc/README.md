@@ -17,15 +17,15 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">audio tapes				(running)
 </font>
-* <font color="red">Wed - confirm disk image
-</font>
 * <font color="red">7 pm - muffins
 </font>
-* <font color="red">Wed 7 pm - brooklyn duty 		(pending T-storms)
+* <font color="red">Wed 9 pm - brooklyn duty 		(pending T-storms)
 </font>
-* <font color="red">followup with amped re bonjour		(pending support reply)
+* <font color="red">twonky web player
 </font>
-* <font color="red">...plus 160 more (see TODO.edoc)
+* <font color="red">!! once 2do_go4 is operating, these will be refactored !!
+</font>
+* <font color="red">...plus 159 more (see TODO.edoc)
 </font>
 
 
