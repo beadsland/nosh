@@ -11,13 +11,13 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">firefox update
-</font>
 * <font color="red">idrive backup			(25 hrs to go)
 </font>
 * <font color="red">red drive backup			(stopped pending usb high gain)		
 </font>
 * <font color="red">hp connection manager		(pending usb high gain test)
+</font>
+* <font color="red">firefox update
 </font>
 * <font color="red">followup with amped re bonjour
 </font>
