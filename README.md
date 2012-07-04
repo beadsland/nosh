@@ -19,11 +19,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">mp3 encoder
 </font>
-* <font color="red">7 am - muffins
-</font>
-* <font color="red">onsite meeting with client		(pending client avail)
+* <font color="red">2pm - onsite meeting with client		(pending client avail)
 </font>
 * <font color="red">robo vac				(pending space)
+</font>
+* <font color="red">Wed 3 pm - brooklyn duty 		(pending T-storms)
 </font>
 * <font color="red">...plus 166 more (see TODO.edoc)
 </font>
