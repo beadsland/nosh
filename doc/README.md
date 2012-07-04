@@ -15,6 +15,8 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">red drive backup			(in progress)		
 </font>
+* <font color="red">breakfast
+</font>
 * <font color="red">sound not working on goldtower
 </font>
 * <font color="red">mp3 encoder
@@ -23,9 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">onsite meeting with client		(pending client avail)
 </font>
-* <font color="red">robo vac				(pending space)
-</font>
-* <font color="red">...plus 166 more (see TODO.edoc)
+* <font color="red">...plus 167 more (see TODO.edoc)
 </font>
 
 
