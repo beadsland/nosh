@@ -11,7 +11,9 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">idrive backup			(25 hrs to go)
+* <font color="red">java chrome install
+</font>
+* <font color="red">idrive backup			(2.5 hrs to go)
 </font>
 * <font color="red">red drive backup			(in progress)
 </font>
@@ -19,13 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">mp3 encoder
 </font>
-* <font color="red">2pm - onsite meeting with client		(pending client avail)
-</font>
 * <font color="red">robo vac				(pending space)
 </font>
 * <font color="red">Wed 3 pm - brooklyn duty 		(pending T-storms)
 </font>
-* <font color="red">...plus 163 more (see TODO.edoc)
+* <font color="red">...plus 164 more (see TODO.edoc)
 </font>
 
 
