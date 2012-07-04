@@ -15,17 +15,17 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">idrive backup			(2 hrs to go)
 </font>
-* <font color="red">red drive backup			(in progress)
+* <font color="red">red drive backup			(in progress)			
 </font>
-* <font color="red">cd drive emulator			
-</font>
-* <font color="red">audio tapes				(running)
+* <font color="red">audio tapes				(1 of 12 cassettes done)
 </font>
 * <font color="red">7 pm - muffins
 </font>
 * <font color="red">Wed 9 pm - brooklyn duty 		(pending T-storms)
 </font>
-* <font color="red">...plus 161 more (see TODO.edoc)
+* <font color="red">divx web player
+</font>
+* <font color="red">...plus 160 more (see TODO.edoc)
 </font>
 
 
