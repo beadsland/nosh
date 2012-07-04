@@ -13,9 +13,11 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">idrive backup			(2.5 hrs to go)
+* <font color="red">idrive backup			(2 hrs to go)
 </font>
-* <font color="red">red drive backup			(in progress)			
+* <font color="red">red drive backup			(in progress)
+</font>
+* <font color="red">cd drive emulator			
 </font>
 * <font color="red">audio tapes				(running)
 </font>
@@ -23,9 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">Wed 9 pm - brooklyn duty 		(pending T-storms)
 </font>
-* <font color="red">twonky web player
-</font>
-* <font color="red">...plus 159 more (see TODO.edoc)
+* <font color="red">...plus 161 more (see TODO.edoc)
 </font>
 
 
