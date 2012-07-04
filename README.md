@@ -11,11 +11,9 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">zonealarm uninstall
+* <font color="red">zonealarm clean install
 </font>
 * <font color="red">usb high gain test	
-</font>
-* <font color="red">zonealarm clean install
 </font>
 * <font color="red">firefox update
 </font>
@@ -25,7 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">bzeek reinstall w/o zonealarm		(pending usb high gain test)
 </font>
-* <font color="red">...plus 168 more (see TODO.edoc)
+* <font color="red">hp connection manager		(pending usb high gain test)
+</font>
+* <font color="red">...plus 167 more (see TODO.edoc)
 </font>
 
 
