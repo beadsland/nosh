@@ -21,11 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">robo vac				(pending space)
 </font>
-* <font color="red">Wed - confirm disk image
+* <font color="red">supper
 </font>
-* <font color="red">7 pm - muffins
+* <font color="red">dishes
 </font>
-* <font color="red">...plus 161 more (see TODO.edoc)
+* <font color="red">...plus 163 more (see TODO.edoc)
 </font>
 
 
