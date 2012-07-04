@@ -15,7 +15,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">red drive backup			(in progress)			
 </font>
-* <font color="red">audio tapes				(pending mp3 encoder)
+* <font color="red">audio tapes				(running)
 </font>
 * <font color="red">robo vac				(pending space)
 </font>
