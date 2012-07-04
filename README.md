@@ -11,6 +11,8 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
+* <font color="red">idriveelaunchdrive.exe stratservice
+</font>
 * <font color="red">idrive backup			(2.5 hrs to go)
 </font>
 * <font color="red">red drive backup			(in progress)			
@@ -22,8 +24,6 @@ __<font color="red">To do</font>__
 * <font color="red">Wed - confirm disk image
 </font>
 * <font color="red">7 pm - muffins
-</font>
-* <font color="red">Wed 7 pm - brooklyn duty 		(pending T-storms)
 </font>
 * <font color="red">...plus 161 more (see TODO.edoc)
 </font>
