@@ -19,13 +19,13 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">audio tapes				(pending mp3 encoder)
 </font>
-* <font color="red">vnc server
-</font>
 * <font color="red">robo vac				(pending space)
 </font>
 * <font color="red">Wed - confirm disk image
 </font>
-* <font color="red">...plus 163 more (see TODO.edoc)
+* <font color="red">7 pm - muffins
+</font>
+* <font color="red">...plus 162 more (see TODO.edoc)
 </font>
 
 
