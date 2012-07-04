@@ -11,11 +11,7 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">zonealarm updates
-</font>
-* <font color="red">amped losing networks
-</font>
-* <font color="red">usb high gain test	
+* <font color="red">wireless network adapter switch
 </font>
 * <font color="red">firefox update
 </font>
@@ -25,7 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">bzeek reinstall w/o zonealarm		(pending usb high gain test)
 </font>
-* <font color="red">...plus 169 more (see TODO.edoc)
+* <font color="red">hp connection manager		(pending usb high gain test)
+</font>
+* <font color="red">followup with amped re bonjour
+</font>
+* <font color="red">...plus 168 more (see TODO.edoc)
 </font>
 
 
