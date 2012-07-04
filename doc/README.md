@@ -13,7 +13,7 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">idrive backup			(25 hrs to go)
 </font>
-* <font color="red">red drive backup			(stopped pending usb high gain)		
+* <font color="red">red drive backup			(in progress)		
 </font>
 * <font color="red">hp connection manager		(pending usb high gain test)
 </font>
@@ -25,7 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">mp3 encoder
 </font>
-* <font color="red">...plus 167 more (see TODO.edoc)
+* <font color="red">...plus 168 more (see TODO.edoc)
 </font>
 
 
