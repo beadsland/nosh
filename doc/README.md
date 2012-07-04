@@ -13,9 +13,9 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">idrive backup			(25 hrs to go)
 </font>
-* <font color="red">red drive backup			(in progress)		
+* <font color="red">red drive backup			(in progress)
 </font>
-* <font color="red">breakfast
+* <font color="red">straighten		
 </font>
 * <font color="red">sound not working on goldtower
 </font>
