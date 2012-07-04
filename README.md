@@ -25,7 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">Wed 3 pm - brooklyn duty 		(pending T-storms)
 </font>
-* <font color="red">...plus 164 more (see TODO.edoc)
+* <font color="red">...plus 163 more (see TODO.edoc)
 </font>
 
 
