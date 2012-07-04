@@ -11,21 +11,21 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">wireless network adapter switch
-</font>
 * <font color="red">firefox update
 </font>
 * <font color="red">idrive backup			(25 hrs to go)
 </font>
 * <font color="red">red drive backup			(stopped pending usb high gain)		
 </font>
-* <font color="red">bzeek reinstall w/o zonealarm		(pending usb high gain test)
-</font>
 * <font color="red">hp connection manager		(pending usb high gain test)
 </font>
 * <font color="red">followup with amped re bonjour
 </font>
-* <font color="red">...plus 168 more (see TODO.edoc)
+* <font color="red">sound not working on goldtower
+</font>
+* <font color="red">mp3 encoder
+</font>
+* <font color="red">...plus 167 more (see TODO.edoc)
 </font>
 
 
