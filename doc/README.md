@@ -13,6 +13,8 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">idriveelaunchdrive.exe stratservice
 </font>
+* <font color="red">hp connection manager not installed error
+</font>
 * <font color="red">idrive backup			(2.5 hrs to go)
 </font>
 * <font color="red">red drive backup			(in progress)			
@@ -23,9 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">Wed - confirm disk image
 </font>
-* <font color="red">7 pm - muffins
-</font>
-* <font color="red">...plus 161 more (see TODO.edoc)
+* <font color="red">...plus 162 more (see TODO.edoc)
 </font>
 
 
