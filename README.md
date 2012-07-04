@@ -11,21 +11,21 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">hp connection manager not installed error
-</font>
 * <font color="red">idrive backup			(2.5 hrs to go)
 </font>
 * <font color="red">red drive backup			(in progress)			
 </font>
 * <font color="red">audio tapes				(running)
 </font>
-* <font color="red">robo vac				(pending space)
+* <font color="red">Wed - confirm disk image
 </font>
-* <font color="red">supper
+* <font color="red">7 pm - muffins
 </font>
-* <font color="red">dishes
+* <font color="red">Wed 7 pm - brooklyn duty 		(pending T-storms)
 </font>
-* <font color="red">...plus 163 more (see TODO.edoc)
+* <font color="red">followup with amped re bonjour		(pending support reply)
+</font>
+* <font color="red">...plus 160 more (see TODO.edoc)
 </font>
 
 
