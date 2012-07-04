@@ -15,17 +15,17 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">red drive backup			(in progress)		
 </font>
-* <font color="red">hp connection manager		(pending usb high gain test)
-</font>
-* <font color="red">firefox update
-</font>
-* <font color="red">followup with amped re bonjour
-</font>
 * <font color="red">sound not working on goldtower
 </font>
 * <font color="red">mp3 encoder
 </font>
-* <font color="red">...plus 168 more (see TODO.edoc)
+* <font color="red">7 am - muffins
+</font>
+* <font color="red">onsite meeting with client		(pending client avail)
+</font>
+* <font color="red">robo vac				(pending space)
+</font>
+* <font color="red">...plus 166 more (see TODO.edoc)
 </font>
 
 
