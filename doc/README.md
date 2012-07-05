@@ -13,19 +13,19 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">idrive backup			(1.5 hrs to go)
+* <font color="red">idrive backup			(pending server avail)
 </font>
 * <font color="red">red drive backup			(in progress)			
 </font>
 * <font color="red">audio tapes				(1.5 of 12 cassettes done)
 </font>
-* <font color="red">universal extractor
+* <font color="red">devcon				(pending extractor)	
 </font>
-* <font color="red">devcon			
+* <font color="red">wdk uninstall			(pending reboot)
 </font>
-* <font color="red">test phone extension			(pending charge)
+* <font color="red">robo vac				(pending space)
 </font>
-* <font color="red">...plus 167 more (see TODO.edoc)
+* <font color="red">...plus 166 more (see TODO.edoc)
 </font>
 
 
