@@ -13,8 +13,6 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">repeater web menu seeking passwords at boot
-</font>
 * <font color="red">idrive backup			(2 hrs to go)
 </font>
 * <font color="red">red drive backup			(in progress)			
@@ -25,7 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">divx web player
 </font>
-* <font color="red">...plus 161 more (see TODO.edoc)
+* <font color="red">syncback backup alternative
+</font>
+* <font color="red">...plus 160 more (see TODO.edoc)
 </font>
 
 
