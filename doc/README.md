@@ -19,13 +19,13 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">audio tapes				(1 of 12 cassettes done)
 </font>
-* <font color="red">auto wifi join
+* <font color="red">windows drivers kit			(40 min left)			
 </font>
-* <font color="red">twonky uninstall
+* <font color="red">script to auto replug external		(pending WDK)
 </font>
-* <font color="red">breakfast
+* <font color="red">dishes
 </font>
-* <font color="red">...plus 169 more (see TODO.edoc)
+* <font color="red">...plus 168 more (see TODO.edoc)
 </font>
 
 
