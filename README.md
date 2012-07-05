@@ -17,15 +17,15 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">red drive backup			(in progress)			
 </font>
-* <font color="red">airsync d videos
-</font>
 * <font color="red">audio tapes				(1 of 12 cassettes done)
 </font>
-* <font color="red">7 am - muffins
+* <font color="red">power cycler
 </font>
-* <font color="red">onsite meeting with client		(pending client avail)
+* <font color="red">twonky uninstall
 </font>
-* <font color="red">...plus 167 more (see TODO.edoc)
+* <font color="red">breakfast
+</font>
+* <font color="red">...plus 168 more (see TODO.edoc)
 </font>
 
 
