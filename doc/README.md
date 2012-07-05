@@ -13,7 +13,7 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">idrive backup			(2 hrs to go)
+* <font color="red">idrive backup			(1.5 hrs to go)
 </font>
 * <font color="red">red drive backup			(in progress)			
 </font>
@@ -25,7 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">touch base / process
 </font>
-* <font color="red">...plus 158 more (see TODO.edoc)
+* <font color="red">...plus 159 more (see TODO.edoc)
 </font>
 
 
