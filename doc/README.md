@@ -23,7 +23,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">robo vac				(running)
 </font>
-* <font color="red">router extention			(pending space)
+* <font color="red">house current ethernet
 </font>
 * <font color="red">...plus 167 more (see TODO.edoc)
 </font>
