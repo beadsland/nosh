@@ -9,6 +9,26 @@ __Version:__ 0.1.0
 
 __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).
 
+__<font color="red">To do</font>__
+<br></br>
+* <font color="red">!! once 2do_go4 is operating, these will be refactored !!
+</font>
+* <font color="red">idrive backup			(1.5 hrs to go)
+</font>
+* <font color="red">red drive backup			(in progress)			
+</font>
+* <font color="red">airsync d videos
+</font>
+* <font color="red">audio tapes				(1 of 12 cassettes done)
+</font>
+* <font color="red">7 am - muffins
+</font>
+* <font color="red">onsite meeting with client		(pending client avail)
+</font>
+* <font color="red">...plus 165 more (see TODO.edoc)
+</font>
+
+
 `nosh` is a Bourne shell emulator, Erl shell alternative, and
   noSQL file system,  implemented in Erlang.  Providing an intuitive
   commandline interface for compiling and loading Erlang modules, and for
