@@ -21,11 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">Wed 9 pm - brooklyn duty 		(pending T-storms)
 </font>
-* <font color="red">divx web player
-</font>
 * <font color="red">syncback backup alternative
 </font>
-* <font color="red">...plus 160 more (see TODO.edoc)
+* <font color="red">++ consulting meetings (refactor with 2do_go4) ++
+</font>
+* <font color="red">...plus 159 more (see TODO.edoc)
 </font>
 
 
