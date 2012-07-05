@@ -23,9 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">script to auto replug external		(pending WDK)
 </font>
-* <font color="red">refill waters
+* <font color="red">test phone extension			(pending charge)
 </font>
-* <font color="red">...plus 167 more (see TODO.edoc)
+* <font color="red">...plus 166 more (see TODO.edoc)
 </font>
 
 
