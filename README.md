@@ -17,7 +17,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">red drive backup			(in progress)			
 </font>
-* <font color="red">audio tapes				(1 of 12 cassettes done)
+* <font color="red">audio tapes				(1.5 of 12 cassettes done)
 </font>
 * <font color="red">windows drivers kit			(40 min left)			
 </font>
