@@ -19,13 +19,13 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">audio tapes				(1.5 of 12 cassettes done)
 </font>
-* <font color="red">windows drivers kit			(40 min left)			
+* <font color="red">universal extractor
+</font>
+* <font color="red">devcon			
 </font>
 * <font color="red">test phone extension			(pending charge)
 </font>
-* <font color="red">robo vac				(pending space)
-</font>
-* <font color="red">...plus 166 more (see TODO.edoc)
+* <font color="red">...plus 167 more (see TODO.edoc)
 </font>
 
 
