@@ -21,9 +21,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">windows drivers kit			(40 min left)			
 </font>
-* <font color="red">script to auto replug external		(pending WDK)
-</font>
 * <font color="red">test phone extension			(pending charge)
+</font>
+* <font color="red">robo vac				(pending space)
 </font>
 * <font color="red">...plus 166 more (see TODO.edoc)
 </font>
