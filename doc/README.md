@@ -13,17 +13,17 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">idrive backup			(pending server avail)
-</font>
 * <font color="red">red drive backup			(1 of 38 pages)			
-</font>
-* <font color="red">7 pm - muffins
 </font>
 * <font color="red">7:30 - audio tapes			(1.5 of 12 cassettes done)
 </font>
 * <font color="red">arduino firmware			(pending support reply)
 </font>
 * <font color="red">Thurs - confirm laptop image
+</font>
+* <font color="red">dinner
+</font>
+* <font color="red">dishes
 </font>
 * <font color="red">...plus 165 more (see TODO.edoc)
 </font>
