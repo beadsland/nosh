@@ -17,13 +17,13 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">red drive backup			(in progress)			
 </font>
-* <font color="red">cleanup
-</font>
 * <font color="red">mta tweet
 </font>
 * <font color="red">airsync d videos
 </font>
 * <font color="red">found mta card
+</font>
+* <font color="red">audio tapes				(1 of 12 cassettes done)
 </font>
 * <font color="red">...plus 166 more (see TODO.edoc)
 </font>
