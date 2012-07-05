@@ -15,17 +15,17 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">idrive backup			(pending server avail)
 </font>
-* <font color="red">red drive backup			(in progress)			
+* <font color="red">red drive backup			(1 of 38 pages)			
 </font>
 * <font color="red">audio tapes				(1.5 of 12 cassettes done)
 </font>
-* <font color="red">wdk uninstall			(pending reboot)
+* <font color="red">wdk uninstall			(revo)
 </font>
-* <font color="red">robo vac				(pending space)
+* <font color="red">robo vac				(running)
 </font>
 * <font color="red">router extention			(pending space)
 </font>
-* <font color="red">...plus 166 more (see TODO.edoc)
+* <font color="red">...plus 167 more (see TODO.edoc)
 </font>
 
 
