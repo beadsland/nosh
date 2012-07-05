@@ -17,15 +17,15 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">red drive backup			(in progress)			
 </font>
-* <font color="red">audio tapes				(1 of 12 cassettes done)
-</font>
 * <font color="red">Wed 9 pm - brooklyn duty 		(pending T-storms)
 </font>
-* <font color="red">++ consulting meetings (refactor with 2do_go4) ++
+* <font color="red">cleanup
 </font>
-* <font color="red">touch base / process
+* <font color="red">mta tweet
 </font>
-* <font color="red">...plus 162 more (see TODO.edoc)
+* <font color="red">airsync d videos
+</font>
+* <font color="red">...plus 165 more (see TODO.edoc)
 </font>
 
 
