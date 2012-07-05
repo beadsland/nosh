@@ -25,8 +25,6 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">onsite meeting with client		(pending client avail)
 </font>
-* <font color="red">...plus 165 more (see TODO.edoc)
-</font>
 
 
 `nosh` is a Bourne shell emulator, Erl shell alternative, and
