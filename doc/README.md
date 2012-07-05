@@ -17,15 +17,15 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">red drive backup			(1 of 38 pages)			
 </font>
-* <font color="red">audio tapes				(1.5 of 12 cassettes done)
+* <font color="red">7 pm - muffins
 </font>
-* <font color="red">wdk uninstall			(revo)
+* <font color="red">7:30 - audio tapes			(1.5 of 12 cassettes done)
 </font>
-* <font color="red">robo vac				(running)
+* <font color="red">arduino firmware			(pending support reply)
 </font>
-* <font color="red">wifi extension
+* <font color="red">Thurs - confirm laptop image
 </font>
-* <font color="red">...plus 167 more (see TODO.edoc)
+* <font color="red">...plus 165 more (see TODO.edoc)
 </font>
 
 
