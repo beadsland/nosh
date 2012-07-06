@@ -15,17 +15,17 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">red drive backup			(1 of 38 pages)			
 </font>
-* <font color="red">7:30 - audio tapes			(1.5 of 12 cassettes done)
+* <font color="red">8 pm - confirm laptop image
 </font>
-* <font color="red">Thurs - confirm laptop image
+* <font color="red">8 pm - confirm smartware backups
+</font>
+* <font color="red">8:30 - audio tapes			(1.5 of 12 cassettes done)
 </font>
 * <font color="red">dinner
 </font>
 * <font color="red">dishes
 </font>
-* <font color="red">recycling
-</font>
-* <font color="red">...plus 165 more (see TODO.edoc)
+* <font color="red">...plus 166 more (see TODO.edoc)
 </font>
 
 
