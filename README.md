@@ -13,19 +13,19 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
+* <font color="red">gain diff audio tape			(70% side 1 / 35% side 2)
+</font>
 * <font color="red">2pm - audio tapes			(3 of 12 cassettes done)	
 </font>
-* <font color="red">rebit backup				(in progress)
+* <font color="red">rebit backup				(11% complete)
 </font>
-* <font color="red">new power cord setup
+* <font color="red">smartware netbook			(13 / 378 Gig)
 </font>
-* <font color="red">smartware netbook
+* <font color="red">smartware rollback desktop		(installing)
 </font>
-* <font color="red">smartware rollback desktop		(pending ups)
+* <font color="red">macrium disk image desktop		(pending smartware)
 </font>
-* <font color="red">macrium disk image desktop		(pending ups)
-</font>
-* <font color="red">...plus 180 more (see TODO.edoc)
+* <font color="red">...plus 183 more (see TODO.edoc)
 </font>
 
 
