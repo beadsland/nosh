@@ -13,19 +13,19 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">8:30 - audio tapes			(1.5 of 12 cassettes done)
-</font>
-* <font color="red">wd smartware to netbook
+* <font color="red">delete bad folder on desktop
 </font>
 * <font color="red">confirm smartware backups laptop
 </font>
 * <font color="red">confirm smartware backups destop
 </font>
+* <font color="red">wd smartware to netbook
+</font>
+* <font color="red">8:30 - audio tapes			(1.5 of 12 cassettes done)
+</font>
 * <font color="red">new laptop image strategy
 </font>
-* <font color="red">red drive backup			(1 of 38 pages)			
-</font>
-* <font color="red">...plus 167 more (see TODO.edoc)
+* <font color="red">...plus 168 more (see TODO.edoc)
 </font>
 
 
