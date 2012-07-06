@@ -23,9 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">remove dup repeater
 </font>
-* <font color="red">8:30 - audio tapes			(1.5 of 12 cassettes done)
+* <font color="red">c drive cleanup
 </font>
-* <font color="red">...plus 169 more (see TODO.edoc)
+* <font color="red">...plus 170 more (see TODO.edoc)
 </font>
 
 
