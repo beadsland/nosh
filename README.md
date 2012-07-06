@@ -19,13 +19,13 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">audio tapes				(1.5 of 12 cassettes done)
 </font>
-* <font color="red">dishes
-</font>
 * <font color="red">recycling				(pending dinner)
 </font>
 * <font color="red">new image strategy
 </font>
-* <font color="red">...plus 169 more (see TODO.edoc)
+* <font color="red">remove dup repeater
+</font>
+* <font color="red">...plus 168 more (see TODO.edoc)
 </font>
 
 
