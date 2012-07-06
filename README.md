@@ -21,7 +21,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">smartware netbook			(13 / 378 Gig)
 </font>
-* <font color="red">smartware rollback desktop		(installing)
+* <font color="red">smartware rollback desktop		(running)
 </font>
 * <font color="red">macrium disk image desktop		(pending smartware)
 </font>
