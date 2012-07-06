@@ -23,9 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">rebit disk image netbook		(pending smartware)
 </font>
-* <font color="red">audio tapes				(1.5 of 12 cassettes done)
+* <font color="red">audio tapes				(1.5 of 12 cassettes done)	
 </font>
-* <font color="red">...plus 167 more (see TODO.edoc)
+* <font color="red">...plus 165 more (see TODO.edoc)
 </font>
 
 
