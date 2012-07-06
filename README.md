@@ -13,19 +13,19 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">macrium disk image desktop
+* <font color="red">breakfast
 </font>
-* <font color="red">smartware backups laptop
+* <font color="red">ups pricing				(pending space)
+</font>
+* <font color="red">new outlet plan			(pending space)
+</font>
+* <font color="red">macrium disk image desktop		(pending ups)
+</font>
+* <font color="red">smartware backups laptop		(3 files pending)
 </font>
 * <font color="red">macrium disk image laptop 		(pending smartware)
 </font>
-* <font color="red">smartware backups netbook
-</font>
-* <font color="red">rebit disk image netbook		(pending smartware)
-</font>
-* <font color="red">audio tapes				(1.5 of 12 cassettes done)	
-</font>
-* <font color="red">...plus 166 more (see TODO.edoc)
+* <font color="red">...plus 169 more (see TODO.edoc)
 </font>
 
 
