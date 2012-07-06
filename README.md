@@ -13,8 +13,6 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">breakfast
-</font>
 * <font color="red">ups pricing				(pending space)
 </font>
 * <font color="red">new outlet plan			(pending space)
@@ -24,6 +22,8 @@ __<font color="red">To do</font>__
 * <font color="red">smartware backups laptop		(3 files pending)
 </font>
 * <font color="red">macrium disk image laptop 		(pending smartware)
+</font>
+* <font color="red">smartware backups netbook		(15,996 files pending)
 </font>
 * <font color="red">...plus 169 more (see TODO.edoc)
 </font>
