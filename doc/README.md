@@ -13,11 +13,9 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">confirm smartware backups destop
-</font>
 * <font color="red">confirm smartware backups laptop
 </font>
-* <font color="red">wd smartware uninstall hunter mode
+* <font color="red">wd smartware uninstall netbook
 </font>
 * <font color="red">wd smartware to netbook
 </font>
@@ -25,7 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">remove dup repeater
 </font>
-* <font color="red">...plus 170 more (see TODO.edoc)
+* <font color="red">8:30 - audio tapes			(1.5 of 12 cassettes done)
+</font>
+* <font color="red">...plus 169 more (see TODO.edoc)
 </font>
 
 
