@@ -9,26 +9,6 @@ __Version:__ 0.1.0
 
 __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).
 
-__<font color="red">To do</font>__
-<br></br>
-* <font color="red">!! once 2do_go4 is operating, these will be refactored !!
-</font>
-* <font color="red">ups pricing				(pending space)
-</font>
-* <font color="red">new outlet plan			(pending space)
-</font>
-* <font color="red">macrium disk image desktop		(pending ups)
-</font>
-* <font color="red">smartware backups laptop		(3 files pending)
-</font>
-* <font color="red">macrium disk image laptop 		(pending smartware)
-</font>
-* <font color="red">smartware backups netbook		(15,996 files pending)
-</font>
-* <font color="red">...plus 169 more (see TODO.edoc)
-</font>
-
-
 `nosh` is a Bourne shell emulator, Erl shell alternative, and
   noSQL file system,  implemented in Erlang.  Providing an intuitive
   commandline interface for compiling and loading Erlang modules, and for
