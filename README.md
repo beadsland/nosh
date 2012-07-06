@@ -17,15 +17,15 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">new outlet plan			(pending space)
 </font>
+* <font color="red">apc backups 750
+</font>
 * <font color="red">macrium disk image desktop		(pending ups)
 </font>
 * <font color="red">smartware backups laptop		(3 files pending)
 </font>
 * <font color="red">macrium disk image laptop 		(pending smartware)
 </font>
-* <font color="red">smartware backups netbook		(15,996 files pending)
-</font>
-* <font color="red">...plus 174 more (see TODO.edoc)
+* <font color="red">...plus 175 more (see TODO.edoc)
 </font>
 
 
