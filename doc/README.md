@@ -13,17 +13,17 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">confirm smartware backups laptop
+* <font color="red">macrium disk image desktop
 </font>
-* <font color="red">confirm smartware backups netbook
+* <font color="red">smartware backups laptop
+</font>
+* <font color="red">macrium disk image laptop 		(pending smartware)
+</font>
+* <font color="red">smartware backups netbook
+</font>
+* <font color="red">rebit disk image netbook		(pending smartware)
 </font>
 * <font color="red">audio tapes				(1.5 of 12 cassettes done)
-</font>
-* <font color="red">new image strategy
-</font>
-* <font color="red">remove dup repeater
-</font>
-* <font color="red">c drive cleanup
 </font>
 * <font color="red">...plus 167 more (see TODO.edoc)
 </font>
