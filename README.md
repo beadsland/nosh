@@ -13,19 +13,19 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">smartware rollback laptop
-</font>
-* <font color="red">smartware backups laptop		(3 files pending)
+* <font color="red">smartware backups laptop		(categorizing)
 </font>
 * <font color="red">macrium disk image laptop 		(pending smartware)
 </font>
 * <font color="red">audio tapes				(4 of 12 cassettes done)	
 </font>
-* <font color="red">rebit backup				(1.5% complete)
+* <font color="red">rebit backup				(3% complete)
 </font>
-* <font color="red">smartware netbook			(110 Kb / 378 Gig)
+* <font color="red">smartware netbook			(115 of 20,084 files)
 </font>
-* <font color="red">...plus 178 more (see TODO.edoc)
+* <font color="red">smartware desktop			(running / pending access)
+</font>
+* <font color="red">...plus 177 more (see TODO.edoc)
 </font>
 
 
