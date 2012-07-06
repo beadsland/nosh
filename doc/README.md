@@ -21,11 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">8:30 - audio tapes			(1.5 of 12 cassettes done)
 </font>
+* <font color="red">wd smartware to netbook
+</font>
 * <font color="red">dinner
 </font>
-* <font color="red">dishes
-</font>
-* <font color="red">...plus 166 more (see TODO.edoc)
+* <font color="red">...plus 167 more (see TODO.edoc)
 </font>
 
 
