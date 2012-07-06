@@ -25,7 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">smartware backups netbook		(15,996 files pending)
 </font>
-* <font color="red">...plus 169 more (see TODO.edoc)
+* <font color="red">...plus 174 more (see TODO.edoc)
 </font>
 
 
