@@ -19,13 +19,13 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">audio tapes				(4 of 12 cassettes done)	
 </font>
-* <font color="red">rebit backup				(21% complete)
+* <font color="red">rebit backup				(preparing)
 </font>
 * <font color="red">smartware netbook			(135 of 20,084 files)
 </font>
-* <font color="red">smartware desktop			(running / pending access)
+* <font color="red">smartware desktop			(c: done, d: in progress)
 </font>
-* <font color="red">...plus 176 more (see TODO.edoc)
+* <font color="red">...plus 177 more (see TODO.edoc)
 </font>
 
 
