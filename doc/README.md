@@ -15,17 +15,17 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">gain diff audio tape			(70% side 1 / 35% side 2)
 </font>
+* <font color="red">laptop reboot			(pending tape)
+</font>
+* <font color="red">smartware rollback laptop
+</font>
+* <font color="red">smartware backups laptop		(3 files pending)
+</font>
+* <font color="red">macrium disk image laptop 		(pending smartware)
+</font>
 * <font color="red">2pm - audio tapes			(3 of 12 cassettes done)	
 </font>
-* <font color="red">rebit backup				(11% complete)
-</font>
-* <font color="red">smartware netbook			(13 / 378 Gig)
-</font>
-* <font color="red">smartware rollback desktop		(running)
-</font>
-* <font color="red">macrium disk image desktop		(pending smartware)
-</font>
-* <font color="red">...plus 183 more (see TODO.edoc)
+* <font color="red">...plus 180 more (see TODO.edoc)
 </font>
 
 
