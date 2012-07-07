@@ -19,13 +19,13 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">macrium disk image laptop 		(pending smartware)
 </font>
-* <font color="red">useable sync application (live mesh?)
+* <font color="red">useable sync application (live mesh?)	(install taking forever)
 </font>
 * <font color="red">public share sync
 </font>
 * <font color="red">idrive keeps asking to make changes!!!!!!!
 </font>
-* <font color="red">...plus 183 more (see TODO.edoc)
+* <font color="red">...plus 182 more (see TODO.edoc)
 </font>
 
 
