@@ -25,7 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">bestsyc install 			(pending disk images)
 </font>
-* <font color="red">...plus 175 more (see TODO.edoc)
+* <font color="red">...plus 176 more (see TODO.edoc)
 </font>
 
 
