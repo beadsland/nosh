@@ -19,13 +19,13 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">macrium disk image laptop 		(pending smartware)
 </font>
+* <font color="red">vista unknown password share
+</font>
 * <font color="red">public share sync
 </font>
-* <font color="red">consolidate desktop files
+* <font color="red">desktop performance
 </font>
-* <font color="red">install winmerge			(pending consolidate)
-</font>
-* <font color="red">...plus 177 more (see TODO.edoc)
+* <font color="red">...plus 179 more (see TODO.edoc)
 </font>
 
 
