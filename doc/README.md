@@ -21,11 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">macrium disk image laptop 		(pending smartware)
 </font>
-* <font color="red">smartware netbook			(137 of 20,084 files)
-</font>
 * <font color="red">bestsyc install 			(pending disk images)
 </font>
-* <font color="red">...plus 176 more (see TODO.edoc)
+* <font color="red">consolidate desktop files		(pending bestsync)
+</font>
+* <font color="red">...plus 179 more (see TODO.edoc)
 </font>
 
 
