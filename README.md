@@ -21,11 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">desktop blekko unisntall
 </font>
-* <font color="red">useable sync application??
+* <font color="red">activesync 4.5 on desktop		(may require firewall fixes)
 </font>
 * <font color="red">public share sync
 </font>
-* <font color="red">...plus 182 more (see TODO.edoc)
+* <font color="red">...plus 184 more (see TODO.edoc)
 </font>
 
 
