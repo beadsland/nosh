@@ -19,7 +19,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">macrium disk image laptop 		(pending smartware)
 </font>
-* <font color="red">xp unknown password share
+* <font color="red">useable sync application
 </font>
 * <font color="red">public share sync
 </font>
