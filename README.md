@@ -23,9 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">public share sync
 </font>
-* <font color="red">desktop performance
+* <font color="red">slimcleaner netbook
 </font>
-* <font color="red">...plus 179 more (see TODO.edoc)
+* <font color="red">...plus 182 more (see TODO.edoc)
 </font>
 
 
