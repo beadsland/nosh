@@ -13,9 +13,9 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">audio tapes				(5 of 12 cassettes done)	
+* <font color="red">audio tapes				(6 of 12 cassettes done)	
 </font>
-* <font color="red">smartware backups laptop		(c: 2,000 of 17,000)
+* <font color="red">smartware backups laptop		(c: 5,400 of 17,000)
 </font>
 * <font color="red">macrium disk image laptop 		(pending smartware)
 </font>
