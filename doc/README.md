@@ -25,7 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">smartware desktop			(d: 19,000 of 54,000)
 </font>
-* <font color="red">...plus 177 more (see TODO.edoc)
+* <font color="red">...plus 176 more (see TODO.edoc)
 </font>
 
 
