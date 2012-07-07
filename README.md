@@ -19,11 +19,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">macrium disk image laptop 		(pending smartware)
 </font>
-* <font color="red">desktop blekko unisntall
+* <font color="red">desktop blekko uninstall
 </font>
 * <font color="red">sync app for desktop + laptop
 </font>
-* <font color="red">public share sync
+* <font color="red">install syncback desktop
 </font>
 * <font color="red">...plus 184 more (see TODO.edoc)
 </font>
