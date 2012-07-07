@@ -19,13 +19,13 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">macrium disk image laptop 		(pending smartware)
 </font>
+* <font color="red">public share backup
+</font>
 * <font color="red">bestsyc install 			(pending disk images)
 </font>
 * <font color="red">consolidate desktop files		(pending bestsync)
 </font>
-* <font color="red">install winmerge			(pending consolidate)
-</font>
-* <font color="red">...plus 177 more (see TODO.edoc)
+* <font color="red">...plus 178 more (see TODO.edoc)
 </font>
 
 
