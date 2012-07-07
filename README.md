@@ -19,9 +19,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">macrium disk image laptop 		(pending smartware)
 </font>
-* <font color="red">public share backup
+* <font color="red">bestsync alternative
 </font>
-* <font color="red">bestsyc install 			(pending disk images)
+* <font color="red">public share sync
 </font>
 * <font color="red">consolidate desktop files		(pending bestsync)
 </font>
