@@ -21,7 +21,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">desktop blekko unisntall
 </font>
-* <font color="red">activesync 4.5 on desktop		(may require firewall fixes)
+* <font color="red">sync app for desktop + laptop
 </font>
 * <font color="red">public share sync
 </font>
