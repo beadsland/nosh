@@ -13,11 +13,11 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">onsite meeting with client 		(pending client avail)
-</font>
 * <font color="red">teamviewer configure
 </font>
 * <font color="red">audio tapes				(6 of 12 cassettes done)	
+</font>
+* <font color="red">new todo list 			(from receipt)
 </font>
 * <font color="red">dishes
 </font>
@@ -25,7 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">macrium disk image laptop 		(pending smartware)
 </font>
-* <font color="red">...plus 181 more (see TODO.edoc)
+* <font color="red">...plus 182 more (see TODO.edoc)
 </font>
 
 
