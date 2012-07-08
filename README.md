@@ -13,9 +13,7 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">breakfast
-</font>
-* <font color="red">onsite meeting with client
+* <font color="red">onsite meeting with client		(pending client avail)
 </font>
 * <font color="red">dishes
 </font>
@@ -25,7 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">Sun - touch base re travel plans
 </font>
-* <font color="red">...plus 186 more (see TODO.edoc)
+* <font color="red">Sun - confirm cat food / litter order	(pending travel plans)
+</font>
+* <font color="red">...plus 185 more (see TODO.edoc)
 </font>
 
 
