@@ -21,7 +21,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">macrium disk image laptop 		(pending smartware)
 </font>
-* <font color="red">straighten				(pending space)
+* <font color="red">e-recycling
 </font>
 * <font color="red">clementines
 </font>
