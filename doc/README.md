@@ -13,7 +13,7 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">dishes				(pending space)
+* <font color="red">desktop remote password
 </font>
 * <font color="red">refill waters				(pending space)
 </font>
