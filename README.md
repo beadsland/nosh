@@ -13,19 +13,19 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">laptop monitor sleep
+* <font color="red">breakfast
 </font>
-* <font color="red">teamviewer configure laptop
+* <font color="red">onsite meeting with client
 </font>
-* <font color="red">audio tapes				(6 of 12 cassettes done)	
+* <font color="red">dishes
 </font>
-* <font color="red">teamviewer configure desktop
+* <font color="red">straighten
 </font>
-* <font color="red">new todo list 			(from receipt)
+* <font color="red">groceries
 </font>
-* <font color="red">smartware backups laptop		(c: 5,600 of 17,000)
+* <font color="red">Sun - touch base re travel plans
 </font>
-* <font color="red">...plus 183 more (see TODO.edoc)
+* <font color="red">...plus 186 more (see TODO.edoc)
 </font>
 
 
