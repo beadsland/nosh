@@ -8,6 +8,7 @@
 @todo slimcleaner laptop			(pending disk image)
 @todo reboot desktop			(pending access)
 @todo uninstall cnet driver checker		(pending reboot)
+@todo wd smartware "my documents" backup	(pending smartware partition)
 @todo consolidate desktop files		(pending reboot)
 @todo install winmerge			(pending consolidate)
 @todo desktop merge			(pending winmerge)
@@ -17,11 +18,8 @@
 @todo apc powerchute			(pending access)
 @todo robo vac				(pending space)
 @todo 7 pm - muffins
-@todo "mail" category
-@todo rename laptop
-@todo "recent" button in wd android app
-@todo wd 20 go where do files go
-@todo google docs drive
+@todo "mail" category			(pending access)
+@todo google docs drive			(pending access)
 @todo google mail drive
 @todo quicktime audio desktop
 @todo clear desktops
@@ -29,6 +27,7 @@
 @todo rebit online				(pending support reply)
 @todo arduino firmware			(pending support reply)
 @todo ++ consulting meetings (refactor with 2do_go4) ++
+@todo orient client to Android/data folder
 @todo orient client to doubletwist airsync
 @todo orient client to remote nas
 @todo orient client to scriviner http://www.youtube.com/watch?v=-DthBJhBrYs
