@@ -25,7 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">install syncback desktop
 </font>
-* <font color="red">...plus 184 more (see TODO.edoc)
+* <font color="red">...plus 183 more (see TODO.edoc)
 </font>
 
 
