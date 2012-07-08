@@ -13,6 +13,8 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
+* <font color="red">onsite meeting with client 		(pending client avail)
+</font>
 * <font color="red">audio tapes				(6 of 12 cassettes done)	
 </font>
 * <font color="red">smartware backups laptop		(c: 5,500 of 17,000)
@@ -22,8 +24,6 @@ __<font color="red">To do</font>__
 * <font color="red">desktop blekko uninstall
 </font>
 * <font color="red">sync app for desktop + laptop
-</font>
-* <font color="red">install syncback desktop
 </font>
 * <font color="red">...plus 184 more (see TODO.edoc)
 </font>
