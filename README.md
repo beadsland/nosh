@@ -17,15 +17,15 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">audio tapes				(7 of 12 cassettes done)	
 </font>
-* <font color="red">smartware backups laptop		(c: 14,700 of 17,000)
+* <font color="red">smartware backups laptop		(c: 15,100 of 17,000)
 </font>
 * <font color="red">macrium disk image laptop 		(pending smartware)
 </font>
-* <font color="red">e-recycling
-</font>
 * <font color="red">clementines
 </font>
-* <font color="red">...plus 186 more (see TODO.edoc)
+* <font color="red">toothpaste, mouth wash
+</font>
+* <font color="red">...plus 184 more (see TODO.edoc)
 </font>
 
 
