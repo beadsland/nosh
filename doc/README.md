@@ -15,17 +15,17 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">onsite meeting with client		(pending client avail)
 </font>
-* <font color="red">dishes
+* <font color="red">audio tapes				(6 of 12 cassettes done)	
 </font>
-* <font color="red">straighten
+* <font color="red">smartware backups laptop		(c: 5,600 of 17,000)
 </font>
-* <font color="red">groceries
+* <font color="red">macrium disk image laptop 		(pending smartware)
 </font>
-* <font color="red">Sun - touch base re travel plans
+* <font color="red">straighten				(pending space)
 </font>
-* <font color="red">Sun - confirm cat food / litter order	(pending travel plans)
+* <font color="red">clementines
 </font>
-* <font color="red">...plus 185 more (see TODO.edoc)
+* <font color="red">...plus 189 more (see TODO.edoc)
 </font>
 
 
