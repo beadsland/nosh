@@ -7,19 +7,17 @@
 @todo macrium disk image laptop 		(pending smartware)
 @todo slimdriver laptop			(pending cassette tapes)
 @todo slimcleaner laptop			(pending disk image)
-@todo slimdriver desktop
+@todo cannot find hardware drivers desktop
 @todo audio backups android
-@todo cheese, turkey, ham
-@todo dr who sound tracks
-@todo cleanup start menu
-@todo cleanup desktop
+@todo cheese, turkey, ham			(pending android sync)
+@todo cleanup start menu desktop
+@todo cleanup desktop desktop
 @todo consolidate desktop files		(pending reboot)
 @todo install winmerge			(pending consolidate)
 @todo desktop merge			(pending winmerge)
 @todo working folder sync			(pending desktop merge)
 @todo laptop merge
 @todo smartware netbook			(2,300 of 20,000 files)
-@todo apc powerchute			(pending access)
 @todo robo vac				(pending space)
 @todo 7 pm - muffins
 @todo "mail" category			(pending access)
@@ -32,6 +30,7 @@
 @todo rebit online				(pending support reply)
 @todo arduino firmware			(pending support reply)
 @todo ++ consulting meetings (refactor with 2do_go4) ++
+@todo orient client to backups status
 @todo consult w/ client re spybot vs. adaware; adaware vs. avira
 @todo orient client to Android/data folder
 @todo orient client to doubletwist airsync
