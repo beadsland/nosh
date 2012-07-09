@@ -25,7 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">get stickynote to autoload desktop
 </font>
-* <font color="red">...plus 211 more (see TODO.edoc)
+* <font color="red">...plus 209 more (see TODO.edoc)
 </font>
 
 
