@@ -13,8 +13,6 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">dishes
-</font>
 * <font color="red">touch base re travel plans		(pending client avail)
 </font>
 * <font color="red">confirm cat food / litter order		(pending travel plans)
@@ -23,7 +21,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">audio tapes				(7 1/2 of 12 cassettes done)	
 </font>
-* <font color="red">smartware backups laptop		(c: 16,500 of 17,000)
+* <font color="red">smartware backups laptop		(c: 16,500 of 17,300)
+</font>
+* <font color="red">macrium disk image laptop 		(pending smartware)
 </font>
 * <font color="red">...plus 193 more (see TODO.edoc)
 </font>
