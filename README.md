@@ -23,7 +23,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">smartware backups laptop		(c: 17,100 of 17,800)
 </font>
-* <font color="red">get stickynote to autoload desktop
+* <font color="red">windows updates desktop		(pending access)
 </font>
 * <font color="red">...plus 209 more (see TODO.edoc)
 </font>
