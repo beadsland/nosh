@@ -19,11 +19,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">onsite meeting with client		(pending client avail)
 </font>
-* <font color="red">windows updates laptop
-</font>
 * <font color="red">confirm stickynote laptop
 </font>
 * <font color="red">get stickynote to autoload desktop
+</font>
+* <font color="red">resolve evernote folder opening on startup desktop
 </font>
 * <font color="red">...plus 213 more (see TODO.edoc)
 </font>
