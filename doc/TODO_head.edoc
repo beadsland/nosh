@@ -1,8 +1,8 @@
-@todo !! once 2do_go4 is operating, these will be refactored !!
-@todo client meeting tasks 	
-@todo client desktop tasks			
-@todo client laptop tasks
-@todo client android tasks	
-@todo netbook tasks	
-@todo ++ items below being refactored to Evernote ++
-@todo ...plus 199 more (see TODO.edoc)
+@todo makefile push depend on get-deps/mkdev
+@todo makefile todo depend on compiled edoc
+@todo shell editor for eclipse
+@todo clear out backups of eclipse/workspace
+@todo auto-succinct superl
+@todo auto-succinct posure
+@todo dev based on dev directory
+@todo ...plus 88 more (see TODO.edoc)

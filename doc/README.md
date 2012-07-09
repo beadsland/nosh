@@ -25,7 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">++ items below being refactored to Evernote ++
 </font>
-* <font color="red">...plus 201 more (see TODO.edoc)
+* <font color="red">...plus 199 more (see TODO.edoc)
 </font>
 
 
