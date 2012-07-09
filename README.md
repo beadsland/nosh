@@ -13,19 +13,19 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">touch base re travel plans		(pending client avail)
-</font>
-* <font color="red">confirm cat food / litter order		(pending travel plans)
-</font>
-* <font color="red">onsite meeting with client		(pending client avail)
-</font>
 * <font color="red">audio tapes				(9 of 12 cassettes done)	
 </font>
 * <font color="red">smartware backups laptop		(c: 17,100 of 17,800)
 </font>
 * <font color="red">windows updates desktop		(pending access)
 </font>
-* <font color="red">...plus 209 more (see TODO.edoc)
+* <font color="red">clonecd uninstall?
+</font>
+* <font color="red">winrar alternative
+</font>
+* <font color="red">evernote android			(pending android)
+</font>
+* <font color="red">...plus 206 more (see TODO.edoc)
 </font>
 
 
