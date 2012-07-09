@@ -25,7 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">macrium disk image laptop 		(pending smartware)
 </font>
-* <font color="red">...plus 194 more (see TODO.edoc)
+* <font color="red">...plus 193 more (see TODO.edoc)
 </font>
 
 
