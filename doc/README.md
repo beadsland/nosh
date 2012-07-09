@@ -23,9 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">audio tapes				(7 1/2 of 12 cassettes done)	
 </font>
-* <font color="red">smartware backups laptop		(c: 16,500 of 17,300)
+* <font color="red">smartware backups laptop		(c: 16,800 of 17,800)
 </font>
-* <font color="red">...plus 209 more (see TODO.edoc)
+* <font color="red">...plus 210 more (see TODO.edoc)
 </font>
 
 
