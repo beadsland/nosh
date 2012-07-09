@@ -1,13 +1,10 @@
 @todo !! once 2do_go4 is operating, these will be refactored !!
-@todo client meeting tasks			
+@todo client meeting tasks 	
 @todo client desktop tasks			
 @todo client laptop tasks
-@todo client android tasks		
-@todo evernote sync text file
-@todo evernote share readonly
-@todo stickynote netbook
-@todo evernote links to other notes
-@todo netbook defrag update
+@todo client android tasks	
+@todo netbook tasks	
+@todo ++ items below being refactored to Evernote ++
 @todo desktop defrag
 @todo laptop defrag
 @todo desktop merge			(pending winmerge)
