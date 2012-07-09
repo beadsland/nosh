@@ -19,7 +19,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">onsite meeting with client		(pending client avail)
 </font>
-* <font color="red">current tape at 35%
+* <font color="red">current tape at 30%
 </font>
 * <font color="red">audio tapes				(7 1/2 of 12 cassettes done)	
 </font>
