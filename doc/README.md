@@ -19,13 +19,13 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">onsite meeting with client		(pending client avail)
 </font>
-* <font color="red">current tape at 30%
+* <font color="red">windows updates laptop
 </font>
-* <font color="red">audio tapes				(7 1/2 of 12 cassettes done)	
+* <font color="red">confirm stickynote laptop
 </font>
-* <font color="red">smartware backups laptop		(c: 16,800 of 17,800)
+* <font color="red">get stickynote to autoload desktop
 </font>
-* <font color="red">...plus 210 more (see TODO.edoc)
+* <font color="red">...plus 213 more (see TODO.edoc)
 </font>
 
 
