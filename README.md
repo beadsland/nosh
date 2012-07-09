@@ -19,13 +19,13 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">client laptop tasks
 </font>
-* <font color="red">client android tasks			
+* <font color="red">client android tasks	
+</font>
+* <font color="red">clean up toolbars IE desktop		
 </font>
 * <font color="red">try evernotesticky
 </font>
-* <font color="red">evernote android			(pending android)
-</font>
-* <font color="red">...plus 206 more (see TODO.edoc)
+* <font color="red">...plus 207 more (see TODO.edoc)
 </font>
 
 
