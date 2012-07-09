@@ -25,7 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">smartware backups laptop		(c: 16,500 of 17,300)
 </font>
-* <font color="red">...plus 202 more (see TODO.edoc)
+* <font color="red">...plus 205 more (see TODO.edoc)
 </font>
 
 
