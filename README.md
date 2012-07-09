@@ -13,19 +13,19 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">clonecd uninstall?
+* <font color="red">client meeting tasks			
 </font>
-* <font color="red">winrar alternative
+* <font color="red">client desktop tasks			
+</font>
+* <font color="red">client laptop tasks
+</font>
+* <font color="red">client android tasks			
+</font>
+* <font color="red">try evernotesticky
 </font>
 * <font color="red">evernote android			(pending android)
 </font>
-* <font color="red">evernote sync text file
-</font>
-* <font color="red">evernote share readonly
-</font>
-* <font color="red">stickynote netbook
-</font>
-* <font color="red">...plus 203 more (see TODO.edoc)
+* <font color="red">...plus 206 more (see TODO.edoc)
 </font>
 
 
