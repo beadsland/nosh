@@ -13,19 +13,19 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">!! once 2do_go4 is operating, these will be refactored !!
 </font>
-* <font color="red">client meeting tasks			
+* <font color="red">client meeting tasks 	
 </font>
 * <font color="red">client desktop tasks			
 </font>
 * <font color="red">client laptop tasks
 </font>
-* <font color="red">client android tasks		
+* <font color="red">client android tasks	
 </font>
-* <font color="red">evernote sync text file
+* <font color="red">netbook tasks	
 </font>
-* <font color="red">evernote share readonly
+* <font color="red">++ items below being refactored to Evernote ++
 </font>
-* <font color="red">...plus 204 more (see TODO.edoc)
+* <font color="red">...plus 201 more (see TODO.edoc)
 </font>
 
 
