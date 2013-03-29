@@ -1,3 +1,6 @@
+@todo resolve eclipse start errors
+@todo resolve egit commit failure
+@todo egit commit button?
 @todo makefile push depend on get-deps/mkdev
 @todo makefile todo depend on compiled edoc
 @todo shell editor for eclipse
@@ -8,6 +11,8 @@
 @todo make install soft links to bin files
 @todo eclipse - pin web page
 @todo eclipse - refresh web page and/or javascript
+@todo confirm remote stores
+@todo confirm tanglelabs
 @todo 2do_go4: seed
 @todo 2do_go4: refresh makefile
 @todo 2do_go4: transclude stdin
