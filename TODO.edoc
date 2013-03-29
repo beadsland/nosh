@@ -1,5 +1,3 @@
-@todo resolve eclipse start errors
-@todo resolve egit commit failure
 @todo egit commit button?
 @todo makefile push depend on get-deps/mkdev
 @todo makefile todo depend on compiled edoc
