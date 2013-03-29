@@ -11,9 +11,7 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">resolve eclipse start errors
-</font>
-* <font color="red">resolve missing edocs
+* <font color="red">egit commit button?
 </font>
 * <font color="red">makefile push depend on get-deps/mkdev
 </font>
@@ -25,7 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">auto-succinct superl
 </font>
-* <font color="red">...plus 90 more (see TODO.edoc)
+* <font color="red">auto-succinct posure
+</font>
+* <font color="red">...plus 91 more (see TODO.edoc)
 </font>
 
 
