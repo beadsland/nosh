@@ -11,10 +11,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">makefile push depend on get-deps/mkdev
-</font>
-* <font color="red">makefile todo depend on compiled edoc
-</font>
 * <font color="red">shell editor for eclipse
 </font>
 * <font color="red">clear out backups of eclipse/workspace
@@ -25,7 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">dev based on dev directory
 </font>
-* <font color="red">...plus 90 more (see TODO.edoc)
+* <font color="red">make install soft links to bin files
+</font>
+* <font color="red">eclipse - pin web page
+</font>
+* <font color="red">...plus 88 more (see TODO.edoc)
 </font>
 
 

@@ -1,4 +1,5 @@
-@todo shell editor for eclipse
+@todo makefile editor for eclipse
+@todo supress behavior undefined warnings?
 @todo clear out backups of eclipse/workspace
 @todo auto-succinct superl
 @todo auto-succinct posure
