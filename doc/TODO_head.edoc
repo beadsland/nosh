@@ -1,8 +1,8 @@
-@todo makefile editor for eclipse
 @todo supress behavior undefined warnings?
 @todo clear out backups of eclipse/workspace
 @todo auto-succinct superl
 @todo auto-succinct posure
 @todo dev based on dev directory
 @todo make install soft links to bin files
-@todo ...plus 89 more (see TODO.edoc)
+@todo eclipse - pin web page
+@todo ...plus 88 more (see TODO.edoc)
