@@ -11,7 +11,7 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">acronis nonstop keeps stopping
+* <font color="red">reliable continuous backup
 </font>
 * <font color="red">clear out backups of eclipse/workspace
 </font>
