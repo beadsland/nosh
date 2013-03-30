@@ -86,7 +86,7 @@ good:
 	@$(POSE) superl
 	@$(POSE) posure
 
-todo:		doc
+todo:		doc TODO.edoc
 	@git add -f $(TODO_FILES)
 	@git commit $(TODO_FILES) -m "updated todo"
 

@@ -1,4 +1,6 @@
 #!bin/dose tdgf
 # nosh
 
+# Pending build out of 2do_go4...
+
 tdgf: &dev/2do_go4/TODO
