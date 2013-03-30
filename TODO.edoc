@@ -1,4 +1,3 @@
-@todo makefile push depend on get-deps/mkdev
 @todo makefile todo depend on compiled edoc
 @todo shell editor for eclipse
 @todo clear out backups of eclipse/workspace

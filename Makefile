@@ -138,6 +138,9 @@ push-nosh:	online
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
 		then $(PUSHGIT); fi
 
-push-libs:	online
+push-libs:	mkdev online
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
 		then (echo '$(PUSHFOR)' | /bin/bash); fi
+
+mkdev: bin/mkdev
+	bin/mkdev
