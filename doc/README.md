@@ -13,6 +13,8 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">reliable continuous backup
 </font>
+* <font color="red">bare metal restore
+</font>
 * <font color="red">clear out backups of eclipse/workspace
 </font>
 * <font color="red">auto-succinct superl
@@ -23,9 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">make install soft links to bin files
 </font>
-* <font color="red">eclipse - pin web page
-</font>
-* <font color="red">...plus 88 more (see TODO.edoc)
+* <font color="red">...plus 89 more (see TODO.edoc)
 </font>
 
 
