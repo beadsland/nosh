@@ -11,8 +11,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">bare metal restore
-</font>
 * <font color="red">clear out backups of eclipse/workspace
 </font>
 * <font color="red">auto-succinct superl
@@ -25,7 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">eclipse - pin web page
 </font>
-* <font color="red">...plus 88 more (see TODO.edoc)
+* <font color="red">eclipse - refresh web page and/or javascript
+</font>
+* <font color="red">...plus 87 more (see TODO.edoc)
 </font>
 
 
