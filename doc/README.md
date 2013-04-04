@@ -11,6 +11,8 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
+* <font color="red">egit up arrow broken
+</font>
 * <font color="red">auto-succinct superl
 </font>
 * <font color="red">auto-succinct posure
@@ -23,9 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">eclipse - refresh web page and/or javascript
 </font>
-* <font color="red">confirm remote stores
-</font>
-* <font color="red">...plus 86 more (see TODO.edoc)
+* <font color="red">...plus 87 more (see TODO.edoc)
 </font>
 
 
