@@ -142,5 +142,5 @@ push-libs:	mkdev online
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
 		then (echo '$(PUSHFOR)' | /bin/bash); fi
 
-mkdev: bin/mkdev
-	bin/mkdev
+mkdev:
+	@if [ "$(DEV)" == yes ]; then bin/mkdev; fi
