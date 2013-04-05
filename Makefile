@@ -78,7 +78,6 @@ TODO_FILES =	TODO.edoc README.md doc/README.md doc/TODO_head.edoc
 PUSHGIT = 	git push origin master
 PUSHDO	=	echo "cd $$file; $(PUSHGIT)" | /bin/sh
 PUSHFOR =	for file in dev/*; do $(PUSHDO); done
-
 #
 # Build rules
 #
@@ -109,20 +108,20 @@ neat:
 #
 
 current:
-	@if [ "$(ONLINE)" == yes ]; \
-		then $(CROWBAR:_cmds_=update-deps compile doc); \
-		else $(CROWBAR:_cmds_=compile doc); fi
+	@if [ "$(ONLINE)" == yes ]; then \
+		$(CROWBAR:_cmds_=update-deps compile doc); else \
+		$(CROWBAR:_cmds_=compile doc); fi
 
 clean: 		online
 	@if [ "$(ONLINE)" == yes ]; \
-		then (rm -rf deps; $(CROWBAR:_cmds_=clean get-deps)); \
-		else $(CROWBAR:_cmds_=clean); fi
+		then (rm -rf deps; rebar clean get-deps | $(SUCCINCT)); \
+		else (rebar clean | $(SUCCINCT)); fi
 	
 install: 	online
 	@if [ "$(ONLINE)" == yes ]; \
-		then (rm -rf deps; \
-			$(CROWBAR:_cmds_=clean get-deps compile doc)); \
-		else $(CROWBAR:_cmds_=clean); fi
+		then (rm -rf deps; rebar clean get-deps compile doc \
+						| $(SUCCINCT)); \
+		else (rebar clean | $(SUCCINCT)); fi
 	
 online:	
 	@if [ "$(ONLINE)" == yes ]; \
