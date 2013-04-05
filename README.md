@@ -25,7 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">2do_go4: seed
 </font>
-* <font color="red">...plus 84 more (see TODO.edoc)
+* <font color="red">...plus 85 more (see TODO.edoc)
 </font>
 
 
