@@ -89,4 +89,5 @@
 @todo Erl commands
 @todo Couch commands
 @todo Add support for line continuation (currently throws error)
+@todo integrate with wicked shell for line continuation (currently throws error)
 @todo integrate with wicked shell
