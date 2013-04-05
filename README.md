@@ -11,10 +11,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">dev based on dev directory
-</font>
-* <font color="red">make install soft links to bin files
-</font>
 * <font color="red">eclipse - pin web page
 </font>
 * <font color="red">eclipse - refresh web page and/or javascript
@@ -25,7 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">2do_go4: seed
 </font>
-* <font color="red">...plus 85 more (see TODO.edoc)
+* <font color="red">2do_go4: refresh makefile
+</font>
+* <font color="red">2do_go4: transclude stdin
+</font>
+* <font color="red">...plus 83 more (see TODO.edoc)
 </font>
 
 
