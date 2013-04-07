@@ -61,8 +61,3 @@ online:
 	@if [ "$(ONLINE)" == yes ]; \
 		then (echo "Working online"); \
 		else (echo "Working offline"); fi
-
-#
-# Shut up unnecessary chatter from includes
-#
-%::	;

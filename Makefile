@@ -29,7 +29,7 @@
 include include/Header.mk
 
 #
-#
+# Run as pose session
 #
 
 ifeq ($(DEV),yes)
@@ -112,7 +112,7 @@ push:		online
 # Run non-overridden common rules.
 #
 
-%::	force
+%::			include/Common.mk
 	@echo No custom target found.
 	@$(MAKE) -f include/Common.mk $@
-force: ;
+
