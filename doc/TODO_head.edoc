@@ -1,8 +1,8 @@
-@todo refactor todo logic from Makefile
-@todo 2do_go4: seed
-@todo 2do_go4: refresh makefile
-@todo 2do_go4: transclude stdin
-@todo 2do_go4: handle ampersands without complaint
-@todo 2do_go4: transcribe / output
-@todo 2do_go4: transclude resources by fragment
-@todo ...plus 80 more (see TODO.edoc)
+@todo no implicit rule on todo
+@todo todo based on updated readme.md
+@todo test included rules
+@todo test non-included rules
+@todo review folderl latency
+@todo refactor good in Makefile
+@todo refactor all in Makefile
+@todo ...plus 88 more (see TODO.edoc)

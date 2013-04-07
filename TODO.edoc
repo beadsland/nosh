@@ -1,4 +1,12 @@
-@todo refactor todo logic from Makefile
+@todo no implicit rule on todo
+@todo todo based on updated readme.md
+@todo test included rules
+@todo test non-included rules
+@todo review folderl latency
+@todo refactor good in Makefile
+@todo refactor all in Makefile
+@todo clear dev dir as part of make clean
+@todo share Makefile/mk to other projects
 @todo 2do_go4: seed
 @todo 2do_go4: refresh makefile
 @todo 2do_go4: transclude stdin

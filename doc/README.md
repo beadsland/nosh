@@ -11,21 +11,21 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">refactor todo logic from Makefile
+* <font color="red">test included rules
 </font>
-* <font color="red">2do_go4: seed
+* <font color="red">test non-included rules
 </font>
-* <font color="red">2do_go4: refresh makefile
+* <font color="red">review folderl latency
 </font>
-* <font color="red">2do_go4: transclude stdin
+* <font color="red">refactor good in Makefile
 </font>
-* <font color="red">2do_go4: handle ampersands without complaint
+* <font color="red">refactor all in Makefile
 </font>
-* <font color="red">2do_go4: transcribe / output
+* <font color="red">clear dev dir as part of make clean
 </font>
-* <font color="red">2do_go4: transclude resources by fragment
+* <font color="red">share Makefile/mk to other projects
 </font>
-* <font color="red">...plus 80 more (see TODO.edoc)
+* <font color="red">...plus 86 more (see TODO.edoc)
 </font>
 
 
