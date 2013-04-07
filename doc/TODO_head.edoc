@@ -1,8 +1,8 @@
-@todo confirm remote stores
-@todo confirm tanglelabs
 @todo 2do_go4: seed
 @todo 2do_go4: refresh makefile
 @todo 2do_go4: transclude stdin
 @todo 2do_go4: handle ampersands without complaint
 @todo 2do_go4: transcribe / output
-@todo ...plus 81 more (see TODO.edoc)
+@todo 2do_go4: transclude resources by fragment
+@todo 2do_go4: ignore comment lines
+@todo ...plus 79 more (see TODO.edoc)
