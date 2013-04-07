@@ -26,18 +26,12 @@
 # -----------------------------------------------------------------------
 # CDDL HEADER END
 
-SHELL	= 	/bin/sh
+include include/Header.mk
 
 #
-# Figure out if development or production
+#
 #
 
-ifeq ($(COMPUTERNAME),GOVMESH-BOOK)
-	DEV		=	$(if $(PROD),no,yes)
-else
-	DEV		=	no
-endif
-	
 ifeq ($(DEV),yes)
 	POSE	=	bin/dose
 	ERL	=	erl -noshell -i dev -deps dev $(POSE)
@@ -46,20 +40,6 @@ else
 	POSE	=	bin/pose
 	ERL	=	erl -noshell -i deps $(POSE)
 endif
-
-#
-# Figure out if online or offline
-#
-
-ifeq ($(shell which ping),/cygdrive/c/Windows/system32/ping)
-	PING	=	ping -n 1
-else
-	PING	=	ping -c1
-endif
-
-ONLINE	= `$(PING) www.google.com 2>&1 >/dev/null; \
-		if [ "$$?" -eq "0" ]; then (echo yes); \
-		else (echo no); fi`
 
 #
 # Macros for commands invoked by rules
@@ -75,9 +55,6 @@ FOLD =		bin/folderl
 TODO_MORE =	`wc -l TODO.edoc | awk '{print $$1 - 7}'`
 TODO_FILES =	TODO.edoc README.md doc/README.md doc/TODO_head.edoc
 
-PUSHGIT = 	git push origin master
-PUSHDO	=	echo "cd $$file; $(PUSHGIT)" | /bin/sh
-PUSHFOR =	for file in dev/*; do $(PUSHDO); done
 #
 # Build rules
 #
@@ -122,22 +99,20 @@ install: 	online
 		then (rm -rf deps; rebar clean get-deps compile doc \
 						| $(SUCCINCT)); \
 		else (rebar clean | $(SUCCINCT)); fi
-	
-online:	
-	@if [ "$(ONLINE)" == yes ]; \
-		then (echo "Working online"); \
-		else (echo "Working offline"); fi
-
+				
 #
 # Push rules
 #
 
-push:		push-libs push-nosh
+push:		online
+	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; then $(PUSHLIB); fi
+	@$(MAKE) -f include/Common.mk push
 
-push-nosh:	online
-	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
-		then $(PUSHGIT); fi
+#
+# Run non-overridden common rules.
+#
 
-push-libs:	online
-	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
-		then (echo '$(PUSHFOR)' | /bin/bash); fi
+%::	force
+	@echo No custom target found.
+	@$(MAKE) -f include/Common.mk $@
+force: ;
