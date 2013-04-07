@@ -28,6 +28,8 @@ include include/Header.mk
 # All good rules
 #
 
+.PHONY:	all good todo docs compile neat current clean push
+
 all:		push good
 
 good:		compile

@@ -47,6 +47,8 @@ include include/Header.mk
 # Custom rules
 #
 
+.PHONY:	all good install push todo
+
 all:	push good
 
 good:
@@ -66,7 +68,7 @@ push:		online
 # Run non-overridden common rules.
 #
 
-todo:		TODO.edoc
+todo:
 	@$(MAKE) -f include/Common.mk todo
 	
 %::			;
