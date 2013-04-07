@@ -22,7 +22,16 @@
 # -----------------------------------------------------------------------
 # CDDL HEADER END
 
-SHELL	= 	/bin/sh
+#
+# Macros for commands
+#
+
+REBAR = 	`command -v rebar || echo bin/rebar`
+SUCCINCT =	grep -v "Entering directory" | grep -v "Leaving directory"
+ifndef	$(FOLD)
+	FOLD = cat
+endif
+CROWBAR	=	$(DEPS) $(REBAR) _cmds_ | $(SUCCINCT) 2>&1 | $(FOLD)
 
 #
 # Formulas for recursive push rules

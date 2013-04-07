@@ -26,8 +26,6 @@
 # -----------------------------------------------------------------------
 # CDDL HEADER END
 
-include include/Header.mk
-
 #
 # Run as pose session
 #
@@ -41,16 +39,13 @@ else
 	ERL	=	erl -noshell -i deps $(POSE)
 endif
 
+FOLD =		bin/folderl
+
+include include/Header.mk
+
 #
 # Macros for commands invoked by rules
 #
-
-TTY	=	`tty`
-
-REBAR = 	`command -v rebar || echo bin/rebar`
-SUCCINCT =	grep -v "Entering directory" | grep -v "Leaving directory"
-CROWBAR	=	$(DEPS) $(REBAR) _cmds_ | $(SUCCINCT) 2>&1 | $(FOLD)
-FOLD =		bin/folderl
 
 TODO_MORE =	`wc -l TODO.edoc | awk '{print $$1 - 7}'`
 TODO_FILES =	TODO.edoc README.md doc/README.md doc/TODO_head.edoc
@@ -75,7 +70,7 @@ doc:		neat
 		fi) > doc/TODO_head.edoc
 
 compile:	neat
-	@$(CROWBAR:_cmds_=compile doc)
+	$(CROWBAR:_cmds_=compile doc)
 
 neat:
 	@rm -f *.dump doc/*.md doc/*.html
@@ -94,15 +89,16 @@ clean: 		online
 		then (rm -rf deps; rebar clean get-deps | $(SUCCINCT)); \
 		else (rebar clean | $(SUCCINCT)); fi
 	
+				
+#
+# Custom rules
+#
+
 install: 	online
 	@if [ "$(ONLINE)" == yes ]; \
 		then (rm -rf deps; rebar clean get-deps compile doc \
 						| $(SUCCINCT)); \
 		else (rebar clean | $(SUCCINCT)); fi
-				
-#
-# Push rules
-#
 
 push:		online
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; then $(PUSHLIB); fi
