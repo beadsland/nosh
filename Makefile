@@ -44,61 +44,20 @@ FOLD =		bin/folderl
 include include/Header.mk
 
 #
-# Macros for commands invoked by rules
+# Custom rules
 #
 
-TODO_MORE =	`wc -l TODO.edoc | awk '{print $$1 - 7}'`
-TODO_FILES =	TODO.edoc README.md doc/README.md doc/TODO_head.edoc
-
-#
-# Build rules
-#
+all:	push good
 
 good:
 	@$(POSE) superl
 	@$(POSE) posure
 
-todo:		doc TODO.edoc
-	@git add -f $(TODO_FILES)
-	@git commit $(TODO_FILES) -m "updated todo"
-
-doc:		neat
-	@$(CROWBAR:_cmds_=doc)
-	@(head -7 TODO.edoc; \
-		if [ $(TODO_MORE) -gt 0 ]; \
-		then (echo "@todo ...plus $(TODO_MORE) more (see TODO.edoc)"); \
-		fi) > doc/TODO_head.edoc
-
-compile:	neat
-	$(CROWBAR:_cmds_=compile doc)
-
-neat:
-	@rm -f *.dump doc/*.md doc/*.html
-
-#
-# Deps rules
-#
-
-current:
-	@if [ "$(ONLINE)" == yes ]; then \
-		$(CROWBAR:_cmds_=update-deps compile doc); else \
-		$(CROWBAR:_cmds_=compile doc); fi
-
-clean: 		online
-	@if [ "$(ONLINE)" == yes ]; \
-		then (rm -rf deps; rebar clean get-deps | $(SUCCINCT)); \
-		else (rebar clean | $(SUCCINCT)); fi
-	
-				
-#
-# Custom rules
-#
-
 install: 	online
 	@if [ "$(ONLINE)" == yes ]; \
-		then (rm -rf deps; rebar clean get-deps compile doc \
-						| $(SUCCINCT)); \
-		else (rebar clean | $(SUCCINCT)); fi
+		then (rm -rf deps; \
+			 $(CROWBAR:_cmds_=clean get-deps compile doc)); \
+		else $(CROWBAR:_cmds_=clean); fi
 
 push:		online
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; then $(PUSHLIB); fi
@@ -111,4 +70,3 @@ push:		online
 %::			include/Common.mk
 	@echo No custom target found.
 	@$(MAKE) -f include/Common.mk $@
-

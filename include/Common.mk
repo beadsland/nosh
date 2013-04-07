@@ -24,6 +24,54 @@
 
 include include/Header.mk
 
-push:	online
+#
+# All good rules
+#
+
+all:		push good
+
+good:		compile
+	@if [ "$(DEV)" == yes ]; \
+		then (erl $(ERL_PATH) -i deps -noshell $(SUPERL)); \
+		else (echo Good only in development); fi 
+
+#
+# Temporary todo rules pending proper 2do_go4 implementation
+#
+
+todo:		doc TODO.edoc
+	@git add -f $(TODO_FILES)
+	@git commit $(TODO_FILES) -m "updated todo"
+
+doc:		neat
+	@$(CROWBAR:_cmds_=doc)
+	@(head -7 TODO.edoc; \
+		if [ $(TODO_MORE) -gt 0 ]; \
+		then (echo "@todo ...plus $(TODO_MORE) more (see TODO.edoc)"); \
+		fi) > doc/TODO_head.edoc
+
+compile:	neat
+	@$(CROWBAR:_cmds_=compile doc)
+
+neat:
+	@rm -f *.dump doc/*.md doc/*.html
+
+#
+# Rules for managing dependencies
+#
+
+current:	online
+	@if [ "$(ONLINE)" == yes ]; then \
+		then (rm -rf deps; \
+			 $(CROWBAR:_cmds_=update-deps compile doc)); \
+		else $(CROWBAR:_cmds_=compile doc); fi
+
+clean: 		online
+	@if [ "$(ONLINE)" == yes ]; \
+		then (rm -rf deps; \
+			 $(CROWBAR:_cmds_=clean get-deps)); \
+		else $(CROWBAR:_cmds_=clean); fi
+
+push:		online
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
 		then $(PUSHGIT); fi

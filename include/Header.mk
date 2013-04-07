@@ -34,6 +34,21 @@ endif
 CROWBAR	=	$(DEPS) $(REBAR) _cmds_ | $(SUCCINCT) 2>&1 | $(FOLD)
 
 #
+# Macros for good
+#
+
+ERL_PATH = 	-pa ebin
+POSURE =	-i .. -pa ebin -s posure
+SUPERL =	-pa ../superl/ebin -s superl $(POSURE) -s init stop
+
+#
+# Todo logic pending proper 2do_go4 implementation
+#
+
+TODO_MORE =		`wc -l TODO.edoc | awk '{print $$1 - 7}'`
+TODO_FILES =	TODO.edoc README.md doc/README.md doc/TODO_head.edoc
+
+#
 # Formulas for recursive push rules
 #
 
