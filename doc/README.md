@@ -11,6 +11,8 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
+* <font color="red">refactor todo logic from Makefile
+</font>
 * <font color="red">2do_go4: seed
 </font>
 * <font color="red">2do_go4: refresh makefile
@@ -23,9 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">2do_go4: transclude resources by fragment
 </font>
-* <font color="red">2do_go4: ignore comment lines
-</font>
-* <font color="red">...plus 79 more (see TODO.edoc)
+* <font color="red">...plus 80 more (see TODO.edoc)
 </font>
 
 
