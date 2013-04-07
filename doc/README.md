@@ -11,8 +11,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">fix todo trigger to work as phony
-</font>
 * <font color="red">todo based on updated readme.md
 </font>
 * <font color="red">test included rules
@@ -25,7 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">refactor all in Makefile
 </font>
-* <font color="red">...plus 88 more (see TODO.edoc)
+* <font color="red">clear dev dir as part of make clean
+</font>
+* <font color="red">...plus 87 more (see TODO.edoc)
 </font>
 
 
