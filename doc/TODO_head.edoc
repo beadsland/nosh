@@ -1,8 +1,8 @@
-@todo fix todo trigger to work as phony
 @todo todo based on updated readme.md
 @todo test included rules
 @todo test non-included rules
 @todo review folderl latency
 @todo refactor good in Makefile
 @todo refactor all in Makefile
-@todo ...plus 88 more (see TODO.edoc)
+@todo clear dev dir as part of make clean
+@todo ...plus 87 more (see TODO.edoc)
