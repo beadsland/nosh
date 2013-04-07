@@ -11,7 +11,7 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">no implicit rule on todo
+* <font color="red">fix todo trigger to work as phony
 </font>
 * <font color="red">todo based on updated readme.md
 </font>
