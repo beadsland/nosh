@@ -73,4 +73,4 @@ todo:
 	
 %::			;
 	@echo No custom target found
-	@$(MAKE) -f include/Common.mk $@
+	@$(MAKE) -f include/Common.mk $@ SUBMAKE=true
