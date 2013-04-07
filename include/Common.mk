@@ -39,7 +39,7 @@ good:		compile
 # Temporary todo rules pending proper 2do_go4 implementation
 #
 
-todo:		docs
+todo:		docs TODO.edoc
 	@git add -f $(TODO_FILES)
 	@git commit $(TODO_FILES) -m "updated todo"
 

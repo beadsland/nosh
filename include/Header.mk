@@ -23,6 +23,19 @@
 # CDDL HEADER END
 
 #
+# Figure out if running GNU make
+#
+
+MAKE_HEAD	= make -v | head -1
+MAKE_WORD	= $(MAKE_HEAD) | sed 's/\ .*//'
+MAKE_VEND	= $(shell $(MAKE_WORD))
+$(info $(shell $(MAKE_HEAD)))
+
+ifneq ($(MAKE_VEND),GNU)
+   $(warning Not running GNU make -- something might break)
+endif
+
+#
 # Macros for commands
 #
 

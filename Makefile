@@ -66,6 +66,9 @@ push:		online
 # Run non-overridden common rules.
 #
 
+todo:		TODO.edoc
+	@$(MAKE) -f include/Common.mk todo
+	
 %::			;
 	@echo No custom target found.
 	@$(MAKE) -f include/Common.mk $@
