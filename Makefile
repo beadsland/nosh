@@ -67,6 +67,6 @@ push:		online
 # Run non-overridden common rules.
 #
 
-%::			include/Common.mk
+%::			;
 	@echo No custom target found.
 	@$(MAKE) -f include/Common.mk $@
