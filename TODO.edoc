@@ -1,3 +1,4 @@
+@todo refactor todo logic from Makefile
 @todo 2do_go4: seed
 @todo 2do_go4: refresh makefile
 @todo 2do_go4: transclude stdin
