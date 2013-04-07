@@ -55,8 +55,7 @@ good:
 
 install: 	online
 	@if [ "$(ONLINE)" == yes ]; \
-		then (rm -rf deps; \
-			 $(CROWBAR:_cmds_=clean get-deps compile doc)); \
+		then $(CROWBAR:_cmds_=delete-deps clean get-deps compile doc); \
 		else $(CROWBAR:_cmds_=clean); fi
 
 push:		online

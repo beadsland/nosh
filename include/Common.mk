@@ -39,11 +39,11 @@ good:		compile
 # Temporary todo rules pending proper 2do_go4 implementation
 #
 
-todo:		doc TODO.edoc
+todo:		docs
 	@git add -f $(TODO_FILES)
 	@git commit $(TODO_FILES) -m "updated todo"
 
-doc:		neat
+docs:		neat
 	@$(CROWBAR:_cmds_=doc)
 	@(head -7 TODO.edoc; \
 		if [ $(TODO_MORE) -gt 0 ]; \
@@ -61,15 +61,13 @@ neat:
 #
 
 current:	online
-	@if [ "$(ONLINE)" == yes ]; then \
-		then (rm -rf deps; \
-			 $(CROWBAR:_cmds_=update-deps compile doc)); \
+	@if [ "$(ONLINE)" == yes ]; \
+		then $(CROWBAR:_cmds_=update-deps compile doc); \
 		else $(CROWBAR:_cmds_=compile doc); fi
 
 clean: 		online
 	@if [ "$(ONLINE)" == yes ]; \
-		then (rm -rf deps; \
-			 $(CROWBAR:_cmds_=clean get-deps)); \
+		then $(CROWBAR:_cmds_=delete-deps clean get-deps); \
 		else $(CROWBAR:_cmds_=clean); fi
 
 push:		online
