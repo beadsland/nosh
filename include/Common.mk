@@ -62,16 +62,16 @@ neat:
 # Rules for managing dependencies
 #
 
-current:	online
+current:
 	@if [ "$(ONLINE)" == yes ]; \
 		then $(CROWBAR:_cmds_=update-deps compile doc); \
 		else $(CROWBAR:_cmds_=compile doc); fi
 
-clean: 		online
+clean:
 	@if [ "$(ONLINE)" == yes ]; \
 		then $(CROWBAR:_cmds_=delete-deps clean get-deps); \
 		else $(CROWBAR:_cmds_=clean); fi
 
-push:		online
+push:
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
 		then $(PUSHGIT); fi

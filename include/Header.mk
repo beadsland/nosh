@@ -36,6 +36,41 @@ ifneq ($(MAKE_VEND),GNU)
 endif
 
 #
+# Figure out if development or production
+#
+
+ifeq ($(COMPUTERNAME),GOVMESH-BOOK)
+	DEV		=	$(if $(PROD),no,yes)
+else
+	DEV		=	no
+endif
+
+ifeq ($(DEV),yes)
+   $(info Development environment)
+endif
+
+#
+# Figure out if online or offline
+#
+
+ifeq ($(shell which ping),/cygdrive/c/Windows/system32/ping)
+	PING	=	ping -n 1
+else
+	PING	=	ping -c1
+endif
+
+ONTEST	= $(PING) www.google.com 2>&1 >/dev/null; \
+		if [ "$$?" -eq "0" ]; then (echo yes); \
+		else (echo no); fi
+ONLINE	= $(shell $(ONTEST))
+
+ifeq ($(ONLINE),yes)
+   $(info Working online)
+else
+   $(info Working offline)
+endif
+
+#
 # Macros for commands
 #
 
@@ -69,32 +104,3 @@ PUSHGIT = 	git push origin master
 PUSHDO	=	echo "cd $$file; $(PUSHGIT)" | /bin/sh
 PUSHFOR =	for file in dev/*; do $(PUSHDO); done
 PUSHLIB =	(echo '$(PUSHFOR)' | /bin/bash)
-
-#
-# Figure out if development or production
-#
-
-ifeq ($(COMPUTERNAME),GOVMESH-BOOK)
-	DEV		=	$(if $(PROD),no,yes)
-else
-	DEV		=	no
-endif
-
-#
-# Figure out if online or offline
-#
-
-ifeq ($(shell which ping),/cygdrive/c/Windows/system32/ping)
-	PING	=	ping -n 1
-else
-	PING	=	ping -c1
-endif
-
-ONLINE	= `$(PING) www.google.com 2>&1 >/dev/null; \
-		if [ "$$?" -eq "0" ]; then (echo yes); \
-		else (echo no); fi`
-
-online:	
-	@if [ "$(ONLINE)" == yes ]; \
-		then (echo "Working online"); \
-		else (echo "Working offline"); fi

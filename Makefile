@@ -55,12 +55,12 @@ good:
 	@$(POSE) superl
 	@$(POSE) posure
 
-install: 	online
+install:
 	@if [ "$(ONLINE)" == yes ]; \
 		then $(CROWBAR:_cmds_=delete-deps clean get-deps compile doc); \
 		else $(CROWBAR:_cmds_=clean); fi
 
-push:		online
+push:
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; then $(PUSHLIB); fi
 	@$(MAKE) -f include/Common.mk push
 
@@ -72,5 +72,5 @@ todo:
 	@$(MAKE) -f include/Common.mk todo
 	
 %::			;
-	@echo No custom target found.
+	@echo No custom target found
 	@$(MAKE) -f include/Common.mk $@
