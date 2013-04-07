@@ -1,4 +1,4 @@
-@todo no implicit rule on todo
+@todo fix todo trigger to work as phony
 @todo todo based on updated readme.md
 @todo test included rules
 @todo test non-included rules
