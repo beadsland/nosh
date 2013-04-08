@@ -47,6 +47,11 @@ install:
 		then $(CROWBAR:_cmds_=delete-deps clean get-deps compile doc); \
 		else $(CROWBAR:_cmds_=clean); fi
 
+clean:
+	@if [ "$(DEV)" == yes ]; \
+		then (cd dev; rm *; cd ..; rmdir dev; bin/mkdev); fi
+	@$(SUBMAKE)
+
 push:
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; then $(PUSHLIB); fi
 	@$(SUBMAKE)
