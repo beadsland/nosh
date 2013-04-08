@@ -69,7 +69,7 @@ push:
 #
 
 todo:
-	@$(MAKE) -f include/Common.mk todo
+	@$(MAKE) -f include/Common.mk todo SUBMAKE=true
 	
 %::			;
 	@echo No custom target found

@@ -41,16 +41,22 @@ good:		compile
 # Temporary todo rules pending proper 2do_go4 implementation
 #
 
-todo:		docs TODO.edoc
+todo:					README.md
 	@git add -f $(TODO_FILES)
 	@git commit $(TODO_FILES) -m "updated todo"
 
-docs:		neat
+README.md:				neat doc/TODO_head.edoc
 	@$(CROWBAR:_cmds_=doc)
+
+doc/TODO_head.edoc:		TODO.edoc
 	@(head -7 TODO.edoc; \
 		if [ $(TODO_MORE) -gt 0 ]; \
 		then (echo "@todo ...plus $(TODO_MORE) more (see TODO.edoc)"); \
 		fi) > doc/TODO_head.edoc
+
+#
+# Rules for compiling 
+#
 
 compile:	neat
 	@$(CROWBAR:_cmds_=compile doc)
