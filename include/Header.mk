@@ -18,7 +18,7 @@
 # by brackets replaced by your own identifying information.
 # "Portions Copyright [year] [name of copyright owner]"
 # 
-# Copyright 2013 Beads D. Land-Trujillo.  All Rights Reserved
+# Copyright 2013 Beads D. Land-Trujillo.  All Rights Reserved.
 # -----------------------------------------------------------------------
 # CDDL HEADER END
 
@@ -30,7 +30,7 @@ MAKE_HEAD	= make -v | head -1
 MAKE_WORD	= $(MAKE_HEAD) | sed 's/\ .*//'
 MAKE_VEND	= $(shell $(MAKE_WORD))
 
-SUBMAKE		= @$(MAKE) -f include/Common.mk $@ IS_SUBMAKE=true
+SUBMAKE		= @$(MAKE) --no-print-directory -f include/Common.mk $@ IS_SUBMAKE=true
 
 ifneq ($(IS_SUBMAKE),true)
    $(info $(shell $(MAKE_HEAD)))
@@ -83,18 +83,20 @@ endif
 REBAR = 	`command -v rebar || echo bin/rebar`
 GREP =		grep --line-buffered
 SUCCINCT =	$(GREP) -v "Entering directory" | $(GREP) -v "Leaving directory"
-ifndef	$(FOLD)
-	FOLD = cat
-endif
+FOLD = 		cat
 CROWBAR	=	$(DEPS) $(REBAR) _cmds_ | $(SUCCINCT) 2>&1 | $(FOLD)
 
 #
 # Macros for good
 #
 
-ERL_PATH = 	-pa ebin
-POSURE =	-i .. -pa ebin -s posure
-SUPERL =	-pa ../superl/ebin -s superl $(POSURE) -s init stop
+POSEPATH =	-pa deps/pose/ebin
+ERL	=		erl -noshell -i deps $(POSEPATH)
+
+POSURE	=	-s pose start posure
+SUPERL	=	-s pose start superl
+NOTERM	=	-s pose start noterm
+STOP	=	-s init stop
 
 #
 # Todo logic pending proper 2do_go4 implementation

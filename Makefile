@@ -22,38 +22,23 @@
 # by brackets replaced by your own identifying information.
 # "Portions Copyright [year] [name of copyright owner]"
 # 
-# Copyright 2013 Beads D. Land-Trujillo.  All Rights Reserved
+# Copyright 2013 Beads D. Land-Trujillo.  All Rights Reserved.
 # -----------------------------------------------------------------------
 # CDDL HEADER END
 
-#
-# Run as pose session
-#
+include include/Header.mk
 
 ifeq ($(DEV),yes)
-	POSE	=	bin/dose
-	ERL		=	erl -noshell -i dev -deps dev $(POSE)
-	DEPS	=	ERL_FLAGS="-deps dev"
-else
-	POSE	=	bin/pose
-	ERL		=	erl -noshell -i deps $(POSE)
+	ERL		=	erl -noshell -i dev -deps dev $(POSEPATH)
 endif
 
 FOLD =		bin/folderl
-
-include include/Header.mk
 
 #
 # Custom rules
 #
 
-.PHONY:	all good install push todo
-
-all:	push good
-
-good:
-	@$(POSE) superl
-	@$(POSE) posure
+.PHONY:	install push todo
 
 install:
 	@if [ "$(ONLINE)" == yes ]; \

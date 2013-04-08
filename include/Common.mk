@@ -18,7 +18,7 @@
 # by brackets replaced by your own identifying information.
 # "Portions Copyright [year] [name of copyright owner]"
 # 
-# Copyright 2013 Beads D. Land-Trujillo.  All Rights Reserved
+# Copyright 2013 Beads D. Land-Trujillo.  All Rights Reserved.
 # -----------------------------------------------------------------------
 # CDDL HEADER END
 
@@ -30,24 +30,22 @@ include include/Header.mk
 
 .PHONY:	all good todo docs compile neat current clean push
 
-all:		push good
+all:		push compile good
 
-good:		compile
-	@if [ "$(DEV)" == yes ]; \
-		then (erl $(ERL_PATH) -i deps -noshell $(SUPERL)); \
-		else (echo Good only in development); fi 
-
+good:
+	@$(ERL) $(SUPERL) $(POSURE) $(STOP)
+	
 #
 # Temporary todo rules pending proper 2do_go4 implementation
 #
 
-docs:					neat README.md
+docs:		neat README.md
 
-todo:					README.md
+todo:		README.md
 	@git add -f $(TODO_FILES)
 	@git commit $(TODO_FILES) -m "updated todo"
 
-README.md:				neat doc/TODO_head.edoc
+README.md:	neat doc/TODO_head.edoc
 	@$(CROWBAR:_cmds_=doc)
 
 doc/TODO_head.edoc:		TODO.edoc
