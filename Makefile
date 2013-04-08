@@ -32,11 +32,11 @@
 
 ifeq ($(DEV),yes)
 	POSE	=	bin/dose
-	ERL	=	erl -noshell -i dev -deps dev $(POSE)
+	ERL		=	erl -noshell -i dev -deps dev $(POSE)
 	DEPS	=	ERL_FLAGS="-deps dev"
 else
 	POSE	=	bin/pose
-	ERL	=	erl -noshell -i deps $(POSE)
+	ERL		=	erl -noshell -i deps $(POSE)
 endif
 
 FOLD =		bin/folderl

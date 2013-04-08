@@ -79,7 +79,8 @@ endif
 #
 
 REBAR = 	`command -v rebar || echo bin/rebar`
-SUCCINCT =	grep -v "Entering directory" | grep -v "Leaving directory"
+GREP =		grep --line-buffered
+SUCCINCT =	$(GREP) -v "Entering directory" | $(GREP) -v "Leaving directory"
 ifndef	$(FOLD)
 	FOLD = cat
 endif
