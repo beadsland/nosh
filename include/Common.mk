@@ -41,7 +41,7 @@ good:		compile
 # Temporary todo rules pending proper 2do_go4 implementation
 #
 
-docs:					todo
+docs:					README.md
 
 todo:					README.md
 	@git add -f $(TODO_FILES)
