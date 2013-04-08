@@ -30,9 +30,6 @@ MAKE_HEAD	= make -v | head -1
 MAKE_WORD	= $(MAKE_HEAD) | sed 's/\ .*//'
 MAKE_VEND	= $(shell $(MAKE_WORD))
 
-SUBMAKE		= @$(MAKE) --no-print-directory -f include/Common.mk $@ \
-				IS_SUBMAKE=true $(SUBPASS)
-
 ifneq ($(IS_SUBMAKE),true)
    $(info $(shell $(MAKE_HEAD)))
 endif
@@ -85,17 +82,20 @@ REBAR = 	`command -v rebar || echo bin/rebar`
 GREP =		grep --line-buffered
 SUCCINCT =	$(GREP) -v "Entering directory" | $(GREP) -v "Leaving directory"
 FOLD = 		cat
-CROWBAR	=	$(DEPS) $(REBAR) _cmds_ | $(SUCCINCT) 2>&1 | $(FOLD)
+CROWBAR	=	$(SUBPASS) $(REBAR) _cmds_ | $(SUCCINCT) 2>&1 | $(FOLD)
+
+SUBMAKE		= @$(MAKE) --no-print-directory -f include/Common.mk $@ \
+				IS_SUBMAKE=true PROD=$(PROD) $(SUBPASS)
 
 #
 # Macros for good
 #
 
-POSEPATH =	-pa deps/pose/ebin
-
-ifndef ERL
-	ERL	=		erl -noshell -i deps $(POSEPATH)
+ifndef DEPS
+	DEPS =		deps
 endif
+POSEPATH =	-pa $(DEPS)/pose/ebin
+ERL	=		erl -noshell -i $(DEPS) -deps $(DEPS) $(POSEPATH)
 
 POSURE	=	-s pose start posure
 SUPERL	=	-s pose start superl

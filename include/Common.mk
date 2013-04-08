@@ -32,9 +32,12 @@ include include/Header.mk
 
 all:		push compile good
 
-good:
-	$(ERL) $(SUPERL) $(POSURE) $(STOP)
+good:		$(DEPS)/pose/ebin/pose.beam
+	@$(ERL) $(SUPERL) $(POSURE) $(STOP)
 	
+$(DEPS)/pose/ebin/pose.beam:
+	$(error Must compile pose to do good)
+
 #
 # Temporary todo rules pending proper 2do_go4 implementation
 #

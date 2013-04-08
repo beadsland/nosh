@@ -29,8 +29,8 @@
 include include/Header.mk
 
 ifeq ($(DEV),yes)
-	ERL	=		erl -noshell -i dev -deps dev $(POSEPATH)
-	SUBPASS =	ERL="$(ERL)"
+	DEPS	=	dev
+	SUBPASS =	DEPS="$(DEPS)"
 endif
 
 FOLD =		bin/folderl
@@ -41,7 +41,7 @@ FOLD =		bin/folderl
 
 .PHONY:	all install push todo
 
-all:	push install good
+all:	push compile good
 
 install:
 	@if [ "$(ONLINE)" == yes ]; \
