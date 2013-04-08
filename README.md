@@ -11,7 +11,7 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">todo based on updated readme.md
+* <font color="red">todo based on updated readme.md - test
 </font>
 * <font color="red">test included rules
 </font>
