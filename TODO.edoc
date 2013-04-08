@@ -1,4 +1,3 @@
-@todo submake macro
 @todo refactor good in Makefile
 @todo refactor all in Makefile
 @todo clear dev dir as part of make clean

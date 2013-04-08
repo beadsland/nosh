@@ -30,7 +30,9 @@ MAKE_HEAD	= make -v | head -1
 MAKE_WORD	= $(MAKE_HEAD) | sed 's/\ .*//'
 MAKE_VEND	= $(shell $(MAKE_WORD))
 
-ifneq ($(SUBMAKE),true)
+SUBMAKE		= @$(MAKE) -f include/Common.mk $@ IS_SUBMAKE=true
+
+ifneq ($(IS_SUBMAKE),true)
    $(info $(shell $(MAKE_HEAD)))
 endif
 
@@ -48,7 +50,7 @@ else
 	DEV		=	no
 endif
 
-ifeq ($(DEV)$(SUBMAKE),yes)
+ifeq ($(DEV)$(IS_SUBMAKE),yes)
    $(info Development environment)
 endif
 
@@ -67,10 +69,10 @@ ONTEST	= $(PING) www.google.com 2>&1 >/dev/null; \
 		else (echo no); fi
 ONLINE	= $(shell $(ONTEST))
 
-ifeq ($(ONLINE)$(SUBMAKE),yes)
+ifeq ($(ONLINE)$(IS_SUBMAKE),yes)
    $(info Working online)
 endif
-ifeq ($(ONLINE)$(SUBMAKE),no)
+ifeq ($(ONLINE)$(IS_SUBMAKE),no)
    $(info Working offline)
 endif
 

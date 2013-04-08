@@ -62,15 +62,15 @@ install:
 
 push:
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; then $(PUSHLIB); fi
-	@$(MAKE) -f include/Common.mk push SUBMAKE=true
+	@$(SUBMAKE)
 
 #
 # Run non-overridden common rules.
 #
 
 todo:
-	@$(MAKE) -f include/Common.mk todo SUBMAKE=true
+	@$(SUBMAKE)
 	
 %::			;
 	@echo No custom target found
-	@$(MAKE) -f include/Common.mk $@ SUBMAKE=true
+	@$(SUBMAKE)
