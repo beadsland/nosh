@@ -1,4 +1,3 @@
-@todo error on compile w/o get-deps
 @todo fix mkdev errors
 @todo share Makefile/mk to other projects
 @todo 2do_go4: seed
