@@ -1,8 +1,8 @@
-@todo good needs to make sure pose compiled
+@todo confirm good works if in production environment
+@todo fix mkdev errors
 @todo share Makefile/mk to other projects
 @todo 2do_go4: seed
 @todo 2do_go4: refresh makefile
 @todo 2do_go4: transclude stdin
 @todo 2do_go4: handle ampersands without complaint
-@todo 2do_go4: transcribe / output
-@todo ...plus 81 more (see TODO.edoc)
+@todo ...plus 82 more (see TODO.edoc)

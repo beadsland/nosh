@@ -1,4 +1,5 @@
-@todo good needs to make sure pose compiled
+@todo confirm good works if in production environment
+@todo fix mkdev errors
 @todo share Makefile/mk to other projects
 @todo 2do_go4: seed
 @todo 2do_go4: refresh makefile
