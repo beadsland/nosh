@@ -22,7 +22,7 @@
 # by brackets replaced by your own identifying information.
 # "Portions Copyright [year] [name of copyright owner]"
 # 
-# Copyright 2012 Beads D. Land-Trujillo.  All Rights Reserved
+# Copyright 2013 Beads D. Land-Trujillo.  All Rights Reserved
 # -----------------------------------------------------------------------
 # CDDL HEADER END
 
@@ -62,7 +62,7 @@ install:
 
 push:
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; then $(PUSHLIB); fi
-	@$(MAKE) -f include/Common.mk push
+	@$(MAKE) -f include/Common.mk push SUBMAKE=true
 
 #
 # Run non-overridden common rules.
