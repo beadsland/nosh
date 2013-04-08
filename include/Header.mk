@@ -30,7 +30,8 @@ MAKE_HEAD	= make -v | head -1
 MAKE_WORD	= $(MAKE_HEAD) | sed 's/\ .*//'
 MAKE_VEND	= $(shell $(MAKE_WORD))
 
-SUBMAKE		= @$(MAKE) --no-print-directory -f include/Common.mk $@ IS_SUBMAKE=true
+SUBMAKE		= @$(MAKE) --no-print-directory -f include/Common.mk $@ \
+				IS_SUBMAKE=true $(SUBPASS)
 
 ifneq ($(IS_SUBMAKE),true)
    $(info $(shell $(MAKE_HEAD)))
@@ -91,7 +92,10 @@ CROWBAR	=	$(DEPS) $(REBAR) _cmds_ | $(SUCCINCT) 2>&1 | $(FOLD)
 #
 
 POSEPATH =	-pa deps/pose/ebin
-ERL	=		erl -noshell -i deps $(POSEPATH)
+
+ifndef ERL
+	ERL	=		erl -noshell -i deps $(POSEPATH)
+endif
 
 POSURE	=	-s pose start posure
 SUPERL	=	-s pose start superl

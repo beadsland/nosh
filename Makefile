@@ -29,7 +29,8 @@
 include include/Header.mk
 
 ifeq ($(DEV),yes)
-	ERL		=	erl -noshell -i dev -deps dev $(POSEPATH)
+	ERL	=		erl -noshell -i dev -deps dev $(POSEPATH)
+	SUBPASS =	ERL="$(ERL)"
 endif
 
 FOLD =		bin/folderl
