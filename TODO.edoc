@@ -1,6 +1,5 @@
-@todo todo based on updated readme.md - test
-@todo test included rules
 @todo test non-included rules
+@todo submake macro
 @todo review folderl latency
 @todo refactor good in Makefile
 @todo refactor all in Makefile

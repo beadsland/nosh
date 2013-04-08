@@ -1,8 +1,8 @@
-@todo todo based on updated readme.md - test
-@todo test included rules
 @todo test non-included rules
+@todo submake macro
 @todo review folderl latency
 @todo refactor good in Makefile
 @todo refactor all in Makefile
 @todo clear dev dir as part of make clean
-@todo ...plus 87 more (see TODO.edoc)
+@todo share Makefile/mk to other projects
+@todo ...plus 86 more (see TODO.edoc)
