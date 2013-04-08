@@ -11,10 +11,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">refactor good in Makefile
-</font>
-* <font color="red">refactor all in Makefile
-</font>
 * <font color="red">clear dev dir as part of make clean
 </font>
 * <font color="red">share Makefile/mk to other projects
@@ -25,7 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">2do_go4: transclude stdin
 </font>
-* <font color="red">...plus 83 more (see TODO.edoc)
+* <font color="red">2do_go4: handle ampersands without complaint
+</font>
+* <font color="red">2do_go4: transcribe / output
+</font>
+* <font color="red">...plus 81 more (see TODO.edoc)
 </font>
 
 
