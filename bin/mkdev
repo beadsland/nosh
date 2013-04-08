@@ -10,10 +10,11 @@ SOURCE='..' export SOURCE
 
 LINK=`if [ $PLATFORM == "Cygwin" ]; \
     then (
-        curl $JUNCURL > $TEMP/junction.zip > /dev/null
+		# EULA doesn't allow for redistribution, so we download from source.
+        curl $JUNCURL > $TEMP/junction.zip 
         unzip -f $TEMP/junction.zip -d $TEMP > /dev/null
         chmod +x $TEMP/junction.exe > /dev/null
-        LINK='{print "$TEMP/junction $TARGET/"$1" $SOURCE/"$1}'
+        LINK='{print "$TEMP/junction $TARGET/"$1" $SOURCE/"$1" 2>&1 | tail -2"}'
         echo $LINK
         );
     else (

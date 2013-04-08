@@ -50,7 +50,7 @@ install:
 
 clean:
 	@if [ "$(DEV)" == yes ]; \
-		then (cd dev; rm *; cd ..; rmdir dev; bin/mkdev); fi
+		then (rm dev/*; rmdir dev; bin/mkdev); fi
 	@$(SUBMAKE)
 
 push:
