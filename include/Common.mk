@@ -41,7 +41,7 @@ good:		compile
 # Temporary todo rules pending proper 2do_go4 implementation
 #
 
-docs:					README.md
+docs:					neat README.md
 
 todo:					README.md
 	@git add -f $(TODO_FILES)
@@ -64,7 +64,7 @@ compile:	neat
 	@$(CROWBAR:_cmds_=compile doc)
 
 neat:
-	@rm -f *.dump doc/*.md doc/*.html
+	@rm -f *.dump doc/*.md doc/*.html README.md
 
 #
 # Rules for managing dependencies
