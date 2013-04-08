@@ -1,5 +1,3 @@
-@todo refactor good in Makefile
-@todo refactor all in Makefile
 @todo clear dev dir as part of make clean
 @todo share Makefile/mk to other projects
 @todo 2do_go4: seed

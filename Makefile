@@ -38,7 +38,9 @@ FOLD =		bin/folderl
 # Custom rules
 #
 
-.PHONY:	install push todo
+.PHONY:	all install push todo
+
+all:	push install good
 
 install:
 	@if [ "$(ONLINE)" == yes ]; \
