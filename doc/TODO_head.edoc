@@ -1,8 +1,8 @@
-@todo push as triggers not shell
-@todo recursive make for push-libs
-@todo test rsync same folder
 @todo rsync for make make
 @todo share Makefile/mk to other projects
 @todo 2do_go4: seed
 @todo 2do_go4: refresh makefile
-@todo ...plus 84 more (see TODO.edoc)
+@todo 2do_go4: transclude stdin
+@todo 2do_go4: handle ampersands without complaint
+@todo 2do_go4: transcribe / output
+@todo ...plus 81 more (see TODO.edoc)

@@ -11,12 +11,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">push as triggers not shell
-</font>
-* <font color="red">recursive make for push-libs
-</font>
-* <font color="red">test rsync same folder
-</font>
 * <font color="red">rsync for make make
 </font>
 * <font color="red">share Makefile/mk to other projects
@@ -25,7 +19,13 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">2do_go4: refresh makefile
 </font>
-* <font color="red">...plus 84 more (see TODO.edoc)
+* <font color="red">2do_go4: transclude stdin
+</font>
+* <font color="red">2do_go4: handle ampersands without complaint
+</font>
+* <font color="red">2do_go4: transcribe / output
+</font>
+* <font color="red">...plus 81 more (see TODO.edoc)
 </font>
 
 
