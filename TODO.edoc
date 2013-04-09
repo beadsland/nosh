@@ -1,5 +1,3 @@
-@todo push as triggers not shell
-@todo recursive make for push-libs
 @todo test rsync same folder
 @todo rsync for make make
 @todo share Makefile/mk to other projects

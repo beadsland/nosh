@@ -35,11 +35,15 @@ endif
 
 FOLD =		bin/folderl
 
+PUSHMAKE	= if [ -e $@/include/Common.mk ]; \
+				then $(SUBMAKE:_param_=-C $@ push); \
+				else (cd $@; git push origin master); fi
+
 #
 # Custom rules
 #
 
-.PHONY:	all install push todo
+.PHONY:	all install push force todo
 
 all:	push compile good
 
@@ -51,19 +55,24 @@ install:
 clean:
 	@if [ "$(DEV)" == yes ]; \
 		then (rm dev/*; rmdir dev; bin/mkdev); fi
-	@$(SUBMAKE)
+	@$(COMMAKE)
 
-push:
-	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; then $(PUSHLIB); fi
-	@$(SUBMAKE)
+push:	${wildcard dev/*}
+	@$(COMMAKE)
+
+dev/%:	force
+	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
+		then (echo -n "$*: "; $(PUSHMAKE)); fi	
+
+force:	;
 
 #
 # Run non-overridden common rules.
 #
 
 todo:
-	@$(SUBMAKE)
+	@$(COMMAKE)
 	
 %::			;
 	@echo No custom target found
-	@$(SUBMAKE)
+	@$(COMMAKE)

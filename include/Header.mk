@@ -84,8 +84,9 @@ SUCCINCT =	$(GREP) -v "Entering directory" | $(GREP) -v "Leaving directory"
 FOLD = 		cat
 CROWBAR	=	$(SUBPASS) $(REBAR) _cmds_ | $(SUCCINCT) 2>&1 | $(FOLD)
 
-SUBMAKE		= @$(MAKE) --no-print-directory -f include/Common.mk $@ \
+SUBMAKE		= $(MAKE) --no-print-directory _param_ \
 				IS_SUBMAKE=true PROD=$(PROD) $(SUBPASS)
+COMMAKE		= $(SUBMAKE:_param_=-f include/Common.mk $@)
 
 #
 # Macros for good
@@ -108,12 +109,3 @@ STOP	=	-s init stop
 
 TODO_MORE =		`wc -l TODO.edoc | awk '{print $$1 - 7}'`
 TODO_FILES =	TODO.edoc README.md doc/README.md doc/TODO_head.edoc
-
-#
-# Formulas for recursive push rules
-#
-
-PUSHGIT = 	git push origin master
-PUSHDO	=	echo "cd $$file; $(PUSHGIT)" | /bin/sh
-PUSHFOR =	for file in dev/*; do $(PUSHDO); done
-PUSHLIB =	(echo '$(PUSHFOR)' | /bin/bash)

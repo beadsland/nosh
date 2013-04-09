@@ -83,4 +83,4 @@ clean:
 
 push:
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
-		then $(PUSHGIT); fi
+		then (git push origin master); fi
