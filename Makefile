@@ -64,7 +64,7 @@ dev/%/.git:		force
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
 		then (echo -n "$*: "; $(PUSHMAKE)); fi	
 
-make:	make2 $(wildcard dev/*/include/Common.mk)
+make:	$(wildcard dev/*/include/Common.mk)
 	@echo Unison of make includes
 
 dev/%/include/Common.mk:	force
