@@ -11,8 +11,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">rsync for make make
-</font>
 * <font color="red">share Makefile/mk to other projects
 </font>
 * <font color="red">2do_go4: seed
@@ -25,7 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">2do_go4: transcribe / output
 </font>
-* <font color="red">...plus 81 more (see TODO.edoc)
+* <font color="red">2do_go4: transclude resources by fragment
+</font>
+* <font color="red">...plus 80 more (see TODO.edoc)
 </font>
 
 
