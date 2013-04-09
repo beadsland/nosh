@@ -90,6 +90,6 @@ push:	make
 		then (git push origin master); fi
 		
 make:
-	@if [ "$(shell basename $(PWD))" != nosh ]; \
-		then (unison include/Common.mk ../nosh/include/Common.mk; \
-			  unison include/Header.mk ../nosh/include/Header.mk); fi
+	@if [ "$(shell basename $(CURDIR))" != nosh ]; \
+		then ($(UNISON:_mk_=Header.mk); \
+			  $(UNISON:_mk_=Common.mk)); fi

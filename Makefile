@@ -57,12 +57,19 @@ clean:
 		then (rm dev/*; rmdir dev; bin/mkdev); fi
 	@$(COMMAKE)
 
-push:	${wildcard dev/*}
+push:	$(wildcard dev/*/.git)
 	@$(COMMAKE)
 
-dev/%:	force
+dev/%/.git:		force
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
 		then (echo -n "$*: "; $(PUSHMAKE)); fi	
+
+make:	make2 $(wildcard dev/*/include/Common.mk)
+	@echo Unison of make includes
+
+dev/%/include/Common.mk:	force
+	@echo $@
+	@cd dev/$*; $(SUBMAKE:_param_=-f include/Common.mk make)
 
 force:	;
 

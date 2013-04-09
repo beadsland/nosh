@@ -83,6 +83,7 @@ GREP =		grep --line-buffered
 SUCCINCT =	$(GREP) -v "Entering directory" | $(GREP) -v "Leaving directory"
 FOLD = 		cat
 CROWBAR	=	$(SUBPASS) $(REBAR) _cmds_ | $(SUCCINCT) 2>&1 | $(FOLD)
+UNISON =	unison -batch -terse include/_mk_ ../nosh/include/_mk_
 
 SUBMAKE		= $(MAKE) --no-print-directory _param_ \
 				IS_SUBMAKE=true PROD=$(PROD) $(SUBPASS)
