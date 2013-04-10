@@ -80,6 +80,6 @@ force:	;
 todo:
 	@$(COMMAKE)
 	
-%::			;
+%::
 	@echo No custom target found
 	@$(COMMAKE)
