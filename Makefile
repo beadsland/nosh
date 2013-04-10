@@ -1,7 +1,3 @@
-# -------------------
-# Makefile for nosh
-# -------------------
-
 # CDDL HEADER START
 # -----------------------------------------------------------------------
 # The contents of this file are subject to the Common Development and 
@@ -25,6 +21,10 @@
 # Copyright 2013 Beads D. Land-Trujillo.  All Rights Reserved.
 # -----------------------------------------------------------------------
 # CDDL HEADER END
+
+# -------------------
+# Makefile for nosh
+# -------------------
 
 include include/Header.mk
 
