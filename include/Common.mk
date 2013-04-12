@@ -89,8 +89,6 @@ push:	make
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
 		then (git push origin master); fi
 
-	#lo	
 make:
-	if [ "$(shell basename $(CURDIR))" != nosh ]; \
-		then ($(UNISON:_mk_=Header.mk); \
-			  $(UNISON:_mk_=Common.mk)); fi
+	@if [ "$(shell basename $(CURDIR))" != nosh ]; \
+		then $(UNISON); fi

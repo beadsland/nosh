@@ -1,4 +1,3 @@
-@todo fix pose/superl recursive dependency
 @todo easy launch crashdump_viewer
 @todo troubleshoot noterm core dumps
 @todo confirm rules superl
