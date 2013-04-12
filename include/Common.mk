@@ -52,11 +52,11 @@ todo:		README.md
 README.md:	neat doc/TODO_head.edoc
 	@$(CROWBAR:_cmds_=doc)
 
-doc/TODO_head.edoc:		TODO.edoc
-	@(head -7 TODO.edoc; \
-		if [ $(TODO_MORE) -gt 0 ]; \
-		then (echo "@todo ...plus $(TODO_MORE) more (see TODO.edoc)"); \
-		fi) > doc/TODO_head.edoc
+doc/TODO_head.edoc:
+#	if [ $(TODO_MORE) -gt 0 ]; \
+#		then (head -7 TODO.edoc; \
+#			  echo "@todo ...plus $(TODO_MORE) more (see TODO.edoc)"); fi \
+#		> doc/TODO_head.edoc
 
 #
 # Rules for compiling 
@@ -72,12 +72,12 @@ neat:
 # Rules for managing dependencies
 #
 
-current:	pose
+current:	push
 	@if [ "$(ONLINE)" == yes ]; \
 		then $(CROWBAR:_cmds_=update-deps compile doc); \
 		else $(CROWBAR:_cmds_=compile doc); fi
 
-clean:		pose
+clean:		push
 	@if [ "$(ONLINE)" == yes ]; \
 		then $(CROWBAR:_cmds_=delete-deps clean get-deps); \
 		else $(CROWBAR:_cmds_=clean); fi
