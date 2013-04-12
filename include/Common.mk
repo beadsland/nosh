@@ -52,11 +52,13 @@ todo:		README.md
 README.md:	neat doc/TODO_head.edoc
 	@$(CROWBAR:_cmds_=doc)
 
-doc/TODO_head.edoc:
-#	if [ $(TODO_MORE) -gt 0 ]; \
-#		then (head -7 TODO.edoc; \
-#			  echo "@todo ...plus $(TODO_MORE) more (see TODO.edoc)"); fi \
-#		> doc/TODO_head.edoc
+doc/TODO_head.edoc:		TODO.edoc
+	@if [ $(TODO_MORE) -gt 0 ]; \
+		then (head -7 TODO.edoc; \
+			  echo "@todo ...plus $(TODO_MORE) more (see TODO.edoc)"); fi \
+		> doc/TODO_head.edoc
+
+TODO.edoc:	;
 
 #
 # Rules for compiling 

@@ -118,5 +118,10 @@ STOP	=	-s init stop
 # Todo logic pending proper 2do_go4 implementation
 #
 
-TODO_MORE =		`wc -l TODO.edoc | awk '{print $$1 - 7}'`
-TODO_FILES =	TODO.edoc README.md doc/README.md doc/TODO_head.edoc
+ifeq ($(wildcard TODO.edoc),TODO.edoc)
+	TODO_MORE =	`wc -l TODO.edoc | awk '{print $$1 - 7}'`
+else
+	TODO_MORE =	0
+endif
+TODO_FILES =	$(wildcard TODO.edoc) \
+					README.md doc/README.md doc/TODO_head.edoc
