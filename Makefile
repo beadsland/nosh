@@ -43,7 +43,7 @@ PUSHMAKE	= if [ -e $@/include/Common.mk ]; \
 # Custom rules
 #
 
-.PHONY:	all install push force todo
+.PHONY:	all install current clean push force todo
 
 all:	push compile good
 
@@ -55,25 +55,25 @@ install:
 current:	push
 	@$(COMMAKE)
 
-clean:
+clean:		push
 	@if [ "$(DEV)" == yes ]; \
 		then (rm dev/*; rmdir dev; bin/mkdev); fi
 	@$(COMMAKE)
 
-push:	$(wildcard dev/*/.git)
+push:		$(wildcard dev/*/.git)
 	@$(COMMAKE)
 
-dev/%/.git:		force
+dev/%/.git:	force
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
 		then (echo -n "$*: "; $(PUSHMAKE)); fi	
 
-make:	$(wildcard dev/*/include/Common.mk)
+make:		$(wildcard dev/*/include/Common.mk)
 	@echo Unison of make includes
 
 dev/%/include/Common.mk:	force
 	@cd dev/$*; $(SUBMAKE:_param_=-f include/Common.mk make)
 
-force:	;
+force:		;
 
 #
 # Run non-overridden common rules.
