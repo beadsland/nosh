@@ -32,7 +32,7 @@ include include/Header.mk
 
 all:		push compile good
 
-good:		
+good:
 	@$(ERL) $(SUPERL) $(POSURE) $(STOP)
 	
 $(POSEBIN)/pose.beam:
