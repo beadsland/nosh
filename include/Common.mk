@@ -32,10 +32,11 @@ include include/Header.mk
 
 all:		push compile good
 
-good:
+good:		$(POSEBIN)/pose.beam
 	@$(ERL) $(SUPERL) $(POSURE) $(STOP)
 	
 $(POSEBIN)/pose.beam:
+	@if [ ! -f $(POSEBIN)/pose.beam ]
 	$(error Must compile pose to do good)
 
 #
@@ -76,7 +77,7 @@ current:
 		then $(CROWBAR:_cmds_=update-deps compile doc); \
 		else $(CROWBAR:_cmds_=compile doc); fi
 
-clean:	make
+clean:
 	@if [ "$(ONLINE)" == yes ]; \
 		then $(CROWBAR:_cmds_=delete-deps clean get-deps); \
 		else $(CROWBAR:_cmds_=clean); fi
@@ -85,7 +86,7 @@ clean:	make
 # Rules for managing revisions and synchronized common files
 #
 
-push:	make
+push:		make
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
 		then (git push origin master); fi
 
