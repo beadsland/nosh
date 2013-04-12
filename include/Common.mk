@@ -72,12 +72,12 @@ neat:
 # Rules for managing dependencies
 #
 
-current:
+current:	pose
 	@if [ "$(ONLINE)" == yes ]; \
 		then $(CROWBAR:_cmds_=update-deps compile doc); \
 		else $(CROWBAR:_cmds_=compile doc); fi
 
-clean:
+clean:		pose
 	@if [ "$(ONLINE)" == yes ]; \
 		then $(CROWBAR:_cmds_=delete-deps clean get-deps); \
 		else $(CROWBAR:_cmds_=clean); fi
