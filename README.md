@@ -13,6 +13,8 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">unison merge not working
 </font>
+* <font color="red">does online need to be optionally invoked?
+</font>
 * <font color="red">easy launch crashdump_viewer
 </font>
 * <font color="red">troubleshoot noterm core dumps
@@ -23,9 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">2do_go4: seed
 </font>
-* <font color="red">2do_go4: refresh makefile
-</font>
-* <font color="red">...plus 84 more (see TODO.edoc)
+* <font color="red">...plus 85 more (see TODO.edoc)
 </font>
 
 
