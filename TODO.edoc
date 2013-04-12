@@ -1,3 +1,5 @@
+@todo make todo must work w/o TODO.edoc
+@todo unison merge not working
 @todo easy launch crashdump_viewer
 @todo troubleshoot noterm core dumps
 @todo confirm rules superl
