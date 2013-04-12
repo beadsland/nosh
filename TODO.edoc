@@ -1,4 +1,5 @@
 @todo make todo must work w/o TODO.edoc
+@todo redundant todo/docs dependency?
 @todo unison merge not working
 @todo easy launch crashdump_viewer
 @todo troubleshoot noterm core dumps
