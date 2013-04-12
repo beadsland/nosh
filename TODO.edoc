@@ -1,3 +1,7 @@
+@todo fix pose/superl recursive dependency
+@todo easy launch crashdump_viewer
+@todo troubleshoot noterm core dumps
+@todo confirm rules superl
 @todo share Makefile/mk to other projects
 @todo 2do_go4: seed
 @todo 2do_go4: refresh makefile

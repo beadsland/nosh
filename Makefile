@@ -18,7 +18,7 @@
 # by brackets replaced by your own identifying information.
 # "Portions Copyright [year] [name of copyright owner]"
 # 
-# Copyright 2013 Beads D. Land-Trujillo.  All Rights Reserved.
+# Copyright 2012, 2013 Beads D. Land-Trujillo.  All Rights Reserved.
 # -----------------------------------------------------------------------
 # CDDL HEADER END
 
@@ -52,6 +52,9 @@ install:
 		then $(CROWBAR:_cmds_=delete-deps clean get-deps compile doc); \
 		else $(CROWBAR:_cmds_=clean); fi
 
+current:	push
+	@$(COMMAKE)
+
 clean:
 	@if [ "$(DEV)" == yes ]; \
 		then (rm dev/*; rmdir dev; bin/mkdev); fi
@@ -68,7 +71,6 @@ make:	$(wildcard dev/*/include/Common.mk)
 	@echo Unison of make includes
 
 dev/%/include/Common.mk:	force
-	@echo $@
 	@cd dev/$*; $(SUBMAKE:_param_=-f include/Common.mk make)
 
 force:	;

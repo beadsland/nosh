@@ -84,6 +84,7 @@ SUCCINCT =	$(GREP) -v "Entering directory" | $(GREP) -v "Leaving directory"
 FOLD = 		cat
 CROWBAR	=	$(SUBPASS) $(REBAR) _cmds_ | $(SUCCINCT) 2>&1 | $(FOLD)
 UNISON =	unison -batch -terse include/_mk_ ../nosh/include/_mk_
+# testing dual unison
 
 SUBMAKE		= $(MAKE) --no-print-directory _param_ \
 				IS_SUBMAKE=true PROD=$(PROD) $(SUBPASS)
@@ -94,13 +95,18 @@ COMMAKE		= $(SUBMAKE:_param_=-f include/Common.mk $@)
 #
 
 ifndef DEPS
-	DEPS =		deps
+	DEPS = 		deps
 endif
-POSEPATH =	-pa $(DEPS)/pose/ebin
-ERL	=		erl -noshell -i $(DEPS) -deps $(DEPS) $(POSEPATH)
+ifndef POSEBIN
+	POSEBIN = 	$(DEPS)/pose/ebin
+endif
+
+ERL	=		erl -noshell -i $(DEPS) -deps $(DEPS) -pa $(POSEBIN)
 
 POSURE	=	-s pose start posure
-SUPERL	=	-s pose start superl
+ifndef SUPERL
+	SUPERL	=	-s pose start superl
+endif
 NOTERM	=	-s pose start noterm
 STOP	=	-s init stop
 

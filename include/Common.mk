@@ -18,7 +18,7 @@
 # by brackets replaced by your own identifying information.
 # "Portions Copyright [year] [name of copyright owner]"
 # 
-# Copyright 2013 Beads D. Land-Trujillo.  All Rights Reserved.
+# Copyright 2012, 2013 Beads D. Land-Trujillo.  All Rights Reserved.
 # -----------------------------------------------------------------------
 # CDDL HEADER END
 
@@ -32,10 +32,10 @@ include include/Header.mk
 
 all:		push compile good
 
-good:		$(DEPS)/pose/ebin/pose.beam
+good:		
 	@$(ERL) $(SUPERL) $(POSURE) $(STOP)
 	
-$(DEPS)/pose/ebin/pose.beam:
+$(POSEBIN)/pose.beam:
 	$(error Must compile pose to do good)
 
 #
@@ -76,7 +76,7 @@ current:
 		then $(CROWBAR:_cmds_=update-deps compile doc); \
 		else $(CROWBAR:_cmds_=compile doc); fi
 
-clean:
+clean:	make
 	@if [ "$(ONLINE)" == yes ]; \
 		then $(CROWBAR:_cmds_=delete-deps clean get-deps); \
 		else $(CROWBAR:_cmds_=clean); fi
@@ -88,8 +88,9 @@ clean:
 push:	make
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
 		then (git push origin master); fi
-		
+
+	#lo	
 make:
-	@if [ "$(shell basename $(CURDIR))" != nosh ]; \
+	if [ "$(shell basename $(CURDIR))" != nosh ]; \
 		then ($(UNISON:_mk_=Header.mk); \
 			  $(UNISON:_mk_=Common.mk)); fi
