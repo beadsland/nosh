@@ -62,10 +62,15 @@ else
 	PING	=	ping -c1
 endif
 
-ONTEST	= $(PING) www.google.com 2>&1 >/dev/null && echo online || echo offline
+ONTEST	= $(PING) www.google.com 2>&1 >/dev/null \
+			&& echo online || echo offline
+ONBOOL	= (test "$(ONRESULT)" == "online" \
+			&& echo yes || echo no)
 
-ifneq ($(IS_SUBMAKE),true)
-   $(info Working $(shell $(ONTEST)))
+ifneq ($(IS_SUBMAKE),true)	   # if submake, online in subpass
+   ONRESULT = $(shell $(ONTEST))
+   $(info Working $(ONRESULT))
+   ONLINE = $(shell $(ONBOOL))
 endif
 
 #
@@ -97,7 +102,7 @@ COMMAKE		= $(SUBMAKE:_param_=-f include/Common.mk $@)
 ifndef DEPS
 	DEPS = 		deps
 endif
-SUBPASS =	DEPS="$(DEPS)"
+SUBPASS =	DEPS="$(DEPS)" ONLINE="$(ONLINE)"
 
 ifndef POSEBIN
 	POSEBIN = 	$(DEPS)/pose/ebin

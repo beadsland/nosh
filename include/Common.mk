@@ -82,7 +82,7 @@ current:
 clean:	neat
 	@if [ "$(ONLINE)" == yes ]; \
 		then (rm -rf deps; $(CROWBAR:_cmds_=clean get-deps)); \
-		else $(CROWBAR:_cmds_=clean); fi
+		else ($(CROWBAR:_cmds_=clean)); fi
 
 #
 # Rules for managing revisions and synchronized common files
