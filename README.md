@@ -13,6 +13,8 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">troubleshoot noterm core dumps
 </font>
+* <font color="red">confirm noterm refactor
+</font>
 * <font color="red">confirm rules superl
 </font>
 * <font color="red">share Makefile/mk to other projects
@@ -23,9 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">2do_go4: transclude stdin
 </font>
-* <font color="red">2do_go4: handle ampersands without complaint
-</font>
-* <font color="red">...plus 82 more (see TODO.edoc)
+* <font color="red">...plus 83 more (see TODO.edoc)
 </font>
 
 
