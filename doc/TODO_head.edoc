@@ -1,8 +1,8 @@
-@todo easy launch crashdump_viewer
 @todo troubleshoot noterm core dumps
 @todo confirm rules superl
 @todo share Makefile/mk to other projects
 @todo 2do_go4: seed
 @todo 2do_go4: refresh makefile
 @todo 2do_go4: transclude stdin
-@todo ...plus 83 more (see TODO.edoc)
+@todo 2do_go4: handle ampersands without complaint
+@todo ...plus 82 more (see TODO.edoc)

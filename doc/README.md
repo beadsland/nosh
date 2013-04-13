@@ -11,8 +11,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">easy launch crashdump_viewer
-</font>
 * <font color="red">troubleshoot noterm core dumps
 </font>
 * <font color="red">confirm rules superl
@@ -25,7 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">2do_go4: transclude stdin
 </font>
-* <font color="red">...plus 83 more (see TODO.edoc)
+* <font color="red">2do_go4: handle ampersands without complaint
+</font>
+* <font color="red">...plus 82 more (see TODO.edoc)
 </font>
 
 
