@@ -81,7 +81,7 @@ current:
 
 clean:
 	@if [ "$(ONLINE)" == yes ]; \
-		then $(CROWBAR:_cmds_=delete-deps clean get-deps); \
+		then (rm -rf deps; $(CROWBAR:_cmds_=clean get-deps)); \
 		else $(CROWBAR:_cmds_=clean); fi
 
 #
