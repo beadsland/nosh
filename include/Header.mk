@@ -62,16 +62,10 @@ else
 	PING	=	ping -c1
 endif
 
-ONTEST	= $(PING) www.google.com 2>&1 >/dev/null; \
-		if [ "$$?" -eq "0" ]; then (echo yes); \
-		else (echo no); fi
-ONLINE	= $(shell $(ONTEST))
+ONTEST	= $(PING) www.google.com 2>&1 >/dev/null && echo online || echo offline
 
-ifeq ($(ONLINE)$(IS_SUBMAKE),yes)
-   $(info Working online)
-endif
-ifeq ($(ONLINE)$(IS_SUBMAKE),no)
-   $(info Working offline)
+ifneq ($(IS_SUBMAKE),true)
+   $(info Working $(shell $(ONTEST)))
 endif
 
 #
