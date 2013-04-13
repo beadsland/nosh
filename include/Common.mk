@@ -28,7 +28,7 @@ include include/Header.mk
 # All good rules
 #
 
-.PHONY:	all good todo docs compile neat current clean push make
+.PHONY:	all good todo docs compile neat current clean push make test
 
 all:		push compile good
 
@@ -88,9 +88,19 @@ clean:
 # Rules for managing revisions and synchronized common files
 #
 
-push:		make
+push:	make
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
 		then (git push origin master); fi
+
+test:	$(patsubst include/%.mk, \
+			include/$(B_PREFIX)%.mk$(B_SUFFIX), \
+			$(wildcard include/*.mk))
+	@if [ "$(shell basename $(CURDIR))" != nosh ]; \
+		then ($(UNISON) -merge "$(MERGE)"); fi
+
+include/$(B_PREFIX)%.mk$(B_SUFFIX):		include/%.mk
+	@if [ "$(shell basename $(CURDIR))" != nosh ]; \
+		then ($(UNISON); test -f $@ || cp $< $@); fi
 
 make:
 	@if [ "$(shell basename $(CURDIR))" != nosh ]; \

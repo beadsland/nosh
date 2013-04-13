@@ -84,12 +84,15 @@ SUCCINCT =	$(GREP) -v "Entering directory" | $(GREP) -v "Leaving directory"
 FOLD = 		cat
 CROWBAR	=	$(SUBPASS) $(REBAR) _cmds_ | $(SUCCINCT) 2>&1 | $(FOLD)
 
-#MERGE =		Name *.mk -> diff3 -m CURRENT1 CURRENTARCH CURRENT2 > NEW \
-#				|| echo Diff merge
+B_PREFIX = 	.unison/
+B_SUFFIX =	.0.bak
+MERGE =		Name *.mk -> diff3 -m CURRENT1 CURRENTARCH CURRENT2 > NEW \
+				|| echo Diff merge $@
 UNISON =	unison ./include ../nosh/include -batch -terse \
-				-ignore "Name *.hrl"
-#				-backupcurr "Name *" -merge "$(MERGE)"
-
+				-ignore "Name *.hrl" -ignore "Name .unison/*" \
+				-backupcurrent "Name *" -backuplocation local \
+				-backupprefix '$(B_PREFIX)' -backupsuffix '.$$VERSION.bak'
+				
 SUBMAKE		= $(MAKE) --no-print-directory _param_ \
 				IS_SUBMAKE=true PROD=$(PROD) $(SUBPASS)
 COMMAKE		= $(SUBMAKE:_param_=-f include/Common.mk $@)
