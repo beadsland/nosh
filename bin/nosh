@@ -24,14 +24,15 @@
 # -----------------------------------------------------------------------
 # CDDL HEADER END
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+CURDIR=$(dirname ${BASH_SOURCE[0]})
 
-if [ -d "$DIR/../dev" ]; \
+if [ -d "$CURDIR/../dev" ]; \
     then POSE=dose export POSE; \
     else POSE=pose export POSE; fi
 
 TTY=`tty`
 
-if [ "$TTY" == "not a tty" ];
-    then pose noterm echo | folderl;
-    else (tabs -1 >/dev/null; pose noterm | folderl); fi
+if [ "$TTY" != "not a tty" ]; 
+	then tabs -1 >/dev/null; fi
+
+$CURDIR/$POSE noterm echo | folderl; 
