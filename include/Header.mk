@@ -103,6 +103,8 @@ COMMAKE		= $(SUBMAKE:_param_=-f include/Common.mk $@)
 ifndef DEPS
 	DEPS = 		deps
 endif
+SUBPASS =	DEPS="$(DEPS)"
+
 ifndef POSEBIN
 	POSEBIN = 	$(DEPS)/pose/ebin
 endif

@@ -30,7 +30,6 @@ include include/Header.mk
 
 ifeq ($(DEV),yes)
 	DEPS	=	dev
-	SUBPASS =	DEPS="$(DEPS)"
 endif
 
 FOLD =		bin/folderl
