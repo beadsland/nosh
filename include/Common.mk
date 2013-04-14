@@ -46,7 +46,7 @@ $(POSEBIN)/pose.beam:
 docs:	$(patsubst src/%.erl, doc/%.md, $(wildcard src/*.erl)) \
 			README.md
 
-doc/%.md:	src/%.erl src/*.hrl $(DEPS)/pose/include/interface.hrl
+doc/%.md:	src/%.erl
 	@$(CROWBAR:_cmds_=doc)
 
 #
