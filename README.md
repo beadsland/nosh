@@ -11,8 +11,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">make docs for subprojects from nosh commandline
-</font>
 * <font color="red">build out 2do_go4
 </font>
 * <font color="red">superl: confirm API functions come first
@@ -25,7 +23,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">noterm bootstrap Makefile
 </font>
-* <font color="red">...plus 63 more (see TODO.edoc)
+* <font color="red">move pose/dose to pose project (from 2do_go4)
+</font>
+* <font color="red">...plus 62 more (see TODO.edoc)
 </font>
 
 

@@ -1,8 +1,8 @@
-@todo make docs for subprojects from nosh commandline
 @todo build out 2do_go4
 @todo superl: confirm API functions come first
 @todo folderl exit stdin distinct from stdout
 @todo edoc via dev (nosh)
 @todo see todo.edoc link
 @todo noterm bootstrap Makefile
-@todo ...plus 63 more (see TODO.edoc)
+@todo move pose/dose to pose project (from 2do_go4)
+@todo ...plus 62 more (see TODO.edoc)
