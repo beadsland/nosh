@@ -80,7 +80,7 @@ current:	neat make
 		then $(CROWBAR:_cmds_=update-deps compile doc); \
 		else $(CROWBAR:_cmds_=compile doc); fi
 
-clean:		neat
+clean:		neat make
 	@if [ "$(ONLINE)" == yes ]; \
 		then (rm -rf deps; $(CROWBAR:_cmds_=clean get-deps)); \
 		else ($(CROWBAR:_cmds_=clean)); fi
