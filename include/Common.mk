@@ -48,7 +48,7 @@ docs:	$(patsubst src/%.erl, doc/%.md, $(wildcard src/*.erl)) \
 
 doc/%.md:	src/%.erl src/*.hrl $(DEPS)/pose/include/interface.hrl
 	@$(CROWBAR:_cmds_=doc)
-	
+
 #
 # Temporary todo rules pending proper 2do_go4 implementation
 #
@@ -75,7 +75,7 @@ TODO.edoc:	;
 compile:	neat
 	@$(CROWBAR:_cmds_=compile doc)
 
-current:	neat
+current:	neat make
 	@if [ "$(ONLINE)" == yes ]; \
 		then $(CROWBAR:_cmds_=update-deps compile doc); \
 		else $(CROWBAR:_cmds_=compile doc); fi
