@@ -43,13 +43,13 @@ $(POSEBIN)/pose.beam:
 # Temporary todo rules pending proper 2do_go4 implementation
 #
 
-docs:		neat README.md
+docs:		README.md
 
 todo:		README.md
 	@git add -f $(TODO_FILES)
 	@git commit $(TODO_FILES) -m "updated todo"
 
-README.md:	neat doc/TODO_head.edoc
+README.md:	doc/TODO_head.edoc
 	@$(CROWBAR:_cmds_=doc)
 
 doc/TODO_head.edoc:		TODO.edoc
@@ -67,22 +67,18 @@ TODO.edoc:	;
 compile:	neat
 	@$(CROWBAR:_cmds_=compile doc)
 
-neat:
-	@rm -f *.dump doc/*.md doc/*.html README.md
-
-#
-# Rules for managing dependencies
-#
-
-current:
+current:	neat
 	@if [ "$(ONLINE)" == yes ]; \
 		then $(CROWBAR:_cmds_=update-deps compile doc); \
 		else $(CROWBAR:_cmds_=compile doc); fi
 
-clean:	neat
+clean:		neat
 	@if [ "$(ONLINE)" == yes ]; \
 		then (rm -rf deps; $(CROWBAR:_cmds_=clean get-deps)); \
 		else ($(CROWBAR:_cmds_=clean)); fi
+
+neat:
+	@rm -f *.dump
 
 #
 # Rules for managing revisions and synchronized common files
