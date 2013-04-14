@@ -43,8 +43,8 @@ $(POSEBIN)/pose.beam:
 # Rules to regenerate documentation
 #
 
-docs:	$(patsubst src/%.erl, doc/%.md, $(wildcard src/*.erl)) \
-			README.md
+docs:	README.md \
+			$(patsubst src/%.erl, doc/%.md, $(wildcard src/*.erl))
 
 doc/%.md:	src/%.erl
 	@$(CROWBAR:_cmds_=doc)
