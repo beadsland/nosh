@@ -13,6 +13,8 @@ __<font color="red">To do</font>__
 <br></br>
 * <font color="red">share Makefile/mk to other projects
 </font>
+* <font color="red">autocheckin docs
+</font>
 * <font color="red">2do_go4: seed
 </font>
 * <font color="red">2do_go4: refresh makefile
@@ -23,9 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">2do_go4: transcribe / output
 </font>
-* <font color="red">2do_go4: transclude resources by fragment
-</font>
-* <font color="red">...plus 80 more (see TODO.edoc)
+* <font color="red">...plus 81 more (see TODO.edoc)
 </font>
 
 

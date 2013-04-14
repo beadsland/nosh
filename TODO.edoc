@@ -1,4 +1,5 @@
 @todo share Makefile/mk to other projects
+@todo autocheckin docs
 @todo 2do_go4: seed
 @todo 2do_go4: refresh makefile
 @todo 2do_go4: transclude stdin
