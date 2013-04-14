@@ -1,8 +1,8 @@
-@todo 2do_go4: seed
-@todo 2do_go4: refresh makefile
-@todo 2do_go4: transclude stdin
-@todo 2do_go4: handle ampersands without complaint
-@todo 2do_go4: transcribe / output
-@todo 2do_go4: transclude resources by fragment
-@todo 2do_go4: ignore comment lines
-@todo ...plus 79 more (see TODO.edoc)
+@todo make todo for subprojects
+@todo make docs for subprojects from nosh commandline
+@todo build out 2do_go4
+@todo superl: confirm API functions come first
+@todo folderl exit stdin distinct from stdout
+@todo edoc via dev (nosh)
+@todo see todo.edoc link
+@todo ...plus 64 more (see TODO.edoc)

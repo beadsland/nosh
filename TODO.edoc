@@ -1,26 +1,11 @@
-@todo 2do_go4: seed
-@todo 2do_go4: refresh makefile
-@todo 2do_go4: transclude stdin
-@todo 2do_go4: handle ampersands without complaint
-@todo 2do_go4: transcribe / output
-@todo 2do_go4: transclude resources by fragment
-@todo 2do_go4: ignore comment lines
-@todo 2do_go4: ignore blank lines
-@todo 2do_go4: no brackets when no fragments
-@todo 2do_go4: headers for fragments
-@todo 2do_go4: macros (deps vs. dev)
-@todo 2do_go4: incorporate w/ nosh Makefile
-@todo 2do_go4: track and avoid lines already included
-@todo 2do_go4: include todos from modules
-@todo 2do_go4: include todos from functions
-@todo make doc for subprojects from nosh commandline
+@todo make todo for subprojects
+@todo make docs for subprojects from nosh commandline
+@todo build out 2do_go4
 @todo superl: confirm API functions come first
 @todo folderl exit stdin distinct from stdout
 @todo edoc via dev (nosh)
 @todo see todo.edoc link
-@todo recursive todo update
 @todo noterm bootstrap Makefile
-@todo interlinked todos
 @todo move pose/dose to pose project (from 2do_go4)
 @todo move pose/dose to pose project (from noterm)
 @todo move pose/dose to pose project (from nosh)

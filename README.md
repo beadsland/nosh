@@ -11,21 +11,21 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">2do_go4: seed
+* <font color="red">make todo for subprojects
 </font>
-* <font color="red">2do_go4: refresh makefile
+* <font color="red">make docs for subprojects from nosh commandline
 </font>
-* <font color="red">2do_go4: transclude stdin
+* <font color="red">build out 2do_go4
 </font>
-* <font color="red">2do_go4: handle ampersands without complaint
+* <font color="red">superl: confirm API functions come first
 </font>
-* <font color="red">2do_go4: transcribe / output
+* <font color="red">folderl exit stdin distinct from stdout
 </font>
-* <font color="red">2do_go4: transclude resources by fragment
+* <font color="red">edoc via dev (nosh)
 </font>
-* <font color="red">2do_go4: ignore comment lines
+* <font color="red">see todo.edoc link
 </font>
-* <font color="red">...plus 79 more (see TODO.edoc)
+* <font color="red">...plus 64 more (see TODO.edoc)
 </font>
 
 
