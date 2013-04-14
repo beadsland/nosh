@@ -28,7 +28,7 @@ include include/Header.mk
 # All good rules
 #
 
-.PHONY:	all good todo docs compile neat current clean push make
+.PHONY:	all good todo docs compile current neat clean push make
 
 all:		push compile good
 
@@ -40,16 +40,24 @@ $(POSEBIN)/pose.beam:
 	$(error Must compile pose to do good)
 
 #
+# Rules to regenerate documentation
+#
+
+docs:	$(patsubst src/%.erl, doc/%.md, $(wildcard src/*.erl)) \
+			README.md
+
+doc/%.md:	src/%.erl src/*.hrl $(DEPS)/pose/include/interface.hrl
+	@$(CROWBAR:_cmds_=doc)
+	
+#
 # Temporary todo rules pending proper 2do_go4 implementation
 #
 
-docs:		README.md
-
-todo:		README.md
+todo:	README.md
 	@git add -f $(TODO_FILES)
 	@git commit $(TODO_FILES) -m "updated todo"
 
-README.md:	doc/TODO_head.edoc
+README.md:	doc/TODO_head.edoc doc/overview.edoc src/overview.hrl
 	@$(CROWBAR:_cmds_=doc)
 
 doc/TODO_head.edoc:		TODO.edoc
