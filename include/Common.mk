@@ -55,7 +55,8 @@ doc/%.md:	src/%.erl src/*.hrl $(DEPS)/pose/include/interface.hrl
 
 todo:	README.md
 	@git add -f $(TODO_FILES)
-	@git commit $(TODO_FILES) -m "updated todo"
+	@if ! git diff-index --cached --quiet HEAD; \
+		then (git commit $(TODO_FILES) -m "updated todo"); fi
 
 README.md:	doc/TODO_head.edoc doc/overview.edoc src/overview.hrl
 	@$(CROWBAR:_cmds_=doc)

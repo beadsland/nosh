@@ -42,9 +42,19 @@ PUSHMAKE	= if [ -e $@/include/Common.mk ]; \
 # Custom rules
 #
 
-.PHONY:	all install current clean push force todo
+.PHONY:	all todo install current clean push force
 
 all:	push compile good
+
+todo:	dev/*/TODO.edoc
+	@$(COMMAKE)
+
+dev/%/TODO.edoc:	force
+	@cd dev/$*; $(SUBMAKE:_param_=-f include/Common.mk todo)
+
+#
+# Rules for compiling 
+#
 
 install:
 	@if [ "$(ONLINE)" == yes ]; \
@@ -58,6 +68,10 @@ clean:		push
 	@if [ "$(DEV)" == yes ]; \
 		then (rm dev/*; rmdir dev; bin/mkdev); fi
 	@$(COMMAKE)
+
+#
+# Rules for managing revisions and synchronized common files
+#
 
 push:		$(wildcard dev/*/.git)
 	@$(COMMAKE)
@@ -78,9 +92,6 @@ force:		;
 # Run non-overridden common rules.
 #
 
-todo:
-	@$(COMMAKE)
-	
 %::
 	@echo No custom target found
 	@$(COMMAKE)
