@@ -11,10 +11,6 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">address edoc latency issue
-</font>
-* <font color="red">autocheckin docs
-</font>
 * <font color="red">2do_go4: seed
 </font>
 * <font color="red">2do_go4: refresh makefile
@@ -25,7 +21,11 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">2do_go4: transcribe / output
 </font>
-* <font color="red">...plus 81 more (see TODO.edoc)
+* <font color="red">2do_go4: transclude resources by fragment
+</font>
+* <font color="red">2do_go4: ignore comment lines
+</font>
+* <font color="red">...plus 79 more (see TODO.edoc)
 </font>
 
 
