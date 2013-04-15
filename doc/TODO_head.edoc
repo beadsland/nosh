@@ -1,8 +1,8 @@
-@todo 2do_go4:  basic pose command
-@todo refactor wescript script
-@todo refactor pose script
-@todo refactor folderl script
-@todo confirm dose still works
-@todo confirm nosh still works
-@todo confirm dogo still works
-@todo ...plus 66 more (see TODO.edoc)
+@todo build out 2do_go4
+@todo superl: confirm API functions come first
+@todo folderl exit stdin distinct from stdout
+@todo edoc via dev (nosh)
+@todo see todo.edoc link
+@todo noterm bootstrap Makefile
+@todo debug broken get_until functionality
+@todo ...plus 59 more (see TODO.edoc)
