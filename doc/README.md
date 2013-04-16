@@ -11,7 +11,7 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">command parameters (e.g., echo) stopped working
+* <font color="red">echo hello works on pose but not on nosh
 </font>
 * <font color="red">support for stdin,pid,captln
 </font>
