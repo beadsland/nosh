@@ -77,7 +77,7 @@
 %% Include files
 %%
 
-%-define(debug, true).
+-define(debug, true).
 -include_lib("pose/include/interface.hrl").
 
 -include("macro.hrl").
@@ -198,12 +198,14 @@ do_output(IO, Command, CmdPid, MsgTag, Output) ->
 %% @todo refactor `hot' and `good' as library commands
 %% @todo refactor bang commands as direct invocations
 do_line(IO, Cmd, CmdPid, Line) ->
+  ?DEBUG("Do line: ~s", [Line]),
   if IO#std.echo -> ?STDOUT(Line); true -> false end,
   case Line of
     "stop\n" -> exit(ok);
     [$! | BangCmd]  ->
       do_loadrun(IO, Cmd, CmdPid, "bang " ++ BangCmd);
     _Line ->
+	  % bypass loadrun while doing parser testing
       case re:run(Line, "\ ", [{capture, none}]) of
         match   -> do_parse(IO, Line);
         nomatch -> do_loadrun(IO, Cmd, CmdPid, Line)
@@ -226,9 +228,9 @@ do_loadrun(IO, Cmd, CmdPid, Line) ->
       ?MODULE:loop(IO, Cmd, CmdPid)
   end.
 
-
 % Parse command line.
 do_parse(IO, Line) ->
+  ?DEBUG("Parse line: ~s", [Line]),
   Command = string:strip(Line, right, $\n),
   ParsePid = spawn_link(nosh, command_run, [?IO(self()), Line]),
   ?MODULE:loop(IO, Command, ParsePid).
@@ -267,5 +269,6 @@ command_return(IO, Command, Status) ->
 
 % spawned as a process
 command_run(IO, Line) ->
+  ?DEBUG("Run command: ~s~n", [Line]),
   Parse = nosh_parse:parse(IO, Line),
-  exit(Parse).
+  exit({some, Parse}).

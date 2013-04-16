@@ -10,9 +10,9 @@
 The `nosh` process module, which handles messaging with a paired
 `noterm` process.
 
-Copyright (c) 2012 Beads D. Land-Trujillo
+Copyright (c) 2012,2013 Beads D. Land-Trujillo
 
-__Version:__ 0.1.15
+__Version:__ 0.1.16
 
 __Behaviours:__ [`gen_command`](gen_command.md).
 

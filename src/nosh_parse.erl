@@ -323,8 +323,8 @@ parse(IO, Subject) ->
   Pred = fun(T) -> case T of [] -> false; _Else -> true end end,
   CleanSplit = lists:filter(Pred, Split),
 
+  ?DEBUG("Clean Split on: ~p~n", [CleanSplit]),
   try_symbols(CleanSplit).
-
 
 %% @doc Parse list of strings split on quoting and grouping characters,
 %% according to current Stack type.  Return tuple of context tree, context
