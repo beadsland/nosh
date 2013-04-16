@@ -1,4 +1,3 @@
-@todo convert stdin,pid,eof to stdout,pid,eof
 @todo support for stdin,pid,captln
 @todo build out 2do_go4
 @todo superl: confirm API functions come first
