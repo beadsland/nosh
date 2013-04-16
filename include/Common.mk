@@ -62,9 +62,8 @@ README.md:	doc/TODO_head.edoc doc/overview.edoc src/overview.hrl
 	@$(CROWBAR:_cmds_=doc)
 
 doc/TODO_head.edoc:		TODO.edoc
-	@if [ $(TODO_MORE) -gt 0 ]; \
-		then (head -7 TODO.edoc; \
-			  echo "@todo ...plus $(TODO_MORE) more (see TODO.edoc)"); fi \
+	@(head -7 TODO.edoc; if [ $(TODO_MORE) -gt 0 ]; \
+			then echo "@todo ...plus $(TODO_MORE) more (see TODO.edoc)"; fi) \
 		> doc/TODO_head.edoc
 
 TODO.edoc:	;
