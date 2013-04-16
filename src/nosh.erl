@@ -55,9 +55,9 @@
 %% (`.') by itself on a line, followed by a `<newline>'.
 %% @end
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
-%% @copyright 2012 Beads D. Land-Trujillo
+%% @copyright 2012,2013 Beads D. Land-Trujillo
 
-%% @version 0.1.15
+%% @version 0.1.16
 
 -define(module, nosh).
 
@@ -71,7 +71,7 @@
 -endif.
 % END POSE PACKAGE PATTERN
 
--version("0.1.15").
+-version("0.1.16").
 
 %%
 %% Include files
@@ -128,7 +128,7 @@ run(IO, ARG, ENV) -> gen_command:run(IO, ARG, ENV, ?MODULE).
 %% @private Callback entry point for gen_command behaviour.
 do_run(IO, _ARG) ->
   receive
-    {stdin, Stdin, eof} when Stdin == IO#std.in ->
+    {stdout, Stdin, eof} when Stdin == IO#std.in ->
     ?STDOUT("nosh: recursive invocation disabled\n"), exit(ok)
   after 100 -> true
   end,
@@ -166,10 +166,10 @@ do_captln(IO, Cmd, CmdPid, ReadPid) ->
       ?MODULE:do_captln(IO, Cmd, CmdPid, ReadPid);
 	{'EXIT', Stdin, Reason} 
 	  					when Stdin == IO#std.in	->
-	  ReadPid ! {stdin, self(), eof},
+	  ReadPid ! {stdout, self(), eof},
 	  do_exit(IO, Cmd, CmdPid, Stdin, Reason);
 	{'EXIT', CmdPid, Reason}					->
-	  ReadPid ! {stdin, self(), eof},
+	  ReadPid ! {stdout, self(), eof},
 	  do_exit(IO, Cmd, CmdPid, CmdPid, Reason)
   end.
 
@@ -217,7 +217,7 @@ do_loadrun(IO, Cmd, CmdPid, Line) ->
   case [list_to_atom(X) || X <- string:tokens(Line, " \n")] of
     [RunCmd | Words]   ->
       RunPid = spawn_link(pose, exec, [?IO(self()), ?ARG(RunCmd, Words)]),
-      RunPid ! {stdin, self(), eof},
+      RunPid ! {stdout, self(), eof},
       ?DEBUG("Running ~p as ~p~n", [RunCmd, RunPid]),
       ?MODULE:loop(IO, RunCmd, RunPid);
     _Else               ->
