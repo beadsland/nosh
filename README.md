@@ -11,6 +11,8 @@ __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`
 
 __<font color="red">To do</font>__
 <br></br>
+* <font color="red">command parameters (e.g., echo) stopped working
+</font>
 * <font color="red">support for stdin,pid,captln
 </font>
 * <font color="red">build out 2do_go4
@@ -23,9 +25,7 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">see todo.edoc link
 </font>
-* <font color="red">noterm bootstrap Makefile
-</font>
-* <font color="red">...plus 60 more (see TODO.edoc)
+* <font color="red">...plus 61 more (see TODO.edoc)
 </font>
 
 
