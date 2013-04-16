@@ -103,7 +103,7 @@
 -export([do_run/2]).
 
 % private exports
--export([loop/3,command_run/2]).
+-export([loop/3,command_run/2,do_captln/4]).
 
 %%
 %% API Functions
@@ -149,6 +149,8 @@ loop(IO, Cmd, CmdPid) ->
       ?MODULE:loop(IO, Cmd, CmdPid);
     {'EXIT', ExitPid, Reason}					->
       do_exit(IO, Cmd, CmdPid, ExitPid, Reason);
+%	{captln, ReadPid}							->
+%		do_captln(IO, Cmd, CmdPid, ReadPid);
     {stdout, Stdin, Line} when CmdPid == self(),
                             Stdin == IO#std.in  ->
       do_line(IO, Cmd, CmdPid, Line);
@@ -157,6 +159,29 @@ loop(IO, Cmd, CmdPid) ->
     Noise when CmdPid == self() 				->
       do_noise(IO, Cmd, CmdPid, Noise)
   end.
+
+do_captln(IO, Cmd, CmdPid, ReadPid) ->
+  receive
+	{purging, _Pid, _Mod}						-> % chase your tail
+      ?MODULE:do_captln(IO, Cmd, CmdPid, ReadPid);
+	{'EXIT', Stdin, Reason} 
+	  					when Stdin == IO#std.in	->
+	  ReadPid ! {stdin, self(), eof},
+	  do_exit(IO, Cmd, CmdPid, Stdin, Reason);
+	{'EXIT', CmdPid, Reason}					->
+	  ReadPid ! {stdin, self(), eof},
+	  do_exit(IO, Cmd, CmdPid, CmdPid, Reason)
+  end.
+
+%  if ExitPid == IO#std.in ->
+%       ?DEBUG("Stopping shell on terminal exit: ~p~n", [Reason]),
+%       exit(ok);
+%     ExitPid == CmdPid	->
+%       ?DEBUG("Saw ~s exit: ~p~n", [Command, ExitPid]),
+%       command_return(IO, Command, Reason),
+%       ?PROMPT,
+%       ?MODULE:loop(IO, ?MODULE, self());	  
+	  
 
 % Handle messages from executing command.
 do_output(IO, Command, CmdPid, MsgTag, Output) ->
