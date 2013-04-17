@@ -144,15 +144,17 @@ do_run(IO, _ARG) ->
 
 %%@private Export to allow for hotswap.
 loop(IO, Cmd, CmdPid) ->
+  Stdin = IO#std.in,
   receive
     {purging, _Pid, _Mod} 						-> % chase your tail
       ?MODULE:loop(IO, Cmd, CmdPid);
     {'EXIT', ExitPid, Reason}					->
       do_exit(IO, Cmd, CmdPid, ExitPid, Reason);
 	{stdin, ReadPid, captln}					->
-	  captln_loop(IO, Cmd, CmdPid, ReadPid);
-    {stdout, Stdin, Line} when CmdPid == self(),
-                            Stdin == IO#std.in  ->
+	  ?MODULE:captln_loop(IO, Cmd, CmdPid, ReadPid);
+	{stdout, Stdin, ".\n"} when IO#std.stop		->
+	  do_line(IO, Cmd, CmdPid, "stop\n");
+    {stdout, Stdin, Line} when CmdPid == self() ->
       do_line(IO, Cmd, CmdPid, Line);
     {MsgTag, CmdPid, Payload} 					->
       do_output(IO, Cmd, CmdPid, MsgTag, Payload);
@@ -160,6 +162,7 @@ loop(IO, Cmd, CmdPid) ->
       do_noise(IO, Cmd, CmdPid, Noise)
   end.
 
+%%@private Export to allow for hotswap.
 captln_loop(IO, Cmd, CmdPid, ReadPid) ->
   ?DEBUG("Captln loop\n"),
   receive
