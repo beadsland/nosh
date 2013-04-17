@@ -55,9 +55,9 @@
 %% (`.') by itself on a line, followed by a `<newline>'.
 %% @end
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
-%% @copyright 2012,2013 Beads D. Land-Trujillo
+%% @copyright 2012, 2013 Beads D. Land-Trujillo
 
-%% @version 0.1.16
+%% @version 0.1.17
 
 -define(module, nosh).
 
@@ -71,7 +71,7 @@
 -endif.
 % END POSE PACKAGE PATTERN
 
--version("0.1.16").
+-version("0.1.17").
 
 %%
 %% Include files
@@ -103,7 +103,7 @@
 -export([do_run/2]).
 
 % private exports
--export([loop/3,command_run/2,do_captln/4]).
+-export([loop/3, captln_loop/4, command_run/2]).
 
 %%
 %% API Functions
@@ -149,8 +149,8 @@ loop(IO, Cmd, CmdPid) ->
       ?MODULE:loop(IO, Cmd, CmdPid);
     {'EXIT', ExitPid, Reason}					->
       do_exit(IO, Cmd, CmdPid, ExitPid, Reason);
-%	{captln, ReadPid}							->
-%		do_captln(IO, Cmd, CmdPid, ReadPid);
+	{stdin, ReadPid, captln}					->
+	  captln_loop(IO, Cmd, CmdPid, ReadPid);
     {stdout, Stdin, Line} when CmdPid == self(),
                             Stdin == IO#std.in  ->
       do_line(IO, Cmd, CmdPid, Line);
@@ -160,7 +160,8 @@ loop(IO, Cmd, CmdPid) ->
       do_noise(IO, Cmd, CmdPid, Noise)
   end.
 
-do_captln(IO, Cmd, CmdPid, ReadPid) ->
+captln_loop(IO, Cmd, CmdPid, ReadPid) ->
+  ?DEBUG("Captln loop\n"),
   receive
 	{purging, _Pid, _Mod}						-> % chase your tail
       ?MODULE:do_captln(IO, Cmd, CmdPid, ReadPid);
@@ -170,19 +171,13 @@ do_captln(IO, Cmd, CmdPid, ReadPid) ->
 	  do_exit(IO, Cmd, CmdPid, Stdin, Reason);
 	{'EXIT', CmdPid, Reason}					->
 	  ReadPid ! {stdout, self(), eof},
-	  do_exit(IO, Cmd, CmdPid, CmdPid, Reason)
+	  do_exit(IO, Cmd, CmdPid, CmdPid, Reason);
+    {stdout, Stdin, Line} when Stdin == IO#std.in  
+	  											->
+	  ReadPid ! {stdout, self(), Line},
+      loop(IO, Cmd, CmdPid)
   end.
-
-%  if ExitPid == IO#std.in ->
-%       ?DEBUG("Stopping shell on terminal exit: ~p~n", [Reason]),
-%       exit(ok);
-%     ExitPid == CmdPid	->
-%       ?DEBUG("Saw ~s exit: ~p~n", [Command, ExitPid]),
-%       command_return(IO, Command, Reason),
-%       ?PROMPT,
-%       ?MODULE:loop(IO, ?MODULE, self());	  
-	  
-
+  
 % Handle messages from executing command.
 do_output(IO, Command, CmdPid, MsgTag, Output) ->
   case MsgTag of
@@ -198,7 +193,6 @@ do_output(IO, Command, CmdPid, MsgTag, Output) ->
 %% @todo refactor `hot' and `good' as library commands
 %% @todo refactor bang commands as direct invocations
 do_line(IO, Cmd, CmdPid, Line) ->
-  ?DEBUG("Do line: ~s", [Line]),
   if IO#std.echo -> ?STDOUT(Line); true -> false end,
   case Line of
     "stop\n" -> exit(ok);
@@ -219,7 +213,7 @@ do_loadrun(IO, Cmd, CmdPid, Line) ->
   case [list_to_atom(X) || X <- string:tokens(Line, " \n")] of
     [RunCmd | Words]   ->
       RunPid = spawn_link(pose, exec, [?IO(self()), ?ARG(RunCmd, Words)]),
-      RunPid ! {stdout, self(), eof},
+%      RunPid ! {stdout, self(), eof},	% captln makes this unnecessary
       ?DEBUG("Running ~p as ~p~n", [RunCmd, RunPid]),
       ?MODULE:loop(IO, RunCmd, RunPid);
     _Else               ->
@@ -230,7 +224,6 @@ do_loadrun(IO, Cmd, CmdPid, Line) ->
 
 % Parse command line.
 do_parse(IO, Line) ->
-  ?DEBUG("Parse line: ~s", [Line]),
   Command = string:strip(Line, right, $\n),
   ParsePid = spawn_link(nosh, command_run, [?IO(self()), Line]),
   ?MODULE:loop(IO, Command, ParsePid).
