@@ -57,7 +57,7 @@
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
 %% @copyright 2012, 2013 Beads D. Land-Trujillo
 
-%% @version 0.1.17
+%% @version 0.1.18
 
 -define(module, nosh).
 
@@ -71,7 +71,7 @@
 -endif.
 % END POSE PACKAGE PATTERN
 
--version("0.1.17").
+-version("0.1.18").
 
 %%
 %% Include files
@@ -215,7 +215,7 @@ do_loadrun(IO, Cmd, CmdPid, Line) ->
   ?DEBUG("Hack run attempt: ~s", [Line]),
   case [list_to_atom(X) || X <- string:tokens(Line, " \n")] of
     [RunCmd | Words]   ->
-      RunPid = spawn_link(pose, exec, [?IO(self()), ?ARG(RunCmd, Words)]),
+      RunPid = spawn_link(pose, exec, [?IO(self(), IO#std.stop), ?ARG(RunCmd, Words)]),
 %      RunPid ! {stdout, self(), eof},	% captln makes this unnecessary
       ?DEBUG("Running ~p as ~p~n", [RunCmd, RunPid]),
       ?MODULE:loop(IO, RunCmd, RunPid);
@@ -228,7 +228,7 @@ do_loadrun(IO, Cmd, CmdPid, Line) ->
 % Parse command line.
 do_parse(IO, Line) ->
   Command = string:strip(Line, right, $\n),
-  ParsePid = spawn_link(nosh, command_run, [?IO(self()), Line]),
+  ParsePid = spawn_link(nosh, command_run, [?IO(self(), IO#std.stop), Line]),
   ?MODULE:loop(IO, Command, ParsePid).
 
 % Handle termination of processes.

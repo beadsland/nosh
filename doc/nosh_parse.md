@@ -486,7 +486,7 @@ according to current Stack type.</td></tr></table>
 ###parse/2##
 
 
-	parse(IO::#std{in = pid(), out = pid(), err = pid(), echo = boolean()}, Subject::nonempty_string()) -> {ok, <a href="#type-context_list">context_list()</a>} | {error, <a href="#type-parse_error">parse_error()</a>}
+	parse(IO::#std{in = pid(), out = pid(), err = pid(), stop = boolean(), echo = boolean()}, Subject::nonempty_string()) -> {ok, <a href="#type-context_list">context_list()</a>} | {error, <a href="#type-parse_error">parse_error()</a>}
 <br></br>
 
 

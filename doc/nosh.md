@@ -10,9 +10,9 @@
 The `nosh` process module, which handles messaging with a paired
 `noterm` process.
 
-Copyright (c) 2012,2013 Beads D. Land-Trujillo
+Copyright (c) 2012, 2013 Beads D. Land-Trujillo
 
-__Version:__ 0.1.16
+__Version:__ 0.1.17
 
 __Behaviours:__ [`gen_command`](gen_command.md).
 
@@ -97,7 +97,7 @@ message from `noterm`.  This is currently produced by typing a period
 ##Function Index##
 
 
-<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#command_run-2">command_run/2</a></td><td></td></tr><tr><td valign="top"><a href="#do_captln-4">do_captln/4</a></td><td></td></tr><tr><td valign="top"><a href="#run-3">run/3</a></td><td></td></tr><tr><td valign="top"><a href="#start-0">start/0</a></td><td>Equivalent to <a href="#start-1"><tt>start([])</tt></a>.</td></tr><tr><td valign="top"><a href="#start-1">start/1</a></td><td>Start as a blocking function.</td></tr></table>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#command_run-2">command_run/2</a></td><td></td></tr><tr><td valign="top"><a href="#run-3">run/3</a></td><td></td></tr><tr><td valign="top"><a href="#start-0">start/0</a></td><td>Equivalent to <a href="#start-1"><tt>start([])</tt></a>.</td></tr><tr><td valign="top"><a href="#start-1">start/1</a></td><td>Start as a blocking function.</td></tr></table>
 
 
 <a name="functions"></a>
@@ -111,19 +111,12 @@ message from `noterm`.  This is currently produced by typing a period
 
 `command_run(IO, Line) -> any()`
 
-<a name="do_captln-4"></a>
-
-###do_captln/4##
-
-
-`do_captln(IO, Cmd, CmdPid, ReadPid) -> any()`
-
 <a name="run-3"></a>
 
 ###run/3##
 
 
-	run(IO::#std{in = pid(), out = pid(), err = pid(), echo = boolean()}, ARG::#arg{cmd = atom(), v = list()}, ENV::#env{plist = [<a href="#type-env_prop">env_prop()</a>]}) -> no_return()
+	run(IO::#std{in = pid(), out = pid(), err = pid(), stop = boolean(), echo = boolean()}, ARG::#arg{cmd = atom(), v = list()}, ENV::#env{plist = [<a href="#type-env_prop">env_prop()</a>]}) -> no_return()
 <br></br>
 
 
