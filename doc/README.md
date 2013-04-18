@@ -3,11 +3,17 @@
 #Welcome to nosh#
 
 
-Copyright (c) 2012 Beads D. Land-Trujillo
+Copyright (c) 2013 Beads D. Land-Trujillo
 
-__Version:__ 0.1.0
+__Version:__ 0.1.1
 
 __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).
+
+__References__* This project and its sub-projects require
+[Erlang/OTP R15B01](http://www.erlang.org/download_release/14).
+The `nosh` architecture depends on the experimental `package` feature,
+which was removed in Erlang/OTP R16.
+
 
 __<font color="red">To do</font>__
 <br></br>
@@ -30,7 +36,9 @@ __<font color="red">To do</font>__
 
 
 `nosh` is a Bourne shell emulator, Erl shell alternative, and
-  noSQL file system,  implemented in Erlang.  Providing an intuitive
+  noSQL file system,  implemented in
+[Erlang/OTP R15B01](http://www.erlang.org/download_release/14).
+  Providing an intuitive
   commandline interface for compiling and loading Erlang modules, and for
   executing Erlang module functions, `nosh` affords both the ease of a
 UNIX shell and the power of an Erlang interpreter.
