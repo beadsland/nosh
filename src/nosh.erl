@@ -128,8 +128,8 @@ run(IO, ARG, ENV) -> gen_command:run(IO, ARG, ENV, ?MODULE).
 %% @private Callback entry point for gen_command behaviour.
 do_run(IO, _ARG) ->
   receive
-    {stdout, Stdin, eof} when Stdin == IO#std.in ->
-    ?STDOUT("nosh: recursive invocation disabled\n"), exit(ok)
+    {stdout, Stdin, eof} when Stdin == IO#std.in 	->
+      ?STDOUT("nosh: recursive invocation disabled\n"), exit(ok)
   after 100 -> true
   end,
   ?STDOUT("Starting Nosh ~s nosql shell ~p~n", [?VERSION(?MODULE), self()]),
@@ -146,19 +146,19 @@ do_run(IO, _ARG) ->
 loop(IO, Cmd, CmdPid) ->
   Stdin = IO#std.in,
   receive
-    {purging, _Pid, _Mod} 						-> % chase your tail
+    {purging, _Pid, _Mod}             			-> % chase your tail
       ?MODULE:loop(IO, Cmd, CmdPid);
-    {'EXIT', ExitPid, Reason}					->
+    {'EXIT', ExitPid, Reason}         			->
       do_exit(IO, Cmd, CmdPid, ExitPid, Reason);
-	{stdin, ReadPid, captln}					->
-	  ?MODULE:captln_loop(IO, Cmd, CmdPid, ReadPid);
-	{stdout, Stdin, ".\n"} when IO#std.stop		->
-	  do_line(IO, Cmd, CmdPid, "stop\n");
+    {stdin, ReadPid, captln}          			->
+      ?MODULE:captln_loop(IO, Cmd, CmdPid, ReadPid);
+    {stdout, Stdin, ".\n"} when IO#std.stop  	->
+      do_line(IO, Cmd, CmdPid, "stop\n");
     {stdout, Stdin, Line} when CmdPid == self() ->
       do_line(IO, Cmd, CmdPid, Line);
-    {MsgTag, CmdPid, Payload} 					->
+    {MsgTag, CmdPid, Payload}           		->
       do_output(IO, Cmd, CmdPid, MsgTag, Payload);
-    Noise when CmdPid == self() 				->
+    Noise when CmdPid == self()         		->
       do_noise(IO, Cmd, CmdPid, Noise)
   end.
 
@@ -166,29 +166,27 @@ loop(IO, Cmd, CmdPid) ->
 captln_loop(IO, Cmd, CmdPid, ReadPid) ->
   ?DEBUG("Captln loop\n"),
   receive
-	{purging, _Pid, _Mod}						-> % chase your tail
+    {purging, _Pid, _Mod}            				-> % chase your tail
       ?MODULE:do_captln(IO, Cmd, CmdPid, ReadPid);
-	{'EXIT', Stdin, Reason} 
-	  					when Stdin == IO#std.in	->
-	  ReadPid ! {stdout, self(), eof},
-	  do_exit(IO, Cmd, CmdPid, Stdin, Reason);
-	{'EXIT', CmdPid, Reason}					->
-	  ReadPid ! {stdout, self(), eof},
-	  do_exit(IO, Cmd, CmdPid, CmdPid, Reason);
-    {stdout, Stdin, Line} when Stdin == IO#std.in  
-	  											->
-	  ReadPid ! {stdout, self(), Line},
+    {'EXIT', Stdin, Reason} when Stdin == IO#std.in ->
+      ReadPid ! {stdout, self(), eof},
+      do_exit(IO, Cmd, CmdPid, Stdin, Reason);
+    {'EXIT', CmdPid, Reason}          				->
+      ReadPid ! {stdout, self(), eof},
+      do_exit(IO, Cmd, CmdPid, CmdPid, Reason);
+    {stdout, Stdin, Line} when Stdin == IO#std.in	->
+      ReadPid ! {stdout, self(), Line},
       loop(IO, Cmd, CmdPid)
   end.
-  
+
 % Handle messages from executing command.
 do_output(IO, Command, CmdPid, MsgTag, Output) ->
   case MsgTag of
-    erlout	-> ?STDOUT("~s: ~p~n", [Command, Output]);
-    erlerr	-> ?STDERR("~s: ~s~n", [Command, ?FORMAT_ERLERR(Output)]);
-    stdout	-> ?STDOUT(Output);
-    stderr 	-> ?STDERR(Output);
-    debug 	-> IO#std.err ! {debug, self(), Output}
+    erlout  -> ?STDOUT("~s: ~p~n", [Command, Output]);
+    erlerr  -> ?STDERR("~s: ~s~n", [Command, ?FORMAT_ERLERR(Output)]);
+    stdout  -> ?STDOUT(Output);
+    stderr   -> ?STDERR(Output);
+    debug   -> IO#std.err ! {debug, self(), Output}
   end,
   ?MODULE:loop(IO, Command, CmdPid).
 
@@ -202,7 +200,7 @@ do_line(IO, Cmd, CmdPid, Line) ->
     [$! | BangCmd]  ->
       do_loadrun(IO, Cmd, CmdPid, "bang " ++ BangCmd);
     _Line ->
-	  % bypass loadrun while doing parser testing
+    % bypass loadrun while doing parser testing
       case re:run(Line, "\ ", [{capture, none}]) of
         match   -> do_parse(IO, Line);
         nomatch -> do_loadrun(IO, Cmd, CmdPid, Line)
@@ -215,8 +213,9 @@ do_loadrun(IO, Cmd, CmdPid, Line) ->
   ?DEBUG("Hack run attempt: ~s", [Line]),
   case [list_to_atom(X) || X <- string:tokens(Line, " \n")] of
     [RunCmd | Words]   ->
-      RunPid = spawn_link(pose, exec, [?IO(self(), IO#std.stop), ?ARG(RunCmd, Words)]),
-%      RunPid ! {stdout, self(), eof},	% captln makes this unnecessary
+      Params = [?IO(self(), IO#std.stop), ?ARG(RunCmd, Words)],
+      RunPid = spawn_link(pose, exec, Params),
+%      RunPid ! {stdout, self(), eof},  % captln makes this unnecessary
       ?DEBUG("Running ~p as ~p~n", [RunCmd, RunPid]),
       ?MODULE:loop(IO, RunCmd, RunPid);
     _Else               ->
@@ -236,15 +235,15 @@ do_exit(IO, Command, CmdPid, ExitPid, Reason) ->
   if ExitPid == IO#std.in ->
        ?DEBUG("Stopping shell on terminal exit: ~p~n", [Reason]),
        exit(ok);
-     ExitPid == CmdPid	->
+     ExitPid == CmdPid  ->
        ?DEBUG("Saw ~s exit: ~p~n", [Command, ExitPid]),
        command_return(IO, Command, Reason),
        ?PROMPT,
        ?MODULE:loop(IO, ?MODULE, self());
-     Reason == normal 	->
+     Reason == normal   ->
        ?DEBUG("Saw process exit: ~p~n", [ExitPid]),
        ?MODULE:loop(IO, Command, CmdPid);
-     true 				->
+     true         ->
        ?STDERR("Exit ~p: ~p ~p~n", [ExitPid, Reason, self()]),
        exit({exit, {ExitPid, Reason}})
   end.
