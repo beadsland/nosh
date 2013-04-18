@@ -23,7 +23,9 @@
 %% CDDL HEADER END
 
 %% @doc `nosh' is a Bourne shell emulator, Erl shell alternative, and
-%% noSQL file system,  implemented in Erlang.  Providing an intuitive
+%% noSQL file system,  implemented in 
+%% <a href="http://www.erlang.org/download_release/14">Erlang/OTP R15B01</a>.  
+%% Providing an intuitive
 %% commandline interface for compiling and loading Erlang modules, and for
 %% executing Erlang module functions, `nosh' affords both the ease of a
 %% UNIX shell and the power of an Erlang interpreter.

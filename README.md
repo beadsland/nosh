@@ -17,8 +17,6 @@ which was removed in Erlang/OTP R16.
 
 __<font color="red">To do</font>__
 <br></br>
-* <font color="red">support for stdin,pid,captln
-</font>
 * <font color="red">build out 2do_go4
 </font>
 * <font color="red">superl: confirm API functions come first
@@ -31,7 +29,9 @@ __<font color="red">To do</font>__
 </font>
 * <font color="red">noterm bootstrap Makefile
 </font>
-* <font color="red">...plus 60 more (see TODO.edoc)
+* <font color="red">debug broken get_until functionality
+</font>
+* <font color="red">...plus 59 more (see TODO.edoc)
 </font>
 
 

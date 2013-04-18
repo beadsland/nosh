@@ -1,8 +1,8 @@
-@todo support for stdin,pid,captln
 @todo build out 2do_go4
 @todo superl: confirm API functions come first
 @todo folderl exit stdin distinct from stdout
 @todo edoc via dev (nosh)
 @todo see todo.edoc link
 @todo noterm bootstrap Makefile
-@todo ...plus 60 more (see TODO.edoc)
+@todo debug broken get_until functionality
+@todo ...plus 59 more (see TODO.edoc)
