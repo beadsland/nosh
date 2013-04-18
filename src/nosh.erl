@@ -29,7 +29,7 @@
 %% <dl>
 %% <dt>`hot'</dt><dd>hotswap nosh project modules</dd>
 %% <dt>`good'</dt><dd>check for superly good nosh code</dd>
-%% <dt>`!<i>command</i></dt><dd>pass <i>command</i> to native shell</dd>
+%% <dt>`!<i>command</i>'</dt><dd>pass <i>command</i> to native shell</dd>
 %% <dt>`.'</dt><dd>end-of-file (exit nosh application)</dd>
 %% </dl>
 %%

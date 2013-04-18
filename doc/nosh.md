@@ -12,7 +12,7 @@ The `nosh` process module, which handles messaging with a paired
 
 Copyright (c) 2012, 2013 Beads D. Land-Trujillo
 
-__Version:__ 0.1.17
+__Version:__ 0.1.18
 
 __Behaviours:__ [`gen_command`](gen_command.md).
 
@@ -43,8 +43,16 @@ Commands:
 
 
 
-<dt><code>!<i>command</i></dt><dd>pass <i>command</i> to native shell</dd>
-<dt>`.</code></dt>
+<dt><code>!<i>command</i></code></dt>
+
+
+
+<dd>pass <i>command</i> to native shell</dd>
+
+
+
+
+<dt><code>.</code></dt>
 
 
 
