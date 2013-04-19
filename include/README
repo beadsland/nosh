@@ -1,0 +1,12 @@
+This directory holds .hrl Erlang library files, .mk Makefiles,
+and .sh Bash shell files.
+
+The only .hrl files are those used by the nosh and pose-compatible
+nosh subprojects.  These .hrl files are stored under the pose 
+project and included using the -include_lib compiler directive.
+
+The .mk and .sh files are used across all related projects, and
+are synchronized between said projects for ease of access.  The master
+copy of these files live under the nosh project.  All projects using
+these files include a "make" target to their Makefile to synchronize
+the files and pick up any changes.
