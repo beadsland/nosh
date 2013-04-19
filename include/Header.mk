@@ -39,6 +39,27 @@ ifneq ($(MAKE_VEND),GNU)
 endif
 
 #
+# Figure out if Erlang is needed version
+#
+
+ERLSTR	= $(shell erl -version 2>&1)
+$(info $(ERLSTR))
+
+ERLVST	= echo "$(ERLSTR)" | sed 's/.* //' | awk -F. '{print $$1*10000+$$2*100+$$3}'
+ERLVER 	= $(shell $(ERLVST))
+
+ERLLT	= test $(ERLVER) -lt 50901 && echo lo
+ERLGT	= test $(ERLVER) -lt 51000 || echo hi
+
+ifeq ($(shell $(ERLLT)),lo)
+   $(error Erlang/OTP 15B01 (and no higher) required) 
+endif
+
+ifeq ($(shell $(ERLGT)),hi)
+   $(error Erlang/OTP 15B01 required: uses experimental package feature)
+endif
+
+#
 # Figure out if development or production
 #
 
