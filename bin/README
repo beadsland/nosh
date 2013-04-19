@@ -1,0 +1,7 @@
+Utility scripts for testing and development.  May not work on UNIXes that
+do not support shebang chaining or nesting.  
+
+Much of this functionality was originally coded as Makefile rules, but was
+refactored here for sake of elegance.  However, if we later want to support
+shebang-limited UNIXes, converting back to a Makefile architecture with
+non-chained shell scripts as wrappers should be a trivial exercise.
