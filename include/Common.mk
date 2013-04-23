@@ -32,9 +32,10 @@ include include/Header.mk
 
 all:		push compile good
 
+good:		override DEPS := $(shell test -d ../pose -a -d ../superl && echo .. || $(DEPS))
 good:		$(POSEBIN)/pose.beam
 	@$(ERL) $(SUPERL) $(POSURE) $(STOP)
-	
+
 $(POSEBIN)/pose.beam:
 	@if [ ! -f $(POSEBIN)/pose.beam ]
 	$(error Must compile pose to do good)
