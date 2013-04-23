@@ -95,6 +95,7 @@ ifneq ($(IS_SUBMAKE),true)	   # if submake, online in subpass
    ONRESULT = $(shell $(ONTEST))
    $(info Working $(ONRESULT))
    ONLINE = $(shell $(ONBOOL))
+   SUBPASS += ONLINE="$(ONLINE)"
 endif
 
 #
@@ -124,19 +125,21 @@ COMMAKE		= $(SUBMAKE:_param_=-f include/Common.mk $@)
 #
 
 ifndef DEPS
-	DEPS = 		deps
+	DEPS = deps
+	SUBPASS += DEPS="$(DEPS)" 
 endif
-SUBPASS =	DEPS="$(DEPS)" ONLINE="$(ONLINE)"
 
 ifndef POSEBIN
-	POSEBIN = 	$(DEPS)/pose/ebin
+	POSEBIN = $(DEPS)/pose/ebin
+	SUBPASS += POSEBIN="$(POSEBIN)" 
 endif
 
 ERL	=		erl -noshell -i $(DEPS) -deps $(DEPS) -pa $(POSEBIN)
 
 POSURE	=	-s pose start posure
 ifndef SUPERL
-	SUPERL	=	-s pose start superl
+	SUPERL = -s pose start superl
+	SUBPASS += SUPERL="$(SUPERL)" 
 endif
 NOTERM	=	-s pose start noterm
 STOP	=	-s init stop
