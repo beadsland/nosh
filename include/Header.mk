@@ -18,7 +18,7 @@
 # by brackets replaced by your own identifying information.
 # "Portions Copyright [year] [name of copyright owner]"
 # 
-# Copyright 2013 Beads D. Land-Trujillo.  All Rights Reserved.
+# Copyright 2012, 2013 Beads D. Land-Trujillo.  All Rights Reserved.
 # -----------------------------------------------------------------------
 # CDDL HEADER END
 
@@ -136,6 +136,7 @@ else
 	SUBPASS += POSEBIN="$(POSEBIN)"	# only pass on if redefined
 endif
 
+GOOD_DEPS = $(shell test -d ../pose -a -d ../superl && echo .. || $(DEPS))
 ERL	=		erl -noshell -i $(DEPS) -deps $(DEPS) -pa $(POSEBIN)
 
 POSURE	=	-s pose start posure

@@ -32,13 +32,16 @@ include include/Header.mk
 
 all:		push compile good
 
-good:		override DEPS := $(shell test -d ../pose -a -d ../superl && echo .. || $(DEPS))
-good:		$(POSEBIN)/pose.beam
+good:		override DEPS := $(GOOD_DEPS)
+# Target-specific variables aren't picked up by dependencies list, 
+# so we move dependency relation to a submake.
+good:		
+	@$(SUBMAKE:_param_=-f include/Common.mk $(POSEBIN)/pose.beam) \
+		| ($(GREP) -v "is up to date"; status=$$?)
 	@$(ERL) $(SUPERL) $(POSURE) $(STOP)
 
-$(POSEBIN)/pose.beam:
-	@if [ ! -f $(POSEBIN)/pose.beam ]
-	$(error Must compile pose to do good)
+%/ebin/pose.beam:	%/src/pose.erl
+	$(error Must compile $(*) to do good)
 
 #
 # Rules to regenerate documentation
