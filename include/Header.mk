@@ -91,12 +91,12 @@ ONTEST	= $(PING) www.google.com 2>&1 >/dev/null \
 ONBOOL	= (test "$(ONRESULT)" == "online" \
 			&& echo yes || echo no)
 
-ifneq ($(IS_SUBMAKE),true)	   # if submake, online in subpass
+ifneq ($(IS_SUBMAKE),true)	   	# if submake, online in subpass
    ONRESULT = $(shell $(ONTEST))
    $(info Working $(ONRESULT))
    ONLINE = $(shell $(ONBOOL))
-   SUBPASS += ONLINE="$(ONLINE)"
 endif
+SUBPASS += ONLINE="$(ONLINE)"	# always pass this on
 
 #
 # Macros for commands
@@ -126,12 +126,14 @@ COMMAKE		= $(SUBMAKE:_param_=-f include/Common.mk $@)
 
 ifndef DEPS
 	DEPS = deps
-	SUBPASS += DEPS="$(DEPS)" 
+else
+	SUBPASS += DEPS="$(DEPS)"		# only pass on if redefined
 endif
 
 ifndef POSEBIN
 	POSEBIN = $(DEPS)/pose/ebin
-	SUBPASS += POSEBIN="$(POSEBIN)" 
+else
+	SUBPASS += POSEBIN="$(POSEBIN)"	# only pass on if redefined
 endif
 
 ERL	=		erl -noshell -i $(DEPS) -deps $(DEPS) -pa $(POSEBIN)
@@ -139,7 +141,8 @@ ERL	=		erl -noshell -i $(DEPS) -deps $(DEPS) -pa $(POSEBIN)
 POSURE	=	-s pose start posure
 ifndef SUPERL
 	SUPERL = -s pose start superl
-	SUBPASS += SUPERL="$(SUPERL)" 
+else
+	SUBPASS += SUPERL="$(SUPERL)" 	# only pass on if redefined
 endif
 NOTERM	=	-s pose start noterm
 STOP	=	-s init stop
