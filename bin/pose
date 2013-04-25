@@ -41,5 +41,10 @@ main(Param) ->
             bootstrap:main(Param, AppDir);
         _Else                ->
             io:format("** bootstrap: compile failed\n")
-    end.
-
+    end,
+    
+    % Hang around waiting for output buffer to flush -- a bug in escript.
+    
+    timer:sleep(500),
+    init:stop(),
+    receive after infinity -> ok end.
