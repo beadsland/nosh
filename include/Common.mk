@@ -28,7 +28,7 @@ include include/Header.mk
 # All good rules
 #
 
-.PHONY:	all good todo docs compile current neat clean push make
+.PHONY:	all good todo docs compile current neat clean push make docup
 
 all:		push compile good
 
@@ -42,16 +42,6 @@ good:
 
 %/ebin/pose.beam:	%/src/pose.erl
 	$(error Must compile $(*) to do good)
-
-#
-# Rules to regenerate documentation
-#
-
-docs:	README.md \
-			$(patsubst src/%.erl, doc/%.md, $(wildcard src/*.erl))
-
-doc/%.md:	src/%.erl
-	@$(CROWBAR:_cmds_=doc)
 
 #
 # Temporary todo rules pending proper 2do_go4 implementation
@@ -72,6 +62,15 @@ doc/TODO_head.edoc:		TODO.edoc
 
 TODO.edoc:	;
 
+#
+# Rules to regenerate documentation
+#
+
+docs:	README.md $(patsubst src/%.erl, doc/%.md, $(wildcard src/*.erl))
+
+doc/%.md:	src/%.erl
+	@$(CROWBAR:_cmds_=doc)
+	
 #
 # Rules for compiling 
 #
@@ -96,7 +95,7 @@ neat:
 # Rules for managing revisions and synchronized common files
 #
 
-push:	make
+push:	make docup
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
 		then (git push origin master); fi
 
@@ -109,3 +108,8 @@ make:	$(patsubst include/%.mk, \
 include/$(B_PREFIX)%.mk$(B_SUFFIX):		include/%.mk
 	@if [ ! -f $@ ]; \
 		then ($(UNISON) && (test -f $@ || cp $< $@)); fi
+		
+docup:	docs
+	@git add -f doc/*.md
+	@if ! git diff-index --cached --quiet HEAD; \
+		then (git commit doc/*.md -m "updated docs"); fi		
