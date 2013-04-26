@@ -41,7 +41,9 @@ good:
 	@$(ERL) $(SUPERL) $(POSURE) $(STOP)
 
 %/ebin/pose.beam:	%/src/pose.erl
-	$(error Must compile $(*) to do good)
+	@$(SUBMAKE:_param_=-C $* compile)
+	
+ebin/pose.beam:		compile
 
 #
 # Temporary todo rules pending proper 2do_go4 implementation
