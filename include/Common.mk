@@ -43,7 +43,8 @@ good:
 %/ebin/pose.beam:	%/src/pose.erl
 	@$(SUBMAKE:_param_=-C $* compile)
 	
-ebin/pose.beam:		compile
+ebin/pose.beam:		src/pose.erl
+	@$(SUBMAKE:_param_=compile)
 
 #
 # Temporary todo rules pending proper 2do_go4 implementation
