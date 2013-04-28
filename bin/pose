@@ -1,5 +1,6 @@
 #!wescript
 %% -*- erlang -*-
+%%! -kernel error_logger false
 
 %% CDDL HEADER START
 %% -----------------------------------------------------------------------
