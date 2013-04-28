@@ -60,7 +60,7 @@ main(Param, AppDir) ->
 % bootstrap hotswap and start pose command
 main_start(Param, []) -> pose:start(Param);
 main_start(Param, [Head | Tail]) ->
-%    IO = ?IO(self()), ENV = ?ENV, ?INIT_POSE,
+    IO = ?IO(self()), ENV = ?ENV, ?INIT_POSE,
     pose_command:load_command(Head),
     main_start(Param, Tail).
 
