@@ -31,15 +31,23 @@ main(Param) ->
     EbinDir = filename:join(AppDir, "ebin"),
     SrcDir = filename:join(AppDir, "src"),
 
+    case init:get_argument(deps) of 
+        error        -> Deps = "deps";
+        {ok, Result} -> [[Deps]] = Result
+    end,
+    DepsDir = filename:join(AppDir, Deps),
+
     Filename = filename:join(SrcDir, "bootstrap.erl"),
     Options = [verbose, warnings_as_errors, return_errors, binary,
-               {outdir, EbinDir}],
+               {outdir, EbinDir}, {i, DepsDir}],
 
     case compile:file(Filename, Options) of
-        {ok, Module, Binary} ->
+        {ok, Module, Binary}        ->
             code:load_binary(Module, Filename, Binary),
             bootstrap:main(Param, AppDir);
-        _Else                ->
+        {error, Errors, Warnings}   ->
+            io:format("** bootstrap: ~p~n", [{Errors, Warnings}]);
+        _Else                       ->
             io:format("** bootstrap: compile failed\n")
     end,
     
