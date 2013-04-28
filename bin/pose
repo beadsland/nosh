@@ -30,17 +30,17 @@ main(Param) ->
     AppDir = filename:join(BinDir, ".."),
     EbinDir = filename:join(AppDir, "ebin"),
     SrcDir = filename:join(AppDir, "src"),
-
-    case init:get_argument(deps) of 
-        error        -> Deps = "deps";
-        {ok, Result} -> [[Deps]] = Result
-    end,
-    DepsDir = filename:join(AppDir, Deps),
+    DepsDir = filename:join(AppDir, get_deps_dir()),
 
     Filename = filename:join(SrcDir, "bootstrap.erl"),
     Options = [verbose, warnings_as_errors, return_errors, binary,
                {outdir, EbinDir}, {i, DepsDir}],
 
+    do_main(Filename, Options, Param, AppDir),    
+    wait_for_flush().
+
+% Compile and run bootstrap module.
+do_main(Filename, Options, Param, AppDir) ->
     case compile:file(Filename, Options) of
         {ok, Module, Binary}        ->
             code:load_binary(Module, Filename, Binary),
@@ -49,10 +49,19 @@ main(Param) ->
             io:format("** bootstrap: ~p~n", [{Errors, Warnings}]);
         _Else                       ->
             io:format("** bootstrap: compile failed\n")
+    end.
+
+% Determine dependency directory, in order to include libraries.
+get_deps_dir() ->
+    case init:get_argument(deps) of 
+        error        -> Deps = "deps";
+        {ok, Result} -> [[Deps]] = Result
     end,
-    
-    % Hang around waiting for output buffer to flush -- a bug in escript.
-    
+    Deps.
+
+% Hang around waiting for output buffer to flush.
+% (Escript doesn't do this reliably.)
+wait_for_flush() ->
     timer:sleep(500),
     init:stop(),
-    receive after infinity -> ok end.
+    receive after infinity -> ok end.  
