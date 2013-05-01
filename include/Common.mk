@@ -92,7 +92,7 @@ clean:		neat make
 		else ($(CROWBAR:_cmds_=clean)); fi
 
 neat:
-	@rm -f *.dump
+	@rm -f *.dump *.stackdump
 
 #
 # Rules for managing revisions and synchronized common files
