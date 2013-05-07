@@ -1,1 +1,18 @@
 Utility scripts for testing and development.
+
+ nosh - Run an interactive No-SQL Shell.
+ 
+ pose - Run a single pose-style command.  (Wrapper for pose.escript.)
+ 
+ dose - Run a pose-style command using development dependencies.
+ 
+ folderl - Format lines containing Erlang terms to fit an 80-character display.
+ 
+ wescript - Run an escript even if Cygwin is obscuring absolute pathnames.
+ 
+ mkdev - Create a dev directory containing soft links to dependencies.*
+ 
+ 
+    * Dependencies here are expected to be found in same working directory
+      as nosh project.  Obviously, this script is only useful in development
+      environment. 
