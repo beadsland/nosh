@@ -9,6 +9,8 @@ Utility scripts for testing and development.
  folderl - Format lines containing Erlang terms to fit an 80-character display.
  
  wescript - Run an escript even if Cygwin is obscuring absolute pathnames.
+
+ r16 - Swap Erlang R15 on path with installed Erlang version R16.
  
  mkdev - Create a dev directory containing soft links to dependencies.*
  

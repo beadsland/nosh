@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+# CDDL HEADER START
+# -----------------------------------------------------------------------
+# The contents of this file are subject to the Common Development and 
+# Distribution License, Version 1.0 (the "License"); you may not use 
+# this file except in compliance with the License.  You should have 
+# received a copy of the Common Development and Distribution License 
+# along with this software.  If not, it can be retrieved online at 
+# http://www.opensource.org/licenses/CDDL-1.0
+# 
+# Software distributed under the License is distributed on an "AS IS"
+# basis, WITHOUT WARRANTY OF ANY KIND, either express or implied.  See
+# the License for the specific language governing rights and limitations
+# under the License.
+# 
+# When distributing Covered Code, include this CDDL Header Notice in
+# each file and include the License file at CDDL-LICENSE.  If applicable
+# add the following below the CDDL Header, with the fields enclosed
+# by brackets replaced by your own identifying information.
+# "Portions Copyright [year] [name of copyright owner]"
+# 
+# Copyright 2013 Beads D. Land-Trujillo.  All Rights Reserved.
+# -----------------------------------------------------------------------
+# CDDL HEADER END
+
+# Figure out where our current system Erlang lives
+OLD_ERL_BIN=`echo $PATH | tr ":" "\n" | grep "/erl5.9" | sed 'q'`
+OLD_ERL_PATH=`dirname "$OLD_ERL_BIN"`
+OLD_ERL_DIR=`dirname "$OLD_ERL_PATH"`
+OLD_ERL_BASE=`basename "$OLD_ERL_PATH"`
+
+# Assume newer version is in parallel directory
+NEW_ERL_BASE=`ls "$OLD_ERL_DIR" | grep "erl5.1" | sed '$!d'`
+NEW_ERL_BIN=$OLD_ERL_DIR/$NEW_ERL_BASE/bin
+
+echo Swapping $NEW_ERL_BASE for $OLD_ERL_BASE
+
+PATH=$NEW_ERL_BIN:$PATH
+
+# Get a workable path to what we plan to run under newer version
+SCR_DIR=`dirname ${BASH_SOURCE[0]}`
+COMMAND=`which ${1} 2&>1 || echo $SCR_DIR/$1`
+
+COMMAND_DIR=`dirname "$COMMAND"`
+
+# Finally, spawn under a new bash shell, so as to not found errors clean
+bash -c "$COMMAND_DIR/$@"
