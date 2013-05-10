@@ -40,7 +40,7 @@ PATH=$NEW_ERL_BIN:$PATH
 
 # Get a workable path to what we plan to run under newer version
 SCR_DIR=`dirname ${BASH_SOURCE[0]}`
-COMMAND=`which ${1} 2&>1 || echo $SCR_DIR/$1`
+COMMAND=`which ${1} 2&>1 || test -f ${1} && echo ${1} || echo $SCR_DIR/$1`
 
 COMMAND_DIR=`dirname "$COMMAND"`
 
