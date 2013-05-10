@@ -137,7 +137,8 @@ else
 endif
 
 GOOD_DEPS = $(shell test -d ../pose -a -d ../superl && echo .. || $(DEPS))
-ERL	=		erl -noshell -i $(DEPS) -deps $(DEPS) -pa $(POSEBIN)
+SILENT =	-kernel error_logger silent
+ERL	=		erl -noshell $(SILENT) -i $(DEPS) -deps $(DEPS) -pa $(POSEBIN)
 
 POSURE	=	-s pose start posure
 ifndef SUPERL
