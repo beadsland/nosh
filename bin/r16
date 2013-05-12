@@ -38,11 +38,17 @@ echo Swapping $NEW_ERL_BASE for $OLD_ERL_BASE
 
 PATH=$NEW_ERL_BIN:$PATH
 
-# Get a workable path to what we plan to run under newer version
-SCR_DIR=`dirname ${BASH_SOURCE[0]}`
-COMMAND=`which ${1} 2&>1 || test -f ${1} && echo ${1} || echo $SCR_DIR/$1`
+# If wrapped command is on path, just run it
+ONPATH=`(command -v ${1} 2&>1 /dev/null) && echo yes || echo no`
 
-COMMAND_DIR=`dirname "$COMMAND"`
+if [ $ONPATH==yes ]; then ($@); fi
 
-# Finally, spawn under a new bash shell, so as to not found errors clean
-bash -c "$COMMAND_DIR/$@"
+# If not on path, it's either on current working directory or else local to r16
+if [ $ONPATH==no ]; 
+    then (SCR_DIR=`dirname ${BASH_SOURCE[0]}`;
+          COMMAND=`test -x ${1} && echo ${1} || echo $SCR_DIR/$1`;
+          COMMAND_DIR=`dirname ${COMMAND}`;
+          echo bash -c "$COMMAND_DIR/$@"
+         ); fi
+    
+# (Above, we spawn under new shell to get clean not found errors.)
