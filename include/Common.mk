@@ -28,7 +28,7 @@ include include/Header.mk
 # All good rules
 #
 
-.PHONY:	all good todo docs compile current neat clean push make docup
+.PHONY:	all good todo docs compile current neat force clean push make docup
 
 all:		push compile good
 
@@ -69,11 +69,21 @@ TODO.edoc:	;
 # Rules to regenerate documentation
 #
 
-docs:	README.md $(patsubst src/%.erl, doc/%.md, $(wildcard src/*.erl))
+docs:	neat README.md $(patsubst src/%.erl, doc/%.md, $(wildcard src/*.erl))
 
-doc/%.md:	src/%.erl
-	@$(CROWBAR:_cmds_=doc)
+neat:			$(wildcard doc/*.md)
+	@rm -f *.dump *.stackdump
+
+doc/README.md:	;
 	
+doc/%.md:		src/%.erl
+	@$(CROWBAR:_cmds_=doc)
+
+src/%.erl:		force
+	@if [ ! -f src/$*.erl ]; then (rm -f doc/$*.*); fi
+	
+force:		;
+
 #
 # Rules for compiling 
 #
@@ -90,10 +100,7 @@ clean:		neat make
 	@if [ "$(ONLINE)" == yes ]; \
 		then (rm -rf deps; $(CROWBAR:_cmds_=clean get-deps)); \
 		else ($(CROWBAR:_cmds_=clean)); fi
-
-neat:
-	@rm -f *.dump *.stackdump
-
+	
 #
 # Rules for managing revisions and synchronized common files
 #
