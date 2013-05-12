@@ -11,7 +11,7 @@ ebin/*.app
 
 # Cygwin is messy
 *.dump
-*.crashdump
+*.stackdump
 
 # Only checkin github docs
 doc
