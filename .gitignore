@@ -1,12 +1,27 @@
+# Eclipse overhead
 .project
 .settings
+
+# Makefile overhead
+include/.unison/*
+dev
+
+# Rebar generates this
+ebin/*.app
+
+# Cygwin is messy
+*.dump
+*.crashdump
+
+# Only checkin github docs
 doc
 !doc/*.md
 !doc/*.edoc
+
+# Github template
+.eunit
 deps
-*.dump
-*.stackdump
-ebin
-include/.unison/*
-include/gitignore.temp
-/dev
+*.o
+*.beam
+*.plt
+erl_crash.dump
