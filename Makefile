@@ -42,7 +42,7 @@ PUSHMAKE	= if [ -e $@/include/Common.mk ]; \
 # Custom rules
 #
 
-.PHONY:	all todo install current clean push gitinclude1 gitinclude2 force
+.PHONY:	all todo install current clean push force
 
 all:	push compile good
 
@@ -80,17 +80,18 @@ dev/%/.git:	force
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
 		then (echo -n "$*: "; $(PUSHMAKE)); fi	
 
-make:		gitinclude1 $(wildcard dev/*/include/Common.mk) gitinclude2
+make:		include/gitignore.template \
+				$(wildcard dev/*/include/Common.mk) .gitignore
 	@echo Unison of make includes
 
-gitinclude1:	force
-	@cp .gitignore include/gitignore.temp
+include/gitignore.template:		.gitignore
+	@cp -p .gitignore include/gitignore.template
 	
 dev/%/include/Common.mk:	force
 	@cd dev/$*; $(SUBMAKE:_param_=-f include/Common.mk make)
 
-gitinclude2:	force
-	@cp include/gitignore.temp .gitignore
+.gitignore:					force
+	@cp -p include/gitignore.template .gitignore
 	
 force:		;
 

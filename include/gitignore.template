@@ -1,0 +1,12 @@
+.project
+.settings
+doc
+!doc/*.md
+!doc/*.edoc
+deps
+*.dump
+*.stackdump
+ebin
+include/.unison/*
+include/gitignore.temp
+/dev

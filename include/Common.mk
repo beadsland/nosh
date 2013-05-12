@@ -112,10 +112,10 @@ push:	make docup
 make:	$(patsubst include/%.mk, \
 			include/$(B_PREFIX)%.mk$(B_SUFFIX), \
 			$(wildcard include/*.mk))
-	@cp .gitignore include/gitignore.temp
+	@cp .gitignore include/gitignore.template
 	@if [ "$(shell basename $(CURDIR))" != nosh ]; \
 		then ($(UNISON) -merge "$(MERGE)"); fi
-	@cp include/gitignore.temp .gitignore
+	@cp include/gitignore.template .gitignore
 
 include/$(B_PREFIX)%.mk$(B_SUFFIX):		include/%.mk
 	@if [ ! -f $@ ]; \
