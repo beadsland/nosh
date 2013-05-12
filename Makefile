@@ -84,15 +84,9 @@ make:		include/gitignore.template \
 				$(wildcard dev/*/include/Common.mk) .gitignore
 	@echo Unison of make includes
 
-include/gitignore.template:		.gitignore
-	@cp -p .gitignore include/gitignore.template
-	
 dev/%/include/Common.mk:	force
 	@cd dev/$*; $(SUBMAKE:_param_=-f include/Common.mk make)
 
-.gitignore:					force
-	@cp -p include/gitignore.template .gitignore
-	
 force:		;
 
 #
