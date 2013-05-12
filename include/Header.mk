@@ -160,3 +160,4 @@ else
 endif
 TODO_FILES =	$(wildcard TODO.edoc) \
 					README.md doc/README.md doc/TODO_head.edoc
+DOC_FILES	= 	`git status --porcelain | grep ' doc/' | awk '{print $$2}'`

@@ -80,7 +80,7 @@ doc/%.md:		src/%.erl
 	@$(CROWBAR:_cmds_=doc)
 
 src/%.erl:		force
-	@if [ ! -f src/$*.erl ]; then (rm -f doc/$*.*); fi
+	@if [ ! -f src/$*.erl ]; then (git rm -f doc/$*.*); fi
 	
 force:		;
 
@@ -120,8 +120,8 @@ make:	$(patsubst include/%.mk, \
 include/$(B_PREFIX)%.mk$(B_SUFFIX):		include/%.mk
 	@if [ ! -f $@ ]; \
 		then ($(UNISON) && (test -f $@ || cp $< $@)); fi
-
+	
 docup:	docs
 	@git add -f doc/*.md
 	@if ! git diff-index --cached --quiet HEAD; \
-		then (git commit doc/*.md -m "updated docs"); fi		
+		then (git commit $(DOC_FILES) -m "updated docs"); fi		
