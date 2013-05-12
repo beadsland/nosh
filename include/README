@@ -1,5 +1,6 @@
 This directory holds .hrl Erlang library files, .mk Makefiles,
-and .sh Bash shell files.
+.sh Bash shell files, and a temporary copy of the .gitignore file 
+for the project.
 
 The only .hrl files are those used by the nosh and pose-compatible
 nosh subprojects.  These .hrl files are stored under the pose 
@@ -10,3 +11,8 @@ are synchronized between said projects for ease of access.  The master
 copy of these files live under the nosh project.  All projects using
 these files include a "make" target to their Makefile to synchronize
 the files and pick up any changes.
+
+The gitignore.temp file is copied in from the project .gitignore prior 
+to synchronization and then copied back to the project .gitignore after
+synchronization, effectively ensuring that this file is also
+synchronized across projects.

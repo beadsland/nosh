@@ -8,3 +8,5 @@ deps
 *.stackdump
 ebin
 include/.unison/*
+include/gitignore.temp
+/dev
