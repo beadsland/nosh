@@ -39,7 +39,7 @@ echo Swapping $NEW_ERL_BASE for $OLD_ERL_BASE
 PATH=$NEW_ERL_BIN:$PATH
 
 # If wrapped command is on path, just run it
-ONPATH=`(command -v ${1} 2&>1 /dev/null) && echo yes || echo no`
+ONPATH=`(command -v ${1} 2>&1 /dev/null) && echo yes || echo no`
 
 if [ "$ONPATH" == "yes" ]; then ($@); fi
 
