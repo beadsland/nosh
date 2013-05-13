@@ -160,4 +160,17 @@ else
 endif
 TODO_FILES =	$(wildcard TODO.edoc) \
 					README.md doc/README.md doc/TODO_head.edoc
-DOC_FILES	= 	`git status --porcelain | grep ' doc/' | awk '{print $$2}'`
+DOC_FILES = 	`git status --porcelain | grep ' doc/' | awk '{print $$2}'`
+
+#
+# Macros for make
+#
+
+PROJECT = $(shell basename $(CURDIR))
+
+GITIGNORE_PRE = if [ .gitignore -nt include/gitignore.template ]; \
+					then (cp -p .gitignore include/gitignore.template \
+						&& echo Updated gitignore.template for $(PROJECT)); fi
+GITIGNORE_POST = if [ include/gitignore.template -nt .gitignore ]; \
+					then (cp -p include/gitignore.template .gitignore \
+						&& echo Updated .gitignore for $(PROJECT)); fi

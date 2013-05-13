@@ -15,7 +15,7 @@ doc
 !doc/*.md
 !doc/*.edoc
 
-# Rebar generates app, so we can ignore this folder
+# Rebar generates our .app file, so we can ignore this folder entirely
 ebin
 
 # Github gitignore template for Erlang

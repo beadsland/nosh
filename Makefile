@@ -42,7 +42,7 @@ PUSHMAKE	= if [ -e $@/include/Common.mk ]; \
 # Custom rules
 #
 
-.PHONY:	all todo install current clean push force
+.PHONY:	all todo install current clean push force force2
 
 all:	push compile good
 
@@ -76,18 +76,21 @@ clean:		push
 push:		$(wildcard dev/*/.git)
 	@$(COMMAKE)
 
-dev/%/.git:	force
+dev/%/.git:		force
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
 		then (echo -n "$*: "; $(PUSHMAKE)); fi	
 
-make:		include/gitignore.template \
-				$(wildcard dev/*/include/Common.mk) .gitignore
-	@echo Unison of make includes
+force:		;
 
-dev/%/include/Common.mk:	force
+make:		$(wildcard dev/*/include/Common.mk)
+	@$(GITIGNORE_PRE)
+	@echo Unison of make includes
+	@$(GITIGNORE_POST)
+
+dev/%/include/Common.mk:	force2
 	@cd dev/$*; $(SUBMAKE:_param_=-f include/Common.mk make)
 
-force:		;
+force2:		;
 
 #
 # Run non-overridden common rules.

@@ -109,18 +109,12 @@ push:	make docup
 	@if [ "$(DEV)" == yes -a "$(ONLINE)" == yes ]; \
 		then (git push origin master); fi
 
-make:	include/gitignore.template \
-			$(patsubst include/%.mk, \
-				include/$(B_PREFIX)%.mk$(B_SUFFIX), $(wildcard include/*.mk)) \
-			.gitignore
+make:	$(patsubst include/%.mk, \
+			include/$(B_PREFIX)%.mk$(B_SUFFIX), $(wildcard include/*.mk))
+	@$(GITIGNORE_PRE)
 	@if [ "$(shell basename $(CURDIR))" != nosh ]; \
 		then ($(UNISON) -merge "$(MERGE)"); fi
-		
-include/gitignore.template:		.gitignore
-	@cp -p .gitignore include/gitignore.template
-
-.gitignore:						force
-	@cp -p include/gitignore.template .gitignore
+	@$(GITIGNORE_POST)
 
 include/$(B_PREFIX)%.mk$(B_SUFFIX):		include/%.mk
 	@if [ ! -f $@ ]; \
