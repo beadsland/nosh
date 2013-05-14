@@ -51,20 +51,13 @@ main(Param, AppDir) ->
     end,
     file:set_cwd(AppDir),
     compile_pose(DepsDir),
-    main_start([list_to_atom(X) || X <- Param], [gen_command, pose]).
+    pose:start(Param).
 
 %%
 %% Local Functions
 %%
 
-% bootstrap hotswap and start pose command
-main_start(Param, []) -> pose:start(Param);
-main_start(Param, [Head | Tail]) ->
-    IO = ?IO(self()), ENV = ?ENV, ?INIT_POSE,
-    pose_command:load_command(Head),
-    main_start(Param, Tail).
-
-% compile pose application modules
+% hotswap pose application modules to memory
 compile_pose(DepsDir) ->
     PoseEbinDir = filename:join(DepsDir, "pose/ebin"),
     PoseSrcDir = filename:join(DepsDir, "pose/src"),
