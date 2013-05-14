@@ -80,23 +80,16 @@ compile_pose(DepsDir) ->
 % compile application modules
 compile_app(_DepsDir, _PoseEbinDir, _PoseSrcDir, []) -> true;
 compile_app(DepsDir, PoseEbinDir, PoseSrcDir, [Head | Tail]) ->
-    PoseEbinFile = lists:append(Head, ".beam"),
-    case filelib:is_file(filename:join(PoseEbinDir, PoseEbinFile)) of
-        false -> compile(DepsDir, PoseEbinDir, PoseSrcDir, Head);
-        true  -> false
-    end,
-    compile_app(DepsDir, PoseEbinDir, PoseSrcDir, Tail).
-
-% compile a module
-compile(DepsDir, PoseEbinDir, PoseSrcDir, ModuleName) ->
-    PoseSrcFile = lists:append(ModuleName, ".erl"),
+    PoseSrcFile = lists:append(Head, ".erl"),
     Filename = filename:join(PoseSrcDir, PoseSrcFile),
     Options = [verbose, warnings_as_errors, return_errors, binary,
                {outdir, PoseEbinDir}, {i, DepsDir}],
+    
     case compile:file(Filename, Options) of
         {ok, Module, Binary} ->
-            code:load_binary(Module, Filename, Binary);
+            code:load_binary(Module, Filename, Binary),
+            compile_app(DepsDir, PoseEbinDir, PoseSrcDir, Tail);
         _Else                ->
-            io:format("** ~s: compile failed~n", [ModuleName]),
+            io:format("** ~s: compile failed~n", [Head]),
             halt()
     end.
