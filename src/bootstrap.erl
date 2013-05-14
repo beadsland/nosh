@@ -61,7 +61,7 @@ main(Param, AppDir) ->
 compile_pose(DepsDir) ->
     PoseEbinDir = filename:join(DepsDir, "pose/ebin"),
     PoseSrcDir = filename:join(DepsDir, "pose/src"),
-
+    
     code:add_pathz(PoseEbinDir),
 
     WildCard = filelib:wildcard("*.erl", PoseSrcDir),
@@ -73,16 +73,24 @@ compile_pose(DepsDir) ->
 % compile application modules
 compile_app(_DepsDir, _PoseEbinDir, _PoseSrcDir, []) -> true;
 compile_app(DepsDir, PoseEbinDir, PoseSrcDir, [Head | Tail]) ->
-    PoseSrcFile = lists:append(Head, ".erl"),
-    Filename = filename:join(PoseSrcDir, PoseSrcFile),
-    Options = [verbose, warnings_as_errors, return_errors, binary,
-               {outdir, PoseEbinDir}, {i, DepsDir}],
+  PoseSrcFile = lists:append(Head, ".erl"),
+  Filename = filename:join(PoseSrcDir, PoseSrcFile),
+  Options = [verbose, warnings_as_errors, return_errors, binary,
+             {outdir, PoseEbinDir}, {i, DepsDir}],
     
-    case compile:file(Filename, Options) of
-        {ok, Module, Binary} ->
-            code:load_binary(Module, Filename, Binary),
-            compile_app(DepsDir, PoseEbinDir, PoseSrcDir, Tail);
-        _Else                ->
-            io:format("** ~s: compile failed~n", [Head]),
-            halt()
+  case compile:file(Filename, Options) of
+    {ok, Module, Binary}        ->
+       code:load_binary(Module, Filename, Binary),
+       compile_app(DepsDir, PoseEbinDir, PoseSrcDir, Tail);
+     error                       ->
+       io:format("** ~s: compile failed~n", [Head]), halt();
+     {error, Errors, Warnings}   ->
+       [First | _Rest] = lists:append(Errors, Warnings),
+       {ErrFilename, [ErrorInfo | _MoreErrorInfo]} = First,
+       {Line, Module, ErrorDescriptor} = ErrorInfo,
+       Where = io_lib:format("~s, line ~p", 
+                             [filename:basename(ErrFilename), Line]),
+       What = Module:format_error(ErrorDescriptor),
+       io:format("** ~s: compile: ~s: ~s~n", [Head, Where, What]),
+       halt()
     end.
