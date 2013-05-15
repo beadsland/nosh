@@ -277,9 +277,13 @@
 -define(GROUP_CHARS, "\;\(\)\&\|").
 -define(SPACE_CHARS, "\ \t\n").
 
+% BEGIN POSE PACKAGE IMPORTS
+-ifdef(package).
 -import(io_lib).
 -import(re).
 -import(lists).
+-endif.
+% END POSE PACKAGE IMPORTS
 
 %%
 %% Exported functions

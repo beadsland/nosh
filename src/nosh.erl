@@ -81,13 +81,16 @@
 -include_lib("pose/include/interface.hrl").
 -include_lib("pose/include/macro.hrl").
 
--import(string).
--import(re).
-
 % This will eventually draw from ENV...
 -define(PROMPT, ?STDOUT("nosh> ")).
 
+% BEGIN POSE PACKAGE IMPORTS
+-ifdef(package).
 -import(gen_command).
+-import(string).
+-import(re).
+-endif.
+% END POSE PACKAGE IMPORTS
 
 %%
 %% Exported functions
