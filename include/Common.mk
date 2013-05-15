@@ -41,9 +41,11 @@ good:
 	@$(ERL) $(SUPERL) $(POSURE) $(STOP)
 
 %/ebin/pose.beam:	%/src/pose.erl
+	@echo Compiling pose
 	@$(SUBMAKE:_param_=-C $* compile)
 	
 ebin/pose.beam:		src/pose.erl
+	@echo Compiling pose
 	@$(SUBMAKE:_param_=compile)
 
 #
