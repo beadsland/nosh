@@ -70,14 +70,18 @@ compile_pose(DepsDir) ->
     Modules = [re:replace(X, MP, "", Opts) || X <- WildCard],
     compile_app(DepsDir, PoseEbinDir, PoseSrcDir, Modules).
 
-% compile application modules
+% Compile modules of an application.
 compile_app(_DepsDir, _PoseEbinDir, _PoseSrcDir, []) -> true;
-compile_app(DepsDir, PoseEbinDir, PoseSrcDir, [Head | Tail]) ->
+compile_app(DepsDir, PoseEbinDir, PoseSrcDir, [Head | _Tail]=Modules) ->
   PoseSrcFile = lists:append(Head, ".erl"),
   Filename = filename:join(PoseSrcDir, PoseSrcFile),
   Options = [verbose, warnings_as_errors, return_errors, binary,
              {outdir, PoseEbinDir}, {i, DepsDir}],
-    
+  compile_app(DepsDir, PoseEbinDir, PoseSrcDir, Modules, Filename, Options).
+
+% Compile a module.
+compile_app(DepsDir, PoseEbinDir, PoseSrcDir, [Head | Tail], Filename, 
+            Options) ->
   case compile:file(Filename, Options) of
     {ok, Module, Binary}        ->
        code:load_binary(Module, Filename, Binary),
