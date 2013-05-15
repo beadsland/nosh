@@ -178,7 +178,7 @@ captln_loop(IO, Cmd, CmdPid, ReadPid) ->
       do_exit(IO, Cmd, CmdPid, CmdPid, Reason);
     {stdout, Stdin, Line} when Stdin == IO#std.in	->
       ReadPid ! {stdout, self(), Line},
-      loop(IO, Cmd, CmdPid)
+      ?MODULE:loop(IO, Cmd, CmdPid)
   end.
 
 % Handle messages from executing command.
