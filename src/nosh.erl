@@ -57,7 +57,7 @@
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
 %% @copyright 2012, 2013 Beads D. Land-Trujillo
 
-%% @version 0.1.18
+%% @version 0.1.19
 
 -define(module, nosh).
 
@@ -71,7 +71,7 @@
 -endif.
 % END POSE PACKAGE PATTERN
 
--version("0.1.18").
+-version("0.1.19").
 
 %%
 %% Include files
@@ -89,6 +89,7 @@
 -import(gen_command).
 -import(string).
 -import(re).
+-import(pose_beam).
 -endif.
 % END POSE PACKAGE IMPORTS
 
@@ -135,8 +136,16 @@ do_run(IO, _ARG) ->
   after 100 -> true
   end,
   ?STDOUT("Starting Nosh ~s nosql shell ~p~n", [?VERSION(?MODULE), self()]),
-  ?DEBUG("Using rev. ~s command line parser~n", [?VERSION(nosh_parse)]),
-  ?DEBUG("Using rev. ~s code loader~n", [?VERSION(.pose_code)]),
+  case string:tokens(atom_to_list(?MODULE), ".") of
+    ["nosh"] -> 
+      Parser = nosh_parse;
+    List     -> 
+      Package = lists:delete("nosh", lists:reverse(List)),
+      String = string:join(lists:reverse(["nosh_parse" | Package]), "."),
+      Parser = list_to_atom(lists:flatten(String))
+  end,
+  ?DEBUG("Using rev. ~s command line parser~n", [?VERSION(Parser)]),
+  ?DEBUG("Using rev. ~s code loader~n", [?VERSION(pose_code)]),
   ?PROMPT,
   ?MODULE:loop(IO, ?MODULE, self()).
 
