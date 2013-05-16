@@ -34,7 +34,7 @@ OLD_ERL_BASE=`basename "$OLD_ERL_PATH"`
 NEW_ERL_BASE=`ls "$OLD_ERL_DIR" | grep "erl5.1" | sed '$!d'`
 NEW_ERL_BIN=$OLD_ERL_DIR/$NEW_ERL_BASE/bin
 
-echo Swapping $NEW_ERL_BASE for $OLD_ERL_BASE
+echo Swapping $OLD_ERL_BASE for $NEW_ERL_BASE
 
 PATH=$NEW_ERL_BIN:$PATH
 
