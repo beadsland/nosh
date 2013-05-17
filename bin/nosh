@@ -35,4 +35,4 @@ TTY=`tty`
 if [ "$TTY" != "not a tty" ]; 
 	then tabs -1 >/dev/null; fi
 
-$CURDIR/$POSE noterm echo | folderl; 
+$CURDIR/$POSE noterm echo 2>&1 | folderl; 
