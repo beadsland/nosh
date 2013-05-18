@@ -317,8 +317,7 @@
 %% symbols.
 %% @end
 parse(IO, Subject) ->
-  ENV = ?ENV,
-  ?INIT_POSE,
+  pose:init(IO, ?ENV),
   Pattern = io_lib:format("([~s~s~s])",
               [?QUOTE_CHARS, ?GROUP_CHARS, ?SPACE_CHARS]),
   {ok, MP} = re:compile(Pattern),
