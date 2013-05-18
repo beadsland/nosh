@@ -28,7 +28,7 @@
 
 main(Param) ->
     BinDir = filename:dirname(escript:script_name()),
-    AppDir = filename:join(BinDir, ".."),
+    AppDir = filename:dirname(BinDir),
     EbinDir = filename:join(AppDir, "ebin"),
     SrcDir = filename:join(AppDir, "src"),
     DepsDir = filename:join(AppDir, get_deps_dir()),
