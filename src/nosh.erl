@@ -77,7 +77,7 @@
 %% Include files
 %%
 
--define(debug, true).
+%-define(debug, true).
 -include_lib("pose/include/interface.hrl").
 -include_lib("pose/include/macro.hrl").
 
@@ -224,7 +224,7 @@ do_loadrun(IO, Cmd, CmdPid, Line) ->
   ?DEBUG("Hack run attempt: ~s", [Line]),
   case [list_to_atom(X) || X <- string:tokens(Line, " \n")] of
     [RunCmd | Words]   ->
-      Params = [?IO(self(), IO#std.stop), ?ARG(RunCmd, Words)],
+      Params = [?IO(self(), IO#std.stop), ?ARG(RunCmd, Words), ?ENV],
       RunPid = spawn_link(pose, exec, Params),
 %      RunPid ! {stdout, self(), eof},  % captln makes this unnecessary
       ?DEBUG("Running ~p as ~p~n", [RunCmd, RunPid]),
