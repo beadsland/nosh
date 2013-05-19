@@ -30,5 +30,5 @@ ORAGAMI=`echo folderl \
   | grep '^folderl$'` export ORAGAMI
 
 if [ "$ORAGAMI" == "folderl" ];
-    then pose folderl;
+    then dose folderl;
     else sed -nu ':p;s/\([^\n]\{80\}\)\([^\n]\)/\1\n \2/;tp;p'; fi
