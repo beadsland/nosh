@@ -82,7 +82,8 @@
 -include_lib("pose/include/macro.hrl").
 
 % This will eventually draw from ENV...
--define(PROMPT, ?STDOUT("nosh> ")).
+-define(PROMPT, ?STDOUT("~s nosh> ", 
+                        [string:left(erlang:system_info(otp_release), 3)])).
 
 % BEGIN POSE PACKAGE IMPORTS
 -ifdef(package).
