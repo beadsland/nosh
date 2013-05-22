@@ -101,9 +101,9 @@ When fully implemented, `pose` JITP will allow for the arbitrary loading
 `pose` architecture.  This will allow for seamless testing and comparison
   of derivative and variant code within the same `nosh` runtime system.
   Meanwhile, as packages are only assigned to `pose`-compatible modules at
-  compile time, existing source code editors need know nothing about packages
-  to work with `pose`-compatible packages, nor need packages be supported
-when such code is put into production.
+  compile time, existing Erlang development tools need know nothing about
+  packages to work with `pose`-compatible modules, nor need packages be
+supported when such code is put into production.
  
 
 
