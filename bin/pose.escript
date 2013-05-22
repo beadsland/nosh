@@ -37,7 +37,7 @@ main(Param) ->
     Options = [verbose, warnings_as_errors, return_errors, binary,
                {outdir, EbinDir}, {i, DepsDir}],
 
-    do_main(Filename, Options, Param, AppDir),    
+    do_main(Filename, Options, [list_to_atom(X) || X <- Param], AppDir),    
     wait_for_flush().
 
 % Compile and run bootstrap module.
