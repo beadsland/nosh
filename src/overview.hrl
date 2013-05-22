@@ -51,11 +51,7 @@
 %% </pre>
 %%
 %% It is recommended that the project `bin/' be prefixed to your `PATH',
-%% so that `nosh' can be run from any working directory.  Also included
-%% in `bin/' is `nano' script that detects if you're running in Wicked
-%% Shell (see below) and fires up an external shell to run either the
-%% UNIX standard `pico' editor or GNU `nano' editor where available.
-%% (`nano'/`pico' requires a tty to run).
+%% so that `nosh' can be run from any working directory.  
 %%
 %% Users of the Eclipse IDE may integrate `nosh' shell with their
 %% workflow by installing the Wicked Shell plugin
