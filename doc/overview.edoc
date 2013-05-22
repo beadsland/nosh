@@ -10,9 +10,3 @@
 @title Welcome to nosh
 @headerfile "../src/overview.hrl"
 @docfile "doc/TODO_head.edoc"
-
-@reference This project and its sub-projects require
-<a href="http://www.erlang.org/download_release/14">Erlang/OTP R15B01</a>.
-The `nosh' architecture depends on the experimental `package' feature,
-which was removed in Erlang/OTP R16.
-@end

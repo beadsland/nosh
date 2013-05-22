@@ -23,9 +23,7 @@
 %% CDDL HEADER END
 
 %% @doc `nosh' is a Bourne shell emulator, Erl shell alternative, and
-%% noSQL file system,  implemented in 
-%% <a href="http://www.erlang.org/download_release/14">Erlang/OTP R15B01</a>.  
-%% Providing an intuitive
+%% noSQL file system, implented in Erlang.  Providing an intuitive
 %% commandline interface for compiling and loading Erlang modules, and for
 %% executing Erlang module functions, `nosh' affords both the ease of a
 %% UNIX shell and the power of an Erlang interpreter.
@@ -35,6 +33,7 @@
 %%
 %% <ul>
 %% <li> {@section Installation} </li>
+%% <li> {@section Built for R15B01} </li>
 %% <li> {@section Bourne Shell Emulator} </li>
 %% <li> {@section Erl Shell Alternative} </li>
 %% <li> {@section NoSQL File System} </li>
@@ -58,6 +57,29 @@
 %% [http://www.wickedshell.net/] from the Eclipse Marketplace.  Simply
 %% run `bash' or `sh' under Wicked Shell, and then execute `nosh'
 %% from there.
+%%
+%% == Built for R15B01 ==
+%%
+%% This project and its sub-projects are developed to run under
+%% <a href="http://www.erlang.org/download_release/14">Erlang/OTP R15B01</a>,
+%% but should be compatible with later releases.  The `nosh' project 
+%% exploits the just-in-time packaging (JITP) feature of the `pose' project.  
+%% Packages were an experimental feature of Erlang/OTP officially removed
+%% as of R16A01.
+%%
+%% When fully implemented, `pose' JITP will allow for the arbitrary loading
+%% and concurrent operation of likenamed modules that participate in the 
+%% `pose' architecture.  This will allow for seamless testing and comparison 
+%% of derivative and variant code within the same `nosh' runtime system.  
+%% Meanwhile, as packages are only assigned to `pose'-compatible modules at 
+%% compile time, existing source code editors need know nothing about packages 
+%% to work with `pose'-compatible packages, nor need packages be supported 
+%% when such code is put into production.
+%%
+%% Longer term, `nosh' is intended as a prototype platform for an ad hoc,
+%% distributed, multi-user domain (MUD) ecosystem.  In this context, `pose'
+%% JITP will ensure that runtime environments can be freely and continuously 
+%% extended by user-contributed modules without risk of namespace collision.
 %%
 %% == Bourne Shell Emulator ==
 %%

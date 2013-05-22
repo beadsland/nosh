@@ -9,12 +9,6 @@ __Version:__ 0.1.1
 
 __Authors:__ Beads D. Land-Trujillo (_web site:_ [`http://twitter.com/beadsland`](http://twitter.com/beadsland)).
 
-__References__* This project and its sub-projects require
-[Erlang/OTP R15B01](http://www.erlang.org/download_release/14).
-The `nosh` architecture depends on the experimental `package` feature,
-which was removed in Erlang/OTP R16.
-
-
 __<font color="red">To do</font>__
 <br></br>
 * <font color="red">build out 2do_go4
@@ -36,9 +30,7 @@ __<font color="red">To do</font>__
 
 
 `nosh` is a Bourne shell emulator, Erl shell alternative, and
-  noSQL file system,  implemented in
-[Erlang/OTP R15B01](http://www.erlang.org/download_release/14).
-  Providing an intuitive
+  noSQL file system, implented in Erlang.  Providing an intuitive
   commandline interface for compiling and loading Erlang modules, and for
   executing Erlang module functions, `nosh` affords both the ease of a
 UNIX shell and the power of an Erlang interpreter.
@@ -49,6 +41,8 @@ _<strong>NOTICE:</strong> Code is still in rudimentary form. Doesn't  do much ye
  
 
 * [Installation](http://github.com/beadsland/nosh/blob/master/doc/README.md#Installation)
+
+* [Built for R15B01](http://github.com/beadsland/nosh/blob/master/doc/README.md#Built_for_R15B01)
 
 * [Bourne Shell Emulator](http://github.com/beadsland/nosh/blob/master/doc/README.md#Bourne_Shell_Emulator)
 
@@ -85,6 +79,38 @@ Users of the Eclipse IDE may integrate `nosh` shell with their
 [`http://www.wickedshell.net/`](http://www.wickedshell.net/) from the Eclipse Marketplace.  Simply
   run `bash` or `sh` under Wicked Shell, and then execute `nosh`
 from there.
+ 
+
+
+###<a name="Built_for_R15B01">Built for R15B01</a>##
+
+ 
+
+
+This project and its sub-projects are developed to run under
+[Erlang/OTP R15B01](http://www.erlang.org/download_release/14),
+  but should be compatible with later releases.  The `nosh` project
+  exploits the just-in-time packaging (JITP) feature of the `pose` project.
+Packages were an experimental feature of Erlang/OTP officially removed
+as of R16A01.
+ 
+
+
+When fully implemented, `pose` JITP will allow for the arbitrary loading
+  and concurrent operation of likenamed modules that participate in the
+`pose` architecture.  This will allow for seamless testing and comparison
+  of derivative and variant code within the same `nosh` runtime system.
+  Meanwhile, as packages are only assigned to `pose`-compatible modules at
+  compile time, existing source code editors need know nothing about packages
+  to work with `pose`-compatible packages, nor need packages be supported
+when such code is put into production.
+ 
+
+
+Longer term, `nosh` is intended as a prototype platform for an ad hoc,
+  distributed, multi-user domain (MUD) ecosystem.  In this context, `pose`
+JITP will ensure that runtime environments can be freely and continuously
+extended by user-contributed modules without risk of namespace collision.
  
 
 
