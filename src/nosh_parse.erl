@@ -18,7 +18,7 @@
 %% by brackets replaced by your own identifying information:
 %% "Portions Copyright [year] [name of copyright owner]"
 %%
-%% Copyright 2012 Beads D. Land-Trujillo.  All Rights Reserved
+%% Copyright 2012, 2013 Beads D. Land-Trujillo.  All Rights Reserved.
 %% -----------------------------------------------------------------------
 %% CDDL HEADER END
 
@@ -238,7 +238,7 @@
 %% <i>Not yet implemented</i>.
 %% @end
 %% @author Beads D. Land-Trujillo [http://twitter.com/beadsland]
-%% @copyright 2012 Beads D. Land-Trujillo
+%% @copyright 2012, 2013 Beads D. Land-Trujillo
 %% @reference See <a href="http://sayle.net/book/basics.htm">Shell
 %% Basics</a> for overview of functionality.  (to be implemented)
 %% @end
@@ -276,14 +276,6 @@
 -define(QUOTE_CHARS, "\\\\\"\'\`\n").
 -define(GROUP_CHARS, "\;\(\)\&\|").
 -define(SPACE_CHARS, "\ \t\n").
-
-% BEGIN POSE PACKAGE IMPORTS
--ifdef(package).
--import(io_lib).
--import(re).
--import(lists).
--endif.
-% END POSE PACKAGE IMPORTS
 
 %%
 %% Exported functions

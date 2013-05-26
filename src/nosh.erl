@@ -85,15 +85,6 @@
 -define(PROMPT, ?STDOUT("~s nosh> ", 
                         [string:left(erlang:system_info(otp_release), 3)])).
 
-% BEGIN POSE PACKAGE IMPORTS
--ifdef(package).
--import(gen_command).
--import(string).
--import(re).
--import(pose_beam).
--endif.
-% END POSE PACKAGE IMPORTS
-
 %%
 %% Exported functions
 %%
