@@ -1,15 +1,30 @@
-This directory holds .hrl Erlang library files, .mk Makefiles,
-.sh Bash shell files, and a gitignore.template file.
+This directory performs double duty in our project.
 
-The only .hrl files are those used by the nosh and pose-compatible
-nosh subprojects.  These .hrl files are stored under the pose 
-project and included using the -include_lib compiler directive.
+First, it contains Erlang header files (.hrl), which are used to share macros 
+and other features specific to the project with those that depend upon it.
+Each project may have zero or more unique header files.
 
-The .mk and .sh files are used across all related projects, and
-are synchronized between said projects for ease of access.  The master
-copy of these files live under the nosh project.  All projects using
-these files include a "make" target to their Makefile to synchronize
-the files and pick up any changes.
+Second, it contains various files providing library functions across multiple
+related projects.  These files are kept synchronized across projects during
+development by way of the `make make' Makefile trigger.
 
-The gitignore.template file serves to keep the .gitignore files of
-all related projects synchronized.
+The files to be found here are as follows:
+
+    *.hrl       - Erlang header files specific to the project.  
+                  [These files ARE NOT synchronized across projects.]
+                  
+    *.sh        - *NIX shell scripts used across projects.  
+                  [Project-specific shell scripts belong the bin/ directory.]
+                  
+    *.mk        - Make libraries, providing standardized variables and
+                  triggers that are then customized by the project Makefile.
+                  
+    *.configure - Alternative rebar configuration files, used to segregate
+                  maintenance dependencies (such as those used for doc
+                  generation) from runtime dependencies, and to resolve
+                  namespace collisions between forked dependency versions.
+    
+    *.template  - Synchronized copies of files found in project root.  Used
+                  to keep those root files up to date across projects.
+                  
+    README      - This documentation file.

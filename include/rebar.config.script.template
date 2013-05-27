@@ -1,0 +1,26 @@
+case os:getenv("REBAR_ALT") of
+  false -> CONFIG;
+  []    -> CONFIG;
+  Path  ->
+    case file:consult(filename:absname(Path)) of
+      {error, Reason} -> Error = file:format_error(Reason),
+                         io:format("ERROR: ~s: ~s~n", [Path, Error]),
+                         halt();
+      {ok, Config}    -> EdocOpts = proplists:get_value(edoc_opts, Config),
+                         TopLevel =
+                                proplists:get_value(top_level_readme, EdocOpts),
+                         {Readme, Github} = TopLevel,
+                         Project = filename:basename(filename:absname("")),
+                         NewGithub = re:replace(Github, "__PROJECT__", Project, 
+                                                [{return, list}]),
+
+                         NewEdocOpts = [{top_level_readme, {Readme, NewGithub}}
+                                | proplists:delete(top_level_readme, EdocOpts)],
+                         NewConfig = [{edoc_opts, NewEdocOpts}
+                                | proplists:delete(edoc_opts, Config)],
+                         io:format("DATA: ~p~n", [NewConfig]),
+                         NewConfig
+    end
+end.
+
+

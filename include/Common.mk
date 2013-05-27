@@ -38,7 +38,7 @@ good:		override DEPS := $(GOOD_DEPS)
 good:		
 	@$(SUBMAKE:_param_=-f include/Common.mk $(POSEBIN)/pose.beam) \
 		| ($(GREP) -v "is up to date"; status=$$?)
-	@$(ERL) $(SUPERL) $(POSURE) $(STOP)
+	@$(ERL) $(SUPERL) $(POSURE) $(TUNER) $(STOP)
 
 %/ebin/pose.beam:	%/src/pose.erl
 	@echo Compiling pose
@@ -58,7 +58,7 @@ todo:	README.md
 		then (git commit $(TODO_FILES) -m "updated todo"); fi
 
 README.md:	doc/TODO_head.edoc doc/overview.edoc src/overview.hrl
-	@$(CROWBAR:_cmds_=doc)
+	@$(DOCSBAR:_ecmds_=doc)
 
 doc/TODO_head.edoc:		TODO.edoc
 	@(sed '7q' TODO.edoc; if [ $(TODO_MORE) -gt 0 ]; \
@@ -79,7 +79,7 @@ neat:	$(wildcard doc/*.md)
 doc/README.md:	;
 	
 doc/%.md:		src/%.erl
-	@$(CROWBAR:_cmds_=doc)
+	@$(DOCSBAR:_ecmds_=doc)
 
 src/%.erl:		force
 	@if [ ! -f src/$*.erl ]; then (git rm -f doc/$*.*); fi
@@ -91,17 +91,26 @@ force:		;
 #
 
 compile:	neat
-	@$(CROWBAR:_cmds_=compile doc)
+	@$(CROWBAR:_cmds_=compile)
+	@$(DOCSBAR:_ecmds_=compile doc)
 
 current:	neat make
-	@if [ "$(ONLINE)" == yes ]; \
-		then $(CROWBAR:_cmds_=update-deps compile doc); \
-		else $(CROWBAR:_cmds_=compile doc); fi
+	@if [ "$(ONLINE)" == "yes" ]; \
+		then (	$(CROWBAR:_cmds_=update-deps compile); \
+				$(DOCSBAR:_ecmds_=update-deps compile doc) \
+				); \
+		else (	$(CROWBAR:_cmds_=compile); \
+				$(DOCSBAR:_ecmds_=compile doc) \
+				); fi
 
 clean:		neat make
-	@if [ "$(ONLINE)" == yes ]; \
-		then (rm -rf deps; $(CROWBAR:_cmds_=clean get-deps)); \
-		else ($(CROWBAR:_cmds_=clean)); fi
+	@if [ "$(ONLINE)" == "yes" ]; \
+		then (  $(CROWBAR:_cmds_=clean delete-deps); \
+				$(CROWBAR:_cmds_=get-deps); \
+				$(DOCSBAR:_ecmds_=delete-deps); \
+				$(DOCSBAR:_ecmds_=get-deps) \
+				); \
+		else $(CROWBAR:_cmds_=clean); fi
 	
 #
 # Rules for managing revisions and synchronized common files
@@ -113,10 +122,10 @@ push:	make docup
 
 make:	$(patsubst include/%.mk, \
 			include/$(B_PREFIX)%.mk$(B_SUFFIX), $(wildcard include/*.mk))
-	@$(GITIGNORE_PRE)
+	@$(PRESYNC_ALL)
 	@if [ "$(shell basename $(CURDIR))" != nosh ]; \
 		then ($(UNISON) -merge "$(MERGE)"); fi
-	@$(GITIGNORE_POST)
+	@$(POSTSYNC_ALL)
 
 include/$(B_PREFIX)%.mk$(B_SUFFIX):		include/%.mk
 	@if [ ! -f $@ ]; \
